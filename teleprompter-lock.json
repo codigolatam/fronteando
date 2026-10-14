@@ -1,0 +1,240 @@
+{
+  "packages": {
+    "factory": {
+      "version": "0.5.0",
+      "installedAt": "2026-10-14T01:12:36.033Z",
+      "files": [
+        {
+          "target": ".agents/skills/actualizar-artefactos",
+          "action": "create",
+          "sha256": "591b9f973aca16d51781c58c896a30d0b61f5db59891f4b6712404d09332231d"
+        },
+        {
+          "target": ".agents/skills/aplicar-guia-estilo",
+          "action": "create",
+          "sha256": "1bdec6677609aafee5f8bd2aa52acaf15eafd79435dd317eb5a3594fdd784714"
+        },
+        {
+          "target": ".agents/skills/cerrar-conjunto",
+          "action": "create",
+          "sha256": "11697e664dae45893e5bf39e6b6cf09c66dcbad262b60598b47b4b14491ec02b"
+        },
+        {
+          "target": ".agents/skills/clasificar-comentarios",
+          "action": "create",
+          "sha256": "40b2811ae929ca0af176c4626e027eca8d653870545c578dcc96d4a2e61dadf6"
+        },
+        {
+          "target": ".agents/skills/comentar-pr",
+          "action": "create",
+          "sha256": "f206076c9f1af650e9e73d3650e3af15ce19003e9bb0af2d07a67c8d6a217ffe"
+        },
+        {
+          "target": ".agents/skills/commit",
+          "action": "create",
+          "sha256": "afb31b84e06f29a0f9148ca3bc42d7fc42ada1e0af2f5bd6a4462ecfb15cf6e2"
+        },
+        {
+          "target": ".agents/skills/consultar-artefactos",
+          "action": "create",
+          "sha256": "f764502579a4c81c2752e1034fc6a4bb959f88b12fca991cad3a43ea52d832b8"
+        },
+        {
+          "target": ".agents/skills/consultar-decisiones",
+          "action": "create",
+          "sha256": "70ca1a4d2ba963ca511abaa3b852b1b0e019a64e2de9aca6d25e485193b75755"
+        },
+        {
+          "target": ".agents/skills/consultar-lecciones",
+          "action": "create",
+          "sha256": "95c3899c34e57ba570bbdb2a3349a9b78b712f6f224923e04e7ad89af343a279"
+        },
+        {
+          "target": ".agents/skills/crear-tareas",
+          "action": "create",
+          "sha256": "a5a2fa8a486ff631e027ef5e318382b20216a31c1e9ddadb45fda5d825a5e53c"
+        },
+        {
+          "target": ".agents/skills/decisiones-diseno",
+          "action": "create",
+          "sha256": "29f327d705a767be8cfa0c769c8393381664da7e6ef7ee4b3ff789f522f3aebd"
+        },
+        {
+          "target": ".agents/skills/desarrollar-tarea",
+          "action": "create",
+          "sha256": "d48bf950d0868ce9afaea81dfaac079118867797de2ef61e60dcd39e2b223e7d"
+        },
+        {
+          "target": ".agents/skills/descubrir-problema",
+          "action": "create",
+          "sha256": "5682dd77c9c1f569b3c166a1610abec89d5874d0c6bcedef06964aba03972e8a"
+        },
+        {
+          "target": ".agents/skills/destilar-lecciones",
+          "action": "create",
+          "sha256": "147297db7966209d7481bd9f0df86b9cf05fec46057fa3ed5f56d4df5cf9aac6"
+        },
+        {
+          "target": ".agents/skills/documentar-dominio",
+          "action": "create",
+          "sha256": "dc579bf15d5c2dbb819bbfb38bdbe9554b4d8108a7e2edf650850ac3878bae91"
+        },
+        {
+          "target": ".agents/skills/documentar-guia-estilo",
+          "action": "create",
+          "sha256": "794dadc9f457059d856bbc7a25a26ba75e2dd483c83a4b462b03b8fd7f3405d6"
+        },
+        {
+          "target": ".agents/skills/documentar-producto",
+          "action": "create",
+          "sha256": "78a3f209ee22961ef44d7ac3c9d9c7cde3625e9129173c1a2ca865263f68ca51"
+        },
+        {
+          "target": ".agents/skills/ejecutar-implementacion",
+          "action": "create",
+          "sha256": "171cc0ab815784fd50219c30d9d08699cb2978a759fcda48442ee3799e7f1f48"
+        },
+        {
+          "target": ".agents/skills/ejecutar-tareas",
+          "action": "create",
+          "sha256": "e527c5d2e82262e2fc54029402f4cbc41354b44ef3b62ebc1e365acd5e1e80a9"
+        },
+        {
+          "target": ".agents/skills/evaluar-conectividad",
+          "action": "create",
+          "sha256": "de2489c759b35a8f0a9f4c6e39950807ef07626ae8c5d9b22f3d0b395016b5f2"
+        },
+        {
+          "target": ".agents/skills/gestionar-pr",
+          "action": "create",
+          "sha256": "5d3031c0258c9719e86b0f1cc80cf30fe5bccb84afa9ac986f33b40b010cf141"
+        },
+        {
+          "target": ".agents/skills/idea-a-tarea",
+          "action": "create",
+          "sha256": "fba20cd940a424efe1af17143f1ca400405cf1162949f167dd47174aefc01a8b"
+        },
+        {
+          "target": ".agents/skills/investigar",
+          "action": "create",
+          "sha256": "27d226f19551ae8d00cbb52cf76a51e8cc1facd4e44f48b135555381adac4d54"
+        },
+        {
+          "target": ".agents/skills/liberar-version",
+          "action": "create",
+          "sha256": "7686a43eaf175c459df527b06670d8c0662f2f503d0dee7dfd86ffc35876a914"
+        },
+        {
+          "target": ".agents/skills/lluvia-de-ideas",
+          "action": "create",
+          "sha256": "e9d113c2a02a963ca71dac104e72c5e8c9411ea2c3cd9016895481f73fc5b7a3"
+        },
+        {
+          "target": ".agents/skills/mantener-changelog",
+          "action": "create",
+          "sha256": "364aa3ad5b2b19ca6501da7a70e674d3e6e3cff54d4e668f720381ac2b8c27f9"
+        },
+        {
+          "target": ".agents/skills/mantener-prd",
+          "action": "create",
+          "sha256": "fb70e4e1dcb9c220931046ad06890a244ed137a051d0107a90241f3573b9c33a"
+        },
+        {
+          "target": ".agents/skills/mantener-roadmap",
+          "action": "create",
+          "sha256": "35be19cc687b0694289c78316c242b98786b7410001e933973c97d18ba2280cb"
+        },
+        {
+          "target": ".agents/skills/mejorar-pr",
+          "action": "create",
+          "sha256": "bccc9e562b7f7b287b43cb7c0ae26596e672d2e272194943541d3c63c7069529"
+        },
+        {
+          "target": ".agents/skills/operar-changelog",
+          "action": "create",
+          "sha256": "539092fb8d60d731e268aeaae60562cdae0b29d6b8c4a790ee69285029afd286"
+        },
+        {
+          "target": ".agents/skills/operar-experiencias",
+          "action": "create",
+          "sha256": "99f7d5fee16f7bc70a92db251fb4255c3e3042ff8e0b6afe3f14853f8e4a9174"
+        },
+        {
+          "target": ".agents/skills/planear-implementacion",
+          "action": "create",
+          "sha256": "eb8ef6eedc151166d7cf5266ba9f6c0dd029280a3d27d9c3eb92eec4717d02cd"
+        },
+        {
+          "target": ".agents/skills/planear-tarea",
+          "action": "create",
+          "sha256": "ea85b396509f7ae2cdb421dd336830e93a423d3a00e1d309f324638cd00623f3"
+        },
+        {
+          "target": ".agents/skills/planificar",
+          "action": "create",
+          "sha256": "bcb91777676c6cab4300d78ea3c6e91a648b0e484e24fec3c7841a9ca77fe59e"
+        },
+        {
+          "target": ".agents/skills/planificar-roadmap",
+          "action": "create",
+          "sha256": "8d544ecfede7200e0335e1b99d076c8d021984ba457811cbd6d1acc205c06b2d"
+        },
+        {
+          "target": ".agents/skills/proponer-forma-solucion",
+          "action": "create",
+          "sha256": "9a400a5384f83bb8a5adcbf3194ba6787e0b82b580546a34710c0ba05937e9e8"
+        },
+        {
+          "target": ".agents/skills/prueba-concepto",
+          "action": "create",
+          "sha256": "3e04ac9e41ee095e3ab2000a86bd788530892b640600e3efbd55c7845edc0c86"
+        },
+        {
+          "target": ".agents/skills/pulir-escritura",
+          "action": "create",
+          "sha256": "2f9488995092d23d9f1711f8f6ea5f72564f288522e8a6535abf8743968d7351"
+        },
+        {
+          "target": ".agents/skills/recopilar-contexto",
+          "action": "create",
+          "sha256": "d232debd802e94a859c4c5b5487d99b5f519a3bf7c174d30e2077f5a59b8d9ef"
+        },
+        {
+          "target": ".agents/skills/refinar-propuesta",
+          "action": "create",
+          "sha256": "426671cc25a40e248b35a7c8c681547f4587a1d65f50c41a078cf902eccac709"
+        },
+        {
+          "target": ".agents/skills/revisar-arquitectura",
+          "action": "create",
+          "sha256": "f965ac840216fba28521d500d80cc482540db4f149b1303d9c256fedf55ea8cc"
+        },
+        {
+          "target": ".agents/skills/revisar-implementacion",
+          "action": "create",
+          "sha256": "c19e04300fd5a3aa56ca8b82270401a88d957efa4e5fb5e5a5053b93ecd613c8"
+        },
+        {
+          "target": ".agents/skills/revisar-pr",
+          "action": "create",
+          "sha256": "cb2ab5384216093e8eb3f8746427637c304f2da3905ee0d4283735aa4dfeb9ae"
+        },
+        {
+          "target": ".agents/skills/revisar-redaccion",
+          "action": "create",
+          "sha256": "ea4a77a7978b371d1d751bfe7f94ca5b55cb7557209d4ec4ee3889a9fce68942"
+        },
+        {
+          "target": ".teleprompter/factory/PERSONALIZE.md",
+          "action": "create",
+          "sha256": "26190a5642228ab1c974e3853f7d55f29540ec47944522447e4a35864eafaee3"
+        }
+      ],
+      "personalization": ".teleprompter/factory/PERSONALIZE.md",
+      "origin": {
+        "type": "github",
+        "repo": "nucleoabierto/factory"
+      }
+    }
+  }
+}
