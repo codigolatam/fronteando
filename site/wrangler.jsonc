@@ -1,0 +1,14 @@
+{
+  // Worker de Cloudflare que sirve los assets estáticos del sitio.
+  // El nombre debe coincidir con el del proyecto en el dashboard.
+  "name": "fronteando",
+  "compatibility_date": "2026-10-15",
+  "assets": {
+    "directory": "./dist",
+  },
+  // Requerido por `wrangler preview`, el comando de deploy de las
+  // builds de preview de Workers Builds.
+  "previews": {},
+  // Dominio de producción; Cloudflare crea el DNS y el certificado.
+  "routes": [{ "pattern": "www.fronteando.dev", "custom_domain": true }],
+}

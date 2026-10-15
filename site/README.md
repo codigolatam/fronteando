@@ -26,3 +26,36 @@ site/
 │   └── content/       # hogar de la colección de artículos
 └── astro.config.mjs   # configuración de Astro (URL del sitio)
 ```
+
+## Despliegue
+
+El sitio se publica en **Cloudflare Workers** como worker de assets
+estáticos —la plataforma que unifica lo que antes era Pages— mediante
+su integración Git (Workers Builds): cada merge a `master` dispara el
+build y la publicación sin pasos manuales.
+
+La configuración vive en el repositorio:
+
+- `wrangler.jsonc` declara el worker `fronteando` y el directorio de
+  assets `./dist` —el `name` debe coincidir con el proyecto del
+  dashboard o el build falla—.
+- `.nvmrc` fija la versión de Node del build remoto.
+- `wrangler` va fijado como dependencia de desarrollo para que el
+  despliegue remoto y el local usen la misma versión.
+
+La conexión del repositorio se hace una sola vez desde el dashboard —
+requiere la cuenta del proyecto— con estos ajustes:
+
+| Ajuste                | Valor                                           |
+| --------------------- | ----------------------------------------------- |
+| Nombre del worker     | `fronteando`                                    |
+| Rama de producción    | `master`                                        |
+| Directorio raíz       | `site`                                          |
+| Comando de build      | `npm run build`                                 |
+| Comando de despliegue | `npx wrangler deploy` (por defecto)             |
+| Dominio de producción | `www.fronteando.dev` (custom domain del worker) |
+
+Pasos para recrear la integración: Workers & Pages → Create
+application → GitHub → autorizar y seleccionar
+`codigolatam/fronteando` → aplicar los ajustes de la tabla → Save and
+Deploy.
