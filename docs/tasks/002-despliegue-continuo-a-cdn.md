@@ -73,13 +73,13 @@ La base que la tarea asume ya existe: `site/` compila a `dist/` con `npm run bui
 - [x] Registrar la configuración de despliegue en el repo: `site/.nvmrc` con la versión de Node y sección de despliegue en `site/README.md` con los ajustes del proyecto Pages (directorio raíz, comando de build, directorio de salida)
   - Aporta: cumple «configuración reproducible» —otro entorno recrea el despliegue leyendo el repo— y fija el Node del build remoto igual al local.
   - Contexto: Pages lee `.nvmrc` desde el directorio de build; `engines >=22.22.0` ya está declarado en `package.json` y la versión local es 24.
-- [ ] Conectar el repositorio con Cloudflare Workers Builds — paso del usuario con la guía documentada
+- [x] Conectar el repositorio con Cloudflare Workers Builds — paso del usuario con la guía documentada
   - Aporta: es la integración que convierte cada merge en publicación.
   - Contexto: el agente no puede autorizar la cuenta de Cloudflare; el paso manual queda documentado en `site/README.md`, que es lo que el criterio de reproducibilidad exige. El `name` de `wrangler.jsonc` debe coincidir con el worker del dashboard (`fronteando`) o el build falla.
-- [ ] Sustituir la URL provisional de `astro.config` por la pública real
+- [x] Sustituir la URL provisional de `astro.config` por la pública real
   - Aporta: el relevo registrado en esta tarea —`fronteando.dev` por el `*.pages.dev` asignado o el dominio propio— deja el origen canónico correcto para el RSS y las OG de 007/008.
   - Contexto: la URL se conoce tras el primer despliegue; verificar que responde antes de escribirla.
-- [ ] Verificar el ciclo completo: un push a `master` dispara el build remoto y la URL pública sirve el sitio
+- [x] Verificar el ciclo completo: un push a `master` dispara el build remoto y la URL pública sirve el sitio
   - Aporta: la evidencia end-to-end del criterio «un cambio fusionado se publica sin intervención manual».
 
 ## Suite de pruebas esperada
@@ -90,6 +90,13 @@ La base que la tarea asume ya existe: `site/` compila a `dist/` con `npm run bui
 - `astro.config.mjs` declara la URL pública real, sin rastro del provisional `fronteando.dev` — CU-1 (B).
 - Otro entorno puede recrear el despliegue leyendo solo lo registrado en el repo — CU-1, prueba de arnés documental.
 - El build remoto corre con la versión de Node declarada en el repo — CU-1 (B).
+
+## Desviaciones del plan
+
+
+- **Proveedor Pages → Workers Builds:** el dashboard actual de Cloudflare no expone el flujo de Pages para proyectos nuevos; la vía vigente es un Worker de assets estáticos con Workers Builds. Decisión: adoptar Workers —misma integración Git, mismo efecto, y la configuración queda además en el repo como `site/wrangler.jsonc`—. El usuario eligió Cloudflare; el cambio es solo de artefacto dentro del mismo proveedor.
+- **`previews: {}` en `wrangler.jsonc`:** el comando de preview de Workers Builds (`npx wrangler preview`, en beta) lo exige aunque esté vacío; sin él toda build de rama falla.
+- **El build command corre `npm run build` y la plataforma instala dependencias sola** (`npm clean-install` automático): no hace falta `npm ci` explícito; el *root directory* `site` aplica también al deploy, por lo que no hizo falta redireccionamiento de config.
 
 ## Revisión
 
