@@ -68,7 +68,7 @@ La base que la tarea asume ya existe: `site/` compila a `dist/` con `npm run bui
 ## Plan técnico
 
 
-`site/` compila a `dist/` estático y el despliegue publica ese artefacto en CDN. El proveedor decidido es Cloudflare Pages con su integración Git —un merge a `master` dispara build y publicación sin CI propio ni secrets—; la parte no automatizable, la autorización de la cuenta, la ejecuta el usuario guiada por la documentación que queda en el repositorio.
+`site/` compila a `dist/` estático y el despliegue publica ese artefacto en CDN. El proveedor decidido es Cloudflare con Workers Builds —un merge a `master` dispara build y publicación sin CI propio ni secrets— (la desviación Pages → Workers queda registrada abajo); la parte no automatizable, la autorización de la cuenta, la ejecuta el usuario guiada por la documentación que queda en el repositorio.
 
 - [x] Registrar la configuración de despliegue en el repo: `site/.nvmrc` con la versión de Node y sección de despliegue en `site/README.md` con los ajustes del proyecto Pages (directorio raíz, comando de build, directorio de salida)
   - Aporta: cumple «configuración reproducible» —otro entorno recrea el despliegue leyendo el repo— y fija el Node del build remoto igual al local.
@@ -85,7 +85,7 @@ La base que la tarea asume ya existe: `site/` compila a `dist/` con `npm run bui
 ## Suite de pruebas esperada
 
 
-- Un merge o push a `master` dispara el build en Cloudflare Pages y publica sin intervención manual — CU-1 (I).
+- Un merge o push a `master` dispara el build en Cloudflare Workers y publica sin intervención manual — CU-1 (I).
 - La URL pública responde 200 sirviendo el HTML compilado del sitio — CU-1 (O).
 - `astro.config.mjs` declara la URL pública real, sin rastro del provisional `fronteando.dev` — CU-1 (B).
 - Otro entorno puede recrear el despliegue leyendo solo lo registrado en el repo — CU-1, prueba de arnés documental.
