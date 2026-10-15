@@ -102,4 +102,4 @@ La base que la tarea asume ya existe: `site/` compila a `dist/` con `npm run bui
 
 - Subagente: 2026-10-15 — Aprueba
 - Usuario (ejecución): 2026-10-15 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-15 — Aprueba
