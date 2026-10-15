@@ -39,11 +39,6 @@ La configuración vive en el repositorio:
 - `wrangler.jsonc` declara el worker `fronteando` y el directorio de
   assets `./dist` —el `name` debe coincidir con el proyecto del
   dashboard o el build falla—.
-- `.wrangler/deploy/config.json` en la raíz del repositorio redirige a
-  esa configuración: los builds de preview de Workers Builds ejecutan
-  `npx wrangler preview` desde la raíz del repo e ignoran el
-  «root directory» del proyecto, así que sin el redireccionamiento
-  wrangler corre sin config y falla.
 - `.nvmrc` fija la versión de Node del build remoto.
 - `wrangler` va fijado como dependencia de desarrollo para que el
   despliegue remoto y el local usen la misma versión.
@@ -56,7 +51,7 @@ requiere la cuenta del proyecto— con estos ajustes:
 | Nombre del worker     | `fronteando`                        |
 | Rama de producción    | `master`                            |
 | Directorio raíz       | `site`                              |
-| Comando de build      | `npm ci && npm run build`           |
+| Comando de build      | `npm run build`                     |
 | Comando de despliegue | `npx wrangler deploy` (por defecto) |
 
 Pasos para recrear la integración: Workers & Pages → Create
