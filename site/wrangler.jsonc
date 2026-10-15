@@ -1,0 +1,9 @@
+{
+  // Worker de Cloudflare que sirve los assets estáticos del sitio.
+  // El nombre debe coincidir con el del proyecto en el dashboard.
+  "name": "fronteando",
+  "compatibility_date": "2026-10-15",
+  "assets": {
+    "directory": "./dist",
+  },
+}

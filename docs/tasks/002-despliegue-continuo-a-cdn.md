@@ -73,9 +73,9 @@ La base que la tarea asume ya existe: `site/` compila a `dist/` con `npm run bui
 - [x] Registrar la configuración de despliegue en el repo: `site/.nvmrc` con la versión de Node y sección de despliegue en `site/README.md` con los ajustes del proyecto Pages (directorio raíz, comando de build, directorio de salida)
   - Aporta: cumple «configuración reproducible» —otro entorno recrea el despliegue leyendo el repo— y fija el Node del build remoto igual al local.
   - Contexto: Pages lee `.nvmrc` desde el directorio de build; `engines >=22.22.0` ya está declarado en `package.json` y la versión local es 24.
-- [ ] Conectar el repositorio con Cloudflare Pages — paso del usuario con la guía documentada
+- [ ] Conectar el repositorio con Cloudflare Workers Builds — paso del usuario con la guía documentada
   - Aporta: es la integración que convierte cada merge en publicación.
-  - Contexto: el agente no puede autorizar la cuenta de Cloudflare; el paso manual queda documentado en `site/README.md`, que es lo que el criterio de reproducibilidad exige.
+  - Contexto: el agente no puede autorizar la cuenta de Cloudflare; el paso manual queda documentado en `site/README.md`, que es lo que el criterio de reproducibilidad exige. El `name` de `wrangler.jsonc` debe coincidir con el worker del dashboard (`fronteando`) o el build falla.
 - [ ] Sustituir la URL provisional de `astro.config` por la pública real
   - Aporta: el relevo registrado en esta tarea —`fronteando.dev` por el `*.pages.dev` asignado o el dominio propio— deja el origen canónico correcto para el RSS y las OG de 007/008.
   - Contexto: la URL se conoce tras el primer despliegue; verificar que responde antes de escribirla.

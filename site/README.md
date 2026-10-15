@@ -29,21 +29,32 @@ site/
 
 ## Despliegue
 
-El sitio se publica en **Cloudflare Pages** por integración Git: cada
-merge a `master` dispara el build y la publicación sin pasos manuales.
-La conexión del repositorio se hace una sola vez desde el dashboard de
-Cloudflare —requiere la cuenta del proyecto—; los ajustes quedan
-registrados aquí para que el despliegue sea recreable:
+El sitio se publica en **Cloudflare Workers** como worker de assets
+estáticos —la plataforma que unifica lo que antes era Pages— mediante
+su integración Git (Workers Builds): cada merge a `master` dispara el
+build y la publicación sin pasos manuales.
 
-| Ajuste               | Valor               |
-| -------------------- | ------------------- |
-| Proyecto             | `fronteando`        |
-| Rama de producción   | `master`            |
-| Directorio raíz      | `site`              |
-| Comando de build     | `npm run build`     |
-| Directorio de salida | `dist`              |
-| Versión de Node      | la de `.nvmrc` (24) |
+La configuración vive en el repositorio:
 
-Pasos para recrear la integración: Workers & Pages → Create → Pages →
-Connect to Git → autorizar `codigolatam/fronteando` → aplicar los
-ajustes de la tabla → Save and Deploy.
+- `wrangler.jsonc` declara el worker `fronteando` y el directorio de
+  assets `./dist` —el `name` debe coincidir con el proyecto del
+  dashboard o el build falla—.
+- `.nvmrc` fija la versión de Node del build remoto.
+- `wrangler` va fijado como dependencia de desarrollo para que el
+  despliegue remoto y el local usen la misma versión.
+
+La conexión del repositorio se hace una sola vez desde el dashboard —
+requiere la cuenta del proyecto— con estos ajustes:
+
+| Ajuste                | Valor                               |
+| --------------------- | ----------------------------------- |
+| Nombre del worker     | `fronteando`                        |
+| Rama de producción    | `master`                            |
+| Directorio raíz       | `site`                              |
+| Comando de build      | `npm run build`                     |
+| Comando de despliegue | `npx wrangler deploy` (por defecto) |
+
+Pasos para recrear la integración: Workers & Pages → Create
+application → GitHub → autorizar y seleccionar
+`codigolatam/fronteando` → aplicar los ajustes de la tabla → Save and
+Deploy.
