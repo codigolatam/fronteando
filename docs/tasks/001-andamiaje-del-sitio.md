@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -99,6 +99,6 @@ El PRD no declara caso de uso de andamiaje; las expectativas anclan a CU-1 —la
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-15 — Aprueba
+- Usuario (ejecución): 2026-10-15 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
