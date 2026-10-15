@@ -56,7 +56,7 @@ requiere la cuenta del proyecto— con estos ajustes:
 | Nombre del worker     | `fronteando`                        |
 | Rama de producción    | `master`                            |
 | Directorio raíz       | `site`                              |
-| Comando de build      | `npm run build`                     |
+| Comando de build      | `npm ci && npm run build`           |
 | Comando de despliegue | `npx wrangler deploy` (por defecto) |
 
 Pasos para recrear la integración: Workers & Pages → Create
