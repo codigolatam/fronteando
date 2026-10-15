@@ -25,6 +25,7 @@ Publicar el esqueleto del blog en una URL pública con despliegue continuo, de m
 ## Resultado esperado
 
 - El sitio publicado en una URL pública del proveedor.
+- La URL pública real sustituye al valor provisional `https://fronteando.dev` en `site/astro.config.mjs`, dejado por la tarea 001.
 - Despliegue automático configurado: la rama principal dispara build y publicación.
 - La configuración de despliegue registrada en el repositorio —archivo de configuración del proveedor o documentación del paso que quede manual.
 
