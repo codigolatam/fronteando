@@ -101,4 +101,4 @@ El PRD no declara caso de uso de andamiaje; las expectativas anclan a CU-1 —la
 
 - Subagente: 2026-10-15 — Aprueba
 - Usuario (ejecución): 2026-10-15 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-15 — Aprueba
