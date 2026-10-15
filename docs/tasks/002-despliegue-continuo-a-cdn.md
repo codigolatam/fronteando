@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -100,6 +100,6 @@ La base que la tarea asume ya existe: `site/` compila a `dist/` con `npm run bui
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-15 — Aprueba
+- Usuario (ejecución): 2026-10-15 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
