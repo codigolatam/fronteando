@@ -9,6 +9,12 @@
   // Requerido por `wrangler preview`, el comando de deploy de las
   // builds de preview de Workers Builds.
   "previews": {},
-  // Dominio de producción; Cloudflare crea el DNS y el certificado.
-  "routes": [{ "pattern": "www.fronteando.dev", "custom_domain": true }],
+  // Producción se sirve en el dominio propio de la zona fronteando.dev.
+  "routes": [
+    {
+      "pattern": "www.fronteando.dev",
+      "zone_name": "fronteando.dev",
+      "custom_domain": true,
+    },
+  ],
 }
