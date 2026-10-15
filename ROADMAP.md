@@ -11,17 +11,27 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-Sin líneas comprometidas: el índice de tareas aún no contiene trabajo
-planificado. Las líneas se posicionan con `planificar-roadmap` cuando
-exista trabajo abierto.
+- 1. docs/epics/001-sitio-base-del-blog.md — Sitio base del blog
+  - Estado: en curso
+  - Justificación: única línea comprometida y ya en vuelo; todo lo demás
+    del producto necesita el sitio publicado —es la base sobre la que
+    aterrizan las ideas del bloque inicial—.
 
 ## Next
 
-Sin líneas validadas.
+Sin líneas validadas: las ideas del bloque inicial esperan su paso por
+el flujo de idea a tarea antes de comprometerse.
 
 ## Later
 
-Sin líneas declaradas.
+- Lectura acompañada por LLM (idea 002) — la línea editorial distintiva:
+  checkpoints, bootstrap y material para el asistente del lector.
+- Blog legible para máquinas (idea 003) — salidas `.md` y `llms.txt` que
+  hacen el contenido consumible por LLMs y agentes.
+- Demos de código ejecutables (idea 004) — ejemplos que el lector puede
+  tocar dentro del artículo.
+- Newsletter (idea 005) — relación continuada con quien quiere seguir
+  el blog; el RSS del hito actual la habilita.
 
 ## No ahora
 
@@ -29,4 +39,4 @@ Sin líneas aparcadas.
 
 ## Revisión
 
-- Usuario: [fecha] — [Aprueba | Solicita cambios]
+- Usuario: 2026-10-15 — Aprueba
