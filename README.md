@@ -69,3 +69,7 @@ agente que llega al artículo y encuentra el protocolo completo.
   MailerLite, Listmonk u otro), integrado por formulario y
   automatizable por RSS; cambiar de proveedor no toca el blog.
 
+El código del sitio vive en [`site/`](site/README.md) —comandos y
+estructura del proyecto Astro—; la raíz del repositorio la ocupan los
+artefactos de gestión del proyecto.
+
