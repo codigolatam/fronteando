@@ -6,4 +6,7 @@
   "assets": {
     "directory": "./dist",
   },
+  // Requerido por `wrangler preview`, el comando de deploy de las
+  // builds de preview de Workers Builds.
+  "previews": {},
 }
