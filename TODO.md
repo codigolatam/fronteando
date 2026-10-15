@@ -21,7 +21,7 @@
 <!-- épica: docs/epics/001-sitio-base-del-blog.md -->
 
 - [x] docs/tasks/001-andamiaje-del-sitio.md — andamiaje del sitio con Astro
-- [ ] docs/tasks/002-despliegue-continuo-a-cdn.md — despliegue continuo a CDN
+- [~] docs/tasks/002-despliegue-continuo-a-cdn.md — despliegue continuo a CDN
 - [ ] docs/tasks/003-identidad-visual-del-blog.md — identidad visual del blog
 - [ ] docs/tasks/004-tema-base-y-layout.md — tema base y layout
 - [ ] docs/tasks/005-pagina-de-articulo.md — colección de artículos y página de artículo
