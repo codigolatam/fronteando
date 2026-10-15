@@ -46,13 +46,14 @@ La configuración vive en el repositorio:
 La conexión del repositorio se hace una sola vez desde el dashboard —
 requiere la cuenta del proyecto— con estos ajustes:
 
-| Ajuste                | Valor                               |
-| --------------------- | ----------------------------------- |
-| Nombre del worker     | `fronteando`                        |
-| Rama de producción    | `master`                            |
-| Directorio raíz       | `site`                              |
-| Comando de build      | `npm run build`                     |
-| Comando de despliegue | `npx wrangler deploy` (por defecto) |
+| Ajuste                | Valor                                           |
+| --------------------- | ----------------------------------------------- |
+| Nombre del worker     | `fronteando`                                    |
+| Rama de producción    | `master`                                        |
+| Directorio raíz       | `site`                                          |
+| Comando de build      | `npm run build`                                 |
+| Comando de despliegue | `npx wrangler deploy` (por defecto)             |
+| Dominio de producción | `www.fronteando.dev` (custom domain del worker) |
 
 Pasos para recrear la integración: Workers & Pages → Create
 application → GitHub → autorizar y seleccionar
