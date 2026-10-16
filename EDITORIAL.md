@@ -86,12 +86,15 @@ explican el porqué, no solo el qué.
 
 ## Contrato de metadatos
 
-- **Frontmatter completo:** `title`, `description`, `date`, `nivel`,
+- **Frontmatter completo:** `title`, `description`, `date`,
   `categoria`, `tags` (los exige la casa; el esquema además da
-  default a `draft` y `tags`). `draft` ausente equivale a `false`:
-  publicado; un borrador en revisión interna lleva `draft: true`.
+  default a `draft` y `tags`, y `nivel` es opcional). `draft` ausente
+  equivale a `false`: publicado; un borrador en revisión interna
+  lleva `draft: true`.
 - **`nivel`:** el grado al que apunta el post (`principiante`,
   `intermedio` o `avanzado`); lo elige el encuadre y lo muestra la UI.
+  Opcional: las piezas que no enseñan por grados (meta, noticias o
+  explicaciones de ecosistema) lo omiten.
 - **`categoria`:** el pilar de conocimiento al que pertenece el post;
   los valores los fija el esquema de la colección (la lista crece
   cuando el blog abre un pilar nuevo).

@@ -8,7 +8,7 @@ const articulos = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.date(),
-    nivel: z.enum(["principiante", "intermedio", "avanzado"]),
+    nivel: z.enum(["principiante", "intermedio", "avanzado"]).optional(),
     categoria: z.enum([
       "fundamentos",
       "arquitectura",

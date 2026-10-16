@@ -29,7 +29,8 @@ const articulos = (
             <time datetime={articulo.data.date.toISOString().slice(0, 10)}>
               {formatFecha(articulo.data.date)}
             </time>
-            {` · ${articulo.data.nivel} · ${articulo.data.categoria}`}
+            {articulo.data.nivel && ` · ${articulo.data.nivel}`}
+            {` · ${articulo.data.categoria}`}
           </p>
           <p class="article-excerpt">
             {excerptOf(articulo.body ?? "") || articulo.data.description}
