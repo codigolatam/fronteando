@@ -356,13 +356,8 @@ html:not(.js) .theme-toggle {
   color: var(--color-text-muted);
 }
 
-.meta-chip {
-  display: inline-block;
-  background: var(--color-surface);
-  border: var(--border-width) solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 0.05em 0.45em;
-  margin-inline-start: 0.5em;
+.article-meta-struct {
+  margin-block-start: 0;
 }
 
 .prose :not(pre) > code {
