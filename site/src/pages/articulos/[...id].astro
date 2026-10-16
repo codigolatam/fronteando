@@ -23,14 +23,23 @@ const fecha = articulo.data.date.toLocaleDateString("es-ES", {
   year: "numeric",
   timeZone: "UTC",
 });
+const ogImagePath = `/og/${articulo.id}.png`;
 ---
 
 <Base
   title={`${articulo.data.title} — Fronteando`}
   description={articulo.data.description}
   type="article"
+  image={ogImagePath}
 >
   <article class="prose">
+    <img
+      class="article-hero"
+      src={ogImagePath}
+      alt=""
+      width="1200"
+      height="630"
+    />
     <h1>{articulo.data.title}</h1>
     <p class="article-meta">
       <time datetime={articulo.data.date.toISOString().slice(0, 10)}>
