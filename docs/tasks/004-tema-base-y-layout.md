@@ -101,6 +101,6 @@ Todo lo que la tarea asume existe: `DESIGN.md` declara el contrato completo con 
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-16 — Solicita cambios (hallazgos resueltos en fa4b37e)
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
