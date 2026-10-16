@@ -2,6 +2,7 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import type { APIContext } from "astro";
 import { renderOgImage } from "../../utils/og";
+import { formatFecha } from "../../utils/format";
 
 export async function getStaticPaths() {
   const articulos = await getCollection("articulos", ({ data }) => !data.draft);
@@ -15,15 +16,11 @@ interface Props {
   articulo: CollectionEntry<"articulos">;
 }
 
-export async function GET({ props }: APIContext) {
-  const { articulo } = props as Props;
-  const fecha = articulo.data.date.toLocaleDateString("es-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-  const meta = [fecha, ...articulo.data.tags].join(" · ");
+export async function GET({ props }: APIContext<Props>) {
+  const { articulo } = props;
+  const meta = [formatFecha(articulo.data.date), ...articulo.data.tags].join(
+    " · ",
+  );
   const png = await renderOgImage(articulo.data.title, meta);
   return new Response(new Uint8Array(png), {
     headers: { "Content-Type": "image/png" },

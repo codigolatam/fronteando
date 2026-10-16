@@ -1,6 +1,7 @@
 import { Resvg } from "@resvg/resvg-js";
 import satori from "satori";
 
+import { OG_HEIGHT, OG_WIDTH } from "./og-size";
 import fontMono400 from "../assets/fonts/ibm-plex-mono-latin-400-normal.woff?inline";
 import fontMono500 from "../assets/fonts/ibm-plex-mono-latin-500-normal.woff?inline";
 import fontSerif700 from "../assets/fonts/ibm-plex-serif-latin-700-normal.woff?inline";
@@ -13,9 +14,6 @@ const colorText = "#ede9e1"; // --color-text
 const colorTextMuted = "#a69f90"; // --color-text-muted
 const colorAccent = "#2dd4bf"; // --color-accent
 const colorBorder = "#3a352a"; // --color-border
-
-export const OG_WIDTH = 1200;
-export const OG_HEIGHT = 630;
 
 interface OgElement {
   type: string;
@@ -81,6 +79,7 @@ function template(title: string, meta: string): OgElement {
               fontWeight: 700,
               fontSize: titleSize,
               lineHeight: 1.2,
+              lineClamp: 4,
               color: colorText,
             },
             children: title,
@@ -96,7 +95,7 @@ function template(title: string, meta: string): OgElement {
               fontSize: 24,
               color: colorTextMuted,
               borderTop: `1px solid ${colorBorder}`,
-              paddingTop: 28,
+              paddingTop: 24,
             },
             children: [
               { type: "span", props: { children: meta } },
@@ -109,7 +108,7 @@ function template(title: string, meta: string): OgElement {
                     color: colorTextMuted,
                     border: `1px solid ${colorBorder}`,
                     borderRadius: 6,
-                    padding: "6px 14px",
+                    padding: "8px 16px",
                     fontSize: 20,
                   },
                   children: "fronteando.dev",
