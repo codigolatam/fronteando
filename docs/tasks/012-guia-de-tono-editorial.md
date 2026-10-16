@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -53,3 +53,33 @@ Crear `EDITORIAL.md` en la raíz —la `DESIGN.md` de la escritura— como contr
 - `Producto:` sin documentación de producto aplicable.
 - `Lecciones:` `docs/lessons/flujo-de-escritura.md`, `docs/lessons/previos-de-articulos.md`, `docs/lessons/fechas-de-publicacion.md` — las tres lecciones editoriales que la guía formaliza.
 - `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el contrato del previo que la guía cita.
+
+## Conectividad
+
+**Veredicto: conectada.**
+
+`EDITORIAL.md` es un archivo nuevo en raíz — no depende de infraestructura. Los dos posts publicados y las tres lecciones editoriales proveen todo el material a destilar; las referencias externas quedaron investigadas en `docs/research/2026-10-reglas-guias-de-estilo-tecnico.md`.
+
+## Plan técnico
+
+- [x] `EDITORIAL.md` — la guía con siete secciones: voz y registro · anatomía del post · contrato de metadatos · niveles de edición (sustantiva vs. mecánica) · manuales de referencia · palabras problemáticas con sustitutos · ejemplos destilados de los posts publicados — más una nota de alcance que declara la tensión de mantenimiento fuera; la guía misma pasa la ronda de escritura completa
+  - Aporta: el contrato contra el que los skills 013–015 verifican
+  - Contexto: archivo nuevo en raíz, convive con `DESIGN.md` sin solape —una gobierna píxeles, la otra prosa—
+- [x] `docs/research/2026-10-reglas-guias-de-estilo-tecnico.md` — investigación de las guías canónicas (Google dev docs, Mailchimp) y de las reglas de blogging técnico (Draft.dev, Ritza) que fundamenta las reglas de la guía
+  - Aporta: reglas trazables a estándares, no preferencias
+  - Contexto: investigación dirigida rápida, dos rondas de búsqueda
+- [x] Metadatos `nivel` y `categoria` (ampliación aprobada en ejecución): `content.config.ts` con ambos enums; frontmatter de los dos posts publicados; `nivel` y `categoria` visibles en la línea de metadatos de la página del artículo y de las tarjetas de portada; contrato de la guía actualizado
+  - Aporta: los pilares de conocimiento y el grado de cada post, visibles y exigidos por el esquema
+  - Contexto: `nivel` = principiante/intermedio/avanzado; `categoria` = los pilares del manifiesto (css, javascript, frameworks, accesibilidad, rendimiento, meta); los valores de `categoria` los fija el esquema, no la guía
+
+## Suite de pruebas esperada
+
+- `check` / `lint` / `format:check` / `build` en verde —(B)
+- La guía pasa la ronda completa (`revisar-redaccion` + `pulir-escritura`) —(B)
+- Cada regla de la guía es comprobable contra los posts publicados —(O)
+- Sin solape con `DESIGN.md` —(O)
+
+## Revisión
+
+- Subagente: 2026-10-16 — Aprueba (ronda 2; ronda 1 solicitó cambios: rayas pegadas, fallback D002, tabla verificable)
+- Usuario (ejecución): 2026-10-16 — Aprueba

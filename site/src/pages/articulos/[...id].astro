@@ -36,6 +36,10 @@ const ogImagePath = `/og/${articulo.id}.png`;
       </time>
       {articulo.data.tags.length > 0 && ` · ${articulo.data.tags.join(", ")}`}
     </p>
+    <p class="article-meta article-meta-struct">
+      {articulo.data.nivel && `nivel: ${articulo.data.nivel} · `}pilar:{" "}
+      {articulo.data.categoria}
+    </p>
     <Content />
   </article>
 </Base>

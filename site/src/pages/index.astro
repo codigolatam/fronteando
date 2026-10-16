@@ -30,6 +30,10 @@ const articulos = (
               {formatFecha(articulo.data.date)}
             </time>
           </p>
+          <p class="article-meta article-meta-struct">
+            {articulo.data.nivel && `nivel: ${articulo.data.nivel} · `}pilar:{" "}
+            {articulo.data.categoria}
+          </p>
           <p class="article-excerpt">
             {excerptOf(articulo.body ?? "") || articulo.data.description}
           </p>

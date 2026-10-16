@@ -356,6 +356,10 @@ html:not(.js) .theme-toggle {
   color: var(--color-text-muted);
 }
 
+.article-meta-struct {
+  margin-block-start: 0;
+}
+
 .prose :not(pre) > code {
   font-family: var(--font-mono);
   font-size: 0.9em;

@@ -76,13 +76,13 @@ tres voces y tres cortes acotan el costo de carga—. Las familias se
 declaran como `--font-display` (Serif), `--font-body` (Sans) y
 `--font-mono` (Mono).
 
-| Rol | Token | Familia | Peso | Altura de línea |
-|-----|-------|---------|------|-----------------|
-| Título de artículo | `--font-size-title` 36px | Serif | 700 | 1.2 |
-| Encabezado de sección | `--font-size-section` 24px | Serif | 700 | 1.3 |
-| Cuerpo | `--font-size-body` 20px | Sans | 400 | 1.65 |
-| Código en bloque | `--font-size-code` 18px | Mono | 400 | 1.55 |
-| Metadatos y chrome | `--font-size-meta` 15px | Mono | 400 | 1.5 |
+| Rol                   | Token                      | Familia | Peso | Altura de línea |
+| --------------------- | -------------------------- | ------- | ---- | --------------- |
+| Título de artículo    | `--font-size-title` 36px   | Serif   | 700  | 1.2             |
+| Encabezado de sección | `--font-size-section` 24px | Serif   | 700  | 1.3             |
+| Cuerpo                | `--font-size-body` 20px    | Sans    | 400  | 1.65            |
+| Código en bloque      | `--font-size-code` 18px    | Mono    | 400  | 1.55            |
+| Metadatos y chrome    | `--font-size-meta` 15px    | Mono    | 400  | 1.5             |
 
 Pesos declarados —ninguno fuera de esta lista—: Serif solo 700; Sans 400
 y 600 —el 600 es el énfasis de `strong` en prosa—; Mono 400 y 500 —el
@@ -151,6 +151,11 @@ es la promesa de la terminal viva—.
 - **Navegación:** cabecera con la marca `fronteando_` y enlaces a
   secciones en IBM Plex Mono, minúsculas; sin menús desplegables —la
   arquitectura del blog es plana—.
+- **Metadato estructural:** nivel y pilar del artículo van en una
+  segunda línea `clave: valor` en IBM Plex Mono muted (la terminal
+  no imprime chips: el metadato se diferencia por etiqueta, no por
+  decoración, y ninguna forma insinúa interactividad que no existe);
+  la primera línea lleva la fecha y los tags en texto plano.
 
 ## Estados
 
