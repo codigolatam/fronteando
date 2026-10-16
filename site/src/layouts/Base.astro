@@ -93,37 +93,39 @@ const { title, description } = Astro.props;
       });
       prefersDark.addEventListener("change", syncToggle);
 
-      document.querySelectorAll(".prose pre:has(> code)").forEach((pre) => {
-        const parent = pre.parentElement;
-        if (!parent) return;
-        pre.tabIndex = 0;
-        const wrapper = document.createElement("div");
-        wrapper.className = "code-block";
-        parent.insertBefore(wrapper, pre);
-        wrapper.appendChild(pre);
+      document
+        .querySelectorAll<HTMLElement>(".prose pre:has(> code)")
+        .forEach((pre) => {
+          const parent = pre.parentElement;
+          if (!parent) return;
+          pre.tabIndex = 0;
+          const wrapper = document.createElement("div");
+          wrapper.className = "code-block";
+          parent.insertBefore(wrapper, pre);
+          wrapper.appendChild(pre);
 
-        const button = document.createElement("button");
-        button.type = "button";
-        button.className = "copy-btn";
-        button.textContent = "copiar";
-        button.addEventListener("click", async () => {
-          button.classList.remove("error");
-          try {
-            const code = pre.querySelector("code");
-            await navigator.clipboard.writeText(code?.textContent ?? "");
-            button.textContent = "copiado";
-            button.classList.add("copied");
-          } catch {
-            button.textContent = "error";
-            button.classList.add("error");
-          }
-          setTimeout(() => {
-            button.textContent = "copiar";
-            button.classList.remove("copied", "error");
-          }, 1200);
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "copy-btn";
+          button.textContent = "copiar";
+          button.addEventListener("click", async () => {
+            button.classList.remove("error");
+            try {
+              const code = pre.querySelector("code");
+              await navigator.clipboard.writeText(code?.textContent ?? "");
+              button.textContent = "copiado";
+              button.classList.add("copied");
+            } catch {
+              button.textContent = "error";
+              button.classList.add("error");
+            }
+            setTimeout(() => {
+              button.textContent = "copiar";
+              button.classList.remove("copied", "error");
+            }, 1200);
+          });
+          wrapper.appendChild(button);
         });
-        wrapper.appendChild(button);
-      });
     </script>
   </body>
 </html>
