@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -42,6 +42,45 @@ Que cada build de rama en Cloudflare Workers Builds produzca una URL de preview 
 ## Notas
 
 - La advertencia del log indica que `wrangler preview` está en beta abierta; si la opción elegida cambia de nombre conviene verificarla contra la documentación vigente de Wrangler.
+
+## Contexto
+
+
+- Archivos similares: `site/wrangler.jsonc` —el artefacto a modificar: ya declara worker, assets, `previews: {}` y la ruta del custom domain de producción—.
+- Patrones: la configuración de despliegue vive versionada en el repo, no en el dashboard; el build de rama corre `npx wrangler preview` y ya sube los assets —solo falta que el despliegue exponga URL—.
+- Dominio: ninguno —el proyecto no tiene `docs/domains/`—.
+- Producto: ninguno —el proyecto no tiene `product-docs/`—.
+- PRD: `docs/prd/001-sitio-base-del-blog.md` —las URLs de preview son tooling del flujo de revisión, no comportamiento del producto; ningún CU las declara—.
+- Lecciones: `formato-de-codigo-generado` —el `wrangler.jsonc` se edita ya en el estilo del archivo (jsonc con comentarios por sección)—.
+- Decisiones: `D001-despliegue-en-cloudflare-workers.md` —fija Worker con assets y config en `wrangler.jsonc`; la habilitación de previews entra en su alcance, no exige ADR nuevo—.
+- Fuente externa: el propio build de `wrangler preview` documenta las dos vías —`preview_urls: true` (workers.dev) y `previews_enabled` en la ruta (subdominio propio)—.
+
+## Conectividad
+
+
+**Veredicto:** conectada.
+
+Todo lo que la tarea asume existe: el worker `fronteando` despliega por Workers Builds, `wrangler preview` ya sube los assets de la rama —el log lo demuestra— y `wrangler.jsonc` es el punto de anclaje documentado por el propio comando para habilitar la URL. La única decisión abierta —workers.dev frente a subdominio propio— es una elección de implementación dentro del alcance, no una dependencia externa.
+
+## Plan técnico
+
+
+`site/wrangler.jsonc` ya orquesta el deploy —Worker, assets, `previews: {}` y la ruta del custom domain de producción—; `wrangler preview` sube los assets de la rama pero no expone URL porque la habilitación falta. La vía elegida es `preview_urls: true` —workers.dev—: la alternativa `previews_enabled` en la ruta generaría previews en `*.www.fronteando.dev`, más superficie sobre el dominio de producción sin beneficio para previews internas.
+
+- [ ] Añadir `"preview_urls": true` a `site/wrangler.jsonc`
+  - Aporta: cada build de rama expone `https://<preview>-fronteando.gilmrjc.workers.dev` —previews navegables para revisar PRs renderizados—
+  - Contexto: `preview_urls` es un flag de nivel raíz, hermano de `routes`, no una propiedad del objeto route
+- [ ] Verificar end-to-end: el push de esta misma rama dispara el build de preview y la URL declarada en el log responde 200
+  - Aporta: la evidencia del criterio «URL de preview activa», verificada con el cambio en vuelo
+  - Contexto: el build lo corre Workers Builds remoto; la URL la reporta el log —no hay comando local que la consulte—
+
+## Suite de pruebas esperada
+
+
+- El log del build de la rama declara una URL de preview activa —(I).
+- La URL de preview responde 200 sirviendo el sitio compilado —(O).
+- `www.fronteando.dev` sigue sirviendo producción sin cambios —regresión (B).
+- La habilitación vive solo en `wrangler.jsonc`, reproducible desde el repo —(B).
 
 ## Revisión
 
