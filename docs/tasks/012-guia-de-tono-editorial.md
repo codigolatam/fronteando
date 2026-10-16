@@ -75,3 +75,7 @@ Crear `EDITORIAL.md` en la raíz —la `DESIGN.md` de la escritura— como contr
 - La guía pasa la ronda completa (`revisar-redaccion` + `pulir-escritura`) —(B)
 - Cada regla de la guía es comprobable contra los posts publicados —(O)
 - Sin solape con `DESIGN.md` —(O)
+
+## Revisión
+
+- Subagente: 2026-10-16 — Aprueba (ronda 2; ronda 1 solicitó cambios: rayas pegadas, fallback D002, tabla verificable)
