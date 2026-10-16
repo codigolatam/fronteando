@@ -278,6 +278,11 @@ html:not(.js) .theme-toggle {
   margin-block: var(--space-1) 0;
 }
 
+.article-excerpt {
+  color: var(--color-text-muted);
+  margin-block: var(--space-1) 0;
+}
+
 .article-empty {
   font-family: var(--font-mono);
   font-size: var(--font-size-meta);

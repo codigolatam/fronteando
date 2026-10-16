@@ -21,7 +21,6 @@ const formatoFecha = (fecha: Date) =>
 >
   <div class="prose">
     <h1>Fronteando</h1>
-    <p>Un lugar donde aprender frontend, con o sin asistente de por medio.</p>
   </div>
   {articulos.length === 0 ? (
     <p class="article-empty">Aún no hay artículos publicados.</p>
@@ -36,9 +35,8 @@ const formatoFecha = (fecha: Date) =>
             <time datetime={articulo.data.date.toISOString().slice(0, 10)}>
               {formatoFecha(articulo.data.date)}
             </time>
-            {" — "}
-            {articulo.data.description}
           </p>
+          <p class="article-excerpt">{articulo.data.description}</p>
         </li>
       ))}
     </ul>
