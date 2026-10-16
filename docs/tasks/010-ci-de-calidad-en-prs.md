@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -83,6 +83,6 @@ Punto a decidir durante la ejecución: activar o no branch protection para exigi
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-16 — Aprueba
+- Usuario (ejecución): 2026-10-16 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

@@ -16,7 +16,6 @@
 
 ## General
 
-- [r] docs/tasks/010-ci-de-calidad-en-prs.md — CI de calidad en PRs con GitHub Actions
 
 ## Propuestas en revisión
 

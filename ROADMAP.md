@@ -11,11 +11,7 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-- 1. docs/epics/001-sitio-base-del-blog.md — Sitio base del blog
-  - Estado: en curso
-  - Justificación: única línea comprometida y ya en vuelo; todo lo demás
-    del producto necesita el sitio publicado —es la base sobre la que
-    aterrizan las ideas del bloque inicial—.
+Sin líneas comprometidas.
 
 ## Next
 
