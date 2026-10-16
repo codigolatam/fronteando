@@ -78,10 +78,15 @@ explican el porqué, no solo el qué.
 
 ## Contrato de metadatos
 
-- **Frontmatter completo:** `title`, `description`, `date`, `tags`
-  (los exige la casa; el esquema además da default a `draft` y
-  `tags`). `draft` ausente equivale a `false`: publicado; un borrador
-  en revisión interna lleva `draft: true`.
+- **Frontmatter completo:** `title`, `description`, `date`, `nivel`,
+  `categoria`, `tags` (los exige la casa; el esquema además da
+  default a `draft` y `tags`). `draft` ausente equivale a `false`:
+  publicado; un borrador en revisión interna lleva `draft: true`.
+- **`nivel`:** el grado al que apunta el post (`principiante`,
+  `intermedio` o `avanzado`); lo elige el encuadre y lo muestra la UI.
+- **`categoria`:** el pilar de conocimiento al que pertenece el post;
+  los valores los fija el esquema de la colección (la lista crece
+  cuando el blog abre un pilar nuevo).
 - **Fecha con hora real** del commit/merge (dos artículos el mismo
   día empatan en el orden por fecha; ver
   `docs/lessons/fechas-de-publicacion.md`).

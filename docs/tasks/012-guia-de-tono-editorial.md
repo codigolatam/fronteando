@@ -68,6 +68,9 @@ Crear `EDITORIAL.md` en la raíz —la `DESIGN.md` de la escritura— como contr
 - [x] `docs/research/2026-10-reglas-guias-de-estilo-tecnico.md` — investigación de las guías canónicas (Google dev docs, Mailchimp) y de las reglas de blogging técnico (Draft.dev, Ritza) que fundamenta las reglas de la guía
   - Aporta: reglas trazables a estándares, no preferencias
   - Contexto: investigación dirigida rápida, dos rondas de búsqueda
+- [x] Metadatos `nivel` y `categoria` (ampliación aprobada en ejecución): `content.config.ts` con ambos enums; frontmatter de los dos posts publicados; `nivel` y `categoria` visibles en la línea de metadatos de la página del artículo y de las tarjetas de portada; contrato de la guía actualizado
+  - Aporta: los pilares de conocimiento y el grado de cada post, visibles y exigidos por el esquema
+  - Contexto: `nivel` = principiante/intermedio/avanzado; `categoria` = los pilares del manifiesto (css, javascript, frameworks, accesibilidad, rendimiento, meta); los valores de `categoria` los fija el esquema, no la guía
 
 ## Suite de pruebas esperada
 
