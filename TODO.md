@@ -19,4 +19,5 @@
 
 ## Propuestas en revisión
 
+- [p] docs/proposals/002-post-inaugural-mini-store/ — Post inaugural: mini store reactivo en vanilla JS (1 borrador)
 
