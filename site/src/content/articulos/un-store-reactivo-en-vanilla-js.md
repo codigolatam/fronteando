@@ -1,7 +1,7 @@
 ---
 title: "Un store reactivo en vanilla JS"
 description: "La magia de los frameworks cabe en cincuenta líneas: estado que notifica, efectos que se registran solos y un Proxy que mantiene la pantalla al día."
-date: 2026-10-16
+date: 2026-10-16T21:15:00Z
 tags: ["javascript", "reactividad", "fundamentos"]
 ---
 
@@ -9,13 +9,15 @@ Cambia una variable y la pantalla se actualiza sola. Si has usado Vue,
 Solid, Preact o cualquier framework reciente, ese gesto te es familiar:
 escribes `count.value++` y el DOM obedece. Parece magia.
 
-No lo es. En este artículo vamos a construir ese mecanismo desde cero,
+No lo es.
+
+<!--more-->
+
+En este artículo vamos a construir ese mecanismo desde cero,
 en JavaScript sin librerías: unas cincuenta líneas que hacen lo
 esencial de un store reactivo. Al final, `ref()` y `signal()` dejarán
 de ser conjuros para convertirse en algo que ya sabes escribir —porque
 mientras algo parezca magia, solo queda memorizar la API.
-
-<!--more-->
 
 ## El resultado primero
 
