@@ -7,13 +7,13 @@ tags: ["javascript", "reactividad", "fundamentos"]
 
 Cambia una variable y la pantalla se actualiza sola. Si has usado Vue,
 Solid, Preact o cualquier framework reciente, ese gesto te es familiar:
-asignas `count.value++` y el DOM obedece. Parece magia, y mientras lo
-parezca, solo queda memorizar la API.
+escribes `count.value++` y el DOM obedece. Parece magia.
 
 No lo es. En este artículo vamos a construir ese mecanismo desde cero,
 en JavaScript sin librerías: unas cincuenta líneas que hacen lo
 esencial de un store reactivo. Al final, `ref()` y `signal()` dejarán
-de ser conjuros para convertirse en algo que ya sabes escribir.
+de ser conjuros para convertirse en algo que ya sabes escribir —porque
+mientras algo parezca magia, solo queda memorizar la API.
 
 <!--more-->
 
