@@ -20,3 +20,10 @@
   Obtenido: «algo deénfasis» — el salto de línea entre texto y etiqueta desapareció en el HTML servido
   Corrección: Astro trata la plantilla con semántica JSX y elimina el whitespace con saltos de línea adyacente a etiquetas en vez de colapsarlo a espacio como HTML; forzar el espacio con la expresión {" "} — también revisar otros bordes texto-etiqueta, que el padding del chip de código disimulaba el mismo bug
   Estado: consolidada
+
+- Id: 20261016T105915
+  Tarea: docs/tasks/005-pagina-de-articulo.md
+  Esperado: una «ronda de revisión de escritura» corre el flujo completo de escritura del proyecto
+  Obtenido: solo se ejecutó revisar-redaccion; el usuario tuvo que pedir explícitamente también el pulido mecánico
+  Corrección: una ronda de escritura comprende revisar-redaccion seguida de pulir-escritura —estilo y luego ortotipografía/formato—; no detenerse tras el primer skill
+  Estado: consolidada

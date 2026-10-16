@@ -20,3 +20,7 @@
 - plantillas-de-astro.md
   - Disparadores: .astro, páginas Astro, plantillas, markup inline, whitespace, JSX, expresiones
   - Resumen: trampas de la semántica JSX de las plantillas `.astro` —p. ej. el whitespace con saltos de línea junto a etiquetas desaparece y el espacio se fuerza con `{" "}`—
+
+- flujo-de-escritura.md
+  - Disparadores: escritura, redacción, revisión de texto, pulir, artículos, documentos en español, ronda de escritura
+  - Resumen: una ronda de revisión de escritura corre el flujo completo —`revisar-redaccion` para el estilo y `pulir-escritura` para la mecánica, en ese orden—
