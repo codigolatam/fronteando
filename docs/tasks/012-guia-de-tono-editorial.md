@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -82,3 +82,4 @@ Crear `EDITORIAL.md` en la raíz —la `DESIGN.md` de la escritura— como contr
 ## Revisión
 
 - Subagente: 2026-10-16 — Aprueba (ronda 2; ronda 1 solicitó cambios: rayas pegadas, fallback D002, tabla verificable)
+- Usuario (ejecución): 2026-10-16 — Aprueba
