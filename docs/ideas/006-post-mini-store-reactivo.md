@@ -3,6 +3,7 @@
 > **Tipo:** idea de contenido — post único (complejidad media)
 > **Fecha:** 2026-10
 > **Orden sugerido:** 1 de 2 (contenido técnico) — post autónomo que prueba la línea editorial sin esperar a la infraestructura de acompañamiento.
+> **Procesada en:** docs/proposals/002-post-inaugural-mini-store/propuesta.md
 
 ## Problema
 
