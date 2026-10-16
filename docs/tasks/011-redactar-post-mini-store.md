@@ -1,5 +1,9 @@
 # Redactar y publicar el post inaugural: mini-store reactivo en vanilla JS
 
+## Estado
+
+**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+
 ## Tipo
 
 desarrollo
@@ -42,3 +46,9 @@ Escribir el primer artículo técnico del blog —construir un store reactivo pa
 
 - Es el primer post técnico: define el tono de los que siguen. Va sin bootstrap ni checkpoints a propósito — la reescritura con las estructuras de acompañamiento llega con la línea 002.
 - Slug sugerido: `un-store-reactivo-en-vanilla-js` (o el que mejor le quede al título final).
+
+## Revisión
+
+- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

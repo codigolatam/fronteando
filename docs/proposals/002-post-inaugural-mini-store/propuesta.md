@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Borrador | **[p] Pendiente de revisión** | [a] Aprobada | [d] Descartada
+[ ] Borrador | [p] Pendiente de revisión | **[a] Aprobada** | [d] Descartada
 
 ## Problema
 
@@ -41,8 +41,8 @@ Redactar y publicar el post inaugural siguiendo el plan de redacción aprobado e
 
 ## Borradores
 
-- `01-redactar-post-mini-store.md` — redactar y publicar el post inaugural
+- `docs/tasks/011-redactar-post-mini-store.md` — redactar y publicar el post inaugural
 
 ## Revisión
 
-- Usuario: [fecha] — [Aprueba | Solicita cambios | Rechaza]
+- Usuario: 2026-10-16 — Aprueba
