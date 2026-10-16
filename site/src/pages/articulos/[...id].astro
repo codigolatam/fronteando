@@ -3,7 +3,6 @@ import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { formatFecha } from "../../utils/format";
-import { OG_HEIGHT, OG_WIDTH } from "../../utils/og-size";
 
 export async function getStaticPaths() {
   const articulos = await getCollection("articulos", ({ data }) => !data.draft);
@@ -30,14 +29,6 @@ const ogImagePath = `/og/${articulo.id}.png`;
   image={ogImagePath}
 >
   <article class="prose">
-    <img
-      class="article-hero"
-      src={ogImagePath}
-      alt=""
-      width={OG_WIDTH}
-      height={OG_HEIGHT}
-      fetchpriority="high"
-    />
     <h1>{articulo.data.title}</h1>
     <p class="article-meta">
       <time datetime={articulo.data.date.toISOString().slice(0, 10)}>

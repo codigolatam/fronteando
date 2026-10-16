@@ -18,9 +18,7 @@ interface Props {
 
 export async function GET({ props }: APIContext<Props>) {
   const { articulo } = props;
-  const meta = [formatFecha(articulo.data.date), ...articulo.data.tags].join(
-    " · ",
-  );
+  const meta = formatFecha(articulo.data.date);
   const png = await renderOgImage(articulo.data.title, meta);
   return new Response(new Uint8Array(png), {
     headers: { "Content-Type": "image/png" },

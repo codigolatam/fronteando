@@ -33,7 +33,7 @@ const fonts = [
 ] as const;
 
 function template(title: string, meta: string): OgElement {
-  const titleSize = title.length > 50 ? 56 : 68;
+  const titleSize = title.length > 90 ? 48 : title.length > 50 ? 56 : 68;
   return {
     type: "div",
     props: {
@@ -74,12 +74,13 @@ function template(title: string, meta: string): OgElement {
           type: "div",
           props: {
             style: {
-              display: "flex",
+              display: "block",
               fontFamily: "IBM Plex Serif",
               fontWeight: 700,
               fontSize: titleSize,
               lineHeight: 1.2,
               lineClamp: 4,
+              textOverflow: "ellipsis",
               color: colorText,
             },
             children: title,
@@ -98,7 +99,17 @@ function template(title: string, meta: string): OgElement {
               paddingTop: 24,
             },
             children: [
-              { type: "span", props: { children: meta } },
+              {
+                type: "span",
+                props: {
+                  children: meta,
+                  style: {
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  },
+                },
+              },
               {
                 type: "div",
                 props: {

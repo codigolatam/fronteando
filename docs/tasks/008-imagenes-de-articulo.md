@@ -88,9 +88,9 @@ Aprobado por el usuario.
   - Aporta: dev y build sin que Vite empaquete el `.node`
 - [x] `site/src/layouts/Base.astro` — prop `image`; `og:image` con URL absoluta + `og:image:type/width/height/alt`; `twitter:card` = `summary_large_image` con imagen, `summary` sin ella
   - Aporta: metadatos OG/Twitter completos por página con imagen
-- [x] `site/src/pages/articulos/[...id].astro` — `image: /og/<id>.png` al layout y `<img>` hero encima del h1
-  - Aporta: hero visible desde la misma imagen que `og:image`
-- [x] `site/src/styles/global.css` — estilos del hero con tokens (radio, borde)
+- [x] `site/src/pages/articulos/[...id].astro` — `image: /og/<id>.png` al layout; el `<img>` hero se descartó en ejecución (ver desviaciones)
+  - Aporta: `og:image` por artículo
+- [x] `site/src/styles/global.css` — estilos del hero, revertidos al descartarse el hero
 
 ## Suite de pruebas esperada
 
@@ -108,6 +108,9 @@ Aprobada por el usuario.
 - `vite.ssr.external` no fue necesario: `@resvg/resvg-js` resuelve su binding nativo en dev y en build sin configuración (verificado: endpoint responde en `astro dev` y `dist/og/*.png` se genera).
 - La plantilla raíz necesita `boxSizing: "border-box"`: satori interpreta `height: 100%` como content-box y el padding empujaba la fila meta fuera del lienzo de 630px.
 - La fila meta usa `justifyContent: "space-between"` en lugar de `marginLeft: "auto"` para la insignia del dominio.
+- **Hero eliminado de la página** (decisión del usuario, desvía el «resultado esperado» literal): el hero duplicaba toda la información ya visible en la página —marca, título, meta, dominio—; el PNG queda como artefacto exclusivamente social (`og:image`), patrón dominante en blogs técnicos con tarjetas generadas. Se evaluó una variante sin elementos duplicados y quedaba una franja genérica sin información.
+- **La meta de la tarjeta lleva solo la fecha** (decisión del usuario), sin tags.
+- `lineClamp` de satori solo aplica con `display: "block"` (verificado en el código fuente de satori 0.43): el título usa `block` + `lineClamp: 4` + `textOverflow: "ellipsis"` tras la prueba de estrés con título de ~20 palabras; la meta trunca con `nowrap` + ellipsis.
 
 ## Revisión
 
