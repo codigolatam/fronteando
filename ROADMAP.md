@@ -11,23 +11,32 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-Sin líneas comprometidas.
+- 1. docs/ideas/006-post-mini-store-reactivo.md — Post inaugural: mini store reactivo
+  - Estado: pendiente de arrancar
+  - Justificación: contenido autónomo y publicable ya, sin
+    infraestructura nueva; es el material real sobre el que se
+    dimensiona la lectura acompañada —diseñar el protocolo sin un post
+    sería hacerlo a ciegas—.
 
 ## Next
 
-Sin líneas validadas: las ideas del bloque inicial esperan su paso por
-el flujo de idea a tarea antes de comprometerse.
+- 2. Lectura acompañada por LLM (idea 002) — el diferenciador editorial;
+  se diseña y verifica contra el post real que el post inaugural deja
+  publicado.
+- 3. Demos de código ejecutables (idea 004) — ejemplos que el lector
+  puede tocar dentro del artículo; enriquecen directamente la escritura
+  que la lectura acompañada estructura.
+- 4. Blog legible para máquinas (idea 003) — salidas `.md` y `llms.txt`;
+  deriva del esquema que la lectura acompañada define.
 
 ## Later
 
-- Lectura acompañada por LLM (idea 002) — la línea editorial distintiva:
-  checkpoints, bootstrap y material para el asistente del lector.
-- Blog legible para máquinas (idea 003) — salidas `.md` y `llms.txt` que
-  hacen el contenido consumible por LLMs y agentes.
-- Demos de código ejecutables (idea 004) — ejemplos que el lector puede
-  tocar dentro del artículo.
 - Newsletter (idea 005) — relación continuada con quien quiere seguir
-  el blog; el RSS del hito actual la habilita.
+  el blog; el RSS ya publicado la habilita, y su valor crece con el
+  catálogo.
+- Serie MVC en vanilla JS (idea 007) — línea editorial duradera que
+  sigue al post inaugural; su cierre enlaza de vuelta a la reactividad
+  que el mini-store ya enseñó.
 
 ## No ahora
 
@@ -35,4 +44,4 @@ Sin líneas aparcadas.
 
 ## Revisión
 
-- Usuario: 2026-10-15 — Aprueba
+- Usuario: 2026-10-16 — Aprueba
