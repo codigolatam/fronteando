@@ -28,3 +28,11 @@
 - checks-de-ci-independientes.md
   - Disparadores: github actions, workflow, ci.yml, CI, checks, matrix, .github/workflows, pull request
   - Resumen: en CI, un job por check —no pasos secuenciales— para que un fallo no enmascare al resto y el PR muestre un check por verificación
+
+- previos-de-articulos.md
+  - Disparadores: previo, excerpt, more, portada, índice de artículos, artículos, gancho, introducción
+  - Resumen: el previo se diseña como pieza propia —breve y con el gancho cerrado dentro del extracto—; el corte va donde la unidad se cumple
+
+- fechas-de-publicacion.md
+  - Disparadores: date, fecha, publicación, orden de artículos, frontmatter, sort, portada, RSS
+  - Resumen: las fechas de publicación llevan la hora real del commit/merge; sin ella dos artículos el mismo día empatan y el orden cae al alfabeto

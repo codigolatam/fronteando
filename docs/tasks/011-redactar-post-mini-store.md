@@ -79,4 +79,4 @@ La colección `articulos` y todo lo que consume un artículo —página, portada
 
 - Subagente: 2026-10-16 — Aprueba
 - Usuario (ejecución): 2026-10-16 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-16 — Aprueba

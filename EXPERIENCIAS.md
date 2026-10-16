@@ -34,3 +34,24 @@
   Obtenido: un solo job con los cuatro checks como pasos secuenciales —un fallo saltaba el resto y solo se veía el primer check roto
   Corrección: un job por check vía strategy.matrix con fail-fast: false, de modo que un fallo no enmascare a los demás y el PR muestre un check independiente por verificación
   Estado: consolidada
+
+- Id: 20261016T151944
+  Tarea: 011-redactar-post-mini-store
+  Esperado: la ronda de escritura cubre el texto que se entrega
+  Obtenido: la ronda corrió sobre el borrador, pero dos párrafos reescritos después por la revisión técnica quedaron sin revisar —el usuario lo detectó preguntando si la ronda había corrido—
+  Corrección: la ronda de escritura corre sobre la versión final; cualquier reescritura posterior necesita una pasada nueva sobre lo cambiado
+  Estado: consolidada
+
+- Id: 20261016T151952
+  Tarea: 011-redactar-post-mini-store
+  Esperado: el previo de la portada funciona como pieza propia
+  Obtenido: el extracto de dos párrafos resultó largo y dejó una línea huérfana; el usuario pidió cerrar el gancho dentro del previo e integrar «No lo es.» en el párrafo
+  Corrección: diseñar el previo como unidad —breve, que cierra su gancho dentro del extracto— y colocar el marcador de corte donde eso se cumple
+  Estado: consolidada
+
+- Id: 20261016T151954
+  Tarea: 011-redactar-post-mini-store
+  Esperado: el artículo nuevo encabeza la portada por ser el más reciente
+  Obtenido: aparecía segundo: dos artículos el mismo día empatan en el orden por fecha y el desempate cae al alfabeto
+  Corrección: las fechas de publicación llevan la hora real —la del commit/merge de cada artículo— para que el orden sea determinista
+  Estado: consolidada
