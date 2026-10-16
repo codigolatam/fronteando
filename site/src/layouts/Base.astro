@@ -10,9 +10,10 @@ interface Props {
   title: string;
   description?: string;
   type?: "website" | "article";
+  noindex?: boolean;
 }
 
-const { title, description, type = "website" } = Astro.props;
+const { title, description, type = "website", noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
@@ -25,6 +26,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:site_name" content="Fronteando" />
     <meta property="og:title" content={title} />
     {description && <meta property="og:description" content={description} />}

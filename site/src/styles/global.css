@@ -258,6 +258,9 @@ html:not(.js) .theme-toggle {
 }
 
 .article-list-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
   font-family: var(--font-display);
   font-size: var(--font-size-section);
   font-weight: 700;
@@ -272,7 +275,7 @@ html:not(.js) .theme-toggle {
 }
 
 .article-list-item .article-meta {
-  margin-top: var(--space-1);
+  margin-block: var(--space-1) 0;
 }
 
 .article-empty {

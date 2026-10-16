@@ -26,7 +26,7 @@ const formatoFecha = (fecha: Date) =>
   {articulos.length === 0 ? (
     <p class="article-empty">Aún no hay artículos publicados.</p>
   ) : (
-    <ul class="article-list">
+    <ul class="article-list" role="list">
       {articulos.map((articulo) => (
         <li class="article-list-item">
           <a class="article-list-link" href={`/articulos/${articulo.id}/`}>
