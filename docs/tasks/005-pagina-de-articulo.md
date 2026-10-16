@@ -116,6 +116,7 @@ Aprobada por el usuario.
 
 - Los tokens `--astro-code-*` se declararon una sola vez en `:root`, sin duplicarlos bajo los dos selectores del tema oscuro que mencionaba el plan: como referencian los tokens semánticos (`--color-text`, `--color-accent`, …), que ya alternan por tema, la resolución es automática. El plan describía la ubicación; el resultado —resaltado por tema sin literales— es idéntico con una definición.
 - Se corrigió un error de tipos preexistente en `Base.astro` (`querySelectorAll` devuelve `Element`, sin `tabIndex`): la capa de contenido endureció el typecheck de `astro check` y lo detectó. Fix absorbido: `querySelectorAll<HTMLElement>`.
+- El artículo final no incluye h3 ni la sección de funcionamiento: la ronda editorial con el usuario llevó el texto a presentación pura del proyecto (qué representa, a quién habla, qué promete). Conserva h2, lista, código inline, bloque `js` (hola mundo) y enlace —el resto del banco queda cubierto; el h3 lo demostrará el primer artículo técnico.
 
 ## Revisión
 

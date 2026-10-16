@@ -1,49 +1,65 @@
 ---
 title: "Hola, Fronteando"
-description: "Qué es Fronteando, por qué existe y cómo se lee."
+description: "Qué es Fronteando, para quién es y qué vas a encontrar aquí."
 date: 2026-10-16
 tags: ["meta"]
 ---
 
-Fronteando es un blog técnico de desarrollo web frontend: CSS, JavaScript,
-frameworks, accesibilidad y rendimiento. Está pensado como **un lugar donde
-aprender frontend, con o sin asistente de por medio**.
+Fronteando es un blog técnico de desarrollo web frontend, escrito en
+español: un lugar donde aprenderlo, **con o sin asistente de por
+medio**.
+
+Escribimos para quien quiere entender cómo funcionan las cosas por
+dentro, no solo para quien necesita resolver la tarea de hoy.
 
 ## Por qué existe
 
-La documentación dice qué hace una API; los tutoriales dicen qué pasos seguir.
-Lo que suele faltar es el espacio intermedio: entender por qué una decisión se
-toma así, qué alternativas existían y qué se rompe si se ignora. Ese es el tipo
-de texto que va a vivir aquí.
+Buena parte de la escritura técnica sobre frontend está en inglés. Lo
+que hay en español suele ser otra cosa: desarrollo web en general,
+noticias del ecosistema o blogs personales que mezclan cursos y
+experiencias, todo legítimo pero no siempre de fondo.
 
-## Cómo se lee
+A esa falta se suma otra, independiente del idioma: la
+[documentación](https://developer.mozilla.org/es/) dice qué hace una API
+y los tutoriales dicen qué pasos seguir. Entre ambas fuentes falta casi
+siempre el mismo espacio, el que explica por qué se decide así, qué
+alternativas había y qué se rompe si se ignora.
 
-Cada artículo está escrito para leerse de corrido, pero también para trabajarse
-con un LLM de acompañamiento: el código es real, copiable en un gesto, y los
-ejemplos se pueden pegar tal cual en una conversación.
+Fronteando existe para ese espacio: contenido de fondo sobre frontend y
+en español.
+
+## Qué vas a encontrar
+
+Artículos de fondo —piezas para entender, no recetas para copiar— sobre
+lo que usas a diario:
+
+- **CSS:** layouts, cascada y lo que el navegador hace con tus estilos.
+- **JavaScript:** el modelo mental del lenguaje, no solo su sintaxis.
+- **Frameworks:** qué resuelven y qué te cobran por ello.
+- **Accesibilidad:** interfaces que sirven a todas las personas.
+- **Rendimiento:** sitios rápidos porque entiendes qué los hace lentos.
+
+## Con o sin asistente
+
+Quien aprende frontend hoy convive con los agentes de código —o
+asistentes—: unos los tienen siempre a mano, otros prefieren no usarlos.
+Nuestro objetivo es que una persona aprenda y mejore, no que una máquina
+resuelva por ella.
+
+Por eso el contenido está pensado para funcionar en ambos casos: habrá
+recursos interactivos y secciones diseñadas para sacar partido a un
+agente como apoyo, pero ningún artículo lo exige. Si lo usas, te sirve
+de compañero; si no, el texto se sostiene solo.
+
+## Este es el `hola mundo`
+
+Todo proyecto empieza igual: con un programa pequeño cuya única prueba
+es que algo funciona, que el punto de partida existe. Este artículo es
+el nuestro, la primera página de un blog que acaba de nacer:
 
 ```js
-// Esto es un bloque de código de verdad.
-const tema = matchMedia("(prefers-color-scheme: dark)").matches
-  ? "oscuro"
-  : "claro";
+const blog = "fronteando";
+console.log(`hola, ${blog}`);
 ```
-
-La interfaz respeta tu sistema: si tu preferencia es `prefers-color-scheme:
-dark`, el sitio llega oscuro; el conmutador de la cabecera te deja elegir.
-
-### Lo que encontrarás en cada artículo
-
-- Prosa que se lee de corrido, sin prerrequisitos artificiales.
-- Código real, resaltado y copiable en un gesto.
-- Enlaces a las fuentes —como la
-  [documentación de Astro](https://docs.astro.build)— cuando el tema lo pide.
-
-## Cómo se publica
-
-Cada artículo es un archivo Markdown en el repositorio, con sus metadatos en el
-frontmatter. Fusionar a la rama principal compila y publica el sitio —no hay
-paso manual entre el texto y la página que estás leyendo. Este artículo es,
-precisamente, la primera prueba de esa tubería.
 
 Bienvenido.
