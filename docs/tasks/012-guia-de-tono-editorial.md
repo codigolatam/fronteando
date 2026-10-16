@@ -83,3 +83,4 @@ Crear `EDITORIAL.md` en la raíz —la `DESIGN.md` de la escritura— como contr
 
 - Subagente: 2026-10-16 — Aprueba (ronda 2; ronda 1 solicitó cambios: rayas pegadas, fallback D002, tabla verificable)
 - Usuario (ejecución): 2026-10-16 — Aprueba
+- Usuario (cierre): 2026-10-16 — Aprueba
