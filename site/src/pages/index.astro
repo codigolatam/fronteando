@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
+import { excerptOf } from "../utils/excerpt";
 
 const articulos = (
   await getCollection("articulos", ({ data }) => !data.draft)
@@ -36,7 +37,9 @@ const formatoFecha = (fecha: Date) =>
               {formatoFecha(articulo.data.date)}
             </time>
           </p>
-          <p class="article-excerpt">{articulo.data.description}</p>
+          <p class="article-excerpt">
+            {excerptOf(articulo.body ?? "") || articulo.data.description}
+          </p>
         </li>
       ))}
     </ul>

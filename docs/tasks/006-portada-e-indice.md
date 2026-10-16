@@ -103,6 +103,7 @@ Aprobada por el usuario.
 
 - `@astrojs/sitemap` se fijó en 3.7.4 en lugar de la 3.6.0 inicial: la 3.6.x falla en el hook `astro:build:done` con Astro 7 (`Cannot read properties of undefined (reading 'reduce')`); la 3.7.4 —publicada el 2026-08-31— genera el sitemap correctamente.
 - La lista de artículos de la portada es una pieza que la guía no describe; se derivó con sus principios: título en Serif tamaño sección sin subrayado —es navegación, no enlace en prosa—, meta en mono muted, hover en acento. El pie deriva sus enlaces del patrón `.site-nav` —mono, muted, hover acento— cumpliendo «pie con enlaces» de la guía.
+- El previo del índice usa el cuerpo del artículo —todo lo anterior a un marcador `<!--more-->`, o el primer párrafo sin él— en texto plano, no el `description` del frontmatter: el usuario distinguió el resumen corto para OG/social del excerpt de contenido. `description` queda como fallback si el excerpt sale vacío.
 
 ## Revisión
 
