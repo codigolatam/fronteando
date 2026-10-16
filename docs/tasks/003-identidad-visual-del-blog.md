@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -46,6 +46,6 @@ Evolucionar la guía de estilo `DESIGN.md` de base neutra a identidad visual pro
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-15 — Solicita cambios (hallazgos resueltos en el commit)
+- Usuario (ejecución): 2026-10-15 — Aprueba
+- Usuario (cierre): 2026-10-16 — Aprueba

@@ -4,9 +4,9 @@ Guía de estilo del blog: contrato verificable en dos mitades —la visual,
 donde todo valor del código referencia los tokens declarados aquí, y la
 de comportamiento, con las garantías de interacción que cruzan la
 interfaz— y su fundamentación en los principios que arbitran las
-decisiones nuevas. Es la propuesta inicial: los valores se ajustan en
-diálogo con el usuario vía `documentar-guia-estilo` y todos los
-componentes están pendientes de implementación.
+decisiones nuevas. La identidad es propia —«terminal viva»: la interfaz
+habla en monospace, la voz de la herramienta que el lector ya usa— y
+todos los componentes están pendientes de implementación.
 
 ## Principios
 
@@ -23,52 +23,107 @@ componentes están pendientes de implementación.
 
 ## Atmósfera
 
-Serena y textual: interfaz de publicación, no de aplicación. Denso en
-contenido, ligero en chrome —el texto ocupa el primer plano y la
-navegación se retira—. Consecuencia verificable: ninguna pantalla
-muestra más de un elemento de acento por bloque de contenido.
+Serena y textual, con acento de terminal: la página se compone como un
+documento —titulares con peso editorial, prosa en sans— mientras el
+chrome de la interfaz —metadatos, navegación, marcadores, botones— habla
+en monospace, la voz de la herramienta. Denso en contenido, ligero en
+chrome —el texto ocupa el primer plano y la navegación se retira—.
+Consecuencia verificable: ningún bloque de contenido muestra más de un
+componente destacado —card, checkpoint o acción primaria—; los enlaces
+en prosa no cuentan como componente destacado.
 
 ## Color
 
-Paleta de tema claro, con roles semánticos:
+Dos temas —claro y oscuro— con los mismos roles semánticos; el tema
+activo sigue `prefers-color-scheme` salvo elección explícita del lector.
 
-- `--color-background` `#ffffff` — fondo de la aplicación
-- `--color-surface` `#f6f6f4` — cards, bloques de código y secciones elevadas
-- `--color-text` `#1a1a18` — texto principal
-- `--color-text-muted` `#6b6b66` — metadatos y texto secundario
-- `--color-accent` `#2456c8` — enlaces, acciones primarias y foco
-- `--color-border` `#e2e2de` — bordes de cards y separadores
+Tema claro —papel cálido, nunca blanco puro:
+
+- `--color-background` `#faf9f7` — fondo de la aplicación
+- `--color-surface` `#f1efe9` — cards, bloques de código y secciones elevadas
+- `--color-text` `#1c1917` — texto principal
+- `--color-text-muted` `#6b675f` — metadatos y texto secundario
+- `--color-accent` `#0e7a70` — teal fósforo: enlaces, acciones primarias y foco
+- `--color-danger` `#a03030` — carmesí: errores de formulario y estados destructivos
+- `--color-border` `#e3e0d8` — bordes de cards y separadores
+
+Tema oscuro —la misma terminal, de noche:
+
+- `--color-background` `#16150f` — fondo de la aplicación
+- `--color-surface` `#221f1a` — cards, bloques de código y secciones elevadas
+- `--color-text` `#ede9e1` — texto principal
+- `--color-text-muted` `#a69f90` — metadatos y texto secundario
+- `--color-accent` `#2dd4bf` — el mismo fósforo, encendido para el fondo oscuro
+- `--color-danger` `#e0655f` — el carmesí, aclarado para el fondo oscuro
+- `--color-border` `#3a352a` — bordes de cards y separadores
 
 Reglas de combinación: el acento solo aparece en enlaces, acciones
-primarias, foco y el marcador de checkpoint —reservarlo mantiene su
-señal de interactividad—; el texto en `muted` nunca es cuerpo de artículo
-—el contraste de lectura larga no se degrada—.
+primarias, foco, el marcador de checkpoint y el cursor de la marca
+—reservarlo mantiene su señal de interactividad—; los errores usan
+`--color-danger`, nunca el acento —un error en color de acción se leería
+como enlace y gastaría la señal—; el texto en `muted` nunca es cuerpo de
+artículo —el contraste de lectura larga no se degrada—; el acento del
+tema claro sobre `surface` mide ≈4.5:1 —el borde de AA—: sobre ese fondo
+el acento nunca baja de tamaño ni de peso.
 
 ## Tipografía
 
-| Rol | Familia | Tamaño | Peso | Altura de línea |
-|-----|---------|--------|------|-----------------|
-| Título de artículo | system-ui | 32px | 700 | 1.2 |
-| Encabezado de sección | system-ui | 22px | 600 | 1.3 |
-| Cuerpo | system-ui | 18px | 400 | 1.65 |
-| Código | ui-monospace | 15px | 400 | 1.55 |
-| Metadatos | system-ui | 14px | 400 | 1.5 |
+Una sola familia con tres cortes —IBM Plex, diseñada como sistema
+coordinado para contextos de ingeniería—: la Serif da voz editorial a
+los titulares, la Sans lleva la prosa y la Mono es la voz de la
+interfaz y del código —la familia única garantiza coherencia entre las
+tres voces y tres cortes acotan el costo de carga—. Las familias se
+declaran como `--font-display` (Serif), `--font-body` (Sans) y
+`--font-mono` (Mono).
 
-Reglas: el cuerpo nunca baja de 16px —la lectura larga es el uso
+| Rol | Token | Familia | Peso | Altura de línea |
+|-----|-------|---------|------|-----------------|
+| Título de artículo | `--font-size-title` 36px | Serif | 700 | 1.2 |
+| Encabezado de sección | `--font-size-section` 24px | Serif | 700 | 1.3 |
+| Cuerpo | `--font-size-body` 20px | Sans | 400 | 1.65 |
+| Código en bloque | `--font-size-code` 18px | Mono | 400 | 1.55 |
+| Metadatos y chrome | `--font-size-meta` 15px | Mono | 400 | 1.5 |
+
+Pesos declarados —ninguno fuera de esta lista—: Serif solo 700; Sans 400
+y 600 —el 600 es el énfasis de `strong` en prosa—; Mono 400 y 500 —el
+500 marca checkpoints y la marca del sitio—.
+
+Reglas: el cuerpo nunca baja de 18px —la lectura larga es el uso
 principal—; tracking negativo permitido solo en el título del artículo;
-la familia monoespaciada se reserva a código y salidas técnicas.
+la familia monoespaciada se reserva a código, metadatos, navegación,
+botones, marcadores y la marca —nunca prosa—; el código en bloque va
+ligeramente por debajo del cuerpo —a igual tamaño la mono se ve mayor y
+consume la medida útil de la línea de código—; el código inline va en
+mono a 0.9em del cuerpo sobre chip de `--color-surface` con borde —la
+pieza se distingue sin romper el ritmo de la línea—; los encabezados de
+nivel 3 van en Sans 600 a `--font-size-body` —la jerarquía baja cambia
+de voz, no de tamaño—; los enlaces en prosa llevan subrayado permanente
+además del acento —el color solo no es señal suficiente—; las fuentes
+web se cargan con `font-display: swap` y solo en los cortes declarados
+—el texto nunca espera a la fuente—.
+
+## Marca
+
+La marca es texto, no logo: `fronteando` en IBM Plex Mono, minúsculas,
+con un guion bajo final en `--color-accent` que actúa como cursor de
+terminal —estático, nunca parpadea—. Es el único elemento donde el
+acento aparece fuera de la interacción —la marca es la firma y su cursor
+es la promesa de la terminal viva—.
 
 ## Espaciado y forma
 
-- Unidad base: 8px; los espaciados son múltiplos de ella —la unidad única
-  elimina los ajustes a ojo entre elementos—.
-- Radios permitidos: 6px para cards, bloques de código e inputs; pill
-  solo para botones de acción —la distinción separa superficie de
-  control—.
+- Unidad base `--space-unit`: 8px; los espaciados son múltiplos de ella
+  (`--space-1` 8px, `--space-2` 16px, `--space-3` 24px, `--space-4` 32px,
+  `--space-6` 48px) —la escala cerrada protege el ritmo vertical y le
+  ahorra al lector bloques visualmente irregulares—.
+- Radios permitidos: `--radius` 6px para cards, bloques de código e
+  inputs; `--radius-pill` solo para botones de acción —la distinción
+  separa superficie de control—.
 - Sombras: ninguna —la superficie se distingue por color y borde; la
   elevación no aporta a leer—.
-- Contenedor: ancho máximo 68ch con gutters de 24px —protege la medida
-  de línea de la prosa técnica—.
+- Contenedor: ancho máximo `--container-max` 68ch con gutters
+  `--gutter` 24px —protege la medida de línea de la prosa técnica—; en
+  pantallas estrechas los gutters son `--gutter-sm` 16px.
 
 ## Componentes
 
@@ -76,19 +131,26 @@ la familia monoespaciada se reserva a código y salidas técnicas.
   con borde `--color-border`, el protocolo de inicio listo para copiar y
   acciones para abrir la conversación en ChatGPT o Claude; se distingue
   del artículo sin competir con él —el acompañamiento no interrumpe—.
-- **Bloque de checkpoint:** recuadro con marcador numerado y su prompt
-  sugerido, copiable individualmente; el numerado es la referencia que el
-  lector menciona a su LLM.
-- **Bloque de código:** fondo `--color-surface`, familia de código, botón
-  copiar visible al foco o al pasar el puntero; scroll horizontal, nunca
-  ajuste de línea —la indentación es contenido—.
-- **Botón primario:** pill con fondo `--color-accent` y texto blanco;
-  variantes secondary (borde) y ghost (solo texto) por jerarquía de
-  acción.
+- **Bloque de checkpoint:** recuadro `--color-surface` encabezado por el
+  marcador `> NN` en IBM Plex Mono 500 y `--color-accent`, seguido del
+  texto sugerido para el acompañante, copiable individualmente —el
+  numerado es la referencia que el lector menciona a su LLM y el `>` es
+  el rasgo de la terminal viva—.
+- **Bloque de código:** fondo `--color-surface`, IBM Plex Mono a `--font-size-code`,
+  botón copiar visible al foco o al pasar el puntero; scroll horizontal,
+  nunca ajuste de línea —la indentación es contenido—.
+- **Botón primario:** pill con fondo `--color-accent` y texto en
+  `--color-background` —legible en ambos temas—; hover aclara u oscurece
+  el fondo un paso dentro del mismo acento —confirma la interacción sin
+  cambiar de señal—; variantes secondary (texto `--color-text` con borde
+  `--color-border`) y ghost (texto `--color-text` sin borde) por
+  jerarquía de acción —el acento se reserva a la acción primaria—; el
+  hover de secondary y ghost colorea el texto en `--color-accent`.
 - **Input y formulario de newsletter:** borde `--color-border`, radio
-  6px, foco con contorno `--color-accent`.
-- **Navegación:** cabecera con el nombre del sitio y enlaces a secciones;
-  sin menús desplegables —la arquitectura del blog es plana—.
+  `--radius`, foco con contorno `--color-accent`.
+- **Navegación:** cabecera con la marca `fronteando_` y enlaces a
+  secciones en IBM Plex Mono, minúsculas; sin menús desplegables —la
+  arquitectura del blog es plana—.
 
 ## Estados
 
@@ -97,7 +159,8 @@ la familia monoespaciada se reserva a código y salidas técnicas.
 - **Empty:** las listas vacías (p. ej. búsqueda sin resultados) declaran
   el vacío en una línea, sin ilustración.
 - **Error:** los errores de formulario aparecen junto al campo, en
-  `--color-accent` para visibilidad, con texto que indica cómo corregir.
+  `--color-danger`, con texto que indica cómo corregir —el error tiene
+  rol propio para no confundirse con una acción—.
 - **Deshabilitado:** opacidad 0.5 y sin interacción —se percibe como
   inerte sin parecer ausente—.
 
@@ -113,13 +176,19 @@ los gutters reducidos a 16px.
 
 Sin animación decorativa: solo transiciones de estado de ≤150ms en
 hover, foco y confirmación de copiado —confirman la interacción sin
-robar atención a la lectura—.
+robar atención a la lectura—. El cursor de la marca es estático:
+parpadear sería animación decorativa.
 
 ## Contrato de experiencia
 
-- **Lectura estable:** nada desplaza ni oculta el texto tras el primer
-  render —sin banners tardíos ni contenido que se inserta—; se comprueba
-  midiendo que no hay cambios de layout en carga.
+- **Lectura estable:** ningún bloque se inserta, desplaza u oculta tras
+  el primer render —sin banners tardíos ni contenido que aparece—; el
+  intercambio de fuentes (`font-display: swap`) no cuenta como
+  desplazamiento de bloques; se comprueba midiendo que no hay cambios de
+  layout estructurales en carga.
+- **Tema coherente:** todos los tokens de color cambian juntos al
+  alternar el tema —no hay superficies del tema contrario ni texto
+  heredado—; se comprueba alternando `prefers-color-scheme`.
 - **Todo lo copiable, en un gesto:** cada bloque pensado para copiarse
   —bootstrap, checkpoints, código— tiene su botón copiar con
   confirmación visible; se comprueba en cada bloque.
@@ -129,16 +198,17 @@ robar atención a la lectura—.
 - **Objetivos de 44px:** todo elemento interactivo tiene al menos
   44×44px de área pulsable; se comprueba en móvil.
 - **Contraste suficiente:** todo texto cumple AA (≥4.5:1 sobre su
-  fondo); se comprueba sobre cada par texto/fondo usado.
+  fondo); se comprueba sobre cada par texto/fondo usado, en ambos temas.
 
 ## Orientación para decisiones nuevas
 
 Ante un componente o pantalla sin regla: elegir el rol semántico que le
 corresponde (¿es superficie, texto, acento, borde?), declarar sus estados
-obligatorios —hover, foco, deshabilitado—, aplicar los tokens del rol y
-justificar la decisión con la razón en dos dimensiones —qué protege y
-qué cambia para el lector—. Si la duda es estética, los principios
-arbitran: lo que sostiene la lectura y no interrumpe, gana.
+obligatorios —hover, foco, deshabilitado—, aplicar los tokens del rol,
+verificar el par texto/fondo en ambos temas y justificar la decisión con
+la razón en dos dimensiones —qué protege y qué cambia para el lector—. Si
+la duda es estética, los principios arbitran: lo que sostiene la lectura
+y no interrumpe, gana.
 
 ## Anti-patrones
 
@@ -146,7 +216,9 @@ Prohibido:
 
 - Valores literales de color, tamaño o espaciado fuera de `:root`.
 - Gradientes y sombras de caja.
-- Fuentes web de display que cuesten tiempo de carga sin aportar a leer.
+- Fuentes web fuera de las tres familias IBM Plex, o cortes y pesos
+  distintos de los declarados (Serif 700; Sans 400/600; Mono 400/500).
 - Modales, overlays y banners que tapen el contenido.
-- Animación decorativa o que dure más de 150ms.
+- Animación decorativa o que dure más de 150ms —incluye el parpadeo del
+  cursor de la marca—.
 - Iconos emoji como ilustración.
