@@ -17,19 +17,6 @@
 ## General
 
 
-## Hito 1: Sitio base del blog
-<!-- épica: docs/epics/001-sitio-base-del-blog.md -->
-
-- [x] docs/tasks/001-andamiaje-del-sitio.md — andamiaje del sitio con Astro
-- [x] docs/tasks/002-despliegue-continuo-a-cdn.md — despliegue continuo a CDN
-- [x] docs/tasks/003-identidad-visual-del-blog.md — identidad visual del blog
-- [x] docs/tasks/004-tema-base-y-layout.md — tema base y layout
-- [x] docs/tasks/009-urls-de-preview-de-rama.md — URLs de preview de rama
-- [x] docs/tasks/005-pagina-de-articulo.md — colección de artículos y página de artículo
-- [x] docs/tasks/006-portada-e-indice.md — portada, índice de artículos y metadatos
-- [x] docs/tasks/007-feed-rss.md — feed RSS
-- [x] docs/tasks/008-imagenes-de-articulo.md — imágenes de artículo: hero y Open Graph
-
 ## Propuestas en revisión
 
 
