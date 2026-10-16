@@ -32,6 +32,13 @@ const tema = matchMedia("(prefers-color-scheme: dark)").matches
 La interfaz respeta tu sistema: si tu preferencia es `prefers-color-scheme:
 dark`, el sitio llega oscuro; el conmutador de la cabecera te deja elegir.
 
+### Lo que encontrarás en cada artículo
+
+- Prosa que se lee de corrido, sin prerrequisitos artificiales.
+- Código real, resaltado y copiable en un gesto.
+- Enlaces a las fuentes —como la
+  [documentación de Astro](https://docs.astro.build)— cuando el tema lo pide.
+
 ## Cómo se publica
 
 Cada artículo es un archivo Markdown en el repositorio, con sus metadatos en el

@@ -283,6 +283,7 @@ html:not(.js) .theme-toggle {
 .article-meta {
   font-family: var(--font-mono);
   font-size: var(--font-size-meta);
+  line-height: var(--line-height-meta);
   color: var(--color-text-muted);
 }
 
