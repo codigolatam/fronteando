@@ -70,7 +70,7 @@ Todo lo que la tarea asume existe: el worker `fronteando` despliega por Workers 
 - [x] Añadir `"preview_urls": true` a `site/wrangler.jsonc`
   - Aporta: cada build de rama expone `https://<preview>-fronteando.gilmrjc.workers.dev` —previews navegables para revisar PRs renderizados—
   - Contexto: `preview_urls` es un flag de nivel raíz, hermano de `routes`, no una propiedad del objeto route
-- [ ] Verificar end-to-end: el push de esta misma rama dispara el build de preview y la URL declarada en el log responde 200
+- [x] Verificar end-to-end: el push de esta misma rama dispara el build de preview y la URL declarada en el log responde 200
   - Aporta: la evidencia del criterio «URL de preview activa», verificada con el cambio en vuelo
   - Contexto: el build lo corre Workers Builds remoto; la URL la reporta el log —no hay comando local que la consulte—
 
@@ -86,6 +86,7 @@ Todo lo que la tarea asume existe: el worker `fronteando` despliega por Workers 
 
 
 - **La habilitación no puede verificarse con la rama propia antes de fusionar:** el plan asumía que el push de esta rama produciría ya una URL activa; el log del build demuestra que `wrangler preview` lee el flag pero las opciones de trigger (`preview_urls`, rutas) solo se aplican con `wrangler deploy` —es decir, al fusionar a `master`—. Motivo: comportamiento real de Workers Builds. Decisión: la verificación end-to-end se ejecuta tras la fusión, con el siguiente build de preview (un push de re-verificación a esta rama o la rama de la tarea siguiente).
+- **El flag también lo aplica :** la desviación anterior lo atribuía solo a ; en realidad  aplica la configuración de triggers sobre el deployment vigente sin cambiar la versión que sirve tráfico. Se usó para activar  antes de fusionar —equivalente a lo que hará el deploy de producción post-merge—, permitiendo la verificación e2e con esta misma rama.
 
 ## Revisión
 
