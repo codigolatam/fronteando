@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -110,4 +110,4 @@ Todo lo que la tarea asume existe: `DESIGN.md` declara el contrato completo con 
 
 - Subagente: 2026-10-16 — Solicita cambios (hallazgos resueltos en fa4b37e)
 - Usuario (ejecución): 2026-10-16 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-16 — Aprueba
