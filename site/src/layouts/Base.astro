@@ -1,4 +1,11 @@
 ---
+import "@fontsource/ibm-plex-serif/700.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "../styles/global.css";
+
 interface Props {
   title: string;
   description?: string;
@@ -16,8 +23,107 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
     <title>{title}</title>
+    <script is:inline>
+      let stored = null;
+      try {
+        stored = localStorage.getItem("theme");
+      } catch {
+        // sin almacenamiento disponible: el tema sigue a prefers-color-scheme
+      }
+      if (stored === "light" || stored === "dark") {
+        document.documentElement.dataset.theme = stored;
+      }
+      document.documentElement.classList.add("js");
+    </script>
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#contenido">
+      saltar al contenido
+    </a>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">
+          fronteando
+          <span class="brand-cursor" aria-hidden="true">
+            _
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="/">artículos</a>
+          <button class="theme-toggle" id="theme-toggle" type="button">
+            tema
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main id="contenido" class="container site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        fronteando_ — un lugar donde aprender frontend
+      </div>
+    </footer>
+    <script>
+      const root = document.documentElement;
+      const prefersDark = matchMedia("(prefers-color-scheme: dark)");
+      const currentTheme = () =>
+        root.dataset.theme === "light" || root.dataset.theme === "dark"
+          ? root.dataset.theme
+          : prefersDark.matches
+            ? "dark"
+            : "light";
+
+      const toggle = document.getElementById("theme-toggle");
+      const syncToggle = () => {
+        if (!toggle) return;
+        const dark = currentTheme() === "dark";
+        toggle.textContent = `tema: ${dark ? "oscuro" : "claro"}`;
+        toggle.setAttribute("aria-pressed", String(dark));
+      };
+      syncToggle();
+      toggle?.addEventListener("click", () => {
+        root.dataset.theme = currentTheme() === "dark" ? "light" : "dark";
+        try {
+          localStorage.setItem("theme", root.dataset.theme);
+        } catch {
+          // sin almacenamiento disponible: la elección solo dura la sesión
+        }
+        syncToggle();
+      });
+      prefersDark.addEventListener("change", syncToggle);
+
+      document.querySelectorAll(".prose pre:has(> code)").forEach((pre) => {
+        const parent = pre.parentElement;
+        if (!parent) return;
+        pre.tabIndex = 0;
+        const wrapper = document.createElement("div");
+        wrapper.className = "code-block";
+        parent.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "copy-btn";
+        button.textContent = "copiar";
+        button.addEventListener("click", async () => {
+          button.classList.remove("error");
+          try {
+            const code = pre.querySelector("code");
+            await navigator.clipboard.writeText(code?.textContent ?? "");
+            button.textContent = "copiado";
+            button.classList.add("copied");
+          } catch {
+            button.textContent = "error";
+            button.classList.add("error");
+          }
+          setTimeout(() => {
+            button.textContent = "copiar";
+            button.classList.remove("copied", "error");
+          }, 1200);
+        });
+        wrapper.appendChild(button);
+      });
+    </script>
   </body>
 </html>

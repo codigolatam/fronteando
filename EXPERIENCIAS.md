@@ -13,3 +13,10 @@
   Obtenido: los archivos .astro y astro.config.mjs se escribieron con indentación de tabs y comillas simples, estilo ajeno al del proyecto
   Corrección: escribir el código directamente en el estilo del formatter del proyecto —o pasar el formatter antes de presentarlo— en lugar de confiar en un pase posterior
   Estado: consolidada
+
+- Id: 20261016T094353
+  Tarea: docs/tasks/004-tema-base-y-layout.md
+  Esperado: que el texto de la página de prueba renderizara «algo de énfasis» con su espacio
+  Obtenido: «algo deénfasis» — el salto de línea entre texto y etiqueta desapareció en el HTML servido
+  Corrección: Astro trata la plantilla con semántica JSX y elimina el whitespace con saltos de línea adyacente a etiquetas en vez de colapsarlo a espacio como HTML; forzar el espacio con la expresión {" "} — también revisar otros bordes texto-etiqueta, que el padding del chip de código disimulaba el mismo bug
+  Estado: consolidada
