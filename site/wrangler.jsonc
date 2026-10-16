@@ -9,6 +9,8 @@
   // Requerido por `wrangler preview`, el comando de deploy de las
   // builds de preview de Workers Builds.
   "previews": {},
+  // Publica cada preview en <preview>-fronteando.gilmrjc.workers.dev.
+  "preview_urls": true,
   // Producción se sirve en el dominio propio de la zona fronteando.dev.
   "routes": [
     {
