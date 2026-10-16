@@ -16,7 +16,6 @@
 
 ## General
 
-- [r] docs/tasks/011-redactar-post-mini-store.md — Post inaugural: mini store reactivo en vanilla JS
 
 ## Propuestas en revisión
 

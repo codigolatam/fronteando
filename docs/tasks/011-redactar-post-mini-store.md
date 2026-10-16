@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -78,5 +78,5 @@ La colección `articulos` y todo lo que consume un artículo —página, portada
 ## Revisión
 
 - Subagente: 2026-10-16 — Aprueba
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-16 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

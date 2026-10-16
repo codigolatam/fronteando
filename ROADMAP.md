@@ -11,12 +11,7 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-- 1. docs/ideas/006-post-mini-store-reactivo.md — Post inaugural: mini store reactivo
-  - Estado: pendiente de arrancar
-  - Justificación: contenido autónomo y publicable ya, sin
-    infraestructura nueva; es el material real sobre el que se
-    dimensiona la lectura acompañada —diseñar el protocolo sin un post
-    sería hacerlo a ciegas—.
+Sin líneas comprometidas.
 
 ## Next
 
