@@ -67,7 +67,7 @@ Todo lo que la tarea asume existe: el worker `fronteando` despliega por Workers 
 
 `site/wrangler.jsonc` ya orquesta el deploy —Worker, assets, `previews: {}` y la ruta del custom domain de producción—; `wrangler preview` sube los assets de la rama pero no expone URL porque la habilitación falta. La vía elegida es `preview_urls: true` —workers.dev—: la alternativa `previews_enabled` en la ruta generaría previews en `*.www.fronteando.dev`, más superficie sobre el dominio de producción sin beneficio para previews internas.
 
-- [ ] Añadir `"preview_urls": true` a `site/wrangler.jsonc`
+- [x] Añadir `"preview_urls": true` a `site/wrangler.jsonc`
   - Aporta: cada build de rama expone `https://<preview>-fronteando.gilmrjc.workers.dev` —previews navegables para revisar PRs renderizados—
   - Contexto: `preview_urls` es un flag de nivel raíz, hermano de `routes`, no una propiedad del objeto route
 - [ ] Verificar end-to-end: el push de esta misma rama dispara el build de preview y la URL declarada en el log responde 200
@@ -81,6 +81,11 @@ Todo lo que la tarea asume existe: el worker `fronteando` despliega por Workers 
 - La URL de preview responde 200 sirviendo el sitio compilado —(O).
 - `www.fronteando.dev` sigue sirviendo producción sin cambios —regresión (B).
 - La habilitación vive solo en `wrangler.jsonc`, reproducible desde el repo —(B).
+
+## Desviaciones del plan
+
+
+- **La habilitación no puede verificarse con la rama propia antes de fusionar:** el plan asumía que el push de esta rama produciría ya una URL activa; el log del build demuestra que `wrangler preview` lee el flag pero las opciones de trigger (`preview_urls`, rutas) solo se aplican con `wrangler deploy` —es decir, al fusionar a `master`—. Motivo: comportamiento real de Workers Builds. Decisión: la verificación end-to-end se ejecuta tras la fusión, con el siguiente build de preview (un push de re-verificación a esta rama o la rama de la tarea siguiente).
 
 ## Revisión
 
