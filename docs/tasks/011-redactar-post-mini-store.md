@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -47,8 +47,36 @@ Escribir el primer artículo técnico del blog —construir un store reactivo pa
 - Es el primer post técnico: define el tono de los que siguen. Va sin bootstrap ni checkpoints a propósito — la reescritura con las estructuras de acompañamiento llega con la línea 002.
 - Slug sugerido: `un-store-reactivo-en-vanilla-js` (o el que mejor le quede al título final).
 
+## Contexto
+
+- `Archivos similares:` `site/src/content/articulos/hola-fronteando.md` — modelo de frontmatter (title, description, date, tags) y de tono de la casa.
+- `Patrones:` la colección `articulos` valida frontmatter con Zod; el previo del índice sale del cuerpo antes de `<!--more-->` (D002); portada, RSS y tarjeta OG absorben el artículo automáticamente en build.
+- `Dominio:` sin documentación de dominio aplicable — es contenido.
+- `Producto:` sin documentación de producto aplicable.
+- `Lecciones:` `docs/lessons/flujo-de-escritura.md` — la ronda corre `revisar-redaccion` y luego `pulir-escritura`; `docs/lessons/formato-de-codigo-generado.md` — el archivo nuevo se escribe ya en el estilo del formatter.
+- `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el previo sale del cuerpo; `<!--more-->` tras el párrafo de gancho.
+
+## Conectividad
+
+**Veredicto: conectada.**
+
+La colección `articulos` y todo lo que consume un artículo —página, portada, RSS, tarjeta OG— existen y funcionan. El código del post ya está verificado en Node durante el refinamiento de la propuesta. El artículo es un archivo Markdown nuevo: no necesita infraestructura adicional.
+
+## Plan técnico
+
+- [x] `site/src/content/articulos/un-store-reactivo-en-vanilla-js.md` — el artículo completo siguiendo el arco aprobado (gancho → suscripción manual → `efectoActivo` → `store` con `Proxy` → límites honestos → cierre-puente); cada fragmento de código verificado ejecutándolo en Node antes de incluirlo; `<!--more-->` tras el párrafo de gancho para el previo; ronda de escritura completa (`revisar-redaccion` + `pulir-escritura`)
+  - Aporta: el primer contenido técnico del blog, publicado
+  - Contexto: un solo archivo nuevo en la colección; portada, RSS y tarjeta OG lo absorben solos
+
+## Suite de pruebas esperada
+
+- `check` / `lint` / `format:check` / `build` en verde —(B)
+- Cada snippet del post corre tal cual en Node —(B)
+- El artículo aparece en portada con su previo, en el feed y con su OG —(B/O)
+- Evidencia renderizada de la página en ambos temas —(O)
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-16 — Aprueba
+- Usuario (ejecución): 2026-10-16 — Aprueba
+- Usuario (cierre): 2026-10-16 — Aprueba
