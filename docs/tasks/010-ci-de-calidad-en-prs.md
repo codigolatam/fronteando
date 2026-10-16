@@ -79,6 +79,7 @@ Punto a decidir durante la ejecución: activar o no branch protection para exigi
 ## Desviaciones del plan
 
 - Se añadieron `concurrency` (grupo por workflow+ref con cancel-in-progress) y `timeout-minutes: 10` al job — observaciones menores de la revisión técnica, aplicadas por coste casi nulo.
+- Los cuatro pasos secuenciales se reemplazaron por un job por check vía  con  — decisión del usuario en la puerta de ejecución: un fallo ya no enmascara al resto y el PR muestra un check independiente por script.
 
 ## Revisión
 

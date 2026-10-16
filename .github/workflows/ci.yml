@@ -19,8 +19,17 @@ defaults:
 
 jobs:
   calidad:
+    name: ${{ matrix.script }}
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        script:
+          - check
+          - lint
+          - format:check
+          - build
     steps:
       - name: Checkout
         uses: actions/checkout@v7
@@ -35,14 +44,5 @@ jobs:
       - name: Dependencias
         run: npm ci
 
-      - name: astro check
-        run: npm run check
-
-      - name: lint
-        run: npm run lint
-
-      - name: format:check
-        run: npm run format:check
-
-      - name: build
-        run: npm run build
+      - name: ${{ matrix.script }}
+        run: npm run ${{ matrix.script }}
