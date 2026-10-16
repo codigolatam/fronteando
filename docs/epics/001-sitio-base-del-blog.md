@@ -23,6 +23,7 @@ Fronteando existe como sitio público: los artículos escritos en Markdown se co
 - [ ] docs/tasks/006-portada-e-indice.md — portada, índice de artículos y metadatos
 - [ ] docs/tasks/007-feed-rss.md — feed RSS
 - [ ] docs/tasks/008-imagenes-de-articulo.md — imágenes de artículo: hero y Open Graph
+- [ ] docs/tasks/009-urls-de-preview-de-rama.md — URLs de preview de rama
 
 ## Plan técnico
 
