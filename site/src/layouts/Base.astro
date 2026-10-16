@@ -25,6 +25,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Fronteando"
+      href="/rss.xml"
+    />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:site_name" content="Fronteando" />
@@ -77,6 +83,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <div class="container">
         <span>fronteando_ — un lugar donde aprender frontend</span>
         <nav class="footer-nav" aria-label="Pie">
+          <a href="/rss.xml">rss</a>
           <a href="https://github.com/codigolatam/fronteando">github</a>
         </nav>
       </div>
