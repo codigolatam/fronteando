@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -45,6 +45,40 @@ Correr automáticamente la suite de calidad del sitio —`astro check`, `lint`, 
 
 - Workers Builds ya construye y despliega cada rama; este workflow cubre la señal de calidad, no el despliegue.
 - El build incluye la generación de imágenes OG con `@resvg/resvg-js`: el runner necesita el binding nativo, que npm resuelve por plataforma —sin pasos extra esperados, pero es el punto a vigilar si el build falla en CI.
+
+## Contexto
+
+- `Archivos similares:` ninguno — es el primer workflow del repositorio; no existe `.github/`.
+- `Patrones:` los scripts de calidad viven en `site/package.json` (`check`, `lint`, `format:check`, `build`); el lockfile es `site/package-lock.json`; `engines.node` exige `>=22.22.0`. Commits por PR con squash a `master`.
+- `Dominio:` sin documentación de dominio aplicable — el cambio es infraestructura de CI, no toca el modelo del sitio.
+- `Producto:` sin documentación de producto aplicable.
+- `Lecciones:` `docs/lessons/formato-de-codigo-generado.md` — escribir el YAML nuevo ya en el estilo del formatter del proyecto.
+- `Decisiones:` `docs/decisions/D001-despliegue-en-cloudflare-workers.md` — el despliegue sigue siendo de Workers Builds; este workflow solo da señal de calidad, sin paso de deploy.
+
+## Conectividad
+
+**Veredicto: conectada.**
+
+Los cuatro scripts que el workflow invoca existen en `site/package.json`; `site/package-lock.json` existe para `cache-dependency-path`; `gh` está autenticado y el repo remoto es GitHub con rama por defecto `master`. El binding nativo de `@resvg/resvg-js` se instala vía `npm ci` por plataforma — punto a vigilar en el primer run.
+
+## Plan técnico
+
+- [x] `.github/workflows/ci.yml` — workflow `ci`: dispara en `pull_request` y en `push` a `master`; un job `calidad` en `ubuntu-latest` con `defaults.run.working-directory: site`; pasos: `actions/checkout` → `actions/setup-node` (Node 22, `cache: npm` con `cache-dependency-path: site/package-lock.json`) → `npm ci` → cuatro pasos separados: `check`, `lint`, `format:check`, `build`
+  - Aporta: señal de CI en cada PR; el paso roto se identifica de un vistazo
+  - Contexto: primer workflow del repo; sin secrets; el despliegue sigue siendo de Workers Builds (D001)
+
+Punto a decidir durante la ejecución: activar o no branch protection para exigir el check verde antes del merge — se consulta en la puerta de cierre.
+
+## Suite de pruebas esperada
+
+- El PR de la propia tarea muestra el check `calidad` en verde —(O)
+- Un commit temporal que rompa `format:check` produce check rojo en el PR; se revierte antes del merge squash —(O)
+- Los logs del run confirman Node 22.x y cache de npm efectivo —(O)
+- Tras el merge, el push a `master` dispara el workflow —(O)
+
+## Desviaciones del plan
+
+- Se añadieron `concurrency` (grupo por workflow+ref con cancel-in-progress) y `timeout-minutes: 10` al job — observaciones menores de la revisión técnica, aplicadas por coste casi nulo.
 
 ## Revisión
 
