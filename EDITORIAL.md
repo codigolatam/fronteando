@@ -9,8 +9,8 @@ documentación del proyecto, que no se rige por esta guía.
 
 **Contenido:** [voz y registro](#voz-y-registro) · [anatomía del
 post](#anatomía-del-post) · [contrato de
-metadatos](#contrato-de-metadatos) · [niveles de
-edición](#niveles-de-edición) · [manuales de
+metadatos](#contrato-de-metadatos) · [taxonomía](#taxonomía) ·
+[niveles de edición](#niveles-de-edición) · [manuales de
 referencia](#manuales-de-referencia) · [palabras
 problemáticas](#palabras-problemáticas) · [ejemplos de la
 casa](#ejemplos-de-la-casa) · [fuera de alcance](#fuera-de-alcance)
@@ -105,6 +105,24 @@ explican el porqué, no solo el qué.
   regla).
 - **`description`:** el previo en prosa para metadatos y OG (una
   frase que enuncia la promesa sin adjetivos valorativos).
+
+## Taxonomía
+
+Las categorías separan; los tags unen. Reglas de la casa:
+
+- **Una categoría por post.** Es vocabulario cerrado (lo fija el
+  esquema): elegirla es una decisión, no un relleno. Las categorías
+  son especializaciones ortogonales, no tecnologías (`javascript` no
+  es categoría porque casi todo el blog lo usa; es tag). La prueba:
+  si dos categorías pueden reclamar el mismo post, la taxonomía está
+  mal, no el post.
+- **Los tags son específicos y varios:** tecnologías, conceptos, APIs.
+  Planos, sin jerarquía; se reutilizan los existentes antes de
+  inventar uno nuevo.
+- **Ningún término vive en ambas listas.** Lo que es categoría no es
+  tag y viceversa (el solape rompe el filtrado y confunde al lector).
+- **Agregar una categoría** abre un pilar del blog: es cambio de
+  esquema y decisión editorial, no un campo de texto libre.
 
 ## Niveles de edición
 

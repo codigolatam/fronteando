@@ -4,7 +4,7 @@ description: "Qué es Fronteando, para quién es y qué vas a encontrar aquí."
 date: 2026-10-16T16:57:45Z
 nivel: principiante
 categoria: meta
-tags: ["meta"]
+tags: ["anuncio"]
 ---
 
 Fronteando es un blog técnico de desarrollo web frontend, escrito en

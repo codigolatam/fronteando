@@ -3,8 +3,8 @@ title: "Un store reactivo en vanilla JS"
 description: "La magia de los frameworks cabe en cincuenta líneas: estado que notifica, efectos que se registran solos y un Proxy que mantiene la pantalla al día."
 date: 2026-10-16T21:15:00Z
 nivel: intermedio
-categoria: javascript
-tags: ["reactividad", "fundamentos"]
+categoria: fundamentos
+tags: ["javascript", "reactividad"]
 ---
 
 Cambia una variable y la pantalla se actualiza sola. Si has usado Vue,

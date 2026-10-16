@@ -49,3 +49,35 @@ Dos decisiones que la evidencia soporta:
 4. OpenCode Skills — «Tech Blog Post Skill». https://opencodeskills.dev/skills/writing/developer-blog-posts/
 5. Ritza — «Guidance on writing technical guides». https://styleguide.ritza.co/
 6. Editors Canada — «Professional Editorial Standards 2024»; IPEd — «Types of Editing». (citadas en `2026-10-procesos-gestion-editorial.md`)
+
+## Anexo — taxonomías (añadido en ejecución de la 012)
+
+Sobre categorías vs. tags y diseño de taxonomías, para fundamentar la
+sección «Taxonomía» de la guía:
+
+- **Una categoría por post** y vocabulario cerrado: las categorías
+  son las secciones del blog, amplias y mutuamente excluyentes; el
+  solape entre nombres confunde el filtrado (Hart & Vine [7];
+  WordPress Learn [8]).
+- **Tags específicos, varios por post, planos:** «las categorías
+  separan, los tags unen» — describen el detalle, no agrupan [8].
+- **Ningún término en ambas listas:** The Toast lo fija como regla
+  editorial y Codemzy muestra el fallo concreto —un tag que solapa
+  dos categorías deja de significar— [9][10].
+- **Categorías como vocabulario controlado:** NN/g las define como
+  lista cerrada que los autores no expanden ad hoc — crecer es
+  decisión, no tecleo [11].
+- **Ortogonalidad:** facetas independientes por dimensión (clásico de
+  clasificación facetada); el caso que lo motivó: en un blog de
+  frontend `javascript` no discrimina — casi todo lo usa — así que es
+  tag, no categoría (corrección del usuario, validada por estas
+  reglas) [12].
+
+Referencias adicionales:
+
+7. Hart & Vine — «Best practices for categories & tags». https://hartandvine.com/insights/best-practices-for-categories-tags/
+8. WordPress Learn — «Categories vs. Tags: What's the difference?». https://learn.wordpress.org/tutorial/categories-vs-tags-whats-the-difference/
+9. Responsive Web Design — «Taxonomy and Recirculation» (The Toast). https://responsivewebdesign.com/toast/taxonomy/
+10. Codemzy — «Blog categories vs tags». https://www.codemzy.com/blog/blog-categories-vs-tags
+11. NN/g — «Taxonomy 101». https://www.nngroup.com/articles/taxonomy-101/
+12. The Discipline of Organizing — «Faceted Classification». https://berkeley.pressbooks.pub/tdo4p/chapter/faceted-classification/
