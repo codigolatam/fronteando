@@ -11,7 +11,10 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-Sin líneas comprometidas.
+- 1. Flujo de escritura de posts (hito 1) — guía editorial, pipeline
+  de contenido y los tres skills del flujo (encuadre, redacción,
+  revisión); capacidad interna que sostiene la línea editorial y se
+  valida escribiendo el primer capítulo de la serie MVC.
 
 ## Next
 
