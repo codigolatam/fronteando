@@ -34,8 +34,10 @@ const ogImagePath = `/og/${articulo.id}.png`;
       <time datetime={articulo.data.date.toISOString().slice(0, 10)}>
         {fecha}
       </time>
-      {articulo.data.nivel && ` · ${articulo.data.nivel}`}
-      {` · ${articulo.data.categoria}`}
+      {articulo.data.nivel && (
+        <span class="meta-chip">{articulo.data.nivel}</span>
+      )}
+      <span class="meta-chip">{articulo.data.categoria}</span>
       {articulo.data.tags.length > 0 && ` · ${articulo.data.tags.join(", ")}`}
     </p>
     <Content />

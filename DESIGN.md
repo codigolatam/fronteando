@@ -151,6 +151,12 @@ es la promesa de la terminal viva—.
 - **Navegación:** cabecera con la marca `fronteando_` y enlaces a
   secciones en IBM Plex Mono, minúsculas; sin menús desplegables —la
   arquitectura del blog es plana—.
+- **Chip de metadato:** nivel y categoría del artículo van en IBM
+  Plex Mono sobre `--color-surface` con borde `--color-border` y
+  radio `--radius` (la misma forma del chip de código inline); la
+  fecha y los tags van en texto plano muted (lo estructural se
+  distingue de lo descriptivo sin tocar el acento, reservado a lo
+  interactivo).
 
 ## Estados
 
