@@ -7,9 +7,7 @@ tags: ["javascript", "reactividad", "fundamentos"]
 
 Cambia una variable y la pantalla se actualiza sola. Si has usado Vue,
 Solid, Preact o cualquier framework reciente, ese gesto te es familiar:
-escribes `count.value++` y el DOM obedece. Parece magia.
-
-No lo es.
+escribes `count.value++` y el DOM obedece. Parece magia. No lo es.
 
 <!--more-->
 
