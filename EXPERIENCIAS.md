@@ -27,3 +27,10 @@
   Obtenido: solo se ejecutó revisar-redaccion; el usuario tuvo que pedir explícitamente también el pulido mecánico
   Corrección: una ronda de escritura comprende revisar-redaccion seguida de pulir-escritura —estilo y luego ortotipografía/formato—; no detenerse tras el primer skill
   Estado: consolidada
+
+- Id: 20261016T133602
+  Tarea: 010-ci-de-calidad-en-prs
+  Esperado: que todos los checks de calidad informen su resultado en cada PR, aunque uno falle
+  Obtenido: un solo job con los cuatro checks como pasos secuenciales —un fallo saltaba el resto y solo se veía el primer check roto
+  Corrección: un job por check vía strategy.matrix con fail-fast: false, de modo que un fallo no enmascare a los demás y el PR muestre un check independiente por verificación
+  Estado: consolidada
