@@ -7,6 +7,14 @@ consultan; los skills genéricos de escritura (`revisar-redaccion`,
 `pulir-escritura`) son su mecánica de apoyo y la referencia para la
 documentación del proyecto, que no se rige por esta guía.
 
+**Contenido:** [voz y registro](#voz-y-registro) · [anatomía del
+post](#anatomía-del-post) · [contrato de
+metadatos](#contrato-de-metadatos) · [niveles de
+edición](#niveles-de-edición) · [manuales de
+referencia](#manuales-de-referencia) · [palabras
+problemáticas](#palabras-problemáticas) · [ejemplos de la
+casa](#ejemplos-de-la-casa) · [fuera de alcance](#fuera-de-alcance)
+
 ## Voz y registro
 
 Fronteando escribe **contenido de fondo, no recetas**: piezas para
