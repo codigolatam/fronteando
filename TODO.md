@@ -28,7 +28,7 @@
 - [x] docs/tasks/005-pagina-de-articulo.md — colección de artículos y página de artículo
 - [x] docs/tasks/006-portada-e-indice.md — portada, índice de artículos y metadatos
 - [x] docs/tasks/007-feed-rss.md — feed RSS
-- [ ] docs/tasks/008-imagenes-de-articulo.md — imágenes de artículo: hero y Open Graph
+- [x] docs/tasks/008-imagenes-de-articulo.md — imágenes de artículo: hero y Open Graph
 
 ## Propuestas en revisión
 
