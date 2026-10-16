@@ -1,5 +1,5 @@
 export function formatFecha(date: Date): string {
-  return date.toLocaleDateString("es-ES", {
+  return date.toLocaleDateString("en-US"   , {
     day: "numeric",
     month: "long",
     year: "numeric",
