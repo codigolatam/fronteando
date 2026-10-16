@@ -1,30 +1,46 @@
 ---
+import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
+
+const articulos = (
+  await getCollection("articulos", ({ data }) => !data.draft)
+).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const formatoFecha = (fecha: Date) =>
+  fecha.toLocaleDateString("es-ES", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    timeZone: "UTC",
+  });
 ---
 
-<Base title="Fronteando" description="Blog técnico de desarrollo web frontend.">
+<Base
+  title="Fronteando"
+  description="Blog técnico de desarrollo web frontend, escrito en español: un lugar donde aprenderlo, con o sin asistente de por medio."
+>
   <div class="prose">
     <h1>Fronteando</h1>
-    <p>
-      Blog técnico de desarrollo web frontend —CSS, JavaScript, frameworks,
-      accesibilidad y rendimiento—, diseñado para leerse con un LLM de
-      acompañamiento. Esta página es el banco de pruebas del tema.
-    </p>
-    <h2>Elementos de muestra</h2>
-    <p>
-      Un párrafo con un <a href="https://www.fronteando.dev">enlace</a>, algo de{" "}
-      <strong>énfasis</strong> y código inline como{" "}
-      <code>prefers-color-scheme</code> para comprobar el estilo de la prosa,
-      seguido de una lista:
-    </p>
-    <ul>
-      <li>Primer elemento de la lista.</li>
-      <li>Segundo elemento de la lista.</li>
-      <li>Tercer elemento de la lista.</li>
-    </ul>
-    <h3>Un encabezado de nivel tres</h3>
-    <p>El h3 cambia de voz —Sans 600— sin cambiar de tamaño.</p>
-    <pre><code>const saludo = 'hola, fronteando';
-console.log(saludo);</code></pre>
+    <p>Un lugar donde aprender frontend, con o sin asistente de por medio.</p>
   </div>
+  {articulos.length === 0 ? (
+    <p class="article-empty">Aún no hay artículos publicados.</p>
+  ) : (
+    <ul class="article-list">
+      {articulos.map((articulo) => (
+        <li class="article-list-item">
+          <a class="article-list-link" href={`/articulos/${articulo.id}/`}>
+            {articulo.data.title}
+          </a>
+          <p class="article-meta">
+            <time datetime={articulo.data.date.toISOString().slice(0, 10)}>
+              {formatoFecha(articulo.data.date)}
+            </time>
+            {" — "}
+            {articulo.data.description}
+          </p>
+        </li>
+      ))}
+    </ul>
+  )}
 </Base>
