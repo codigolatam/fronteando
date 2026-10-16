@@ -24,3 +24,7 @@
 - flujo-de-escritura.md
   - Disparadores: escritura, redacción, revisión de texto, pulir, artículos, documentos en español, ronda de escritura
   - Resumen: una ronda de revisión de escritura corre el flujo completo —`revisar-redaccion` para el estilo y `pulir-escritura` para la mecánica, en ese orden—
+
+- checks-de-ci-independientes.md
+  - Disparadores: github actions, workflow, ci.yml, CI, checks, matrix, .github/workflows, pull request
+  - Resumen: en CI, un job por check —no pasos secuenciales— para que un fallo no enmascare al resto y el PR muestre un check por verificación
