@@ -12,7 +12,7 @@ const articulos = defineCollection({
     categoria: z.enum([
       "fundamentos",
       "arquitectura",
-      "interfaces",
+      "visual",
       "accesibilidad",
       "rendimiento",
       "ecosistema",
