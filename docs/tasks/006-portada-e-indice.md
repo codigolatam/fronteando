@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -108,5 +108,5 @@ Aprobada por el usuario.
 ## Revisión
 
 - Subagente: 2026-10-16 — Aprueba
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-16 — Aprueba
+- Usuario (cierre): 2026-10-16 — Aprueba

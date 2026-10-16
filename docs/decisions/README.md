@@ -16,3 +16,7 @@
 - D001-despliegue-en-cloudflare-workers.md
   - Disparadores: cloudflare, workers, wrangler, deploy, despliegue, wrangler.jsonc, CDN, astro.config
   - Resumen: el sitio se despliega como Worker de assets estáticos en Cloudflare (Workers Builds), no en Pages
+
+- D002-previo-de-articulos-desde-el-cuerpo.md
+  - Disparadores: excerpt, previo, more, artículos, portada, índice, frontmatter, description, excerpt.ts
+  - Resumen: el previo del índice sale del cuerpo del artículo —antes de `<!--more-->` o el primer párrafo— en texto plano; `description` queda para metadatos y como respaldo
