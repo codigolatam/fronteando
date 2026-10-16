@@ -1,4 +1,4 @@
-# Espacios junto a etiquetas en plantillas Astro
+# Plantillas de Astro
 
 ## Lecciones
 

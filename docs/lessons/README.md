@@ -17,6 +17,6 @@
   - Disparadores: prettier, format, formatter, .astro, astro.config, archivos nuevos, código generado
   - Resumen: el código nuevo debe escribirse ya en el estilo del formatter del proyecto, no con un estilo ajeno a la espera de un pase posterior
 
-- espacios-junto-a-etiquetas-en-astro.md
-  - Disparadores: .astro, páginas Astro, contenido con markup inline, strong, code, enlace, espacio que falta, whitespace, JSX
-  - Resumen: el whitespace con saltos de línea junto a etiquetas desaparece en `.astro` (semántica JSX); el espacio entre texto y etiqueta se fuerza con `{" "}`
+- plantillas-de-astro.md
+  - Disparadores: .astro, páginas Astro, plantillas, markup inline, whitespace, JSX, expresiones
+  - Resumen: trampas de la semántica JSX de las plantillas `.astro` —p. ej. el whitespace con saltos de línea junto a etiquetas desaparece y el espacio se fuerza con `{" "}`—
