@@ -99,8 +99,15 @@ Todo lo que la tarea asume existe: `DESIGN.md` declara el contrato completo con 
 - La elección explícita de tema persiste entre cargas, sin flash ni desplazamiento de bloques — CU-2 (E).
 - `astro check`, ESLint y Prettier pasan limpios — arnés del proyecto (I).
 
+## Desviaciones del plan
+
+
+- **Conmutador como variante secondary, no ghost:** el plan lo describía ghost; la implementación usa texto `--color-text` con borde `--color-border` —la variante secondary de la guía— por mejor affordance y coherencia con la jerarquía de acciones. Motivo: coherencia con `DESIGN.md`.
+- **Tema sin `data-theme` por defecto:** el plan fijaba `data-theme` siempre resuelto antes del primer paint; la revisión detectó que eso congelaba el tema ante cambios del SO tras la carga. Ahora `data-theme` solo se fija cuando hay elección explícita persistida; sin ella la media query responde en vivo y el toggle se muestra con la clase `js`. Motivo: corrección de la revisión técnica.
+- **Tokens derivados no nombrados en la guía:** la hoja declara `--line-height-*`, `--border-width`, `--focus-*`, `--duration-fast` y `--target-min` —valores que `DESIGN.md` declara sin nombre de token— para cumplir «sin literales fuera de `:root`». Motivo: hacer verificable el contrato; candidatos a absorber en la guía.
+
 ## Revisión
 
 - Subagente: 2026-10-16 — Solicita cambios (hallazgos resueltos en fa4b37e)
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-16 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
