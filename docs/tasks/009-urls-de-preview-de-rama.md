@@ -91,5 +91,5 @@ Todo lo que la tarea asume existe: el worker `fronteando` despliega por Workers 
 ## Revisión
 
 - Subagente: 2026-10-16 — Aprueba
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-16 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
