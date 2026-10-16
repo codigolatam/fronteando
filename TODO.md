@@ -19,7 +19,7 @@
 
 ## Hito 1: Flujo de escritura de posts
 
-- [ ] docs/tasks/012-guia-de-tono-editorial.md — guía de tono editorial EDITORIAL.md
+- [r] docs/tasks/012-guia-de-tono-editorial.md — guía de tono editorial EDITORIAL.md
 - [ ] docs/tasks/013-skill-planear-post.md — skill planear-post (encuadre editorial)
   - docs/tasks/012-guia-de-tono-editorial.md
 - [ ] docs/tasks/014-skill-redactar-post.md — skill redactar-post (ejecución de la escritura)
