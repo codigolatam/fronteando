@@ -83,8 +83,14 @@ Aprobada por el usuario.
 - `<link rel="alternate">` presente en el head de todas las páginas —(B)
 - Enlace `rss` en el pie, verificado renderizado —(O)
 
+## Desviaciones del plan
+
+- El feed gana `<language>es</language>`, `<atom:link rel="self">` y `<category>` por tag — mejoras menores de la revisión técnica que no cambian el alcance.
+- Se quitó el fallback de `context.site`: `site` siempre está definido en la config y el fallback duplicaba el dominio enmascarando una misconfiguración.
+- El feed se sirve como `application/xml` (no `application/rss+xml`): lo emite así `@astrojs/rss`; es válido y universalmente aceptado.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-16 — Aprueba
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
