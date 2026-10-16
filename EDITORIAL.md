@@ -40,9 +40,8 @@ entender por qué, no instrucciones para copiar.
   (_gatekeeping_).
 - **Ortotipografía de la casa:** comillas latinas «» para citas y
   usos metalingüísticos; los incisos van entre paréntesis (la casa
-  los prefiere sobre la raya larga). La raya pegada de los posts
-  publicados precede a esta preferencia y solo queda como recurso
-  excepcional.
+  los prefiere sobre la raya larga, que solo queda como recurso
+  excepcional).
 
 ## Anatomía del post
 
@@ -89,8 +88,8 @@ explican el porqué, no solo el qué.
 - **`<!--more-->` inmediatamente tras el gancho**: el previo sale
   del cuerpo (decisión D002), no del `description`. Todo post nuevo
   lleva el marcador; sin él el sistema cae al primer párrafo
-  (respaldo, no diseño; `hola-fronteando` es el único precedente
-  heredado).
+  (respaldo, no diseño, válido solo en piezas anteriores a esta
+  regla).
 - **`description`:** el previo en prosa para metadatos y OG (una
   frase que enuncia la promesa sin adjetivos valorativos).
 
@@ -118,8 +117,9 @@ Jerarquía, como en las guías canónicas:
 2. **Los skills genéricos**: `revisar-redaccion` (consistencia,
    anglicismos, ritmo) y `pulir-escritura` (RAE, Fundéu,
    ortotipografía) para lo que esta guía no cubre.
-3. **Los posts publicados**: precedente cuando la regla no está
-   escrita; la excepción consistente se anota y se vuelve regla.
+3. **La práctica del propio blog**: cuando la regla no está escrita,
+   el precedente manda; la excepción consistente se anota y se vuelve
+   regla.
 
 ## Palabras problemáticas
 
@@ -135,8 +135,6 @@ La tabla crece con cada corrección del usuario (toda palabra
 prohibida entra con su sustituto).
 
 ## Ejemplos de la casa
-
-Los dos posts publicados son el precedente:
 
 - Gancho con negación: «Parece magia. No lo es.»
 - Resultado primero: «Antes de desmontar la magia conviene verla
