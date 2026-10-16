@@ -2,9 +2,8 @@
 
 La `DESIGN.md` de la escritura: el contrato de voz, estructura y
 metadatos que todo artículo de Fronteando cumple. Los skills de
-contenido —`planear-post`, `redactar-post` y `revisar-post`— verifican
-contra
-esta guía; los skills genéricos de escritura (`revisar-redaccion`,
+contenido —`planear-post`, `redactar-post` y `revisar-post`, que las
+tareas 013–015 crean— la consultan; los skills genéricos de escritura (`revisar-redaccion`,
 `pulir-escritura`) son su mecánica de apoyo y la referencia para la
 documentación del proyecto, que no se rige por esta guía.
 
@@ -36,8 +35,9 @@ entender por qué, no instrucciones para copiar.
   comillas; el español no tiene equivalente instalado. Los calcos
   síntácticos no valen: «Con eso dicho» por _with that said_ queda
   fuera. La lista es orientativa, no cerrada —el criterio es el
-  equivalente instalado: `trade-offs`, `snippet` entran por la misma
-  puerta—.
+  equivalente instalado: trade-offs, snippet entran por la misma
+  puerta—. Los extranjerismos no asimilados llevan cursiva
+  —_gatekeeping_—.
 - **Ortotipografía de la casa:** comillas latinas «» para citas y
   usos metalingüísticos, raya larga pegada —sin espacios interiores—
   para incisos.
@@ -67,7 +67,8 @@ notas) adaptan los pasos donde aplican.
 6. **Los límites honestos.** Sección propia que nombra lo que quedó
    fuera y por qué importa —cada omisión es una pregunta legítima.
 7. **El cierre.** La conclusión —el último párrafo— en dos o tres
-   frases y una puerta abierta: lo que sigue, la pregunta que queda.
+   frases, la última una puerta abierta: lo que sigue, la pregunta
+   que queda.
 
 **El código.** Todo fragmento corre tal cual está escrito —verificado
 ejecutándolo antes de publicar— o se marca explícitamente como
@@ -93,8 +94,8 @@ explican el porqué, no solo el qué.
 
 ## Niveles de edición
 
-El flujo de escritura separa dos niveles —la taxonomía editorial
-estándar:
+El flujo de escritura separa dos niveles, los de la taxonomía
+editorial estándar:
 
 - **Sustantiva** —estructura, promesa, veracidad, adecuación a la
   audiencia: la hace `revisar-post` con contexto aislado, verificando
@@ -120,13 +121,13 @@ Jerarquía, como en las guías canónicas:
 
 ## Palabras problemáticas
 
-| Proscrito                                            | Usar                                       |
-| ---------------------------------------------------- | ------------------------------------------ |
-| «corrida»                                            | ejecución                                  |
-| «corre X» transitivo («corre `fn`»)                  | «ejecuta X» —«corre» intransitivo admitido |
-| «Con eso dicho»                                      | «Y sin embargo», «Dicho esto»              |
-| «simplemente», «obviamente», «fácil», «solo hay que» | — (suprimir)                               |
-| perífrasis nominales («la suscripción de X»)         | el verbo («suscribirse a X»)               |
+| Proscrito                                                      | Usar                                       |
+| -------------------------------------------------------------- | ------------------------------------------ |
+| «corrida»                                                      | «ejecución»                                |
+| «corre X» transitivo («corre `fn`»)                            | «ejecuta X» —«corre» intransitivo admitido |
+| «Con eso dicho»                                                | «Y sin embargo», «Dicho esto»              |
+| «simplemente», «obviamente», «fácil», «solo hay que»           | — (suprimir)                               |
+| nominalizaciones que esconden el verbo («la suscripción de X») | el verbo («suscribirse a X»)               |
 
 La tabla crece con cada corrección del usuario —toda palabra
 prohibida entra con su sustituto.
