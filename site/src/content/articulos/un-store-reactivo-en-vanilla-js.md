@@ -104,7 +104,7 @@ function effect(fn) {
 ```
 
 `effect` envuelve `fn` en `correr`: al ejecutarse, `correr` se declara
-efecto activo, corre `fn` y limpia. El suscriptor real es `correr`, no
+efecto activo, ejecuta `fn` y limpia. El suscriptor real es `correr`, no
 `fn` — así cada reejecución vuelve a levantar `efectoActivo` y a
 registrar lo que lea. Como JavaScript corre en un solo hilo, mientras
 `correr` se ejecuta ningún otro efecto puede estar en marcha:
@@ -197,7 +197,7 @@ pregunta que los frameworks tuvieron que responder:
 
 - **Los efectos no se limpian.** Cada ejecución anota lo que el efecto
   leyó, pero nada borra lo anotado antes: si un efecto lee una
-  propiedad en una corrida y deja de leerla en la siguiente, la
+  propiedad en una ejecución y deja de leerla en la siguiente, la
   suscripción vieja permanece. Los frameworks descartan las
   dependencias viejas en cada ejecución y ofrecen `onCleanup` o
   `dispose`.
