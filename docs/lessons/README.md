@@ -36,3 +36,19 @@
 - fechas-de-publicacion.md
   - Disparadores: date, fecha, publicación, orden de artículos, frontmatter, sort, portada, RSS
   - Resumen: las fechas de publicación llevan la hora real del commit/merge; sin ella dos artículos el mismo día empatan y el orden cae al alfabeto
+
+- incisos-entre-parentesis.md
+  - Disparadores: inciso, raya, em-dash, guiones, paréntesis, ortotipografía, EDITORIAL.md
+  - Resumen: la casa prefiere paréntesis sobre la raya larga para incisos —aplica a posts y a la escritura del proyecto—
+
+- reglas-atemporales.md
+  - Disparadores: guía, referencia, DESIGN.md, EDITORIAL.md, contrato, reglas, convenciones, documento de estilo
+  - Resumen: las reglas de una guía de referencia se escriben atemporales —sin conjuntos móviles, precedentes con nombre ni historia de construcción—
+
+- taxonomia-de-contenido.md
+  - Disparadores: categoria, tags, taxonomía, pilares, nivel, frontmatter, enum, metadatos, ortogonal
+  - Resumen: las categorías son especializaciones ortogonales mutuamente excluyentes —lo que todo el corpus comparte es tag, no pilar—; nivel es opcional
+
+- metadatos-clave-valor.md
+  - Disparadores: metadatos, chips, badges, patrones UI, article-meta, nivel, pilar, terminal
+  - Resumen: la identidad también arbitra patrones de UI —el metadato estructural va en `clave: valor`, no en chips que insinúan interactividad—

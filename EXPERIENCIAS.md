@@ -55,3 +55,31 @@
   Obtenido: aparecía segundo: dos artículos el mismo día empatan en el orden por fecha y el desempate cae al alfabeto
   Corrección: las fechas de publicación llevan la hora real —la del commit/merge de cada artículo— para que el orden sea determinista
   Estado: consolidada
+
+- Id: 20261016T172500
+  Tarea: 012-guia-de-tono-editorial
+  Esperado: incisos con raya larga pegada como patrón de la casa
+  Obtenido: el usuario prefiere paréntesis sobre guiones para incisos
+  Corrección: la casa prefiere paréntesis sobre la raya larga para incisos —aplica a posts y a la escritura del proyecto en general—; la guía lo codifica y los documentos nuevos lo siguen
+  Estado: consolidada
+
+- Id: 20261016T172515
+  Tarea: 012-guia-de-tono-editorial
+  Esperado: la guía justificaba reglas citando «los posts publicados» y la construcción en curso («que las tareas 013-015 crean»)
+  Obtenido: el usuario señaló que «los posts publicados» es un referente móvil (cada publicación lo redefine) y que nombrar skills inexistentes deja la guía pendiente de actualizar
+  Corrección: las reglas de una guía de referencia se escriben atemporales —sin referencias a conjuntos que cambian, precedentes con nombre ni la propia historia de construcción—
+  Estado: consolidada
+
+- Id: 20261016T172530
+  Tarea: 012-guia-de-tono-editorial
+  Esperado: categorías como pilares del manifiesto (css, javascript, frameworks, accesibilidad, rendimiento, meta)
+  Obtenido: el usuario objetó que javascript no discrimina en un blog de frontend —rendimiento y arquitectura hablan de javascript igual—: no es ortogonal
+  Corrección: las categorías son especializaciones ortogonales y mutuamente excluyentes (una por post, vocabulario cerrado); lo que todo el corpus comparte es tag, no pilar; nivel es opcional para piezas que no enseñan por grados
+  Estado: consolidada
+
+- Id: 20261016T172545
+  Tarea: 012-guia-de-tono-editorial
+  Esperado: chips de metadato para nivel y categoría, reutilizando la forma del chip de código inline
+  Obtenido: el usuario pidió evaluar si el chip era el patrón adecuado; al discutirlo, el chip insinúa interactividad que no existe y la voz terminal nativa es `clave: valor`
+  Corrección: la identidad «terminal viva» también arbitra patrones de UI, no solo tokens —el metadato estructural va en una segunda línea `clave: valor` en mono muted, diferenciado por etiqueta y no por decoración—
+  Estado: consolidada
