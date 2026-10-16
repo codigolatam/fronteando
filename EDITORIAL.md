@@ -2,8 +2,8 @@
 
 La `DESIGN.md` de la escritura: el contrato de voz, estructura y
 metadatos que todo artículo de Fronteando cumple. Los skills de
-contenido (`planear-post`, `redactar-post` y `revisar-post`, que las
-tareas 013–015 crean) la consultan; los skills genéricos de escritura (`revisar-redaccion`,
+contenido (`planear-post`, `redactar-post` y `revisar-post`) la
+consultan; los skills genéricos de escritura (`revisar-redaccion`,
 `pulir-escritura`) son su mecánica de apoyo y la referencia para la
 documentación del proyecto, que no se rige por esta guía.
 
