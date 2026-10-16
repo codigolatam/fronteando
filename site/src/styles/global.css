@@ -112,13 +112,16 @@ body {
   top: var(--space-1);
   left: var(--space-1);
   transform: translateY(-300%);
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
   font-family: var(--font-mono);
   font-size: var(--font-size-meta);
   color: var(--color-text);
   background: var(--color-surface);
   border: var(--border-width) solid var(--color-border);
   border-radius: var(--radius);
-  padding: var(--space-1) var(--space-2);
+  padding-inline: var(--space-2);
 }
 
 .skip-link:focus {
@@ -138,6 +141,9 @@ body {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
   font-family: var(--font-mono);
   font-size: var(--font-size-body);
   font-weight: 500;
@@ -191,7 +197,7 @@ body {
   border-color: var(--color-accent);
 }
 
-html:not([data-theme]) .theme-toggle {
+html:not(.js) .theme-toggle {
   display: none;
 }
 
@@ -297,6 +303,7 @@ html:not([data-theme]) .theme-toggle {
   padding-inline: var(--space-2);
   cursor: pointer;
   opacity: 0;
+  pointer-events: none;
   transition:
     opacity var(--duration-fast),
     color var(--duration-fast),
@@ -318,10 +325,12 @@ html:not([data-theme]) .theme-toggle {
 .copy-btn.copied,
 .copy-btn.error {
   opacity: 1;
+  pointer-events: auto;
 }
 
 @media (hover: none) {
   .copy-btn {
     opacity: 1;
+    pointer-events: auto;
   }
 }
