@@ -1,4 +1,11 @@
 ---
+import "@fontsource/ibm-plex-serif/700.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "../styles/global.css";
+
 interface Props {
   title: string;
   description?: string;
@@ -16,8 +23,88 @@ const { title, description } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     {description && <meta name="description" content={description} />}
     <title>{title}</title>
+    <script is:inline>
+      const stored = localStorage.getItem("theme");
+      document.documentElement.dataset.theme =
+        stored === "light" || stored === "dark"
+          ? stored
+          : matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark"
+            : "light";
+    </script>
   </head>
   <body>
-    <slot />
+    <a class="skip-link" href="#contenido">
+      saltar al contenido
+    </a>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">
+          fronteando
+          <span class="brand-cursor" aria-hidden="true">
+            _
+          </span>
+        </a>
+        <nav class="site-nav" aria-label="Principal">
+          <a href="/">artículos</a>
+          <button class="theme-toggle" id="theme-toggle" type="button">
+            tema
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main id="contenido" class="container site-main">
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        fronteando_ — un lugar donde aprender frontend
+      </div>
+    </footer>
+    <script>
+      const root = document.documentElement;
+      const toggle = document.getElementById("theme-toggle");
+      const label = () =>
+        `tema: ${root.dataset.theme === "dark" ? "oscuro" : "claro"}`;
+      if (toggle) {
+        toggle.textContent = label();
+        toggle.addEventListener("click", () => {
+          root.dataset.theme = root.dataset.theme === "dark" ? "light" : "dark";
+          localStorage.setItem("theme", root.dataset.theme ?? "");
+          toggle.textContent = label();
+        });
+      }
+
+      document.querySelectorAll(".prose pre:has(> code)").forEach((pre) => {
+        const parent = pre.parentElement;
+        if (!parent) return;
+        const wrapper = document.createElement("div");
+        wrapper.className = "code-block";
+        parent.insertBefore(wrapper, pre);
+        wrapper.appendChild(pre);
+
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "copy-btn";
+        button.textContent = "copiar";
+        button.addEventListener("click", async () => {
+          button.classList.remove("error");
+          try {
+            const code = pre.querySelector("code");
+            await navigator.clipboard.writeText(code?.textContent ?? "");
+            button.textContent = "copiado";
+            button.classList.add("copied");
+          } catch {
+            button.textContent = "error";
+            button.classList.add("error");
+          }
+          setTimeout(() => {
+            button.textContent = "copiar";
+            button.classList.remove("copied", "error");
+          }, 1200);
+        });
+        wrapper.appendChild(button);
+      });
+    </script>
   </body>
 </html>
