@@ -69,7 +69,14 @@ Nombres de la industria para el mecanismo: `signal` (Solid, Preact), `ref` (Vue)
 
 ## Borrador del outline
 
-Gancho: «Cambia una variable y la pantalla se actualiza sola… Parece magia. No lo es.» — `<!--more-->` inmediatamente después y el párrafo de promesa («unas cincuenta líneas que hacen lo esencial»). Resultado primero: el programa completo de quince líneas con su comentario de salida (`count.value = 1` y el título ya dice «count: 1»). Sección por pieza: `signal` (estado que notifica), `effect` (registro de dependencias), `store` (Proxy sobre el objeto). Límites honestos: `document.title` se reescribe entero; la reconciliación fina del DOM es lo que los frameworks aportan. Cierre: una frase que baja el telón y la última que abre la serie («De esa pregunta va la siguiente serie»).
+- Gancho: «Cambia una variable y la pantalla se actualiza sola… Parece magia. No lo es.»
+- `<!--more-->` inmediatamente después + el párrafo de promesa («unas cincuenta líneas que hacen lo esencial»)
+- Resultado primero: el programa completo de quince líneas con su comentario de salida (`count.value = 1` y el título ya dice «count: 1»)
+- `signal`: estado que notifica — suscripciones y el truco que las conecta
+- `effect`: registro de dependencias — el efecto corre sin que nadie lo avise
+- `store`: el Proxy sobre el objeto — de un valor a un objeto estado
+- Límites honestos: `document.title` se reescribe entero; la reconciliación fina del DOM es lo que los frameworks aportan
+- Cierre: una frase que baja el telón y la última que abre la serie («De esa pregunta va la siguiente serie»)
 
 ## Checklist de publicación
 

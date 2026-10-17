@@ -37,7 +37,9 @@
 
 ## Borrador del outline
 
-[El arco bajado a beats: orden de secciones, qué pasa en cada una, dónde entra cada snippet del material, las transiciones. Boceto de trabajo: `redactar-post` lo sigue como guía, no como corsé.]
+- [beat ordenado de escritura: qué pasa en cada sección, dónde entra cada snippet del material, las transiciones]
+
+[El arco bajado a beats, un ítem por línea. Boceto de trabajo: `redactar-post` lo sigue como guía, no como corsé.]
 
 ## Checklist de publicación
 
