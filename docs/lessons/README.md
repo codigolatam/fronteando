@@ -58,8 +58,8 @@
   - Resumen: cuando la preparación de un trabajo excede una sección administrativa —investigación, material, esqueleto— merece artefacto propio con su estado; la tarea conserva solo el puntero de avance
 
 - assets-de-skills.md
-  - Disparadores: skill, SKILL.md, assets, plantilla, template, ejemplo, references, artefacto, formato
-  - Resumen: los artefactos que un skill produce se definen como plantilla en `assets/`, no en prosa; la plantilla se explica mejor con un ejemplo completado sobre material real en `references/`
+  - Disparadores: skill, SKILL.md, assets, plantilla, template, ejemplo, references, artefacto, formato, sesgo, anatomía
+  - Resumen: los artefactos que un skill produce se definen como plantilla en `assets/`, no en prosa; la plantilla se explica mejor con un ejemplo completado sobre material real en `references/` y lleva solo el contrato universal, no la forma de una pieza concreta
 
 - lineas-completas-en-artefactos.md
   - Disparadores: artefacto, checklist, línea, formato, plantilla, brief, markdown, marcar-item, lista anidada

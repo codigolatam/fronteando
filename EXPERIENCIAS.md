@@ -104,3 +104,10 @@
   Obtenido: el usuario eligió línea completa para el brief —los ítems se marcan y sustituyen mecánicamente y el corte en columnas produce diffs ruidosos— y enumeraciones como listas anidadas (metadatos, arco, beats del outline)
   Corrección: en artefactos con ítems accionables —checklists, campos enumerados, beats— una línea por ítem y enumeraciones como listas anidadas; las operaciones mecánicas casan por línea
   Estado: consolidada
+
+- Id: 20261017T125004
+  Tarea: docs/tasks/014-skill-redactar-post.md
+  Esperado: la plantilla del post materializa el contrato del artefacto sin prescribir una forma concreta
+  Obtenido: assets/post.md describía en sus placeholders la anatomía del tutorial explicativo (gancho con tensión, resultado primero, límites con sección propia) — el formato del primer post, sesgando los futuros
+  Corrección: la plantilla conserva solo lo universal — frontmatter, `<!--more-->` y placeholders neutros —; la anatomía la gobierna la guía y el orden concreto el brief
+  Estado: consolidada
