@@ -43,7 +43,7 @@ Escribir y publicar el primer capítulo de la serie MVC en vanilla JS usando el 
 
 ## Notas
 
-- Es el primer ejemplar del tipo `contenido`: su archivo es el molde real que la sección Encuadre + Checklist estrena.
+- Es el primer ejemplar del tipo `contenido`: su archivo es el molde real donde el brief y la sección `## Encuadre` se estrenan.
 - El registro de fricciones es tan importante como el post — el dogfooding sirve para ajustar el flujo, no solo para publicar.
 - El capítulo elegido es el primero del arco de la idea 007: el componente sin patrón, para que la serie cierre en el mini-store ya publicado.
 

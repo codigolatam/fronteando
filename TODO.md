@@ -13,14 +13,11 @@
      propuestas del flujo de idea a tarea con el marcador [p].
 -->
 
-
 ## General
-
 
 ## Hito 1: Flujo de escritura de posts
 
-
-- [ ] docs/tasks/013-skill-planear-post.md — skill planear-post (encuadre editorial)
+- [r] docs/tasks/013-skill-planear-post.md — skill planear-post (encuadre editorial)
 
 - [ ] docs/tasks/014-skill-redactar-post.md — skill redactar-post (ejecución de la escritura)
 
@@ -36,5 +33,3 @@
   - docs/tasks/017-enrutado-tipo-contenido.md
 
 ## Propuestas en revisión
-
-

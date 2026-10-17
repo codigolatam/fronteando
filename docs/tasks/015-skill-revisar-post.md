@@ -10,7 +10,7 @@ desarrollo
 
 ## Objetivo
 
-Crear el skill `revisar-post` —la revisión editorial del flujo de escritura— que somete el post a un revisor independiente por subagente: edición sustantiva contra `EDITORIAL.md` y el encuadre, más verificación técnica del código contra la prosa, con informe y veredicto.
+Crear el skill `revisar-post` —la revisión editorial del flujo de escritura— que somete el post a un revisor independiente por subagente: edición sustantiva contra `EDITORIAL.md` y el brief, más verificación técnica del código contra la prosa, con informe y veredicto.
 
 ## Dependencias
 
@@ -25,7 +25,7 @@ Crear el skill `revisar-post` —la revisión editorial del flujo de escritura�
 
 ## Resultado esperado
 
-- `.agents/skills/revisar-post/SKILL.md` que: lanza un subagente con contexto aislado y rol adversarial, le pasa el encuadre y `EDITORIAL.md` como contrato, exige verificar —¿cumple la promesa? ¿la prosa dice lo que el código hace, ejecutado? ¿arco presente? ¿voz y anatomía de la guía? ¿previo y metadatos?—, produce un informe con hallazgos por severidad y veredicto, y soporta rondas hasta aprobar o escalar.
+- `.agents/skills/revisar-post/SKILL.md` que: lanza un subagente con contexto aislado y rol adversarial, le pasa el brief y `EDITORIAL.md` como contrato, exige verificar —¿cumple la promesa? ¿la prosa dice lo que el código hace, ejecutado? ¿arco presente? ¿voz y anatomía de la guía? ¿previo y metadatos?—, produce un informe con hallazgos por severidad y veredicto, y soporta rondas hasta aprobar o escalar.
 
 ## Criterios de calidad
 
@@ -43,7 +43,7 @@ Crear el skill `revisar-post` —la revisión editorial del flujo de escritura�
 ## Notas
 
 - El subagente de revisión es independiente del contexto de redacción — esa separación es lo que atrapó el bug de la 011.
-- El revisor verifica contra la guía y el encuadre, no contra su gusto: cada hallazgo cita la regla incumplida.
+- El revisor verifica contra la guía y el brief, no contra su gusto: cada hallazgo cita la regla incumplida.
 
 ## Contexto
 
