@@ -17,7 +17,7 @@
 
 ## Hito 1: Flujo de escritura de posts
 
-- [r] docs/tasks/013-skill-planear-post.md — skill planear-post (encuadre editorial)
+- [x] docs/tasks/013-skill-planear-post.md — skill planear-post (encuadre editorial)
 
 - [ ] docs/tasks/014-skill-redactar-post.md — skill redactar-post (ejecución de la escritura)
 

@@ -52,3 +52,15 @@
 - metadatos-clave-valor.md
   - Disparadores: metadatos, chips, badges, patrones UI, article-meta, nivel, pilar, terminal
   - Resumen: la identidad también arbitra patrones de UI —el metadato estructural va en `clave: valor`, no en chips que insinúan interactividad—
+
+- preparacion-como-artefacto.md
+  - Disparadores: brief, artefacto, plan, planeación, preparación, encuadre, archivo de tarea, documento de trabajo, SKILL.md
+  - Resumen: cuando la preparación de un trabajo excede una sección administrativa —investigación, material, esqueleto— merece artefacto propio con su estado; la tarea conserva solo el puntero de avance
+
+- assets-de-skills.md
+  - Disparadores: skill, SKILL.md, assets, plantilla, template, ejemplo, references, artefacto, formato
+  - Resumen: los artefactos que un skill produce se definen como plantilla en `assets/`, no en prosa; la plantilla se explica mejor con un ejemplo completado sobre material real en `references/`
+
+- lineas-completas-en-artefactos.md
+  - Disparadores: artefacto, checklist, línea, formato, plantilla, brief, markdown, marcar-item, lista anidada
+  - Resumen: en artefactos con ítems accionables —checklists, campos enumerados, beats— una línea por ítem y enumeraciones como listas anidadas; las operaciones mecánicas casan por línea

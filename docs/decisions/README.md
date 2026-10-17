@@ -20,3 +20,7 @@
 - D002-previo-de-articulos-desde-el-cuerpo.md
   - Disparadores: excerpt, previo, more, artículos, portada, índice, frontmatter, description, excerpt.ts
   - Resumen: el previo del índice sale del cuerpo del artículo —antes de `<!--more-->` o el primer párrafo— en texto plano; `description` queda para metadatos y como respaldo
+
+- D003-brief-editorial-artefacto-propio.md
+  - Disparadores: brief, encuadre, planear-post, editorial, docs/editorial, contenido, post, artefacto, sección Encuadre, checklist
+  - Resumen: la preparación de un post vive en un brief propio (docs/editorial/briefs/) con estado por campos; la tarea conserva solo la sección Encuadre como puntero y señal
