@@ -35,7 +35,7 @@ Instrucciones para que un agente ejecute la mitad de planeación del flujo de es
 - La pieza del planeador enlazada desde la tarea, con sus tres requisitos: pregunta del lector, ángulo y soporte.
 - `EDITORIAL.md`: la guía que el encuadre consulta y contra la que se verifica.
 - El corpus publicado en `site/src/content/articulos/`: precedentes, series y tags existentes.
-- `assets/brief.md`: la plantilla del documento de preparación.
+- `assets/brief.md`: la plantilla del documento de preparación; `references/brief-ejemplo.md` la muestra completada sobre un post real.
 - Las capacidades de artefactos: `consultar-artefactos` para las lecturas del formato; `actualizar-artefactos` para las mutaciones de la tarea.
 
 ## Salida
@@ -86,6 +86,7 @@ El skill ha terminado cuando:
 ## Referencias
 
 - `.agents/skills/planear-tarea/SKILL.md` — La mitad de planeación del flujo de desarrollo, modelo en forma.
+- `references/brief-ejemplo.md` — Un brief completado y aprobado sobre un post real, como referencia del nivel de detalle esperado.
 - `EDITORIAL.md` — La guía contra la que se encuadra.
 - `docs/research/2026-10-procesos-gestion-editorial.md` — El brief como salida definida de la etapa de preparación y la aprobación del brief antes de redactar.
 - `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — El `<!--more-->` que el checklist exige.
