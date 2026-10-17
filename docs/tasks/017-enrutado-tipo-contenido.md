@@ -21,15 +21,15 @@ Registrar el tipo de tarea `contenido` en `ejecutar-tareas` con su sub-flujo pro
 
 ## Entrada
 
-- Los tres skills del flujo (013–015) con las secciones editoriales definidas: Encuadre + Checklist.
+- Los tres skills del flujo (013–015) con el contrato definido: brief aprobado en `docs/editorial/briefs/` y la sección `## Encuadre` de la tarea como señal.
 - El planeador editorial (016) — origen de las piezas que entran al flujo.
 - `ejecutar-tareas` en `.agents/skills/` — el orquestador donde el enrutado por tipo vive.
 - La experiencia de la tarea 011: un post corrió por el sub-flujo de desarrollo y el molde apretó — el tipo `contenido` lo resuelve.
 
 ## Resultado esperado
 
-- `ejecutar-tareas` enruta las tareas de tipo `contenido` al sub-flujo de escritura: Encuadre aprobado como equivalente de la mitad de planeación, redacción con su checklist, revisión editorial en lugar de revisión técnica de implementación.
-- La consulta de «planeación completa» reconoce las secciones editoriales (Encuadre + Checklist) para el tipo `contenido` — sin tocar las del tipo `desarrollo`.
+- `ejecutar-tareas` enruta las tareas de tipo `contenido` al sub-flujo de escritura: brief aprobado como equivalente de la mitad de planeación, redacción con su checklist, revisión editorial en lugar de revisión técnica de implementación.
+- La consulta de «planeación completa» reconoce la sección `## Encuadre` (puntero al brief aprobado) para el tipo `contenido` — sin tocar las del tipo `desarrollo`.
 - Las puertas generales del ciclo —rama, PR, checks, veredictos, cierre— se conservan intactas para el nuevo tipo.
 
 ## Criterios de calidad

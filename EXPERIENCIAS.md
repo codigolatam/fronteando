@@ -83,3 +83,24 @@
   Obtenido: el usuario pidió evaluar si el chip era el patrón adecuado; al discutirlo, el chip insinúa interactividad que no existe y la voz terminal nativa es `clave: valor`
   Corrección: la identidad «terminal viva» también arbitra patrones de UI, no solo tokens —el metadato estructural va en una segunda línea `clave: valor` en mono muted, diferenciado por etiqueta y no por decoración—
   Estado: consolidada
+
+- Id: 20261017T040043
+  Tarea: 013-skill-planear-post
+  Esperado: encuadre y checklist como secciones del archivo de tarea, análogas a Plan técnico y Suite del tipo desarrollo
+  Obtenido: el usuario propuso un brief como artefacto propio con temas de investigación, material recopilado y borrador del outline —una preparación que permita escribir sin recopilar contexto en la redacción
+  Corrección: cuando la preparación de un trabajo excede una sección administrativa —investigación, material, esqueleto— merece artefacto propio con su estado; el archivo de tarea conserva solo el puntero de avance
+  Estado: consolidada
+
+- Id: 20261017T040044
+  Tarea: 013-skill-planear-post
+  Esperado: el formato de las secciones editoriales descrito en la prosa del skill
+  Obtenido: el usuario recordó que los skills pueden traer assets de plantilla, y luego pidió un asset de ejemplo completado para entender la plantilla llena
+  Corrección: los artefactos que un skill produce se definen como plantilla en `assets/`, no en prosa; y la plantilla se explica mejor con un ejemplo completado sobre material real en `references/`
+  Estado: consolidada
+
+- Id: 20261017T040045
+  Tarea: 013-skill-planear-post
+  Esperado: prosa envuelta en columna (~80 caracteres) por convención del repositorio
+  Obtenido: el usuario eligió línea completa para el brief —los ítems se marcan y sustituyen mecánicamente y el corte en columnas produce diffs ruidosos— y enumeraciones como listas anidadas (metadatos, arco, beats del outline)
+  Corrección: en artefactos con ítems accionables —checklists, campos enumerados, beats— una línea por ítem y enumeraciones como listas anidadas; las operaciones mecánicas casan por línea
+  Estado: consolidada
