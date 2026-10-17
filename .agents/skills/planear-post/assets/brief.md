@@ -1,6 +1,6 @@
 # Brief — [título del post]
 
-[Documento de preparación de un post de Fronteando. Lo produce `planear-post` a partir de una pieza `lista` del planeador o de una tarea `contenido`, y lo consume `redactar-post` como única entrada de escritura. Ningún campo queda vacío: lo que no aplica se declara («sin ejemplo conductor») con la razón. El brief referencia `EDITORIAL.md`, no la repite. Una línea por párrafo y por ítem: los ítems se marcan y sustituyen mecánicamente y el envoltorio dificulta ambas cosas.]
+[Documento de preparación de un post de Fronteando. Lo produce `planear-post` a partir de una pieza `lista` del planeador o de una tarea `contenido`, y lo consume `redactar-post` como única entrada de escritura. Ningún campo queda vacío: lo que no aplica se declara («sin ejemplo conductor») con la razón. El brief referencia `EDITORIAL.md`, no la repite. Una línea por párrafo y por ítem: los ítems se marcan y sustituyen mecánicamente, y el corte en columnas dificulta ambas cosas.]
 
 ## Estado
 

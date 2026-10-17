@@ -1,6 +1,6 @@
 # Brief — Un store reactivo en vanilla JS
 
-[Ejemplo de brief completado y aprobado, construido sobre un post real ya publicado. Sirve para ver la plantilla `assets/brief.md` llena: qué nivel de detalle espera cada sección y cómo se ve un brief listo para `redactar-post`.]
+[Ejemplo de brief completado y aprobado, construido sobre un post real del blog. Sirve para ver la plantilla `assets/brief.md` llena: qué nivel de detalle espera cada sección y cómo se ve un brief listo para `redactar-post`.]
 
 ## Estado
 
@@ -23,7 +23,7 @@
   - Lo que falta para ser un framework: los límites honestos.
   - El punto: cierre con puerta a la serie.
 - **Ejemplo conductor:** un solo programa que crece sección a sección (contador con `signal` y `effect` que reescribe `document.title`); cada mecanismo nuevo se añade al mismo ejemplo.
-- **Alcance:** sin reconciliación de DOM, sin componentes, sin middleware; el ejemplo reescribe el título entero — escalarlo es justamente lo que los frameworks resuelven.
+- **Alcance:** sin reconciliación de DOM, sin componentes, sin middleware; el ejemplo reescribe el título entero (escalarlo es justamente lo que los frameworks resuelven).
 - **Metadatos:**
   - `slug` un-store-reactivo-en-vanilla-js
   - `categoria` fundamentos
@@ -32,13 +32,13 @@
 
 ## Temas de investigación
 
-- [x] ¿`queueMicrotask` basta para agrupar efectos del mismo tick o hace falta `requestAnimationFrame`? — verificado ejecutándolo: respuesta en `## Material`.
-- [x] ¿Cómo nombran los frameworks el agrupado de actualizaciones? — `batching` y `scheduling`; la casa ya usa `batching` sin cursiva.
-- [x] ¿`Proxy` permite interceptar escrituras sobre propiedades arbitrarias del objeto estado? — sí, con `set()` en el handler; snippet verificado en `## Material`.
+- [x] ¿`queueMicrotask` basta para agrupar efectos del mismo tick o hace falta `requestAnimationFrame`? (verificado ejecutándolo: respuesta en `## Material`)
+- [x] ¿Cómo nombran los frameworks el agrupado de actualizaciones? (`batching` y `scheduling`; la casa ya usa `batching` sin cursiva)
+- [x] ¿`Proxy` permite interceptar escrituras sobre propiedades arbitrarias del objeto estado? (sí, con `set()` en el handler; snippet verificado en `## Material`)
 
 ## Material
 
-`queueMicrotask` agrupa los efectos del mismo tick antes del render: verificado ejecutando en Node — una escritura triple dispara una sola ejecución del efecto.
+`queueMicrotask` agrupa los efectos del mismo tick antes del render: verificado ejecutando en Node (una escritura triple dispara una sola ejecución del efecto).
 
 ```js
 let queued = false;
@@ -65,16 +65,16 @@ new Proxy(estado, {
 });
 ```
 
-Nombres de la industria para el mecanismo: `signal` (Solid, Preact), `ref` (Vue), `store` (Svelte); el post usa `signal` y `effect` por cercanía al lector de frameworks.
+Nombres que dan los frameworks al mismo mecanismo: `signal` (Solid, Preact), `ref` (Vue), `store` (Svelte); el post usa `signal` y `effect` por cercanía al lector de frameworks.
 
 ## Borrador del outline
 
 - Gancho: «Cambia una variable y la pantalla se actualiza sola… Parece magia. No lo es.»
 - `<!--more-->` inmediatamente después + el párrafo de promesa («unas cincuenta líneas que hacen lo esencial»)
 - Resultado primero: el programa completo de quince líneas con su comentario de salida (`count.value = 1` y el título ya dice «count: 1»)
-- `signal`: estado que notifica — suscripciones y el truco que las conecta
-- `effect`: registro de dependencias — el efecto corre sin que nadie lo avise
-- `store`: el Proxy sobre el objeto — de un valor a un objeto estado
+- `signal`: estado que notifica (suscripciones y el truco que las conecta)
+- `effect`: registro de dependencias (el efecto corre sin que nadie lo avise)
+- `store`: el Proxy sobre el objeto (de un valor a un objeto estado)
 - Límites honestos: `document.title` se reescribe entero; la reconciliación fina del DOM es lo que los frameworks aportan
 - Cierre: una frase que baja el telón y la última que abre la serie («De esa pregunta va la siguiente serie»)
 
