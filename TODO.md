@@ -19,7 +19,7 @@
 
 - [x] docs/tasks/013-skill-planear-post.md — skill planear-post (encuadre editorial)
 
-- [ ] docs/tasks/014-skill-redactar-post.md — skill redactar-post (ejecución de la escritura)
+- [~] docs/tasks/014-skill-redactar-post.md — skill redactar-post (ejecución de la escritura)
 
 - [ ] docs/tasks/015-skill-revisar-post.md — skill revisar-post (revisión editorial)
 
