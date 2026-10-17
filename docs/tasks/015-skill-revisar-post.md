@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -47,9 +47,46 @@ Crear el skill `revisar-post` —la revisión editorial del flujo de escritura�
 
 ## Contexto
 
-- `Archivos similares:` `.agents/skills/revisar-implementacion/` — modelo de revisión por subagente.
-- `Patrones:` revisión con contexto aislado, informe anclado y veredicto registrado en el archivo de la tarea.
-- `Dominio:` sin documentación de dominio aplicable.
-- `Producto:` sin documentación de producto aplicable.
-- `Lecciones:` `docs/lessons/flujo-de-escritura.md` — la ronda corre sobre la versión final tras hallazgos de fondo.
-- `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el revisor verifica el previo.
+- `Archivos similares:` `.agents/skills/revisar-implementacion/SKILL.md` — el modelo directo de revisión por subagente (contexto aislado, rol adversarial, informe anclado, rondas); `.agents/skills/redactar-post/` — el skill que produce el borrador que este revisa, con su plantilla.
+- `Patrones:` subagente revisor con contexto aislado y capacidad de ejecutar (`node` para los snippets); informe con hallazgos citados por severidad y veredicto Aprueba/Solicita cambios; la revisión sustantiva verifica contra el contrato (guía + brief), no contra el gusto.
+- `Dominio:` `EDITORIAL.md` — los niveles de edición separan sustantiva (este skill) de mecánica (la ronda de `redactar-post`); la regla dura: toda reescritura tras la ronda pide pasada nueva sobre lo cambiado.
+- `Producto:` `site/src/content/articulos/<slug>.md` — el borrador con `draft: true`; `site/src/content.config.ts` — el esquema; `node` local para ejecutar el código del post.
+- `Lecciones:` `docs/lessons/flujo-de-escritura.md` — la ronda corre sobre la versión final tras hallazgos de fondo; `docs/lessons/previos-de-articulos.md` y `docs/lessons/fechas-de-publicacion.md` — previo como unidad y hora real, que el revisor verifica; `docs/lessons/assets-de-skills.md` — la plantilla lleva solo el contrato universal.
+- `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el previo que el revisor verifica; `docs/decisions/D003-brief-editorial-artefacto-propio.md` — el contrato de entrada; `docs/decisions/D004-el-post-nace-borrador-y-la-revision-lo-publica.md` — este skill retira el `draft` al aprobar.
+
+## Conectividad
+
+Conectada. El trabajo toca `.agents/skills/revisar-post/` —directorio nuevo con `SKILL.md`—, lee el brief aprobado en `docs/editorial/briefs/` y el borrador en `site/src/content/articulos/<slug>.md`, y sobre aprobación retira la línea `draft` del frontmatter (escritura directa; `draft` tiene default `false` en el esquema). El contrato de entrada ya está fijado (D003): `## Encuadre` en la tarea + `estado: aprobado` en el brief; la señal de «listo para revisar» es el post existente con `draft: true`. El subagente revisor necesita perfil con ejecución (corre los snippets con `node` local); el estado de la tarea, las desviaciones y el PR quedan del ejecutor general. Frontera declarada, no implementada: mover la pieza del planeador a «en revisión»/«publicado» corresponde a su gestor.
+
+## Plan técnico
+
+El subsistema: el directorio `.agents/skills/revisar-post/` —`SKILL.md`, sin `assets/` (el informe es efímero y por ronda, como el de `revisar-implementacion`)— que somete el borrador de `site/src/content/articulos/<slug>.md` a un subagente revisor independiente y materializa la aprobación retirando el `draft`.
+
+- [x] `SKILL.md` — frontmatter (name, description con cuándo usar y sinónimos) y cuerpo canónico: cuándo usar / cuándo no usar / entrada / salida / principios rectores / procedimiento / finalización / referencias
+  - Aporta: la revisión editorial del flujo de escritura — análoga a `revisar-implementacion` en forma (subagente aislado, rol adversarial, informe anclado, rondas), editorial en sustancia (edición sustantiva contra la guía y el brief, no contra el gusto)
+- [x] Entrada validada: tarea `contenido` con `## Encuadre` → brief `aprobado` → post existente con `draft: true` (la señal de «listo para revisar»); sin post o sin draft se deriva a `redactar-post`
+  - Aporta: la puerta de entrada firme, simétrica a la de `redactar-post`
+- [x] El encargo del revisor (subagente con contexto aislado y capacidad de ejecutar): recibe rutas —tarea, brief, post, `EDITORIAL.md`— sin el razonamiento del redactor; verifica contra el contrato: promesa cumplida, prosa contra código **ejecutado** (obligatorio), arco y anatomía, voz, previo como unidad y `<!--more-->`, frontmatter contra metadatos decididos (categoría/nivel/tags sin solape), límites honestos; hallazgos citados con la regla incumplida + severidad + corrección propuesta; veredicto Aprueba | Solicita cambios
+  - Aporta: la verificación técnica del código dentro del informe — el fact-check que atrapó el desfase de la 011
+- [x] Rondas: «solicita cambios» → correcciones → ronda de escritura nueva sobre los párrafos reescritos (regla dura de `EDITORIAL.md`) → re-revisión con subagente fresco; «aprueba» → retirar la línea `draft` (default `false` en el esquema) y devolver el informe al invocador
+  - Aporta: D004 materializado — la aprobación editorial publica
+- [x] Ronda de escritura sobre `SKILL.md`
+  - Aporta: convenciones del proyecto
+
+## Suite de pruebas esperada
+
+- `check`, `lint`, `format:check`, `build` en verde —(B)
+- El skill declara cuándo usar/no usar, entrada, salida, principios, procedimiento y finalización en el formato canónico —(O)
+- La puerta de entrada es firme: sin borrador con `draft: true` no hay revisión —(O)
+- El encargo del revisor prohíbe aprobar sin haber ejecutado el código del post —(O)
+- La distinción sustantiva/mecánica queda explícita: los hallazgos de fondo gatillan ronda de escritura nueva sobre lo reescrito —(O)
+- El veredicto sigue el formato del proyecto (Aprueba | Solicita cambios, hallazgos anclados) y el `draft` solo se retira al aprobar (D004) —(O)
+- Las lecturas/escrituras mecánicas se delegan en las capacidades de artefactos donde aplica —(O)
+- El texto no contiene rayas para incisos ni referencias al estado de construcción del sistema —(O)
+- Revisión técnica por subagente aprueba
+
+## Revisión
+
+- Subagente: 2026-10-17 — Aprueba
+- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
