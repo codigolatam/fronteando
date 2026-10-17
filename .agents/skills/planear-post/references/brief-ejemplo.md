@@ -24,7 +24,11 @@
   - El punto: cierre con puerta a la serie.
 - **Ejemplo conductor:** un solo programa que crece sección a sección (contador con `signal` y `effect` que reescribe `document.title`); cada mecanismo nuevo se añade al mismo ejemplo.
 - **Alcance:** sin reconciliación de DOM, sin componentes, sin middleware; el ejemplo reescribe el título entero — escalarlo es justamente lo que los frameworks resuelven.
-- **Metadatos:** `slug` un-store-reactivo-en-vanilla-js · `categoria` fundamentos · `nivel` intermedio · `tags` javascript, reactividad
+- **Metadatos:**
+  - `slug` un-store-reactivo-en-vanilla-js
+  - `categoria` fundamentos
+  - `nivel` intermedio
+  - `tags` javascript, reactividad
 
 ## Temas de investigación
 

@@ -19,7 +19,11 @@
 - **Arco:** [las secciones del post en orden, con una línea por sección diciendo qué aporta al cumplimiento de la promesa; la anatomía de `EDITORIAL.md` es el molde]
 - **Ejemplo conductor:** [el programa, demo o hilo que atraviesa el post; sale del soporte de la pieza]
 - **Alcance:** [qué queda fuera y por qué; los límites honestos decididos por adelantado]
-- **Metadatos:** `slug` [nombre del archivo del post y de este brief] · `categoria` [pilar del esquema] · `nivel` [grado, solo si la pieza enseña por grados; se omite si no] · `tags` [reutilizando los existentes; ninguno coincide con la categoría]
+- **Metadatos:**
+  - `slug` [nombre del archivo del post y de este brief]
+  - `categoria` [pilar del esquema]
+  - `nivel` [grado, solo si la pieza enseña por grados; se omite si no]
+  - `tags` [reutilizando los existentes; ninguno coincide con la categoría]
 
 ## Temas de investigación
 
