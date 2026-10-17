@@ -24,3 +24,7 @@
 - D003-brief-editorial-artefacto-propio.md
   - Disparadores: brief, encuadre, planear-post, editorial, docs/editorial, contenido, post, artefacto, sección Encuadre, checklist
   - Resumen: la preparación de un post vive en un brief propio (docs/editorial/briefs/) con estado por campos; la tarea conserva solo la sección Encuadre como puntero y señal
+
+- D004-el-post-nace-borrador-y-la-revision-lo-publica.md
+  - Disparadores: draft, borrador, revisar-post, redactar-post, publicación, post, frontmatter, merge, editorial
+  - Resumen: el post nace con draft: true y lo conserva hasta que revisar-post aprueba la revisión editorial; la aprobación equivale a listo para publicar y el merge publica
