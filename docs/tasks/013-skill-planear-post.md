@@ -93,4 +93,4 @@ El subsistema: el directorio de skills `.agents/skills/` —un directorio por ca
 
 - Subagente: 2026-10-17 — Aprueba (ronda 3; rondas 1-2 solicitaron cambios: retoma de borrador, contrato desactualizado en 014/017, género del estado, slug en metadatos)
 - Usuario (ejecución): 2026-10-17 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-17 — Aprueba
