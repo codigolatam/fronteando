@@ -8,8 +8,8 @@ tags: ["[tag]", "[tag]"]
 draft: true
 ---
 
-[gancho: el previo. Un párrafo breve y autocontenido que planta una tensión y la resuelve dentro de sí mismo]
+[el texto que sirve de previo]
 
 <!--more-->
 
-[párrafo de la promesa y resto del cuerpo siguiendo el outline del brief: resultado primero, explicación, límites honestos con sección propia y cierre que abre una puerta]
+[el resto del artículo]
