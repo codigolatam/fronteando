@@ -74,6 +74,7 @@ El consumidor delega la acción de dominio; el gestor la expande a las operacion
 - «sustituir el ítem `<texto>` de la sección `<concepto>` de `<ref>` por el cuerpo dado»: `sustituir-item` con el cuerpo por `stdin`.
 - «marcar la idea `<ref>` procesada en `<destino>`»: `procesada`.
 - «promover los borradores de la propuesta `<dir>`»: `promover`, resolviendo el directorio de tareas y el índice de la configuración; emite la correspondencia `MM→NNN→ruta` por borrador.
+- «mover la pieza `<texto>` a la sección `<estado>` del índice del planeador»: `mover` de `editorial.sh` sobre `docs/editorial/README.md`.
 
 ## Catálogo de operaciones
 
@@ -158,6 +159,12 @@ Añade `> **Procesada en:** <destino>` tras la última línea `>` de la cabecera
 Invocada sobre el directorio de la propuesta: mueve cada `MM-slug.md` a `<dir-tareas>/NNN-slug.md` con numeración continua tras el máximo del directorio de tareas y del índice, inyecta `## Estado` en forma canónica y `## Revisión` con sus placeholders, renumera las dependencias «Borrador MM» de `## Dependencias` y actualiza el índice `## Borradores` de `propuesta.md` —la referencia al archivo y los «depende de N»—. Emite por stdout una línea `MM<TAB>NNN<TAB>ruta` por borrador promovido.
 
 La validación precede a cualquier escritura: una dependencia «Borrador MM» no resoluble, un borrador del índice ausente o sin serie válida, un borrador sin secciones `## ` o uno que ya trae `## Estado` o `## Revisión` abortan la promoción entera con exit `1` sin tocar nada; un borrador del directorio no listado en el índice solo avisa por stderr y se promueve igual. Directorio de la propuesta, `propuesta.md`, directorio de tareas o índice ausentes: exit `2`; directorio sin borradores: exit `1`. El cambio de estado de `propuesta.md` a `[a]` y la retirada de su línea `[p]` del índice son órdenes aparte (`tarea.sh estado` y `todo.sh retirar`).
+
+### `editorial.sh` — el índice del planeador editorial (`docs/editorial/README.md`)
+
+#### `mover <estado> <texto>`
+
+Mueve la línea `- ` que contiene `<texto>` a la sección `## <estado>` del índice kanban —al final de la lista de la sección—. `<texto>` debe casar exactamente una línea dentro de las secciones del índice (el preámbulo no cuenta) y la sección destino debe existir: ítem no localizado, casamiento ambiguo o sección ausente → exit `1`; `<texto>` vacío → exit `2`. Idempotente sobre una línea que ya está en la sección destino. Normaliza los blancos tras el movimiento (una línea vacía entre bloques).
 
 ### Cobertura
 
