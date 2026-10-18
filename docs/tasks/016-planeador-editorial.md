@@ -58,7 +58,7 @@ Crear el planeador editorial del blog: un pipeline de contenido en `docs/editori
 
 ## Conectividad
 
-Conectada. El trabajo crea `docs/editorial/` —`README.md` como índice kanban por estados con sección `## series`, `piezas/<slug>.md` por pieza y `series/<slug>.md` por arco (junto al `briefs/` ya fijado por D003)—, `.agents/skills/gestionar-piezas/` con `SKILL.md`, `assets/pieza.md` y `assets/serie.md`, y las operaciones `mover`, `retirar` y `añadir` de `editorial.sh` sobre el índice (no existían ops de líneas para este artefacto). El campo `estado:` de pieza y serie es escritura directa (como el brief, D003). La migración de la serie MVC usa `ideas.sh procesada` para marcar la idea origen. La separación `docs/ideas/` (producto) vs `docs/editorial/` (contenido) queda documentada en el propio índice. El movimiento a `en redacción` enlaza la pieza con una tarea `contenido`; los movimientos a `en revisión`/`publicado` los informa el ejecutor general al gestor; el despliegue de una serie crea una pieza por post con `- serie:` apuntando al arco, que `planear-post` lee como marco.
+Conectada. El trabajo crea `docs/editorial/` —`README.md` como índice kanban por estados con sección `## series`, `piezas/<slug>.md` por pieza y `series/<slug>.md` por arco (junto al `briefs/` ya fijado por D003)—. También `.agents/skills/gestionar-piezas/` con `SKILL.md`, `assets/pieza.md` y `assets/serie.md`, y las operaciones `mover`, `retirar` y `añadir` de `editorial.sh` sobre el índice (no existían ops de líneas para este artefacto). El campo `estado:` de pieza y serie es escritura directa (como el brief, D003). La migración de la serie MVC usa `ideas.sh procesada` para marcar la idea origen. La separación `docs/ideas/` (producto) vs `docs/editorial/` (contenido) queda documentada en el propio índice. El movimiento a `en redacción` enlaza la pieza con una tarea `contenido`; los movimientos a `en revisión`/`publicado` los informa el ejecutor general al gestor; el despliegue de una serie crea una pieza por post con `- serie:` apuntando al arco, que `planear-post` lee como marco.
 
 ## Plan técnico
 
@@ -83,7 +83,7 @@ El subsistema: `docs/editorial/` como pipeline de nivel 1 —`README.md` como í
 
 ## Desviaciones del plan
 
-- El plan original modelaba la serie MVC como una pieza única en `lista`. En la revisión de la puerta de ejecución se detectó la costura: el pipeline rastrea unidades publicables (posts) y una serie publica N, así que una pieza-arco haría mentir al kanban. Con aprobación del usuario se adoptó el modelo de dos niveles (serie = épica editorial, pieza = unidad publicable): la pieza MVC migrada se reconvirtió en serie `propuesta` y se añadieron el formato de serie, la sección `## series`, el campo `- serie:` y las operaciones de ciclo de serie en el gestor y el catálogo.
+- El plan original modelaba la serie MVC como una pieza única en `lista`. En la revisión de la puerta de ejecución se detectó la costura: el pipeline rastrea unidades publicables (posts) y una serie publica N piezas, así que una pieza-arco haría mentir al kanban. Con aprobación del usuario se adoptó el modelo de dos niveles (serie = épica editorial, pieza = unidad publicable): la pieza MVC migrada se reconvirtió en serie `propuesta` y se añadieron el formato de serie, la sección `## series`, el campo `- serie:` y las operaciones de ciclo de serie en el gestor y el catálogo.
 
 ## Suite de pruebas esperada
 

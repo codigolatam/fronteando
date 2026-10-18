@@ -23,7 +23,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 - Cuando el usuario pida generar ideas de contenido en lote (lluvia de ideas editorial).
 - Cuando una pieza maduró lo suficiente para escribirla: promoverla a `lista`.
 - Cuando una pieza `lista` arranca su escritura (a `en redacción`), entra en revisión (a `en revisión`) o se publica (a `publicado`); el ejecutor general informa el cambio y este gestor lo materializa.
-- Cuando el usuario trae un arco de varios posts, o una pieza resulta ser multi-post: capturarla o convertirla como serie.
+- Cuando el usuario trae un arco de varios posts, o una pieza resulta ser multi-post: capturar el arco como serie o convertir la pieza en serie.
 - Cuando una serie `propuesta` tiene decidido su arco: desplegarla en piezas.
 - Cuando la última pieza de una serie queda publicada: cerrarla.
 
@@ -41,13 +41,13 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 - `docs/editorial/piezas/<slug>.md`: el archivo de cada pieza, con su formato en `assets/pieza.md`.
 - `docs/editorial/series/<slug>.md`: el archivo de cada serie, con su formato en `assets/serie.md`.
 - `EDITORIAL.md` y el corpus publicado en `site/src/content/articulos/` para idear contra la línea editorial real (pilares, series, precedentes).
-- Las capacidades de artefactos: `consultar-artefactos` para las lecturas del catálogo (las de piezas y series, campos y `## Piezas`, son lecturas directas); `actualizar-artefactos` para las mutaciones (`añadir`, `mover` y `retirar` de `editorial.sh` sobre el índice).
+- Las capacidades de artefactos: `consultar-artefactos` para las lecturas del catálogo (los campos de piezas y series y la lista `## Piezas` son lecturas directas); `actualizar-artefactos` para las mutaciones (`añadir`, `mover` y `retirar` de `editorial.sh` sobre el índice).
 - `crear-tareas` para el alta de la tarea `contenido` cuando la pieza entra en redacción.
 
 ## Salida
 
 - Piezas capturadas o ideadas en `piezas/<slug>.md` con `estado: idea` y su línea en `## idea` del índice.
-- Piezas promovidas a `lista` (los tres requisitos verificados y confirmados por el usuario) o movidas entre los demás estados, con el índice y el campo `estado:` sincronizados.
+- Piezas promovidas a `lista` (los tres requisitos verificados y la promoción confirmada por el usuario) o movidas entre los demás estados, con el índice y el campo `estado:` sincronizados.
 - Al mover a `en redacción`: la tarea `contenido` enlazada desde la pieza (creada vía `crear-tareas` si no existía).
 - Series capturadas en `series/<slug>.md` con `estado: propuesta` y su línea en `## series`; series desplegadas con sus piezas hijas creadas y `- serie:` apuntando al arco; series cerradas con su línea retirada del índice.
 - O la conclusión de que la operación no procede (pieza sin los tres requisitos, serie sin arco decidido, estado inconsistente), comunicada con el motivo.
@@ -55,11 +55,11 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 ## Principios rectores
 
 1. **Capturar no es comprometer:** `idea` es la bandeja; una pieza puede nacer con campos `[por madurar]` y quedarse ahí indefinidamente sin coste.
-2. **`lista` es la única puerta del nivel 1:** exige los tres requisitos presentes en el archivo (pregunta del lector, ángulo, soporte; la verificación es mecánica) más la confirmación del usuario (la intención es decisión humana).
+2. **`lista` es la única puerta del tablero:** exige los tres requisitos presentes en el archivo (pregunta del lector, ángulo, soporte; la verificación es mecánica) más la confirmación del usuario (la intención es decisión humana).
 3. **La pieza es la fuente, el índice el mapa:** el campo `estado:` de la pieza manda; el índice lo refleja por posición; todo movimiento sincroniza ambos en el mismo gesto.
 4. **El gestor mueve marcadores, no escribe:** encuadre, redacción y revisión pertenecen al pipeline de nivel 2; el gestor entrega una tarea `contenido` enlazada y ahí termina.
 5. **Separación de dominios:** contenido en `docs/editorial/`, producto en `docs/ideas/`; una pieza que migra de ideas se marca `procesada` en su origen.
-6. **La serie agrupa, la pieza publica:** la serie es el análogo editorial de la épica (un arco con marco propio a nivel de serie y criterio de cierre); como no es publicable, no ocupa el kanban: vive en `## series` con su propio ciclo (`propuesta` → `en curso` → `cerrada`). Solo las piezas son unidades del kanban.
+6. **La serie agrupa, la pieza publica:** la serie es el análogo editorial de la épica (un arco con marco propio y criterio de cierre); como no es publicable, no ocupa el kanban: vive en `## series` con su propio ciclo (`propuesta` → `en curso` → `cerrada`). Solo las piezas son unidades del kanban.
 
 ## Procedimiento
 
@@ -72,7 +72,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 ### Idear en lote
 
 4. **Proponer piezas contra la línea editorial real:** leer `EDITORIAL.md` y el corpus (pilares poco cubiertos, series abiertas, preguntas naturales de la audiencia) y presentar al usuario nombres con una línea por pieza; el usuario filtra antes de escribir.
-5. **Escribir cada pieza confirmada** como en capturar (una por archivo, todas en `idea`). Algunas pueden nacer ya con los tres campos y promoverse a `lista` en el mismo gesto si el usuario lo confirma.
+5. **Escribir cada pieza confirmada** como en capturar (una por archivo, todas en `idea`). Algunas pueden nacer ya con los tres requisitos y promoverse a `lista` en el mismo gesto si el usuario lo confirma.
 
 ### Promover a `lista`
 
@@ -93,7 +93,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 ### Desplegar una serie
 
 13. **Decidir el arco en diálogo:** el soporte y el próximo paso de la serie orientan, pero el despliegue decide con el usuario el hilo conductor, el número de posts y el corte de cada uno. Sin arco decidido no hay despliegue.
-14. **Crear cada pieza hija** desde `assets/pieza.md` con `- serie: <slug>` y sus tres campos rebanados del marco del arco (la pregunta del post es un corte de la pregunta del arco); nace `lista` si los tres campos salen completos y el usuario lo confirma, `idea` si no. Registrar cada línea en el índice, escribir la lista `## Piezas` de la serie (escritura directa), actualizar `estado: en curso` y reescribir el sufijo de la línea del índice a `— en curso` (delegar «añadir» la línea actualizada y «retirar» la anterior).
+14. **Crear cada pieza hija** desde `assets/pieza.md` con `- serie: <slug>` y sus tres requisitos recortados del marco del arco (la pregunta del post es un corte de la pregunta del arco); nace `lista` si los tres requisitos salen completos y el usuario lo confirma, `idea` si no. Registrar cada línea en el índice, escribir la lista `## Piezas` de la serie (escritura directa), actualizar `estado: en curso` y reescribir el sufijo de la línea del índice a `— en curso` (delegar «añadir» la línea actualizada y «retirar» la anterior).
 
 ### Cerrar una serie
 
