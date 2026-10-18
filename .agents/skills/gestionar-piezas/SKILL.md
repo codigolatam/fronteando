@@ -1,13 +1,13 @@
 ---
 name: gestionar-piezas
 description: >
-  Gestiona el planeador editorial del blog (el pipeline de contenido
-  de docs/editorial/): captura e idea piezas (posibles artículos),
-  las promueve de idea a lista verificando sus tres requisitos
-  (pregunta del lector, ángulo y soporte) y las mueve por los estados
-  del kanban hasta publicado. Usar para dar de alta una idea de
-  post, madurar una pieza, arrancar su escritura o actualizar su
-  estado en el pipeline.
+  Mantiene el planeador editorial del blog (la vista única de todo
+  el contenido, desde la idea apuntada hasta el artículo publicado,
+  que vive en docs/editorial/) para que las ideas de post se
+  capturen sin compromiso, maduren antes de entrar en producción y
+  la escritura solo consuma piezas listas. Usar para dar de alta
+  una idea de post, madurar una pieza, arrancar su escritura o
+  actualizar su estado en el pipeline.
   Sinónimos: gestor del planeador, planeador editorial, pipeline de
   contenido, backlog editorial, pieza de contenido, kanban editorial.
 ---
