@@ -62,23 +62,23 @@ Conectada. El trabajo crea `docs/editorial/` —`README.md` como índice kanban 
 
 ## Plan técnico
 
-El subsistema: `docs/editorial/` como pipeline de nivel 1 —`README.md` como índice kanban por estados y `piezas/<slug>.md` por pieza, junto al `briefs/` ya fijado por D003— más `.agents/skills/gestionar-piezas/` como gestor, y una operación nueva del catálogo (`editorial.sh` con `mover`) porque ninguna operación existente mueve una línea entre secciones.
+El subsistema: `docs/editorial/` como pipeline de nivel 1 —`README.md` como índice kanban por estados con `## series`, `piezas/<slug>.md` por pieza y `series/<slug>.md` por arco, junto al `briefs/` ya fijado por D003— más `.agents/skills/gestionar-piezas/` como gestor, y `editorial.sh` con `mover`, `retirar` y `añadir` como operaciones nuevas del catálogo para las líneas del índice.
 
 - [x] `docs/editorial/README.md` — el índice kanban: cabecera que declara los cinco estados (`idea` → `lista` → `en redacción` → `en revisión` → `publicado`) y la separación de dominio (contenido aquí, producto en `docs/ideas/`), más una sección por estado con una línea por pieza (`- <slug> — <título tentativo>`)
   - Aporta: la bandeja de captura separada de la lista de listo-para-escribir, en un solo mapa
 - [x] `assets/pieza.md` — la plantilla de la pieza: `# <título tentativo>` + `- estado:` por campos (como el brief, D003) + pregunta del lector / ángulo / soporte / próximo paso / notas sueltas, una línea por campo
   - Aporta: el registro mínimo de la investigación materializado como contrato universal, no como prosa
-- [x] `.agents/skills/actualizar-artefactos/assets/editorial.sh` — operación `mover <índice> <estado> <texto>`: localiza la línea que contiene `<texto>` en cualquier sección de estado del índice y la traslada a `## <estado>`; documentada en el SKILL.md del skill de artefactos
-  - Aporta: la única mecánica nueva que el kanban necesita; el alta reusa `añadir-linea` sobre `## idea` y el `estado:` de la pieza es escritura directa
-- [x] `.agents/skills/gestionar-piezas/SKILL.md` — el gestor con cuatro operaciones: capturar (pieza suelta → archivo + línea en `## idea`), idear (lluvia en lote, patrón de `lluvia-de-ideas` sin tocarlo), promover `idea`→`lista` verificando los tres requisitos con confirmación humana, mover (a `en redacción` dando de alta la tarea `contenido` vía `crear-tareas` si no existe; a `en revisión`/`publicado` por informe del ejecutor)
+- [x] `.agents/skills/actualizar-artefactos/assets/editorial.sh` — operaciones `mover`, `retirar` y `añadir` sobre el índice: trasladar una línea entre secciones, retirarla y darla de alta; documentadas en el SKILL.md del skill de artefactos
+  - Aporta: la mecánica de líneas que el kanban necesita (alta, traslado y retirada); el `estado:` de la pieza es escritura directa
+- [x] `.agents/skills/gestionar-piezas/SKILL.md` — el gestor con siete operaciones: capturar (pieza suelta → archivo + línea en `## idea`), idear (lluvia en lote, patrón de `lluvia-de-ideas` sin tocarlo), promover `idea`→`lista` verificando los tres requisitos con confirmación humana, mover (a `en redacción` dando de alta la tarea `contenido` vía `crear-tareas` si no existe; a `en revisión`/`publicado` por informe del ejecutor) y las tres de serie (capturar/convertir, desplegar en piezas, cerrar)
   - Aporta: el gestor del planeador que los tres skills de escritura ya nombran como frontera
-- [x] Migrar la serie MVC: `docs/ideas/007` → `docs/editorial/series/mvc-en-vanilla-js.md` en el formato de serie (pregunta del arco, ángulo, soporte del arco), `estado: propuesta`; la idea origen marcada con `ideas.sh procesada` (en la primera versión fue pieza en `lista`; la enmienda serie/pieza la recondujo a arco)
+- [x] Migrar la serie MVC: `docs/ideas/007` → `docs/editorial/series/mvc-en-vanilla-js.md` en el formato de serie (pregunta del arco, ángulo, soporte del arco), `estado: propuesta`; la idea origen marcada con `ideas.sh procesada`
   - Aporta: el primer arco real del planeador y el ejemplo vivo del formato de serie
 - [x] Ronda de escritura sobre los artefactos nuevos
   - Aporta: convenciones del proyecto
-- [x] `assets/serie.md` + sección `## series` en el índice + campo `- serie:` opcional en `assets/pieza.md` (enmienda: modelo de dos niveles serie/pieza, espejo de épica/tarea)
+- [x] `assets/serie.md` + sección `## series` en el índice + campo `- serie:` opcional en `assets/pieza.md`
   - Aporta: el kanban solo rastrea unidades publicables; el arco agrupa con marco propio y cierre
-- [x] Operación `retirar` en `editorial.sh` + gestor con capturar/convertir serie, desplegar y cerrar + `planear-post` sigue `- serie:` para leer el marco del arco
+- [x] Operaciones `retirar` y `añadir` en `editorial.sh` + gestor con capturar/convertir serie, desplegar y cerrar + `planear-post` sigue `- serie:` para leer el marco del arco
   - Aporta: el ciclo completo de la serie dentro del gestor y la coherencia de briefs entre posts del mismo arco
 
 ## Desviaciones del plan
@@ -90,8 +90,8 @@ El subsistema: `docs/editorial/` como pipeline de nivel 1 —`README.md` como í
 - `check`, `lint`, `format:check`, `build` en verde —(B)
 - El índice tiene los cinco estados canónicos y documenta la separación `docs/ideas/` (producto) / `docs/editorial/` (contenido) —(O)
 - La puerta `idea`→`lista` exige los tres requisitos verificables (pregunta del lector, ángulo, soporte) con confirmación humana —(O)
-- `mover` de `editorial.sh` funciona conductualmente sobre un índice en /tmp —(B)
-- La pieza MVC migrada tiene pregunta + ángulo + soporte y la idea 007 queda marcada `procesada` —(B)
+- `mover`, `retirar` y `añadir` de `editorial.sh` funcionan conductualmente sobre un índice en /tmp —(B)
+- La serie MVC migrada tiene pregunta del arco + ángulo + soporte y la idea 007 queda marcada `procesada` —(B)
 - El gestor delega la mecánica en las capacidades de artefactos y el alta de la tarea `contenido` en `crear-tareas`; no invoca los skills de escritura —(O)
 - El texto no contiene rayas para incisos ni referencias al estado de construcción del sistema —(O)
 - Revisión técnica por subagente aprueba

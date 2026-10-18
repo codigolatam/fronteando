@@ -155,7 +155,7 @@ Emite el valor configurado de `<clave>` por stdout —o el valor por defecto del
 ### Cobertura
 
 - Todas las operaciones tienen al menos un skill consumidor —las publicadas por anticipado no entran en el catálogo: se añaden cuando aparezca su consumidor—.
-- Artefactos del ciclo aún sin operación delegada: `ROADMAP.md` —lectura y escritura directas del consumidor—; la sección `## Borradores` de `propuesta.md` —los borradores se listan y tachan a mano, `promocion.sh` solo la actualiza al promover—; las escrituras de los índices `README.md` de `docs/decisions/` y `docs/lessons/` —sus consultas por disparadores ya las cubre `indice.sh`—; y el índice de `docs/domains/` entero —formato distinto, sin lectura ni escritura delegada—. El registro de experiencias y el changelog están cubiertos por `operar-experiencias` y `operar-changelog`.
+- Artefactos del ciclo aún sin operación delegada: `ROADMAP.md` —lectura y escritura directas del consumidor—; la sección `## Borradores` de `propuesta.md` —los borradores se listan y tachan a mano, `promocion.sh` solo la actualiza al promover—; las escrituras de los índices `README.md` de `docs/decisions/` y `docs/lessons/` —sus consultas por disparadores ya las cubre `indice.sh`—; el índice de `docs/domains/` entero —formato distinto, sin lectura ni escritura delegada—; y las lecturas de `docs/editorial/` —los campos de piezas y series y la lista `## Piezas` son lecturas directas del consumidor; las mutaciones del índice kanban sí las cubre `editorial.sh`—. El registro de experiencias y el changelog están cubiertos por `operar-experiencias` y `operar-changelog`.
 
 ## Finalización
 

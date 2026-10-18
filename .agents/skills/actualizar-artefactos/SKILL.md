@@ -80,7 +80,7 @@ El consumidor delega la acción de dominio; el gestor la expande a las operacion
 
 ## Catálogo de operaciones
 
-Los scripts viven en `assets/` y se invocan como `assets/<script>.sh <objetivo> <operación> [términos]`, donde `<objetivo>` es el artefacto a mutar —el índice, el archivo de tarea, la idea o, en `promocion.sh`, el directorio de la propuesta—. Las referencias `<ref>` y los `<texto>` casan por subcadena con la línea o el encabezado; conviene pasar la ruta del archivo o el encabezado completo para que sean únicas. Las excepciones al casamiento por subcadena: en `tarea.sh` el argumento `<sección>` es el título exacto de la sección, sin el `## `, y en `todo.sh añadir` los nombres `general` y `propuestas` denotan las secciones fijas de la convención.
+Los scripts viven en `assets/` y se invocan como `assets/<script>.sh <objetivo> <operación> [términos]`, donde `<objetivo>` es el artefacto a mutar —el índice, el archivo de tarea, la idea o, en `promocion.sh`, el directorio de la propuesta—. Las referencias `<ref>` y los `<texto>` casan por subcadena con la línea o el encabezado; conviene pasar la ruta del archivo o el encabezado completo para que sean únicas. Las excepciones al casamiento por subcadena: en `tarea.sh` el argumento `<sección>` es el título exacto de la sección, sin el `## `; en `editorial.sh` los argumentos `<estado>` y `<sección>` casan por igualdad exacta con el encabezado `## `; y en `todo.sh añadir` los nombres `general` y `propuestas` denotan las secciones fijas de la convención.
 
 Solo `encabezado` y `promover` emiten un dato por stdout; el resto muta en silencio. El artefacto ausente o la invocación incompleta o inválida terminan con exit `2` —salvo `inicializar`, que exige que el índice no exista— y toda mutación que no puede ejecutarse termina con diagnóstico en stderr y sin escribir.
 
@@ -170,7 +170,7 @@ Mueve la línea `- ` que contiene `<texto>` a la sección `## <estado>` del índ
 
 #### `retirar <texto>`
 
-Elimina la línea `- ` que contiene `<texto>` del índice del planeador. Como en `mover`, `<texto>` debe casar exactamente una línea dentro de las secciones del índice (el preámbulo no cuenta): ítem no localizado o casamiento ambiguo → exit `1`; `<texto>` vacío → exit `2`. Normaliza los blancos tras retirar. Es la operación del cierre de serie y del descarte de piezas.
+Elimina la línea `- ` que contiene `<texto>` del índice del planeador. Como en `mover`, `<texto>` debe casar exactamente una línea dentro de las secciones del índice (el preámbulo no cuenta): ítem no localizado o casamiento ambiguo → exit `1`; `<texto>` vacío → exit `2`. Normaliza los blancos tras retirar. Es la operación del cierre de serie.
 
 #### `añadir <sección> <línea>`
 

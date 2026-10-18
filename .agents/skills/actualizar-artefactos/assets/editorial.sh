@@ -106,16 +106,16 @@ case "$op" in
 
   añadir)
     [ $# -ge 2 ] || uso
-    estado=$1; linea=$2
+    seccion=$1; linea=$2
     [ -n "$linea" ] || uso
     case "$linea" in
       -\ *) ;;
       *) echo "editorial.sh: la línea debe empezar por «- »: «${linea}»" >&2; exit 2 ;;
     esac
-    if LINEA="$linea" awk -v seccion="## $estado" '
+    if LINEA="$linea" awk -v destino="## $seccion" '
       /^## / { dentro = 1 }
       dentro && index($0, "- ") == 1 && $0 == ENVIRON["LINEA"] { dup++ }
-      { l[NR] = $0; if ($0 == seccion) s = NR }
+      { l[NR] = $0; if ($0 == destino) s = NR }
       END {
         if (!s) exit 1
         if (!dup) {
@@ -134,7 +134,7 @@ case "$op" in
       normalizar "$tmp" > "$tmp.n" && mv "$tmp.n" "$tmp"
       mv "$tmp" "$f"
     else
-      echo "editorial.sh: sección ausente en $f: «${estado}»" >&2; exit 1
+      echo "editorial.sh: sección ausente en $f: «${seccion}»" >&2; exit 1
     fi
     ;;
   *)

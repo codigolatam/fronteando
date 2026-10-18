@@ -41,7 +41,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 - `docs/editorial/piezas/<slug>.md`: el archivo de cada pieza, con su formato en `assets/pieza.md`.
 - `docs/editorial/series/<slug>.md`: el archivo de cada serie, con su formato en `assets/serie.md`.
 - `EDITORIAL.md` y el corpus publicado en `site/src/content/articulos/` para idear contra la línea editorial real (pilares, series, precedentes).
-- Las capacidades de artefactos: `consultar-artefactos` para lecturas; `actualizar-artefactos` para las mutaciones (`añadir`, `mover` y `retirar` de `editorial.sh` sobre el índice).
+- Las capacidades de artefactos: `consultar-artefactos` para las lecturas del catálogo (las de piezas y series, campos y `## Piezas`, son lecturas directas); `actualizar-artefactos` para las mutaciones (`añadir`, `mover` y `retirar` de `editorial.sh` sobre el índice).
 - `crear-tareas` para el alta de la tarea `contenido` cuando la pieza entra en redacción.
 
 ## Salida
@@ -78,7 +78,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 
 6. **Verificar los tres requisitos** en el archivo de la pieza: pregunta del lector, ángulo y soporte presentes y con contenido real (no `[por madurar]`). Si falta alguno, madurar en diálogo con el usuario rellenando el archivo; la pieza sigue en `idea` hasta completarse.
 7. **Confirmar con el usuario** la promoción (pasar a `lista` declara intención de escribirla).
-8. **Sobre el sí:** actualizar `- estado: lista` en la pieza (escritura directa) y mover su línea en el índice delegando «mover la línea de la pieza a la sección `lista` del índice del planeador» en `actualizar-artefactos` (operación `mover` de `editorial.sh`).
+8. **Sobre el sí:** actualizar `- estado: lista` en la pieza (escritura directa) y mover su línea en el índice delegando «mover la pieza `<texto>` a la sección `lista` del índice del planeador» en `actualizar-artefactos` (operación `mover` de `editorial.sh`).
 
 ### Mover entre estados
 
