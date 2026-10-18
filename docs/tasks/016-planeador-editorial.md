@@ -25,9 +25,9 @@ Crear el planeador editorial del blog: un pipeline de contenido en `docs/editori
 
 ## Resultado esperado
 
-- `docs/editorial/` con un índice kanban por estados —`idea` → `lista` → `en redacción` → `en revisión` → `publicado`— y un archivo por pieza con pregunta del lector, ángulo, soporte, próximo paso y notas sueltas.
-- `.agents/skills/` con el skill gestor: idear (lluvia de ideas de posts), dar de alta una pieza, promover `idea`→`lista` solo cuando tiene los tres requisitos, y arrancar el flujo de escritura al mover a `en redacción`.
-- La serie MVC registrada como primera pieza del pipeline.
+- `docs/editorial/` con un índice kanban por estados —`idea` → `lista` → `en redacción` → `en revisión` → `publicado`— y un archivo por pieza con pregunta del lector, ángulo, soporte, próximo paso y notas sueltas; más `series/<slug>.md` para los arcos multi-post y una sección `## series` en el índice (la serie es el análogo editorial de la épica: agrupa piezas y tiene cierre propio, sin ocupar el kanban).
+- `.agents/skills/` con el skill gestor: idear (lluvia de ideas de posts), dar de alta una pieza, promover `idea`→`lista` solo cuando tiene los tres requisitos, arrancar el flujo de escritura al mover a `en redacción`, y las operaciones de serie (capturar, desplegar en piezas, cerrar).
+- La serie MVC registrada como primer arco del planeador (`estado: propuesta`, pendiente de desplegar).
 
 ## Criterios de calidad
 
@@ -58,7 +58,7 @@ Crear el planeador editorial del blog: un pipeline de contenido en `docs/editori
 
 ## Conectividad
 
-Conectada. El trabajo crea `docs/editorial/` —`README.md` como índice kanban por estados y `piezas/<slug>.md` por pieza (junto al `briefs/` ya fijado por D003)—, `.agents/skills/gestionar-piezas/` con `SKILL.md` y `assets/pieza.md`, y una operación nueva del catálogo: `mover` sobre el índice (mueve la línea de una pieza entre secciones de estado; no existe op de borrado/movimiento de líneas). El alta es `añadir-linea` sobre `## idea` (ya existe); el campo `estado:` de la pieza es escritura directa (como el brief, D003). La migración de la serie MVC usa `ideas.sh procesada` para marcar la idea origen. La separación `docs/ideas/` (producto) vs `docs/editorial/` (contenido) queda documentada en el propio índice. El movimiento a `en redacción` enlaza la pieza con una tarea `contenido`; los movimientos a `en revisión`/`publicado` los informa el ejecutor general al gestor.
+Conectada. El trabajo crea `docs/editorial/` —`README.md` como índice kanban por estados con sección `## series`, `piezas/<slug>.md` por pieza y `series/<slug>.md` por arco (junto al `briefs/` ya fijado por D003)—, `.agents/skills/gestionar-piezas/` con `SKILL.md`, `assets/pieza.md` y `assets/serie.md`, y las operaciones `mover`, `retirar` y `añadir` de `editorial.sh` sobre el índice (no existían ops de líneas para este artefacto). El campo `estado:` de pieza y serie es escritura directa (como el brief, D003). La migración de la serie MVC usa `ideas.sh procesada` para marcar la idea origen. La separación `docs/ideas/` (producto) vs `docs/editorial/` (contenido) queda documentada en el propio índice. El movimiento a `en redacción` enlaza la pieza con una tarea `contenido`; los movimientos a `en revisión`/`publicado` los informa el ejecutor general al gestor; el despliegue de una serie crea una pieza por post con `- serie:` apuntando al arco, que `planear-post` lee como marco.
 
 ## Plan técnico
 
@@ -72,10 +72,18 @@ El subsistema: `docs/editorial/` como pipeline de nivel 1 —`README.md` como í
   - Aporta: la única mecánica nueva que el kanban necesita; el alta reusa `añadir-linea` sobre `## idea` y el `estado:` de la pieza es escritura directa
 - [x] `.agents/skills/gestionar-piezas/SKILL.md` — el gestor con cuatro operaciones: capturar (pieza suelta → archivo + línea en `## idea`), idear (lluvia en lote, patrón de `lluvia-de-ideas` sin tocarlo), promover `idea`→`lista` verificando los tres requisitos con confirmación humana, mover (a `en redacción` dando de alta la tarea `contenido` vía `crear-tareas` si no existe; a `en revisión`/`publicado` por informe del ejecutor)
   - Aporta: el gestor del planeador que los tres skills de escritura ya nombran como frontera
-- [x] Migrar la serie MVC: `docs/ideas/007` → `docs/editorial/piezas/serie-mvc-en-vanilla-js.md` en el formato de pieza (Problema→pregunta del lector, Qué desbloquea→ángulo, soporte del arco de la serie), a `lista` (los tres requisitos presentes); la idea origen marcada con `ideas.sh procesada`
-  - Aporta: la primera pieza real del pipeline y el ejemplo vivo del formato
+- [x] Migrar la serie MVC: `docs/ideas/007` → `docs/editorial/series/mvc-en-vanilla-js.md` en el formato de serie (pregunta del arco, ángulo, soporte del arco), `estado: propuesta`; la idea origen marcada con `ideas.sh procesada` (en la primera versión fue pieza en `lista`; la enmienda serie/pieza la recondujo a arco)
+  - Aporta: el primer arco real del planeador y el ejemplo vivo del formato de serie
 - [x] Ronda de escritura sobre los artefactos nuevos
   - Aporta: convenciones del proyecto
+- [x] `assets/serie.md` + sección `## series` en el índice + campo `- serie:` opcional en `assets/pieza.md` (enmienda: modelo de dos niveles serie/pieza, espejo de épica/tarea)
+  - Aporta: el kanban solo rastrea unidades publicables; el arco agrupa con marco propio y cierre
+- [x] Operación `retirar` en `editorial.sh` + gestor con capturar/convertir serie, desplegar y cerrar + `planear-post` sigue `- serie:` para leer el marco del arco
+  - Aporta: el ciclo completo de la serie dentro del gestor y la coherencia de briefs entre posts del mismo arco
+
+## Desviaciones del plan
+
+- El plan original modelaba la serie MVC como una pieza única en `lista`. En la revisión de la puerta de ejecución se detectó la costura: el pipeline rastrea unidades publicables (posts) y una serie publica N, así que una pieza-arco haría mentir al kanban. Con aprobación del usuario se adoptó el modelo de dos niveles (serie = épica editorial, pieza = unidad publicable): la pieza MVC migrada se reconvirtió en serie `propuesta` y se añadieron el formato de serie, la sección `## series`, el campo `- serie:` y las operaciones de ciclo de serie en el gestor y el catálogo.
 
 ## Suite de pruebas esperada
 

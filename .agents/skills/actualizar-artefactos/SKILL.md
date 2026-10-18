@@ -75,6 +75,8 @@ El consumidor delega la acción de dominio; el gestor la expande a las operacion
 - «marcar la idea `<ref>` procesada en `<destino>`»: `procesada`.
 - «promover los borradores de la propuesta `<dir>`»: `promover`, resolviendo el directorio de tareas y el índice de la configuración; emite la correspondencia `MM→NNN→ruta` por borrador.
 - «mover la pieza `<texto>` a la sección `<estado>` del índice del planeador»: `mover` de `editorial.sh` sobre `docs/editorial/README.md`.
+- «retirar la línea `<texto>` del índice del planeador»: `retirar` de `editorial.sh` sobre `docs/editorial/README.md`.
+- «añadir la línea `<línea>` a la sección `<sección>` del índice del planeador»: `añadir` de `editorial.sh` sobre `docs/editorial/README.md`; la línea debe venir completa, empezando por `- `.
 
 ## Catálogo de operaciones
 
@@ -165,6 +167,14 @@ La validación precede a cualquier escritura: una dependencia «Borrador MM» no
 #### `mover <estado> <texto>`
 
 Mueve la línea `- ` que contiene `<texto>` a la sección `## <estado>` del índice kanban —al final de la lista de la sección—. `<texto>` debe casar exactamente una línea dentro de las secciones del índice (el preámbulo no cuenta) y la sección destino debe existir: ítem no localizado, casamiento ambiguo o sección ausente → exit `1`; `<texto>` vacío → exit `2`. Idempotente sobre una línea que ya está en la sección destino. Normaliza los blancos tras el movimiento (una línea vacía entre bloques).
+
+#### `retirar <texto>`
+
+Elimina la línea `- ` que contiene `<texto>` del índice del planeador. Como en `mover`, `<texto>` debe casar exactamente una línea dentro de las secciones del índice (el preámbulo no cuenta): ítem no localizado o casamiento ambiguo → exit `1`; `<texto>` vacío → exit `2`. Normaliza los blancos tras retirar. Es la operación del cierre de serie y del descarte de piezas.
+
+#### `añadir <sección> <línea>`
+
+Añade `<línea>` al final de la sección `## <sección>` del índice. La sección debe existir y la línea venir completa, empezando por `- `: sección ausente → exit `1`; línea vacía o sin el prefijo → exit `2`. Idempotente: si la línea exacta ya figura en cualquier sección, no duplica. Normaliza los blancos tras añadir (una línea vacía entre bloques, también tras el encabezado de una sección que estaba vacía). Es la operación de alta de piezas y series.
 
 ### Cobertura
 
