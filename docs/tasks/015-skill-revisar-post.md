@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -89,4 +89,4 @@ El subsistema: el directorio `.agents/skills/revisar-post/` —`SKILL.md`, sin `
 
 - Subagente: 2026-10-17 — Aprueba
 - Usuario (ejecución): 2026-10-18 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-18 — Aprueba
