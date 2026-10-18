@@ -11,4 +11,4 @@
 
 [una línea «- [título del post](../piezas/<slug>.md)» por cada pieza del arco; el despliegue las crea]
 
-[Una línea por campo. La serie es el arco (como la épica lo es de la tarea): no ocupa el kanban porque no es publicable; lo publicable son sus piezas, que nacen en el despliegue con `- serie:` apuntando aquí. El marco de arriba se escribe una vez y las piezas heredan su corte de él. `propuesta` es arco sin decidir; `en curso`, ya desplegada; `cerrada`, con todas las piezas publicadas, y entonces su línea sale del índice.]
+[Una línea por campo. La serie es el arco (como la épica lo es de la tarea): no ocupa el kanban porque no es publicable; lo publicable son sus piezas, que nacen en el despliegue con `- serie:` apuntando aquí. El marco de arriba se escribe una vez y las piezas heredan su corte de él. `propuesta` es arco sin decidir; `en curso`, ya desplegada; `cerrada`, con todas las piezas publicadas, y entonces su línea sale del índice (mientras está activa, la línea del índice lleva el estado como sufijo: `- [título](series/<slug>.md) — <estado>`).]

@@ -88,12 +88,12 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 
 ### Capturar una serie
 
-12. **Directa o por conversión.** Directa: el usuario trae un arco y se dialoga lo mínimo para bajarlo al formato (pregunta del arco, ángulo, soporte); se crea `series/<slug>.md` desde `assets/serie.md` con `estado: propuesta` y se registra la línea `- [<título>](series/<slug>.md)` en `## series` delegando en `actualizar-artefactos`. Conversión: una pieza en `idea` o `lista` resulta multi-post; el archivo migra a `series/` adoptando el formato de serie (la pregunta del lector se convierte en pregunta del arco y se añade la sección `## Piezas`), y su línea del índice se reescribe (delegar «añadir» la línea con la nueva ruta a `series` y «retirar» la antigua).
+12. **Directa o por conversión.** Directa: el usuario trae un arco y se dialoga lo mínimo para bajarlo al formato (pregunta del arco, ángulo, soporte); se crea `series/<slug>.md` desde `assets/serie.md` con `estado: propuesta` y se registra la línea `- [<título>](series/<slug>.md) — propuesta` en `## series` delegando en `actualizar-artefactos` (el sufijo muestra el estado del arco: la sección es lista plana y la posición no lo codifica). Conversión: una pieza en `idea` o `lista` resulta multi-post; el archivo migra a `series/` adoptando el formato de serie (la pregunta del lector se convierte en pregunta del arco y se añade la sección `## Piezas`), y su línea del índice se reescribe (delegar «añadir» la línea con la nueva ruta a `series` y «retirar» la antigua).
 
 ### Desplegar una serie
 
 13. **Decidir el arco en diálogo:** el soporte y el próximo paso de la serie orientan, pero el despliegue decide con el usuario el hilo conductor, el número de posts y el corte de cada uno. Sin arco decidido no hay despliegue.
-14. **Crear cada pieza hija** desde `assets/pieza.md` con `- serie: <slug>` y sus tres campos rebanados del marco del arco (la pregunta del post es un corte de la pregunta del arco); nace `lista` si los tres campos salen completos y el usuario lo confirma, `idea` si no. Registrar cada línea en el índice, escribir la lista `## Piezas` de la serie (escritura directa) y actualizar `estado: en curso`.
+14. **Crear cada pieza hija** desde `assets/pieza.md` con `- serie: <slug>` y sus tres campos rebanados del marco del arco (la pregunta del post es un corte de la pregunta del arco); nace `lista` si los tres campos salen completos y el usuario lo confirma, `idea` si no. Registrar cada línea en el índice, escribir la lista `## Piezas` de la serie (escritura directa), actualizar `estado: en curso` y reescribir el sufijo de la línea del índice a `— en curso` (delegar «añadir» la línea actualizada y «retirar» la anterior).
 
 ### Cerrar una serie
 
