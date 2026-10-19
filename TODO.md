@@ -24,7 +24,7 @@
 - [x] docs/tasks/015-skill-revisar-post.md — skill revisar-post (revisión editorial)
 
 - [x] docs/tasks/016-planeador-editorial.md — planeador editorial (pipeline de contenido)
-- [r] docs/tasks/017-enrutado-tipo-contenido.md — enrutado del tipo contenido en ejecutar-tareas
+- [x] docs/tasks/017-enrutado-tipo-contenido.md — enrutado del tipo contenido en ejecutar-tareas
 - [ ] docs/tasks/018-validar-flujo-con-post-mvc.md — dogfooding: primer post de la serie MVC por el flujo
   - docs/tasks/017-enrutado-tipo-contenido.md
 

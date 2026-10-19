@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -97,5 +97,5 @@ Verificación: recorrido en seco sobre la 018 como ejemplar (sin `## Encuadre` �
 ## Revisión
 
 - Subagente: 2026-10-18 — Aprueba
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-18 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
