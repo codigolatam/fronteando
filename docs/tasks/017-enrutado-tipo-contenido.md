@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -58,3 +58,44 @@ Registrar el tipo de tarea `contenido` en `ejecutar-tareas` con su sub-flujo pro
 - `Producto:` sin documentación de producto aplicable.
 - `Lecciones:` `docs/lessons/checks-de-ci-independientes.md` — las puertas del ciclo general no se negocian.
 - `Decisiones:` sin decisiones aplicables.
+
+## Conectividad
+
+Conectada. El trabajo toca `.agents/skills/ejecutar-tareas/SKILL.md` —el registro «Enrutado por tipo» (paso 5) y los puntos del ciclo que el tipo condiciona: la revisión (paso 9) y los informes de estado de la pieza (pasos 8 y 18)—. Todo lo asumido existe: la operación `secciones` de `consultar-artefactos` emite los encabezados `##` de la tarea y cubre la consulta de encuadre (`## Encuadre` como señal de planeación completa del tipo `contenido`, D003) sin operación nueva; los tres especialistas (`planear-post`, `redactar-post`, `revisar-post`) existen con sus contratos de entrada; `gestionar-piezas` ya declara que el ejecutor le informa los movimientos a `en revisión` y `publicado`; y el campo `## Tipo` es lectura directa del archivo. La tarea 018 ya declara `Tipo: contenido` y es el primer ejemplar real del enrutado.
+
+## Plan técnico
+
+`ejecutar-tareas` es un orquestador agnóstico de dominio: lee el `## Tipo` de la tarea y delega en el especialista registrado en «Enrutado por tipo». El sub-flujo de `desarrollo` tiene dos puntos de entrada según el estado de planeación (`planear-tarea`/`desarrollar-tarea`) y su propia revisión (`revisar-implementacion`). El tipo `contenido` necesita el mismo tratamiento con sus especialistas editoriales.
+
+- [x] Registrar el tipo `contenido` en «Enrutado por tipo» con sus dos puntos de entrada: sin `## Encuadre` → `planear-post` (y si el encuadre termina con brief aprobado, la misma iteración continúa con `redactar-post`); con `## Encuadre` → `redactar-post` directamente
+  - Aporta: el espejo exacto del enrutado de `desarrollo` —el orquestador elige el punto de entrada por el estado registrado, no por conocimiento del dominio—
+  - Contexto: la consulta de planeación del tipo es «las secciones de la tarea» (`secciones`, ya existe —`## Encuadre` presente es la señal, D003); la validación real del `estado` del brief la hacen los especialistas, que derivan hacia atrás si está inconsistente. No hace falta operación nueva en `consultar-artefactos`
+- [x] Adaptar el paso 9 para que la revisión de una tarea `contenido` invoque `revisar-post` en lugar del subagente genérico
+  - Aporta: la puerta editorial sustituye a la técnica (verificación contra `EDITORIAL.md` y brief, código ejecutado); su «aprueba» retira el `draft` —equivalente de «listo para publicar» (D004)
+- [x] Declarar en la entrada del registro el informe del estado de la pieza: si la tarea enlaza una pieza del planeador en su `## Entrada`, el ejecutor informa a `gestionar-piezas` —`en revisión` cuando la tarea pasa a revisión (paso 8) y `publicado` tras el merge (paso 18)
+  - Aporta: el kanban editorial refleja el avance real; el ejecutor solo informa, el gestor materializa (su paso 10 ya lo espera)
+  - Contexto: condicionado a la pieza enlazada —una tarea `contenido` sin pieza no informa nada—
+
+## Suite de pruebas esperada
+
+- Una tarea `contenido` sin `## Encuadre` es enrutada a `planear-post` —del objetivo: encuadre como mitad de planeación— (O)
+- Una tarea `contenido` con `## Encuadre` es enrutada a `redactar-post` directamente —del objetivo— (O)
+- El encuadre que termina aprobado continúa en redacción dentro de la misma iteración —del criterio «puertas firmes»; espejo del comportamiento de `desarrollo`— (B)
+- La revisión de una tarea `contenido` la hace `revisar-post`, no el subagente genérico ni `revisar-implementacion` —del objetivo— (I)
+- Una tarea `contenido` no dispara los sensores de dominio/producto del paso 14 (condicionados al sub-flujo de desarrollo); `mantener-changelog` sí corre —del criterio de puertas generales intactas— (B)
+- La pieza enlazada pasa a `en revisión` con la tarea y a `publicado` tras el merge —del contrato con `gestionar-piezas`— (M)
+- Una tarea `contenido` sin pieza enlazada en `## Entrada` no informa nada al gestor —(Z)
+- Regresión: el enrutado de `desarrollo` y `mantenimiento (refactoring)` no cambia —del criterio de no romper tipos existentes—
+
+Verificación: recorrido en seco sobre la 018 como ejemplar (sin `## Encuadre` → aterrizaría en `planear-post`), más `check`/`lint`/`format:check`/`build` en verde.
+
+## Desviaciones del plan
+
+- La revisión técnica movió la declaración del revisor al registro «Enrutado por tipo» (cada entrada nombra su especialista) y dejó el paso 9 genérico, en lugar de condicionar el paso por tipo como planeaba la acción 2. Motivo: el preámbulo del registro prometía que añadir un tipo solo exige registrarlo, y la revisión puntual demostró lo contrario. Decisión: adoptar la forma general —el registro es el único sitio que un tipo nuevo toca—.
+- El informe `publicado` al gestor se ancló al paquete de cierre y no «tras la fusión» como decía el plan. Motivo: la escritura posterior al merge no tiene vehículo de commit (master protegido, una rama por tarea); con el paquete de cierre viaja en el commit del cierre y se hace efectiva con la fusión. Decisión: corregir la redacción del registro.
+
+## Revisión
+
+- Subagente: 2026-10-18 — Aprueba
+- Usuario (ejecución): 2026-10-18 — Aprueba
+- Usuario (cierre): 2026-10-19 — Aprueba
