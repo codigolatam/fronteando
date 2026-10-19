@@ -23,7 +23,7 @@
 
 - [x] docs/tasks/015-skill-revisar-post.md — skill revisar-post (revisión editorial)
 
-- [ ] docs/tasks/016-planeador-editorial.md — planeador editorial (pipeline de contenido)
+- [x] docs/tasks/016-planeador-editorial.md — planeador editorial (pipeline de contenido)
 - [ ] docs/tasks/017-enrutado-tipo-contenido.md — enrutado del tipo contenido en ejecutar-tareas
   - docs/tasks/013-skill-planear-post.md
   - docs/tasks/014-skill-redactar-post.md

@@ -111,3 +111,17 @@
   Obtenido: assets/post.md describía en sus placeholders la anatomía del tutorial explicativo (gancho con tensión, resultado primero, límites con sección propia) — el formato del primer post, sesgando los futuros
   Corrección: la plantilla conserva solo lo universal — frontmatter, `<!--more-->` y placeholders neutros —; la anatomía la gobierna la guía y el orden concreto el brief
   Estado: consolidada
+
+- Id: 20261018T191223
+  Tarea: docs/tasks/016-planeador-editorial.md
+  Esperado: la description del skill declara su razón de ser —el para qué— como hacen las hermanas del catálogo
+  Obtenido: la description de gestionar-piezas enumeraba las operaciones del procedimiento (captura, promueve, mueve) en lugar del propósito
+  Corrección: la description dice para qué existe el skill —vista única del contenido, captura sin compromiso, escritura solo de piezas listas— y el procedimiento vive en el cuerpo
+  Estado: consolidada
+
+- Id: 20261018T191224
+  Tarea: docs/tasks/016-planeador-editorial.md
+  Esperado: el índice muestra de un vistazo dónde está cada elemento
+  Obtenido: las líneas de «## series» eran punteros desnudos — la posición en lista plana no codifica el estado del arco, a diferencia de las secciones kanban
+  Corrección: la línea del índice lleva como sufijo aquello que la posición no codifica — «- [título](series/<slug>.md) — <estado>»
+  Estado: consolidada

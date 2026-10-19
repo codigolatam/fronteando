@@ -3,6 +3,7 @@
 > **Tipo:** idea de contenido — serie (complejidad media-alta)
 > **Fecha:** 2026-10
 > **Orden sugerido:** 2 de 2 (contenido técnico) — la serie es la línea editorial duradera; arranca cuando el post inaugural ya probó el formato.
+> **Procesada en:** docs/editorial/series/mvc-en-vanilla-js.md
 
 ## Problema
 

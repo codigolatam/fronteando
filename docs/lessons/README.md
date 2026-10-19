@@ -64,3 +64,11 @@
 - lineas-completas-en-artefactos.md
   - Disparadores: artefacto, checklist, línea, formato, plantilla, brief, markdown, marcar-item, lista anidada
   - Resumen: en artefactos con ítems accionables —checklists, campos enumerados, beats— una línea por ítem y enumeraciones como listas anidadas; las operaciones mecánicas casan por línea
+
+- descripciones-de-skills.md
+  - Disparadores: skill, SKILL.md, description, frontmatter, sinónimos, cuándo usar
+  - Resumen: la description del frontmatter declara la razón de ser del skill (el para qué), no el procedimiento, que vive en el cuerpo
+
+- indices-de-artefactos.md
+  - Disparadores: índice, README, kanban, línea, sección, estado, sufijo, planeador
+  - Resumen: la línea del índice lleva como dato aquello que la posición no codifica; si la sección es el estado, la línea basta como puntero

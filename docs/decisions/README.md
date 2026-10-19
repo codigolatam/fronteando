@@ -28,3 +28,7 @@
 - D004-el-post-nace-borrador-y-la-revision-lo-publica.md
   - Disparadores: draft, borrador, revisar-post, redactar-post, publicación, post, frontmatter, merge, editorial
   - Resumen: el post nace con draft: true y lo conserva hasta que revisar-post aprueba la revisión editorial; la aprobación equivale a listo para publicar y el merge publica
+
+- D005-serie-como-epica-editorial.md
+  - Disparadores: serie, pieza, planeador, editorial, kanban, arco, épica, docs/editorial, series
+  - Resumen: la serie es el análogo editorial de la épica (marco propio, ciclo propuesta→en curso→cerrada, fuera del kanban) y la pieza es la unidad publicable; el índice muestra el estado del arco como sufijo de la línea
