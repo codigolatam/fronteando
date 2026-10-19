@@ -98,4 +98,4 @@ Verificación: recorrido en seco sobre la 018 como ejemplar (sin `## Encuadre` �
 
 - Subagente: 2026-10-18 — Aprueba
 - Usuario (ejecución): 2026-10-18 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-19 — Aprueba
