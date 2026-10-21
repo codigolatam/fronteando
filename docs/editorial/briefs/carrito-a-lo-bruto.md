@@ -67,17 +67,17 @@ document.body.innerHTML = `<ul id="carrito"><li>Teclado <button>Quitar</button><
 
 ## Checklist de publicación
 
-- [ ] El gancho planta una tensión y la resuelve dentro del previo
-- [ ] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
-- [ ] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal
-- [ ] `description` enuncia la promesa en una frase, sin adjetivos valorativos
-- [ ] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
-- [ ] `date` con la hora real del commit o del merge
-- [ ] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
-- [ ] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
-- [ ] Los límites honestos tienen sección propia; el cierre abre una puerta
-- [ ] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
-- [ ] El carrito espagueti es código honesto, no un hombre de paja: la resistencia del cambio se demuestra, no se declara
-- [ ] El bug del foco (el input de cantidad destruido por el re-render) se reproduce y se muestra
-- [ ] Ninguna separación se adelanta: el post termina con el enredo nombrado, no con el arreglo
-- [ ] El enlace al post del mini-store aparece donde el hilo lo pide, sin forzarlo
+- [x] El gancho planta una tensión y la resuelve dentro del previo
+- [x] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
+- [x] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal
+- [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos
+- [x] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
+- [x] `date` con la hora real del commit o del merge
+- [x] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
+- [x] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
+- [x] Los límites honestos tienen sección propia; el cierre abre una puerta
+- [x] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
+- [x] El carrito espagueti es código honesto, no un hombre de paja: la resistencia del cambio se demuestra, no se declara
+- [x] El bug del foco (el input de cantidad destruido por el re-render) se reproduce y se muestra
+- [x] Ninguna separación se adelanta: el post termina con el enredo nombrado, no con el arreglo
+- [x] El enlace al post del mini-store aparece donde el hilo lo pide, sin forzarlo
