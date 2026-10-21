@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -20,6 +20,7 @@ Escribir y publicar el primer capítulo de la serie MVC en vanilla JS usando el 
 
 - El flujo de escritura completo enrutado (tareas 012–017): `EDITORIAL.md`, `planear-post`, `redactar-post`, `revisar-post`, planeador editorial y el tipo `contenido`.
 - La serie MVC en `docs/editorial/series/mvc-en-vanilla-js.md` — en `propuesta`, migrada por la tarea 016; su despliegue en piezas es el primer paso de esta tarea.
+- La pieza del capítulo 1: `docs/editorial/piezas/carrito-a-lo-bruto.md` — nacida del despliegue de la serie; es la que esta tarea lleva por el pipeline.
 - El post inaugural publicado como precedente de voz y de cierre: «la serie de patrones» que el mini-store prometió.
 
 ## Resultado esperado

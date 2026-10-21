@@ -10,7 +10,14 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## lista
 
+- [El Modelo: el estado que notifica](piezas/mvc-modelo.md)
+- [La Vista: el render como función del estado](piezas/mvc-vista.md)
+- [El Controlador: cerrar el ciclo](piezas/mvc-controlador.md)
+- [Los límites del MVC a mano](piezas/mvc-limites.md)
+
 ## en redacción
+
+- [El carrito a lo bruto: construir un componente sin patrón](piezas/carrito-a-lo-bruto.md)
 
 ## en revisión
 
@@ -20,4 +27,5 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## series
 
-- [Serie MVC en vanilla JS](series/mvc-en-vanilla-js.md) — propuesta
+- [Serie MVC en vanilla JS](series/mvc-en-vanilla-js.md) — en curso
+

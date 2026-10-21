@@ -25,7 +25,6 @@
 
 - [x] docs/tasks/016-planeador-editorial.md — planeador editorial (pipeline de contenido)
 - [x] docs/tasks/017-enrutado-tipo-contenido.md — enrutado del tipo contenido en ejecutar-tareas
-- [ ] docs/tasks/018-validar-flujo-con-post-mvc.md — dogfooding: primer post de la serie MVC por el flujo
-  - docs/tasks/017-enrutado-tipo-contenido.md
+- [~] docs/tasks/018-validar-flujo-con-post-mvc.md — dogfooding: primer post de la serie MVC por el flujo
 
 ## Propuestas en revisión
