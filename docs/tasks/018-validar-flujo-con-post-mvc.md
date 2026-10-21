@@ -59,3 +59,8 @@ Escribir y publicar el primer capítulo de la serie MVC en vanilla JS usando el 
 - `Producto:` sin documentación de producto aplicable.
 - `Lecciones:` `docs/lessons/flujo-de-escritura.md`, `docs/lessons/previos-de-articulos.md`, `docs/lessons/fechas-de-publicacion.md` — las prácticas que el flujo ya codifica.
 - `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el previo sale del cuerpo.
+
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/carrito-a-lo-bruto.md` — aprobado 2026-10-21
+- **Promesa:** «después de leer esto, el lector podrá diagnosticar el enredo de un componente sin patrón —qué tres cosas se mezclaron y por qué un cambio pequeño se vuelve caro—»
