@@ -52,6 +52,8 @@ document.body.innerHTML = `<ul id="carrito"><li>Teclado <button>Quitar</button><
 
 **El cambio que resiste.** Petición: que la cantidad de cada ítem se pueda editar en línea. La resistencia se demuestra sola —la cantidad pasa a vivir en tres sitios (el array de ítems, el `value` del input y el texto del `<li>`); el total hay que recalcularlo en un sitio más; y regenerar la lista mientras el usuario edita destruye el input y su foco: un bug reproducible, no una molestia abstracta.
 
+**Referencias del género.** `docs/research/2026-10-referencias-mvc-vanilla-js.md` caracteriza el género «MVC en vanilla JS»: sus convenciones estables son justificación anti-framework, todo app, construcción incremental por clases y caveat de boilerplate. El capítulo rompe dos a sabiendas —ejemplo fuera de la todo app y el problema antes que el patrón— y mantiene las dos que ya son de la casa (resultado primero, límites honestos). Imprescindibles para capítulos siguientes: Rascia (tutorial incremental) y Stearns (el modelo que emite eventos, materia del capítulo 2).
+
 **Origen del MVC, si el post lo menciona.** Trygve Reenskaug lo concibió en Xerox PARC en 1978–79; la nota «Models-Views-Controllers» está fechada el 10 de diciembre de 1979 (fuente: `http://www.ifi.uio.no/~trygver/1979/mvc-2/1979-12-MVC.pdf`). Matiz por si sale: en la formulación original la Vista también atendía la entrada relevante para sí misma; la versión de Smalltalk-80 que popularizó el patrón es de Jim Althoff.
 
 ## Borrador del outline

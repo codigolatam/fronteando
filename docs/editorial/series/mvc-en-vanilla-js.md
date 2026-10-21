@@ -5,7 +5,7 @@
 - **Ángulo:** MVC construido pieza a pieza a mano en JavaScript vanilla, con la justificación de cada separación hecha visible (el patrón que el lector asocia a backends o a frameworks); la comprensión por contraste explica qué problema resolvieron después la reactividad y los signals.
 - **Soporte:** un componente real que el lector lleva del espagueti al MVC completo (modelo con notificación, vista como función del estado, controlador cerrando el ciclo); el arco deja en cada post una pieza funcional y una pregunta abierta, y cierra enlazando de vuelta al post del store reactivo.
 - **Próximo paso:** escribir el capítulo 1 (carrito a lo bruto) — pieza enlazada desde la tarea 018; el resto del arco espera en `lista`.
-- **Notas sueltas:** hermana del post del mini-store ya publicado (este enseñó cómo se sincroniza el estado con la vista; la serie enseña cómo se estructura todo lo demás); primera serie del blog como formato editorial; migra de `docs/ideas/007`.
+- **Notas sueltas:** hermana del post del mini-store ya publicado (este enseñó cómo se sincroniza el estado con la vista; la serie enseña cómo se estructura todo lo demás); primera serie del blog como formato editorial; migra de `docs/ideas/007`; las referencias del género están en `docs/research/2026-10-referencias-mvc-vanilla-js.md` (Rascia y Stearns como lecturas imprescindibles; el caveat de boilerplate es tropo del género que el capítulo 5 puede usar).
 
 ## Piezas
 
