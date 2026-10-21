@@ -5,7 +5,6 @@ date: 2026-10-21T19:56:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
-draft: true
 ---
 
 Añade productos, quita productos, el total cuadra: el carrito de la
@@ -16,8 +15,8 @@ de lo que debería.
 
 <!--more-->
 
-Vamos a construir ese carrito a lo bruto —catálogo, añadir, quitar y
-total, sin patrón de por medio— y después le vamos a pedir el cambio
+Vamos a construir ese carrito a lo bruto (catálogo, añadir, quitar y
+total, sin patrón de por medio) y después le vamos a pedir el cambio
 más normal del mundo: que la cantidad de cada producto se pueda editar
 en la propia lista. El código se va a resistir, y la resistencia tiene
 nombre: al terminar podrás decir con precisión qué tres cosas se
@@ -79,8 +78,8 @@ dice 3 y el total 250 €. Quitando el teclado quedan dos líneas y 205
 ## Un componente como otro cualquiera
 
 Nadie escribe este código con mala intención. Es el resultado natural
-de ir resolviendo lo que la pantalla pide, una línea cada vez —y sin
-embargo, si lo lees con atención, las decisiones ya están tomadas.
+de ir resolviendo lo que la pantalla pide, una línea cada vez (y sin
+embargo, si lo lees con atención, las decisiones ya están tomadas).
 
 El estado está repartido. `carrito` guarda los productos, `total` y
 `unidades` guardan dos números, y el propio DOM guarda otro trozo de
@@ -129,10 +128,10 @@ en tres sitios a la vez (el array, el `value` del input y el texto del
 
 Pero lo peor no es el trabajo extra: es que funciona y aun así rompe
 cosas. Ejecutado de verdad, cambiar la cantidad del teclado a 3
-actualiza todo correctamente —total 135 €, contador 3, subtotal 135
-€— y en ese mismo instante el botón «Quitar» de esa línea deja de
+actualiza todo correctamente (total 135 €, contador 3, subtotal 135
+€) y en ese mismo instante el botón «Quitar» de esa línea deja de
 funcionar: el `innerHTML` dejó el botón viejo fuera del DOM y el nuevo
-nació sin manejadores. El input que el usuario acababa de usar corrió
+nació sin manejadores. El input que acababas de usar corrió
 la misma suerte. La pantalla miente: parece un carrito normal y es un
 carrito con un botón muerto.
 
@@ -147,7 +146,7 @@ las demás. Cada actualización debe acordarse de todas las copias; la
 que se olvide es el bug de mañana.
 
 **Los manejadores deciden de todo.** Cada evento ejecuta directamente
-sus consecuencias —mutar estado, repintar, cablear— sin pasar por
+sus consecuencias (mutar estado, repintar, cablear) sin pasar por
 ningún sitio común. Añadir una vía nueva (un input, un cupón, un
 contador más) significa repetir la cascada en un sitio más.
 
@@ -169,25 +168,26 @@ tonto cuesta una tarde.
 
 Este capítulo se queda en el diagnóstico a propósito: no hemos
 separado nada, y el carrito del final sigue tan enredado como el del
-principio. Desenredarlo —quién guarda el estado, quién escucha, quién
-pinta— es exactamente el trabajo de los capítulos que siguen.
+principio. Desenredarlo (quién guarda el estado, quién escucha, quién
+pinta) es exactamente el trabajo de los capítulos que siguen.
 
 Tampoco el ejemplo es un espantapájaros: es el código que escribe una
 persona razonable con prisa razonable, y sus síntomas son los de un
 componente real pequeño. Uno más grande no introduce problemas nuevos;
 hace que estos cuesten más.
 
-Y aunque el patrón que falta aquí tiene nombre y décadas —Modelo,
-Vista y Controlador, que Trygve Reenskaug concibió en Xerox PARC
-allá por 1979—, conocerlo de nombre no te dice dónde cortar tu
+Y aunque el patrón que falta aquí tiene nombre y décadas (Modelo,
+Vista y Controlador, que [Trygve Reenskaug concibió en Xerox
+PARC](http://www.ifi.uio.no/~trygver/1979/mvc-2/1979-12-MVC.pdf)
+allá por 1979), conocerlo de nombre no te dice dónde cortar tu
 componente. Por eso la serie lo construye pieza a pieza en lugar de
 copiarlo de un diagrama.
 
 ## El punto
 
 El espagueti no es un código roto: es un código sin reparto. Tres
-preguntas quedan flotando sobre el carrito —quién guarda el estado,
-quién decide lo que pasa y quién pinta— y el enredo es lo
+preguntas quedan flotando sobre el carrito (quién guarda el estado,
+quién decide lo que pasa y quién pinta) y el enredo es lo
 que ocurre cuando todas se responden con «donde caiga». La siguiente
 parada de la serie responde la primera: el Modelo, el estado que por
 fin tiene un sitio.
