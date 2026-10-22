@@ -33,7 +33,7 @@ es pequeño y el framework parece exceso:
 <ul id="catalogo"></ul>
 <h3>Tu carrito (<span id="contador">0</span>)</h3>
 <ul id="carrito"></ul>
-<p>Total: <span id="total">0 €</span></p>
+<p>Total: <span id="total">$0</span></p>
 ```
 
 ```js
@@ -48,23 +48,23 @@ let unidades = 0;
 
 productos.forEach((p) => {
   const li = document.createElement("li");
-  li.innerHTML = `${p.nombre} — ${p.precio} € <button>Añadir</button>`;
+  li.innerHTML = `${p.nombre} — $${p.precio} <button>Añadir</button>`;
   li.querySelector("button").addEventListener("click", () => {
     carrito.push({ ...p, cantidad: 1 });
     const item = document.createElement("li");
-    item.innerHTML = `${p.nombre} x1 — ${p.precio} € <button>Quitar</button>`;
+    item.innerHTML = `${p.nombre} x1 — $${p.precio} <button>Quitar</button>`;
     item.querySelector("button").addEventListener("click", () => {
       item.remove();
       total -= p.precio;
       unidades -= 1;
-      document.querySelector("#total").textContent = `${total} €`;
+      document.querySelector("#total").textContent = `$${total}`;
       document.querySelector("#contador").textContent = unidades;
       carrito.splice(carrito.indexOf(carrito.find((c) => c.id === p.id)), 1);
     });
     document.querySelector("#carrito").appendChild(item);
     total += p.precio;
     unidades += 1;
-    document.querySelector("#total").textContent = `${total} €`;
+    document.querySelector("#total").textContent = `$${total}`;
     document.querySelector("#contador").textContent = unidades;
   });
   document.querySelector("#catalogo").appendChild(li);
@@ -72,8 +72,8 @@ productos.forEach((p) => {
 ```
 
 Pulsando los tres «Añadir» la lista muestra tres líneas, el contador
-dice 3 y el total 250 €. Quitando el teclado quedan dos líneas y 205
-€. Nada que reprochar: el componente hace lo que promete.
+dice 3 y el total $250. Quitando el teclado quedan dos líneas y
+$205. Nada que reprochar: el componente hace lo que promete.
 
 ## Un componente como otro cualquiera
 
@@ -109,17 +109,17 @@ manejador quedan así:
 
 ```js
 // extracto: dentro del manejador de «Añadir», el <li> cambia
-item.innerHTML = `${p.nombre} x<input type="number" value="1" min="1"> — <span class="subtotal">${p.precio} €</span> <button>Quitar</button>`;
+item.innerHTML = `${p.nombre} x<input type="number" value="1" min="1"> — <span class="subtotal">$${p.precio}</span> <button>Quitar</button>`;
 item.querySelector("input").addEventListener("change", (e) => {
   const cantidad = Number(e.target.value);
   const i = carrito.findIndex((c) => c.id === p.id);
   carrito[i].cantidad = cantidad;
   total = carrito.reduce((s, c) => s + c.precio * c.cantidad, 0);
   unidades = carrito.reduce((s, c) => s + c.cantidad, 0);
-  document.querySelector("#total").textContent = `${total} €`;
+  document.querySelector("#total").textContent = `$${total}`;
   document.querySelector("#contador").textContent = unidades;
   // y para que el <li> enseñe el subtotal nuevo, lo re-renderizamos
-  item.innerHTML = `${p.nombre} x<input type="number" value="${cantidad}" min="1"> — <span class="subtotal">${p.precio * cantidad} €</span> <button>Quitar</button>`;
+  item.innerHTML = `${p.nombre} x<input type="number" value="${cantidad}" min="1"> — <span class="subtotal">$${p.precio * cantidad}</span> <button>Quitar</button>`;
 });
 ```
 
@@ -131,8 +131,8 @@ en tres sitios a la vez (el array, el `value` del input y el texto del
 
 Pero lo peor no es el trabajo extra: es que funciona y aun así rompe
 cosas. Ejecutado de verdad, cambiar la cantidad del teclado a 3
-actualiza todo correctamente (total 135 €, contador 3, subtotal 135
-€) y en ese mismo instante el botón «Quitar» de esa línea deja de
+actualiza todo correctamente (total $135, contador 3, subtotal
+$135) y en ese mismo instante el botón «Quitar» de esa línea deja de
 funcionar: el `innerHTML` dejó el botón viejo fuera del DOM y el nuevo
 nació sin manejadores. El input que acababas de usar corrió
 la misma suerte: nodo nuevo, foco perdido a mitad de la edición. La
