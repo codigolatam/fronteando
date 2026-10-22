@@ -86,7 +86,10 @@ El estado está repartido. `carrito` guarda los productos, `total` y
 la verdad: cada `<li>` lleva el nombre, la cantidad y el subtotal
 soldados en su texto. ¿Cuántos teclados hay en el carrito? Depende de
 a quién le preguntes: el array sabe una cosa, el `<li>` otra y el
-contador otra. Mientras coincidan, nadie lo nota.
+contador otra. Mientras coincidan, nadie lo nota. Y de las tres
+copias, las que viven en el DOM son las traicioneras: no salen en un
+`console.log` como el array, pero son las que el usuario tiene
+delante.
 
 Los manejadores tocan de todo. El de «Añadir» empuja al array, crea un
 nodo, le cablea otro manejador y actualiza dos `<span>`; el de
@@ -132,8 +135,9 @@ actualiza todo correctamente (total 135 €, contador 3, subtotal 135
 €) y en ese mismo instante el botón «Quitar» de esa línea deja de
 funcionar: el `innerHTML` dejó el botón viejo fuera del DOM y el nuevo
 nació sin manejadores. El input que acababas de usar corrió
-la misma suerte. La pantalla miente: parece un carrito normal y es un
-carrito con un botón muerto.
+la misma suerte: nodo nuevo, foco perdido a mitad de la edición. La
+pantalla miente: parece un carrito normal y es un carrito con un
+botón muerto y un campo que ya no escucha.
 
 ## El diagnóstico: tres cosas enredadas
 
@@ -174,7 +178,21 @@ pinta) es exactamente el trabajo de los capítulos que siguen.
 Tampoco el ejemplo es un espantapájaros: es el código que escribe una
 persona razonable con prisa razonable, y sus síntomas son los de un
 componente real pequeño. Uno más grande no introduce problemas nuevos;
-hace que estos cuesten más.
+hace que estos cuesten más. Y la versión corta también es verdad: para
+un catálogo de tres productos, meter un patrón sería sobre-ingeniería
+y este código la cantidad justa; la trampa es que el enredo no se
+declara en ningún sitio, solo aparece, como acaba de pasar, cuando
+llega el cambio normal.
+
+Habrá quien ya esté pensando en los escapes de manual: delegar los
+eventos en el `<ul>` padre (que nunca se regenera y por tanto nunca
+pierde sus manejadores) o tocar solo el trozo que cambia (un
+`textContent` en el `.subtotal` en lugar de rehacer el `<li>`
+entero). Los dos
+funcionan, y ninguno desenreda nada: son dos líneas más de disciplina
+que hay que acordarse de mantener, aplicadas a un síntoma de tres. El
+carrito con esos parches sigue sin dueño para su estado ni sitio
+común para sus decisiones.
 
 Y aunque el patrón que falta aquí tiene nombre y décadas (Modelo,
 Vista y Controlador, que [Trygve Reenskaug concibió en Xerox
@@ -185,9 +203,11 @@ copiarlo de un diagrama.
 
 ## El punto
 
-El espagueti no es un código roto: es un código sin reparto. Tres
-preguntas quedan flotando sobre el carrito (quién guarda el estado,
-quién decide lo que pasa y quién pinta) y el enredo es lo
+El espagueti no es un código roto: es un código sin reparto. Míralo
+al revés de cómo debería ser: el estado se escribe en la pantalla, la
+pantalla se lee como estado y los eventos deciden y repintan a la
+vez. Tres preguntas quedan flotando sobre el carrito (quién guarda
+el estado, quién decide lo que pasa y quién pinta) y el enredo es lo
 que ocurre cuando todas se responden con «donde caiga». La siguiente
 parada de la serie responde la primera: el Modelo, el estado que por
 fin tiene un sitio.
