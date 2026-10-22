@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -65,3 +65,8 @@ Escribir y publicar el primer capítulo de la serie MVC en vanilla JS usando el 
 
 - **Brief:** `docs/editorial/briefs/carrito-a-lo-bruto.md` — aprobado 2026-10-21
 - **Promesa:** «después de leer esto, el lector podrá diagnosticar el enredo de un componente sin patrón —qué tres cosas se mezclaron y por qué un cambio pequeño se vuelve caro—»
+
+## Revisión
+
+- Subagente: 2026-10-21 — Aprueba
+

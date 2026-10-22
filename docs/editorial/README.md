@@ -17,9 +17,9 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## en redacción
 
-- [El carrito a lo bruto: construir un componente sin patrón](piezas/carrito-a-lo-bruto.md)
-
 ## en revisión
+
+- [El carrito a lo bruto: construir un componente sin patrón](piezas/carrito-a-lo-bruto.md)
 
 ## publicado
 

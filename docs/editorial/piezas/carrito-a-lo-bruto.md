@@ -1,6 +1,6 @@
 # El carrito a lo bruto: construir un componente sin patrón
 
-- estado: en redacción
+- estado: en revisión
 - serie: mvc-en-vanilla-js
 - **Pregunta del lector:** ¿por qué un componente sin framework que funcionaba ayer se vuelve intocable en cuanto crece?
 - **Ángulo:** el dolor del espagueti se demuestra, no se declara — se construye el carrito a lo bruto, se le pide un cambio legítimo y el código se resiste; el enredo (estado, eventos y DOM) queda diagnosticado con nombre propio.
