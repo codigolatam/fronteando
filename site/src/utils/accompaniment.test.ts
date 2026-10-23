@@ -38,92 +38,92 @@ const withPauses = [
   "Fin.",
 ].join("\n");
 
-describe("protocolOf (CU-1)", () => {
-  it("composes common protocol + ficha + pauses (O)", () => {
-    const out = protocolOf(
-      article({
-        body: withPauses,
-        data: { agente: declared, nivel: "intermedio" },
-      }),
-    );
-    expect(out).toContain("# Lectura acompañada");
-    expect(out).toContain("## Ficha del artículo");
-    expect(out).toContain("Tema: un carrito construido sin patrón");
-    expect(out).toContain("Nivel: intermedio");
-    expect(out).toContain("Prerequisitos: javascript básico, DOM");
-    expect(out).toContain("Pausas:\n1. Verifica");
+describe("protocolOf", () => {
+  describe("when the article declares accompaniment", () => {
+    it("composes the common protocol, the article card and the pauses", () => {
+      const out = protocolOf(
+        article({
+          body: withPauses,
+          data: { agente: declared, nivel: "intermedio" },
+        }),
+      );
+      expect(out).toContain("# Lectura acompañada");
+      expect(out).toContain("## Ficha del artículo");
+      expect(out).toContain("Tema: un carrito construido sin patrón");
+      expect(out).toContain("Nivel: intermedio");
+      expect(out).toContain("Prerequisitos: javascript básico, DOM");
+      expect(out).toContain("Pausas:\n1. Verifica");
+    });
+
+    it("numbers the pauses in body order", () => {
+      const out = protocolOf(
+        article({ body: withPauses, data: { agente: declared } }),
+      );
+      const i1 = out!.indexOf("1. Verifica que puedas explicar el estado");
+      const i2 = out!.indexOf("2. Verifica por qué cada cambio sale más caro");
+      expect(i1).toBeGreaterThan(-1);
+      expect(i2).toBeGreaterThan(i1);
+    });
+
+    it("emits the absolute URL from site and the article route", () => {
+      const out = protocolOf(article({ data: { agente: declared } }));
+      expect(out).toContain(
+        `URL: ${import.meta.env.SITE}/articulos/carrito-a-lo-bruto/`,
+      );
+    });
+
+    it("flattens marked-up multi-line pause indications to plain text", () => {
+      const out = protocolOf(
+        article({ body: withPauses, data: { agente: declared } }),
+      );
+      expect(out).toContain(
+        "1. Verifica que puedas explicar el estado compartido.",
+      );
+      expect(out).toContain(
+        "2. Verifica por qué cada cambio sale más caro, en dos líneas.",
+      );
+      expect(out).not.toContain("`estado`");
+    });
+
+    it("omits empty prerequisitos and missing nivel lines", () => {
+      const out = protocolOf(
+        article({
+          body: withPauses,
+          data: { agente: { tema: "tema", prerequisitos: [] } },
+        }),
+      );
+      expect(out).not.toContain("Prerequisitos:");
+      expect(out).not.toContain("Nivel:");
+    });
+
+    it("produces a protocol without a pauses section when none are marked", () => {
+      const out = protocolOf(
+        article({ body: "Sin pausas.", data: { agente: declared } }),
+      );
+      expect(out).toContain("## Ficha del artículo");
+      expect(out).not.toContain("Pausas:");
+    });
   });
 
-  it("numbers pauses in body order (M)", () => {
-    const out = protocolOf(
-      article({ body: withPauses, data: { agente: declared } }),
-    );
-    const i1 = out!.indexOf("1. Verifica que puedas explicar el estado");
-    const i2 = out!.indexOf("2. Verifica por qué cada cambio sale más caro");
-    expect(i1).toBeGreaterThan(-1);
-    expect(i2).toBeGreaterThan(i1);
-  });
+  describe("when the article does not declare accompaniment", () => {
+    it("returns null", () => {
+      expect(protocolOf(article({ data: {} }))).toBeNull();
+    });
 
-  it("emits the absolute URL from site + article route (I)", () => {
-    const out = protocolOf(article({ data: { agente: declared } }));
-    expect(out).toContain(
-      `URL: ${import.meta.env.SITE}/articulos/carrito-a-lo-bruto/`,
-    );
-  });
-
-  it("flattens a marked-up multi-line indication to plain text (B)", () => {
-    const out = protocolOf(
-      article({ body: withPauses, data: { agente: declared } }),
-    );
-    expect(out).toContain(
-      "1. Verifica que puedas explicar el estado compartido.",
-    );
-    expect(out).toContain(
-      "2. Verifica por qué cada cambio sale más caro, en dos líneas.",
-    );
-    expect(out).not.toContain("`estado`");
-  });
-});
-
-describe("protocolOf (CU-4)", () => {
-  it("omits empty Prerequisitos and missing Nivel lines (Z)", () => {
-    const out = protocolOf(
-      article({
-        body: withPauses,
-        data: { agente: { tema: "tema", prerequisitos: [] } },
-      }),
-    );
-    expect(out).not.toContain("Prerequisitos:");
-    expect(out).not.toContain("Nivel:");
-  });
-
-  it("degrades to a protocol without pauses when none are marked (B)", () => {
-    const out = protocolOf(
-      article({ body: "Sin pausas.", data: { agente: declared } }),
-    );
-    expect(out).toContain("## Ficha del artículo");
-    expect(out).not.toContain("Pausas:");
-  });
-});
-
-describe("protocolOf (CU-3)", () => {
-  it("returns null without agente (Z)", () => {
-    expect(protocolOf(article({ data: {} }))).toBeNull();
-  });
-
-  it("returns null on agente: false (I)", () => {
-    expect(protocolOf(article({ data: { agente: false } }))).toBeNull();
+    it("returns null on explicit opt-out", () => {
+      expect(protocolOf(article({ data: { agente: false } }))).toBeNull();
+    });
   });
 });
 
 describe("pausesOf", () => {
-  it("ignores a :::pausa inside a code fence", () => {
+  it("ignores a :::pausa block inside a code fence", () => {
     const body =
       "```md\n:::pausa\nEjemplo falso.\n:::\n```\n\n:::pausa\nLa real.\n:::\n";
     expect(pausesOf(body)).toEqual(["La real."]);
   });
 
-  it("returns [] without pauses", () => {
+  it("returns an empty array when there are no pauses", () => {
     expect(pausesOf("Sin pausas.")).toEqual([]);
   });
 });
