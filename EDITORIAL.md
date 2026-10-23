@@ -9,7 +9,8 @@ documentación del proyecto, que no se rige por esta guía.
 
 **Contenido:** [voz y registro](#voz-y-registro) · [anatomía del
 post](#anatomía-del-post) · [contrato de
-metadatos](#contrato-de-metadatos) · [taxonomía](#taxonomía) ·
+metadatos](#contrato-de-metadatos) · [lectura
+acompañada](#lectura-acompañada) · [taxonomía](#taxonomía) ·
 [niveles de edición](#niveles-de-edición) · [manuales de
 referencia](#manuales-de-referencia) · [palabras
 problemáticas](#palabras-problemáticas) · [ejemplos de la
@@ -122,6 +123,43 @@ explican el porqué, no solo el qué.
   OG y el RSS — la ve quien aún no ha abierto nada. Máximo ~150
   caracteres, la tensión o el gancho dentro, sin adjetivos
   valorativos. No es el previo: es su propia pieza.
+
+## Lectura acompañada
+
+Las piezas que enseñan se pueden leer acompañadas de un asistente: el
+lector copia un protocolo a su asistente y recorre el artículo
+deteniéndose en pausas marcadas para contrastar lo que entendió. Las
+instrucciones comunes del acompañamiento viven en un solo lugar
+(`site/src/data/protocolo-acompanamiento.md`); cada artículo declara
+solo lo propio.
+
+- **`agente` en el frontmatter:** el contexto que ajusta el protocolo:
+  `tema` (de qué trata el post, en palabras del lector) y
+  `prerequisitos` (lista de lo que conviene saber antes, opcional).
+  El nivel del lector lo aporta `nivel`: las piezas acompañadas lo
+  declaran siempre.
+- **Los tres estados:** un artículo sin `agente` no está declarado
+  (quizá le toque después); `agente: false` declara la decisión de no
+  acompañarlo (la opción de las piezas meta y de cualquier artículo
+  que no se beneficie del acompañamiento). Ausente y `false` no son lo
+  mismo: el segundo es decisión editorial explícita.
+- **Las pausas** se escriben donde ocurren, con un bloque `:::pausa`
+  en línea propia cuyo contenido es la verificación de la pausa (qué
+  debe poder decir o hacer el lector para seguir). El orden en el
+  texto da la numeración (Pausa 1, 2…) y cada pausa viaja con su
+  contenido al editar.
+
+  ```md
+  :::pausa
+  Verifica que puedas explicar por qué el estado vive en un solo
+  lugar antes de seguir.
+  :::
+  ```
+
+- **Dónde poner pausas:** al cerrar una unidad de sentido que exige
+  comprensión (un concepto nuevo, un resultado contraintuitivo), no
+  tras la mecánica. Dos o tres por post suelen bastar: cada pausa es
+  un punto donde perderse cuesta caro.
 
 ## Taxonomía
 

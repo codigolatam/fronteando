@@ -120,18 +120,18 @@ esquema con un campo opt-in/opt-out, las pausas viven íntegras en el
 cuerpo como bloques directiva, el protocolo común vive como archivo
 de datos importable y la convención se documenta en `EDITORIAL.md`.
 
-- [ ] Extender el esquema de `articulos` en `site/src/content.config.ts` con `agente` opcional: `false` (opt-out explícito) u objeto `{ tema, prerequisitos (default []) }`
+- [x] Extender el esquema de `articulos` en `site/src/content.config.ts` con `agente` opcional: `false` (opt-out explícito) u objeto `{ tema, prerequisitos (default []) }`
   - Aporta: materializa los tres estados —ausente = sin declarar, `false` = decisión editorial, objeto = declarado— en un solo campo; el campo solo ajusta el prompt común y no conoce las pausas
   - Contexto: el nivel del lector se reutiliza del `nivel` top-level existente (no se duplica dentro de la declaración); la convención exige `nivel` en las piezas acompañadas
-- [ ] Escribir el protocolo común en `site/src/data/protocolo-acompanamiento.md`: rol del asistente, reglas de la lectura acompañada y semántica de las pausas, en la voz del blog, ~≤2k caracteres
+- [x] Escribir el protocolo común en `site/src/data/protocolo-acompanamiento.md`: rol del asistente, reglas de la lectura acompañada y semántica de las pausas, en la voz del blog, ~≤2k caracteres
   - Aporta: la fuente única editable de lo común; la tarea 023 lo importa como texto crudo (`?raw`) y le anexa el contexto del artículo y las pausas extraídas del cuerpo
   - Contexto: presupuesto total del protocolo compuesto ~6k caracteres (docs/research/2026-10-enlaces-precargados-a-asistentes.md); el bloque común debe dejar margen para el bloque del artículo
-- [ ] Registrar `remark-directive` en `astro.config.mjs` como sustrato de los bloques `:::pausa` y fijar la sintaxis: la indicación es el contenido del bloque
-  - Aporta: posición e indicación viajan juntas en el cuerpo al editar; el orden en el texto da la numeración (Pausa 1, 2…); sin handler la directiva degrada a párrafo visible, nunca markup roto
-  - Contexto: el plugin queda inerte —ningún artículo publicado usa la sintaxis hasta la 025—; la transformación que la renderiza visible es de la 024 y el parseo para componer es de la 023
-- [ ] Documentar la convención en `EDITORIAL.md`: el campo `agente` (objeto o `false`), el bloque `:::pausa`, cuándo declarar (piezas que enseñan) vs opt-out (piezas meta) y la guía para elegir pausas
+- [x] Activar la feature `directive` del procesador Sätteri en `astro.config.mjs` (`markdown.processor: satteri({ features: { directive: true } })`) como sustrato de los bloques `:::pausa`, y fijar la sintaxis: la indicación es el contenido del bloque
+  - Aporta: posición e indicación viajan juntas en el cuerpo al editar; el orden en el texto da la numeración (Pausa 1, 2…); sin handler la directiva no renderiza nada, nunca markup roto
+  - Contexto: Astro 7 usa Sätteri como procesador por defecto —los plugins remark exigen el procesador legado `@astrojs/markdown-remark`—; el plugin queda inerte (ningún artículo publicado usa la sintaxis hasta la 025), la transformación visible es de la 024 y el parseo para componer de la 023
+- [x] Documentar la convención en `EDITORIAL.md`: el campo `agente` (objeto o `false`), el bloque `:::pausa`, cuándo declarar (piezas que enseñan) vs opt-out (piezas meta) y la guía para elegir pausas
   - Aporta: CU-4 usable por quien escribe sin leer el código; reglas atemporales —describen el estado final sin historia de construcción
-- [ ] Ejercitar el esquema de punta a punta con un artículo temporal `draft: true` (declaración válida, opt-out y casos rechazados) y retirarlo antes de cerrar
+- [x] Ejercitar el esquema de punta a punta con un artículo temporal `draft: true` (declaración válida, opt-out y casos rechazados) y retirarlo antes de cerrar
   - Aporta: prueba el contrato real contra la pipeline de contenido sin tocar el corpus publicado, que es alcance de la 025
 
 ## Suite de pruebas esperada
@@ -151,6 +151,10 @@ de datos importable y la convención se documenta en `EDITORIAL.md`.
   - El texto del protocolo cumple la voz del blog (revisión de redacción y pulido).
 - **Arnés:**
   - `check`, `lint`, `format:check` y `build` en verde.
+
+## Desviaciones del plan
+
+- **Sustrato de `:::pausa`: de `remark-directive` a la feature nativa de Sätteri.** El plan proponía registrar `remark-directive`; al ejecutar, `astro check` evidenció que Astro 7 usa Sätteri como procesador de Markdown por defecto y que los plugins remark exigen instalar el procesador legado `@astrojs/markdown-remark`. Sätteri soporta directivas `:::` de forma nativa (`features: { directive: true }`), así que se optó por `markdown.processor: satteri({ features: { directive: true } })` con `@astrojs/markdown-satteri@0.4.4` —la versión que Astro 7.4 ya fija como dependencia, no la 0.4.5 publicada hace dos días—. Menor: no cambia el objetivo ni los criterios de la tarea; el resultado es mejor (pipeline nativo, sin procesador legado). Efecto colateral verificado: sin handler la directiva no renderiza nada —degrada a invisible, no a párrafo—, lo que conviene anotar para la 024.
 
 ## Revisión
 

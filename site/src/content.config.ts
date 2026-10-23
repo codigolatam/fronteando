@@ -20,6 +20,15 @@ const articulos = defineCollection({
     ]),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    agente: z
+      .union([
+        z.literal(false),
+        z.object({
+          tema: z.string(),
+          prerequisitos: z.array(z.string()).default([]),
+        }),
+      ])
+      .optional(),
   }),
 });
 
