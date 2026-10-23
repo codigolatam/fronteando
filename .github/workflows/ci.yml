@@ -30,6 +30,7 @@ jobs:
           - lint
           - format:check
           - build
+          - test
     steps:
       - name: Checkout
         uses: actions/checkout@v7
