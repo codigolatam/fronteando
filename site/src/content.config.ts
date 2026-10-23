@@ -23,10 +23,12 @@ const articulos = defineCollection({
     agente: z
       .union([
         z.literal(false),
-        z.object({
-          tema: z.string(),
-          prerequisitos: z.array(z.string()).default([]),
-        }),
+        z
+          .object({
+            tema: z.string(),
+            prerequisitos: z.array(z.string()).default([]),
+          })
+          .strict(),
       ])
       .optional(),
   }),

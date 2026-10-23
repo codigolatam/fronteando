@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -158,6 +158,6 @@ de datos importable y la convención se documenta en `EDITORIAL.md`.
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-23 — Aprueba
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

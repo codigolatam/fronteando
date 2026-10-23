@@ -156,6 +156,9 @@ solo lo propio.
   :::
   ```
 
+  El bloque siempre se cierra con `:::` en línea propia: sin el cierre
+  el bloque se traga el resto del texto sin avisar.
+
 - **Dónde poner pausas:** al cerrar una unidad de sentido que exige
   comprensión (un concepto nuevo, un resultado contraintuitivo), no
   tras la mecánica. Dos o tres por post suelen bastar: cada pausa es
