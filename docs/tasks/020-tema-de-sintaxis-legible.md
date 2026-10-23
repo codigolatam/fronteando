@@ -91,6 +91,10 @@ El resaltado hoy solo tiene cuatro colores efectivos porque el reparto de variab
 - `DESIGN.md` declara los tokens nuevos con regla atemporal —sin literales en el mapa de Shiki justificados por omisión— (B).
 - `astro check`, ESLint, Prettier y `build` pasan limpios —arnés del proyecto— (I).
 
+## Desviaciones del plan
+
+- **Colores dedicados de diff:** el plan mapeaba `inserted`/`deleted`/`changed` a `syntax-string`/`danger`/`syntax-constant`; la revisión del usuario pidió tokens propios —los roles de diff no son léxicos y `changed`/`deleted` resultaban casi confundibles en tema claro (~15° de separación de hue)—. La sub-paleta `--color-diff-*` queda declarada en `DESIGN.md` y resuelve el hallazgo del subagente. Motivo: decisión del usuario.
+
 ## Revisión
 
 - Subagente: 2026-10-23 — Aprueba (hallazgo de redacción en la regla corregido; changed/deleted próximos en diffs —sin fences diff en el corpus—; comment y punctuation comparten muted por decisión documentada)

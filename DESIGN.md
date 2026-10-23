@@ -83,16 +83,31 @@ Tema oscuro —los mismos roles, encendidos para el fondo oscuro:
 - `--color-syntax-function` `#93c5fd`
 - `--color-syntax-constant` `#fdba74`
 
-Reglas: los colores de sintaxis viven solo en bloques de código —ningún
-elemento interactivo los usa—; el acento queda fuera del código salvo
-en los tokens de enlace —la sintaxis de enlace hereda el color del
-enlace real—; comentarios y
+Diffs —los bloques de diff usan tres roles propios, distintos de los
+léxicos:
+
+Tema claro:
+
+- `--color-diff-inserted` `#166534` — verde puro: líneas añadidas
+- `--color-diff-deleted` `#b91c1c` — rojo: líneas eliminadas
+- `--color-diff-changed` `#854d0e` — amarillo mostaza: líneas modificadas
+
+Tema oscuro —los mismos roles, encendidos para el fondo oscuro:
+
+- `--color-diff-inserted` `#22c55e`
+- `--color-diff-deleted` `#f87171`
+- `--color-diff-changed` `#facc15`
+
+Reglas: los colores de sintaxis y de diff viven solo en bloques de
+código —ningún elemento interactivo los usa—; el acento queda fuera del
+código salvo en los tokens de enlace —la sintaxis de enlace hereda el
+color del enlace real—; comentarios y
 puntuación llevan `--color-text-muted` —el ruido se atenúa, no
 desaparece—; los parámetros van en `--color-text` —son identificadores,
-no roles—; en diffs lo insertado usa `--color-syntax-string`, lo
-eliminado `--color-danger` y lo cambiado `--color-syntax-constant` —la
-semántica convencional—; cada par sintaxis/`surface` mide ≥4.5:1 en
-ambos temas —AA—.
+no roles—; los roles de diff no reutilizan los léxicos ni
+`--color-danger` —una línea eliminada no es un error y lo modificado
+debe separarse de lo eliminado—; cada par sintaxis o diff/`surface`
+mide ≥4.5:1 en ambos temas —AA—.
 
 ## Tipografía
 
