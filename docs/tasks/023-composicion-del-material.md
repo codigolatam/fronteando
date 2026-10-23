@@ -17,7 +17,7 @@ superficie.
 
 ## Dependencias
 
-- 022.
+- 22.
 
 ## Entrada
 

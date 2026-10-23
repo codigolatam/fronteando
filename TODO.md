@@ -15,8 +15,8 @@
 
 ## General
 
-
 ## Hito 1: Lectura acompañada por LLM
+
 <!-- épica: docs/epics/002-lectura-acompanada-por-llm.md -->
 
 - [ ] docs/tasks/022-declaracion-y-protocolo-comun.md — declaración de acompañamiento y protocolo común
@@ -25,4 +25,3 @@
 - [ ] docs/tasks/025-adaptar-el-corpus.md — adaptar el corpus a la lectura acompañada
 
 ## Propuestas en revisión
-

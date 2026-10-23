@@ -24,13 +24,13 @@ técnicos publicados.
 ## Piezas
 
 - [ ] docs/tasks/022-declaracion-y-protocolo-comun.md — declaración de
-  acompañamiento y protocolo común
+      acompañamiento y protocolo común
 - [ ] docs/tasks/023-composicion-del-material.md — composición del
-  material de acompañamiento
+      material de acompañamiento
 - [ ] docs/tasks/024-experiencia-en-pagina.md — experiencia de lectura
-  acompañada en página
+      acompañada en página
 - [ ] docs/tasks/025-adaptar-el-corpus.md — adaptar el corpus a la
-  lectura acompañada
+      lectura acompañada
 
 ## Plan técnico
 
@@ -44,8 +44,7 @@ técnicos publicados.
     y las pausas marcadas dentro del texto, donde viajan con el
     contenido.
   - La composición produce texto plano portable: la misma pieza
-    alimenta la página del artículo y las futuras salidas de la idea
-    003.
+    alimenta la página del artículo y las futuras salidas de la idea 003.
   - Copiar el protocolo es el camino garantizado; los enlaces
     precargados son una comodidad que degrada a copiar — no
     documentados, con límite de ~6k/10k caracteres y sin auto-envío
