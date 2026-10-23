@@ -84,3 +84,4 @@ Lo que apretó, sobró y faltó en el primer uso real del pipeline — cada fric
 
 - Subagente: 2026-10-21 — Aprueba
 - Usuario (ejecución): 2026-10-23 — Aprueba
+- Usuario (cierre): 2026-10-23 — Aprueba

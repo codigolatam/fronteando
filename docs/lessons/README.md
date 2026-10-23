@@ -72,3 +72,19 @@
 - indices-de-artefactos.md
   - Disparadores: índice, README, kanban, línea, sección, estado, sufijo, planeador
   - Resumen: la línea del índice lleva como dato aquello que la posición no codifica; si la sección es el estado, la línea basta como puntero
+
+- copy-fuera-del-post.md
+  - Disparadores: description, frontmatter, Open Graph, og:, tarjeta, preview, SERP, RSS, meta description, previo, gancho, metadatos
+  - Resumen: el copy que se lee fuera del post centra el efecto que el lector reconoce —no el mecanismo— y se evalúa por su propósito —abrir la pregunta que el post cierra—, no por su cumplimiento formal
+
+- espanol-del-blog.md
+  - Disparadores: español, redacción, regionalismo, peninsular, voz, EDITORIAL.md, posts, carrito, frase, giro, metáfora, expresión, sinónimo, reescritura
+  - Resumen: la variante es español latinoamericano neutro y los giros deben ser hablados y continentales; ante una regresión de sentido se busca la frase más idiomática, no se revierte al original
+
+- opciones-comparables.md
+  - Disparadores: opciones, alternativas, propuesta, redacción, description, título, reescritura, elegir
+  - Resumen: las decisiones de redacción se presentan como 2-4 opciones comparables con su estrategia y una recomendación, no iteradas de a una
+
+- changelog-de-producto.md
+  - Disparadores: changelog, CHANGELOG.md, entrada, release, publicación, artículo, mantener-changelog
+  - Resumen: las publicaciones de artículos no van al changelog —registra capacidades del producto, no contenido—
