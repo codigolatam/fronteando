@@ -6,9 +6,11 @@ mantenimiento
 
 ## Objetivo
 
-Declarar el acompañamiento en los tres artículos publicados para que el
-blog entero presente la funcionalidad, sin alterar su contenido
-editorial más allá de las marcas de pausa.
+Declarar el acompañamiento en los artículos técnicos publicados para
+que el blog presente la funcionalidad donde aporta, y dejar
+explícitamente fuera —con el opt-out— las piezas que no se benefician
+del agente, sin alterar el contenido editorial más allá de las marcas
+de pausa.
 
 ## Dependencias
 
@@ -24,25 +26,31 @@ editorial más allá de las marcas de pausa.
 
 ## Resultado esperado
 
-- Cada artículo publicado que lo amerite lleva su declaración —contexto
-  y pausas— y muestra la tarjeta y las marcas.
+- `un-store-reactivo-en-vanilla-js` y `carrito-a-lo-bruto` llevan su
+  declaración —contexto y pausas— y muestran la tarjeta y las marcas.
+- `hola-fronteando` lleva el opt-out explícito: ni tarjeta ni marcas, y
+  la exclusión queda declarada como decisión editorial.
 
 ## Criterios de calidad
 
 - Las pausas caen en puntos pedagógicos reales —donde verificar la
   comprensión aporta, no donde quepan—.
+- «Hola, Fronteando» no muestra tarjeta ni marcas: su exclusión queda
+  declarada con el opt-out, no por ausencia.
 - El contenido editorial no cambia salvo las marcas de pausa y los
   metadatos de declaración.
 - `check`, `lint` y `build` en verde.
 
 ## Procedimiento sugerido
 
-1. Por artículo: decidir el contexto —nivel del lector, prerequisitos—
-   y las pausas con qué se verifica en cada una.
-2. Declararlas y verificar el render de cada artículo.
+1. Por artículo técnico: decidir el contexto —nivel del lector,
+   prerequisitos— y las pausas con qué se verifica en cada una.
+2. Declarar el opt-out en «Hola, Fronteando».
+3. Verificar el render de cada artículo: tarjeta y marcas donde hay
+   acompañamiento, nada donde hay opt-out.
 
 ## Notas
 
-- El post `meta` —«Hola, Fronteando»— puede declarar contexto sin
-  pausas, o quedar sin acompañamiento si la pieza no lo amerita: la
-  declaración opt-in también cubre el caso de no acompañar.
+- «Hola, Fronteando» queda fuera de la adaptación por decisión
+  editorial: recibe el opt-out explícito, no pausas — la pieza `meta`
+  presenta el proyecto y no se beneficia de la lectura acompañada.

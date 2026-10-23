@@ -29,8 +29,8 @@ convención para quien escribe.
 ## Resultado esperado
 
 - El esquema de la colección `articulos` extendido con la declaración
-  de acompañamiento: contexto (tema, nivel del lector, prerequisitos) y
-  pausas.
+  de acompañamiento: contexto (tema, nivel del lector, prerequisitos),
+  pausas y el opt-out explícito.
 - La forma de marcar una pausa dentro del cuerpo definida, de modo que
   viaje con el contenido al editar.
 - El protocolo común escrito en un único lugar del sitio: el rol del
@@ -44,8 +44,9 @@ convención para quien escribe.
   verifica en cada una— sin piezas ambiguas.
 - Nada del protocolo común se duplica por artículo: un solo origen
   editable.
-- La declaración es opt-in: un artículo sin ella se publica igual que
-  hoy.
+- La declaración es opt-in y ofrece opt-out explícito: una pieza puede
+  declarar que no se acompaña —decisión editorial declarada—, lo que se
+  distingue de un artículo simplemente sin declarar.
 - El protocolo compuesto típico —común más declaración— cabe en el
   presupuesto de ~6k caracteres.
 

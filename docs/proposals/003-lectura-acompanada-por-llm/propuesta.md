@@ -57,6 +57,11 @@ cada artículo; el sitio compone ambas al publicar y produce la tarjeta,
 el texto del protocolo y las marcas. Nada se duplica y todo queda
 declarado, no en prosa suelta.
 
+La declaración incluye la opción explícita de no acompañar —opt-out—
+para las piezas que no se benefician del agente, como las de categoría
+`meta`: así «sin tarjeta» puede ser una decisión editorial declarada,
+no solo la ausencia de metadatos.
+
 ## Alternativas consideradas
 
 - Solo convención editorial — cada artículo escribe a mano su sección de
