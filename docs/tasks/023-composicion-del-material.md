@@ -52,6 +52,7 @@ superficie.
 
 - La salida es texto plano; su presentación —tarjeta, `.md`— es
   responsabilidad de cada superficie.
+- La ficha del artículo lleva su URL absoluta (site + ruta del artículo): es como el agente sabe de qué texto se habla, y puede leerlo si tiene acceso. Decisión surgida en la revisión de la 022.
 
 ## Revisión
 
