@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -20,6 +20,7 @@ Escribir y publicar el primer capítulo de la serie MVC en vanilla JS usando el 
 
 - El flujo de escritura completo enrutado (tareas 012–017): `EDITORIAL.md`, `planear-post`, `redactar-post`, `revisar-post`, planeador editorial y el tipo `contenido`.
 - La serie MVC en `docs/editorial/series/mvc-en-vanilla-js.md` — en `propuesta`, migrada por la tarea 016; su despliegue en piezas es el primer paso de esta tarea.
+- La pieza del capítulo 1: `docs/editorial/piezas/carrito-a-lo-bruto.md` — nacida del despliegue de la serie; es la que esta tarea lleva por el pipeline.
 - El post inaugural publicado como precedente de voz y de cierre: «la serie de patrones» que el mini-store prometió.
 
 ## Resultado esperado
@@ -58,3 +59,29 @@ Escribir y publicar el primer capítulo de la serie MVC en vanilla JS usando el 
 - `Producto:` sin documentación de producto aplicable.
 - `Lecciones:` `docs/lessons/flujo-de-escritura.md`, `docs/lessons/previos-de-articulos.md`, `docs/lessons/fechas-de-publicacion.md` — las prácticas que el flujo ya codifica.
 - `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el previo sale del cuerpo.
+- `Investigación:` `docs/research/2026-10-referencias-mvc-vanilla-js.md` — las convenciones del género que el capítulo rompe a sabiendas y las lecturas de referencia.
+
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/carrito-a-lo-bruto.md` — aprobado 2026-10-21
+- **Promesa:** «después de leer esto, el lector podrá diagnosticar el enredo de un componente sin patrón —qué tres cosas se mezclaron y por qué un cambio pequeño se vuelve caro—»
+
+## Fricciones del flujo
+
+Lo que apretó, sobró y faltó en el primer uso real del pipeline — cada fricción con su resolución o su estado:
+
+- **La guía y el corpus discrepaban en los incisos:** la regla pedía paréntesis y el post precedente usa raya larga sistemáticamente; la primera ronda corrigió hacia la regla. _Abierta:_ normalizar el corpus o relajar la regla.
+- **«Denso, sin relleno» era ambiguo:** el borrador salió telegráfico y metafórico; la edición del usuario mostró la preferencia real. _Resuelta:_ la guía ahora dice «claro antes que denso».
+- **La variante de español no estaba declarada:** el borrador y el corpus traían peninsularismos («carrito de la compra») que la revisión editorial cazó tarde, sin criterio escrito. _Resuelta:_ la guía fija español latinoamericano neutro.
+- **Las metáforas no tenían criterio de calidad:** la regla las permitía sin dosificar y el borrador abusó de figuras de la casa. _Resuelta:_ solo figuras simples y de uso común.
+- **La `description` estaba mal descrita:** la guía la llamaba «el previo en prosa» sin distinguir su audiencia real (SERP, tarjetas OG, RSS). _Resuelta:_ reescrita como pieza propia escrita para quien aún no abre el post.
+- **El checklist del brief sobreexigió:** pedía enlazar el mini-store, pero el enlazado entre posts es criterio de la serie, no del capítulo. _Resuelta:_ la línea del checklist registra la decisión.
+- **El título no tenía regla:** el gerundio descriptivo se decidió sin criterio escrito. _Resuelta:_ la guía declara título descriptivo con gerundio admitido.
+- **El flujo no tiene paso de edición del autor:** el usuario reescribió la voz directamente sobre el post aprobado y hubo que resolver ad hoc —corrección mecánica y re-revisión—. _Abierta:_ decidir si `pulir-escritura` o un paso del flujo aloja la edición del autor.
+- **Ningún paso evalúa los metadatos como copy:** la revisión editorial valida el frontmatter formalmente pero no su eficacia como preview; la evaluación del `description` nació de una pregunta del usuario. _Abierta:_ considerar un punto de checklist para description/OG.
+
+## Revisión
+
+- Subagente: 2026-10-21 — Aprueba
+- Usuario (ejecución): 2026-10-23 — Aprueba
+- Usuario (cierre): 2026-10-23 — Aprueba

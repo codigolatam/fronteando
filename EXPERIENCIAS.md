@@ -125,3 +125,52 @@
   Obtenido: las líneas de «## series» eran punteros desnudos — la posición en lista plana no codifica el estado del arco, a diferencia de las secciones kanban
   Corrección: la línea del índice lleva como sufijo aquello que la posición no codifica — «- [título](series/<slug>.md) — <estado>»
   Estado: consolidada
+
+- Id: 20261023T105834
+  Tarea: docs/tasks/018-validar-flujo-con-post-mvc.md
+  Esperado: la redacción del blog usa el español de su lector
+  Obtenido: el borrador y el corpus traían formas peninsulares («carrito de la compra», «amañado») que la revisión editorial solo cazó tarde, sin criterio escrito
+  Corrección: la variante del blog es español latinoamericano neutro —entre dos formas correctas se elige la que se entiende en todo el continente y los regionalismos quedan fuera—; quedó declarada en EDITORIAL.md
+  Estado: consolidada
+
+- Id: 20261023T105835
+  Tarea: docs/tasks/018-validar-flujo-con-post-mvc.md
+  Esperado: el borrador sale en la voz de la casa —claro y sin ornamento—
+  Obtenido: salió telegráfico y cargado de figuras propias; el usuario reescribió la voz del post ya aprobado y de la edición salieron varias reglas nuevas de la guía
+  Corrección: comprensibilidad antes que densidad —frase que no exige deducir nada, metáfora simple y de uso común o ninguna—; quedó codificado en EDITORIAL.md («claro antes que denso», metáforas comunes, eco de la promesa, título descriptivo)
+  Estado: consolidada
+
+- Id: 20261023T105836
+  Tarea: docs/tasks/018-validar-flujo-con-post-mvc.md
+  Esperado: la `description` se evalúa por su función real —preview social, SERP y RSS—
+  Obtenido: se evaluó como «útil» por cumplir requisitos formales —longitud, gancho declarado— sin comprobar si abre la pregunta que el post cierra; el usuario preguntó si la redacción servía de verdad al propósito
+  Corrección: evaluar el copy por su propósito, no por su cumplimiento formal —la segunda mitad enumeraba la agenda del post en lugar de prometer lo que el lector gana—; cumplir requisitos no equivale a servir al propósito
+  Estado: consolidada
+
+- Id: 20261023T105837
+  Tarea: docs/tasks/018-validar-flujo-con-post-mvc.md
+  Esperado: las decisiones de redacción se resuelven comparando alternativas
+  Obtenido: se proponía una redacción por turno y el usuario tuvo que pedir «3 opciones para poder comparar y elegir la mejor» —dos veces en la sesión—
+  Corrección: cuando el usuario debe elegir una redacción, presentar 2-4 opciones comparables con su estrategia y una recomendación, no iterar de a una
+  Estado: consolidada
+
+- Id: 20261023T105838
+  Tarea: docs/tasks/018-validar-flujo-con-post-mvc.md
+  Esperado: el hook del preview pone la palabra central donde está el valor para el lector
+  Obtenido: la propuesta centraba el mecanismo —«enredo»—; el usuario aclaró que lo central es el efecto y la consecuencia
+  Corrección: en el copy que se lee fuera del post, centrar el efecto y la consecuencia que el lector reconoce —«cada cambio nuevo sale más caro»—, no el nombre del mecanismo interno
+  Estado: consolidada
+
+- Id: 20261023T105839
+  Tarea: docs/tasks/018-validar-flujo-con-post-mvc.md
+  Esperado: las frases del post suenan a español hablado en el continente
+  Obtenido: construcciones de calco o figuras poco comunes —«espantapájaros», «no es un código roto: es un código sin reparto», «versión difícil de ver»— fueron rechazadas una a una
+  Corrección: ante una regresión de sentido, buscar el giro más idiomático en lugar de revertir al original —«no es que falle, sino que cada parte hace de todo»—
+  Estado: consolidada
+
+- Id: 20261023T105840
+  Tarea: docs/tasks/018-validar-flujo-con-post-mvc.md
+  Esperado: el changelog registra solo capacidades del producto
+  Obtenido: se registró como entrada la publicación del capítulo 1 —contenido, no capacidad—
+  Corrección: las publicaciones de artículos no van al changelog; el changelog registra lo que el producto puede hacer, no el contenido que el blog publica
+  Estado: consolidada

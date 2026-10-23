@@ -15,17 +15,4 @@
 
 ## General
 
-## Hito 1: Flujo de escritura de posts
-
-- [x] docs/tasks/013-skill-planear-post.md — skill planear-post (encuadre editorial)
-
-- [x] docs/tasks/014-skill-redactar-post.md — skill redactar-post (ejecución de la escritura)
-
-- [x] docs/tasks/015-skill-revisar-post.md — skill revisar-post (revisión editorial)
-
-- [x] docs/tasks/016-planeador-editorial.md — planeador editorial (pipeline de contenido)
-- [x] docs/tasks/017-enrutado-tipo-contenido.md — enrutado del tipo contenido en ejecutar-tareas
-- [ ] docs/tasks/018-validar-flujo-con-post-mvc.md — dogfooding: primer post de la serie MVC por el flujo
-  - docs/tasks/017-enrutado-tipo-contenido.md
-
 ## Propuestas en revisión

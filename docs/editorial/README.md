@@ -10,6 +10,11 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## lista
 
+- [El Modelo: el estado que notifica](piezas/mvc-modelo.md)
+- [La Vista: el render como función del estado](piezas/mvc-vista.md)
+- [El Controlador: cerrar el ciclo](piezas/mvc-controlador.md)
+- [Los límites del MVC a mano](piezas/mvc-limites.md)
+
 ## en redacción
 
 ## en revisión
@@ -17,7 +22,8 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 ## publicado
 
 - [Un store reactivo en vanilla JS](../../site/src/content/articulos/un-store-reactivo-en-vanilla-js.md)
+- [El carrito a lo bruto: construyendo un componente web sin seguir un patrón](../../site/src/content/articulos/carrito-a-lo-bruto.md)
 
 ## series
 
-- [Serie MVC en vanilla JS](series/mvc-en-vanilla-js.md) — propuesta
+- [Serie MVC en vanilla JS](series/mvc-en-vanilla-js.md) — en curso
