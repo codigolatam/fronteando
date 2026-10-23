@@ -16,8 +16,8 @@ escribes `count.value++` y el DOM obedece. Parece magia. No lo es.
 En este artículo vamos a construir ese mecanismo desde cero,
 en JavaScript sin librerías: unas cincuenta líneas que hacen lo
 esencial de un store reactivo. Al final, `ref()` y `signal()` dejarán
-de ser conjuros para convertirse en algo que ya sabes escribir —porque
-mientras algo parezca magia, solo queda memorizar la API.
+de ser conjuros para convertirse en algo que ya sabes escribir (porque
+mientras algo parezca magia, solo queda memorizar la API).
 
 ## El resultado primero
 
@@ -35,15 +35,15 @@ count.value = 1; // el título del documento ya dice «count: 1»
 ```
 
 Ninguna línea avisa de nada a nadie: asignar `count.value` basta para
-que el título se reescriba. Tres piezas lo hacen posible —`signal`,
-`effect` y un truco pequeño que las conecta— y las construiremos una a
+que el título se reescriba. Tres piezas lo hacen posible: `signal`,
+`effect` y un truco pequeño que las conecta. Las construiremos una a
 una.
 
 ## Estado que notifica
 
 La primera pieza es la más vieja del mundo: una variable que avisa a
 quien se suscriba cuando cambia. Un getter devuelve el valor y un
-setter, además de guardarlo, recorre a los suscriptores:
+setter, además de guardarlo, avisa a cada suscriptor:
 
 ```js
 function signal(valorInicial) {
@@ -80,9 +80,9 @@ count.value = 2;
 
 Funciona, pero el defecto salta a la vista: cada consumidor tiene que
 acordarse de suscribirse y de repetir dentro lo que lee. Con un
-componente real —varias propiedades, varios consumidores— el cableado
+componente real (varias propiedades, varios consumidores) el cableado
 manual se convierte en la fuente de los errores: el efecto que nadie
-suscribió, la suscripción colgada del dato equivocado.
+suscribió, el que quedó suscrito al dato equivocado.
 
 ## El efecto que se registra solo
 
@@ -107,7 +107,7 @@ function effect(fn) {
 
 `effect` envuelve `fn` en `correr`: al ejecutarse, `correr` se declara
 efecto activo, ejecuta `fn` y limpia. El suscriptor real es `correr`, no
-`fn` — así cada reejecución vuelve a levantar `efectoActivo` y a
+`fn`: así cada reejecución vuelve a declararse efecto activo y a
 registrar lo que lea. Como JavaScript corre en un solo hilo, mientras
 `correr` se ejecuta ningún otro efecto puede estar en marcha:
 `efectoActivo` es, sin ambigüedad, «el efecto que está corriendo
@@ -123,8 +123,8 @@ get value() {
 ```
 
 Leer `value` dentro de un `effect` registra la dependencia sin que
-nadie lo pida: si hay un efecto en ejecución, queda suscrito. Con eso
-`suscribir` desaparece y el programa del gancho ya es real:
+nadie lo pida: si hay un efecto en ejecución, queda suscrito. Con esa
+pieza `suscribir` desaparece y el programa del gancho ya es real:
 
 ```js
 const count = signal(0);
@@ -138,8 +138,8 @@ count.value = 2; // y otra vez
 ```
 
 El grafo de dependencias se construye solo: cada efecto queda anotado
-en los signals que lee cada vez que corre. Ese matiz —«cada vez que
-corre»— importa; volveremos a él en los límites.
+en los signals que lee cada vez que corre. Ese matiz («cada vez que
+corre») importa; volveremos a él en los límites.
 
 ## De un valor a un objeto: la store
 
@@ -193,7 +193,8 @@ ya no es por variable, es por propiedad.
 
 ## Lo que falta para ser un framework
 
-Lo construido es el corazón de la reactividad, no el animal completo.
+Lo construido es el corazón de la reactividad, no el framework
+completo.
 Conviene nombrar lo que quedó fuera, porque cada omisión es una
 pregunta que los frameworks tuvieron que responder:
 
@@ -208,20 +209,21 @@ pregunta que los frameworks tuvieron que responder:
   las notificaciones en un solo pase.
 - **El render no existe.** Nuestro efecto reescribe `document.title`
   entero; escalar eso al DOM es justamente lo que los frameworks
-  resuelven —diffing en los de virtual DOM, actualización quirúrgica
-  compilada en Solid o Svelte—.
+  resuelven (diffing en los frameworks de virtual DOM, actualización
+  quirúrgica compilada en Solid o Svelte).
 - **Un solo efecto a la vez.** `efectoActivo` es una variable, así que
   los efectos no pueden anidarse; la versión de verdad mantiene una
   pila.
 
-Y sin embargo, la sustancia ya está: leer registra, escribir notifica y
-la lista de dependencias la lleva la propia pieza de estado.
+Y sin embargo, la sustancia ya está (en unas cincuenta líneas): leer
+registra, escribir notifica y la lista de dependencias la lleva la
+propia pieza de estado.
 
 ## El punto
 
 `ref()` en Vue, `createSignal()` en Solid, `signal()` en Preact: detrás
-de cada una está esta misma idea —un contenedor que toma nota de quién
-lee y avisa cuando cambia— vestida de API y rodeada de lo que sí cuesta
+de cada una está esta misma idea (un contenedor que toma nota de quién
+lee y avisa cuando cambia) vestida de API y rodeada de lo que sí cuesta
 trabajo: render eficiente, batching, cleanup.
 
 La próxima vez que `count.value++` mueva tu pantalla, ya sabes qué
@@ -229,6 +231,6 @@ acaba de ocurrir: un getter anotó a tu efecto y un setter lo volvió a
 llamar.
 
 Sincronizar el estado con la vista ya no cuesta nada. La pregunta que
-sí queda abierta es cómo estructurar todo lo demás —quién escucha los
-eventos, quién decide, qué se guarda dónde—. De esa pregunta va la
+sí queda abierta es cómo estructurar todo lo demás (quién escucha los
+eventos, quién decide, qué se guarda dónde). De esa pregunta va la
 siguiente serie.
