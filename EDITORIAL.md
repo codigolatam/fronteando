@@ -134,7 +134,7 @@ Las piezas que enseñan se pueden leer acompañadas de un asistente: el
 lector copia un protocolo a su asistente y recorre el artículo
 deteniéndose en pausas marcadas para contrastar lo que entendió. Las
 instrucciones comunes del acompañamiento viven en un solo lugar
-(`site/src/data/protocolo-acompanamiento.md`); cada artículo declara
+(`site/src/data/accompaniment-protocol.md`); cada artículo declara
 solo lo propio.
 
 - **`agente` en el frontmatter:** el contexto que ajusta el protocolo:
