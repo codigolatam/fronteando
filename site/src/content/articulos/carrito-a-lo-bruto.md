@@ -1,6 +1,6 @@
 ---
 title: "El carrito a lo bruto: construyendo un componente web sin seguir un patrón"
-description: "Un carrito de compras sin framework que funciona y aun así cuesta mantener: construirlo, pedirle un cambio normal y nombrar el enredo que lo resiste."
+description: "Un carrito de compras construido sin seguir un patrón de diseño cuesta mantener: veremos por qué cada cambio nuevo sale más caro que el anterior."
 date: 2026-10-21T19:56:00Z
 categoria: arquitectura
 nivel: intermedio
