@@ -7,14 +7,18 @@ consultan; los skills genéricos de escritura (`revisar-redaccion`,
 `pulir-escritura`) son su mecánica de apoyo y la referencia para la
 documentación del proyecto, que no se rige por esta guía.
 
-**Contenido:** [voz y registro](#voz-y-registro) · [anatomía del
-post](#anatomía-del-post) · [contrato de
-metadatos](#contrato-de-metadatos) · [lectura
-acompañada](#lectura-acompañada) · [taxonomía](#taxonomía) ·
-[niveles de edición](#niveles-de-edición) · [manuales de
-referencia](#manuales-de-referencia) · [palabras
-problemáticas](#palabras-problemáticas) · [ejemplos de la
-casa](#ejemplos-de-la-casa) · [fuera de alcance](#fuera-de-alcance)
+**Contenido**
+
+- [Voz y registro](#voz-y-registro)
+- [Anatomía del post](#anatomía-del-post)
+- [Contrato de metadatos](#contrato-de-metadatos)
+- [Lectura acompañada](#lectura-acompañada)
+- [Taxonomía](#taxonomía)
+- [Niveles de edición](#niveles-de-edición)
+- [Manuales de referencia](#manuales-de-referencia)
+- [Palabras problemáticas](#palabras-problemáticas)
+- [Ejemplos de la casa](#ejemplos-de-la-casa)
+- [Fuera de alcance](#fuera-de-alcance)
 
 ## Voz y registro
 
