@@ -20,8 +20,8 @@ quitar y total) a lo bruto, sin un patrón de diseño, y después vamos
 a pedir el cambio más normal del mundo: que la cantidad de cada
 producto se pueda editar en la propia lista. El código se va a
 resistir a los cambios debido a la forma en que está construido y al
-terminar podrás decir con precisión qué cosas se enredaron en este
-componente sin estructura y por qué cada cambio nuevo sale más caro
+terminar podrás decir con precisión qué tres cosas se enredaron en
+este componente sin estructura y por qué cada cambio nuevo sale más caro
 que el anterior.
 
 ## El resultado primero
@@ -160,7 +160,7 @@ más) significa repetir la cascada en un sitio más.
 **El render destruye y re-cablea.** Actualizar la maqueta con
 `innerHTML` crea nodos nuevos que nacen sin manejadores ni estado:
 cada cambio pequeño obliga a gestionar el cableado a mano, y si se te
-olvida un botón la interfaz deja de funcionar.
+olvida un botón la interfaz se ve igual pero ya no responde.
 
 Cada síntoma encarece el siguiente cambio. Por eso el código espagueti
 no se rompe de golpe hasta que el cambio más simple te lleva toda una
@@ -174,7 +174,7 @@ el del principio. Desenredarlo (separar en capas quién guarda el
 estado, quién escucha los eventos, quién pinta los elementos) es
 exactamente el trabajo de los capítulos siguientes.
 
-El ejemplo tampoco es una versión difícil de ver, es el código que
+El ejemplo tampoco está fabricado para fallar: es el código que
 escribe una persona razonable con prisa y tiene la forma de un
 componente real pequeño. En uno más grande no se introducen problemas
 nuevos sino que hace que estos cuesten más.
@@ -185,8 +185,7 @@ pierde sus manejadores) o tocar solo el trozo que cambia (un
 `textContent` en el `.subtotal` en lugar de rehacer el `<li>`
 entero). Los dos funcionan pero ninguno mejora nada: son dos líneas
 más que hay que acordarse de mantener. El carrito con esos parches
-sigue sin gestionar su estado ni tener un sitio común para sus
-decisiones.
+sigue con el estado sin dueño y las decisiones sin sitio común.
 
 Aunque el patrón que falta aquí tiene nombre y décadas de historia
 (Modelo, Vista y Controlador, que [Trygve Reenskaug concibió en Xerox
@@ -197,8 +196,8 @@ lugar de copiarlo de un diagrama.
 
 ## El punto
 
-El ejemplo del carrito en la forma que tiene muestra algunos errores
-comunes: el estado se escribe en la pantalla, la pantalla se lee como
+El problema del carrito no es que falle, sino que cada parte hace de
+todo: el estado se escribe en la pantalla, la pantalla se lee como
 estado y los eventos gestionan tanto la lógica como la composición
 visual. Tres preguntas quedan flotando sobre el carrito: quién guarda
 el estado, quién decide lo que pasa y quién pinta los elementos. El
