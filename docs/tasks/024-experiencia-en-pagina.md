@@ -1,5 +1,9 @@
 # Experiencia de lectura acompañada en la página del artículo
 
+## Estado
+
+**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+
 ## Tipo
 
 desarrollo
@@ -53,3 +57,9 @@ lo declara.
 
 - `aplicar-guia-estilo` gobierna la pieza visual: tokens antes que
   literales, evidencia renderizada antes de darse por conforme.
+
+## Revisión
+
+- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

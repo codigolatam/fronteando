@@ -1,5 +1,9 @@
 # Adaptar el corpus publicado a la lectura acompañada
 
+## Estado
+
+**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+
 ## Tipo
 
 mantenimiento
@@ -14,7 +18,7 @@ de pausa.
 
 ## Dependencias
 
-- Borrador 03 — la adaptación se verifica sobre la experiencia ya
+- 024 — la adaptación se verifica sobre la experiencia ya
   renderizada.
 
 ## Entrada
@@ -54,3 +58,9 @@ de pausa.
 - «Hola, Fronteando» queda fuera de la adaptación por decisión
   editorial: recibe el opt-out explícito, no pausas — la pieza `meta`
   presenta el proyecto y no se beneficia de la lectura acompañada.
+
+## Revisión
+
+- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

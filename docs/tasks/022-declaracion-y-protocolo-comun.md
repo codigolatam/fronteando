@@ -1,5 +1,9 @@
 # Definir la declaración de acompañamiento por artículo y el protocolo común
 
+## Estado
+
+**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+
 ## Tipo
 
 desarrollo
@@ -64,3 +68,9 @@ convención para quien escribe.
 - El esquema definido aquí es la entrada directa de la idea 003 —blog
   legible para máquinas—: conviene que la declaración sea portable como
   texto plano.
+
+## Revisión
+
+- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

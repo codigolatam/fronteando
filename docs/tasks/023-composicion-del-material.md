@@ -1,5 +1,9 @@
 # Componer el material de acompañamiento por artículo
 
+## Estado
+
+**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+
 ## Tipo
 
 desarrollo
@@ -13,7 +17,7 @@ superficie.
 
 ## Dependencias
 
-- Borrador 01.
+- 022.
 
 ## Entrada
 
@@ -48,3 +52,9 @@ superficie.
 
 - La salida es texto plano; su presentación —tarjeta, `.md`— es
   responsabilidad de cada superficie.
+
+## Revisión
+
+- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Borrador | **[p] Pendiente de revisión** | [a] Aprobada | [d] Descartada
+[ ] Borrador | [p] Pendiente de revisión | **[a] Aprobada** | [d] Descartada
 
 ## Problema
 
@@ -95,15 +95,15 @@ no solo la ausencia de metadatos.
 
 ## Borradores
 
-- `01-declaracion-y-protocolo-comun.md` — definir la declaración por
+- `docs/tasks/022-declaracion-y-protocolo-comun.md` — definir la declaración por
   artículo y escribir el protocolo común
-- `02-composicion-del-material.md` — componer el protocolo completo por
+- `docs/tasks/023-composicion-del-material.md` — componer el protocolo completo por
   artículo (depende de 01)
-- `03-experiencia-en-pagina.md` — tarjeta, marcas de pausa y enlaces en
+- `docs/tasks/024-experiencia-en-pagina.md` — tarjeta, marcas de pausa y enlaces en
   el artículo (depende de 01, 02)
-- `04-adaptar-el-corpus.md` — declarar el acompañamiento en los posts
+- `docs/tasks/025-adaptar-el-corpus.md` — declarar el acompañamiento en los posts
   publicados (depende de 03)
 
 ## Revisión
 
-- Usuario: [fecha] — [Aprueba | Solicita cambios | Rechaza]
+- Usuario: 2026-10-23 — Aprueba
