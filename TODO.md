@@ -18,7 +18,7 @@
 ## Hito 1: Puesta al día del blog publicado
 
 - [x] docs/tasks/019-post-reactividad-al-dia-con-la-guia.md — revisar el post de reactividad con la guía nueva
-- [ ] docs/tasks/020-tema-de-sintaxis-legible.md — resaltado de sintaxis legible en ambos temas
+- [x] docs/tasks/020-tema-de-sintaxis-legible.md — resaltado de sintaxis legible en ambos temas
 - [ ] docs/tasks/021-post-hola-fronteando-al-dia-con-la-guia.md — revisar el post de presentación con la guía nueva
 
 ## Propuestas en revisión

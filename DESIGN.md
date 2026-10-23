@@ -66,6 +66,49 @@ artículo —el contraste de lectura larga no se degrada—; el acento del
 tema claro sobre `surface` mide ≈4.5:1 —el borde de AA—: sobre ese fondo
 el acento nunca baja de tamaño ni de peso.
 
+Sintaxis —los bloques de código añaden cuatro hues por tema, sobrios
+como el resto de la paleta —nunca neón—:
+
+Tema claro:
+
+- `--color-syntax-keyword` `#7c3aed` — violeta: palabras clave y control
+- `--color-syntax-string` `#3f6212` — verde: cadenas y contenido literal
+- `--color-syntax-function` `#1d4ed8` — azul: funciones, tipos y atributos
+- `--color-syntax-constant` `#9a3412` — ámbar quemado: números, constantes y valores incorporados
+
+Tema oscuro —los mismos roles, encendidos para el fondo oscuro:
+
+- `--color-syntax-keyword` `#a78bfa`
+- `--color-syntax-string` `#86efac`
+- `--color-syntax-function` `#93c5fd`
+- `--color-syntax-constant` `#fdba74`
+
+Diffs —los bloques de diff usan tres roles propios, distintos de los
+léxicos:
+
+Tema claro:
+
+- `--color-diff-inserted` `#166534` — verde puro: líneas añadidas
+- `--color-diff-deleted` `#b91c1c` — rojo: líneas eliminadas
+- `--color-diff-changed` `#854d0e` — amarillo mostaza: líneas modificadas
+
+Tema oscuro —los mismos roles, encendidos para el fondo oscuro:
+
+- `--color-diff-inserted` `#22c55e`
+- `--color-diff-deleted` `#f87171`
+- `--color-diff-changed` `#facc15`
+
+Reglas: los colores de sintaxis y de diff viven solo en bloques de
+código —ningún elemento interactivo los usa—; el acento queda fuera del
+código salvo en los tokens de enlace —la sintaxis de enlace hereda el
+color del enlace real—; comentarios y
+puntuación llevan `--color-text-muted` —el ruido se atenúa, no
+desaparece—; los parámetros van en `--color-text` —son identificadores,
+no roles—; los roles de diff no reutilizan los léxicos ni
+`--color-danger` —una línea eliminada no es un error y lo modificado
+debe separarse de lo eliminado—; cada par sintaxis o diff/`surface`
+mide ≥4.5:1 en ambos temas —AA—.
+
 ## Tipografía
 
 Una sola familia con tres cortes —IBM Plex, diseñada como sistema
