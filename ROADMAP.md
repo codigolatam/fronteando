@@ -11,25 +11,40 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
+- 1. Lectura acompañada por LLM (idea 002)
+  - Estado: pendiente de arrancar.
+  - Justificación: el diferenciador editorial y la cabeza del bloque —
+    el esquema de contenido que define es la entrada de blog-legible-
+    para-máquinas, y su protocolo es lo primero que se adaptaría en cada
+    post existente.
+- 2. Blog legible para máquinas (idea 003)
+  - Estado: pendiente de arrancar.
+  - Justificación: hermana menor de la lectura acompañada — consume el
+    esquema que aquella define, así que ejecutarla inmediatamente
+    después la hace casi mecánica; antes sería trabajo doble.
+- 3. Demos de código ejecutables (idea 004)
+  - Estado: pendiente de arrancar.
+  - Justificación: la tercera redefinición del post — si se escribieran
+    capítulos nuevos ahora habría que volver sobre ellos para insertar
+    demos donde la explicación las necesita. Cierra el bloque de
+    funcionalidades antes de retomar la escritura.
+
 ## Next
 
-- 2. Lectura acompañada por LLM (idea 002) — el diferenciador editorial;
-     se diseña y verifica contra el post real que el post inaugural deja
-     publicado.
-- 3. Demos de código ejecutables (idea 004) — ejemplos que el lector
-     puede tocar dentro del artículo; enriquecen directamente la escritura
-     que la lectura acompañada estructura.
-- 4. Blog legible para máquinas (idea 003) — salidas `.md` y `llms.txt`;
-     deriva del esquema que la lectura acompañada define.
+- 1. Serie MVC en vanilla JS — continuación
+     (docs/editorial/series/mvc-en-vanilla-js.md)
+  - Justificación: en pausa, no desplazada — queda primera en Next
+    porque su arco ya está planeado (cuatro piezas en lista) y retoma
+    con el blog completo: los capítulos restantes nacerán con
+    acompañamiento, formato legible y demos disponibles, sin
+    reescritura.
 
 ## Later
 
 - Newsletter (idea 005) — relación continuada con quien quiere seguir
-  el blog; el RSS ya publicado la habilita, y su valor crece con el
-  catálogo.
-- Serie MVC en vanilla JS (idea 007) — línea editorial duradera que
-  sigue al post inaugural; su cierre enlaza de vuelta a la reactividad
-  que el mini-store ya enseñó.
+  el blog; el RSS ya la habilita y su valor crece con el catálogo. Su
+  posición es la negociable del documento: puede adelantarse si interesa
+  capturar suscriptores desde ya.
 
 ## No ahora
 
@@ -38,3 +53,4 @@ Sin líneas aparcadas.
 ## Revisión
 
 - Usuario: 2026-10-16 — Aprueba
+- Usuario: 2026-10-23 — Aprueba
