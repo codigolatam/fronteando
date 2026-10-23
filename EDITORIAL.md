@@ -25,22 +25,28 @@ entender por qué, no instrucciones para copiar.
   («tu pantalla», «ya sabes qué acaba de ocurrir»). Nunca tercera
   persona
   impersonal cuando cabe una de las dos.
-- **Denso, sin relleno.** Cada párrafo desarrolla una idea y cada
-  frase trabaja; si una frase puede irse sin que el lector pierda
-  nada, se va.
+- **Claro antes que denso.** Se prefiere la frase que no exige
+  deducir nada a la telegráfica: la subordinada que explicita la
+  causa gana a la elipsis. Cada párrafo desarrolla una idea y cada
+  frase trabaja; el relleno se corta, pero la explicitud no es
+  relleno.
 - **Conversacional de trabajo.** La prueba: ¿hablaría así con un
   colega técnico? (Y la de voz alta: intro y cierre se leen en voz
-  alta; lo forzado se reescribe.) Metáforas y preguntas retóricas
-  sí; solemnidad y burocracia no.
+  alta; lo forzado se reescribe.) Metáforas simples y de uso común
+  (una figura que el lector tenga que traducir es relleno) y
+  preguntas retóricas sí; solemnidad y burocracia no.
 - **Honesto antes que entusiasta.** Los límites se nombran, los
   trade-offs se declaran. La confianza la da admitir lo que falta, no
   fingir que no falta nada.
 - **Sin _gatekeeping_.** Proscritos «simplemente», «obviamente»,
   «fácil», «solo hay que»: nada es obvio para quien lo está
   aprendiendo.
-- **Español con anglicismos técnicos aceptados.** `store`, `signal`,
-  `batching`, `render`, `diffing`, `cleanup` van así, sin cursiva ni
-  comillas; el español no tiene equivalente instalado. Los calcos
+- **Español latinoamericano neutro, con anglicismos técnicos
+  aceptados.** La variante es la neutra del continente: entre dos
+  formas correctas se elige la que se entiende en todas partes y
+  los regionalismos quedan fuera. `store`, `signal`, `batching`,
+  `render`, `diffing`, `cleanup` van así, sin cursiva ni comillas;
+  el español no tiene equivalente instalado. Los calcos
   síntácticos no valen: «Con eso dicho» por _with that said_ queda
   fuera. La lista es orientativa, no cerrada (el criterio es el
   equivalente instalado: trade-offs, snippet entran por la misma
@@ -67,7 +73,9 @@ notas) adaptan los pasos donde aplican.
    gancho resuelto adentro. Se diseña como unidad, no como sobrante
    del primer párrafo.
 3. **La promesa.** El párrafo tras el corte declara qué se construye o
-   qué se aprende y qué se lleva el lector (sin calentamiento).
+   qué se aprende y qué se lleva el lector (sin calentamiento). Sus
+   anclas concretas (cantidades, nombres propios del diagnóstico)
+   reaparecen en el cuerpo del post.
 4. **El resultado primero.** Mostrar el programa funcionando antes de
    explicarlo: el final gana la atención que la explicación sostiene.
 5. **Las secciones.** Encabezados descriptivos que permiten aprender
@@ -106,6 +114,9 @@ explican el porqué, no solo el qué.
   lleva el marcador; sin él el sistema cae al primer párrafo
   (respaldo, no diseño, válido solo en piezas anteriores a esta
   regla).
+- **Título descriptivo:** nombra el contenido en palabras del
+  lector; el gerundio entra cuando describe la acción del post, no
+  por costumbre.
 - **`description`:** el previo en prosa para metadatos y OG (una
   frase que enuncia la promesa sin adjetivos valorativos).
 
