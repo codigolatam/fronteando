@@ -93,14 +93,14 @@ crearlo es una pieza pequeña dentro del alcance.
 
 Las entradas de la colección traen la declaración `agente` (de la 022) y el `body` crudo; el protocolo común es un `.md` importable con `?raw`; la URL se deriva de `import.meta.env.SITE` + `/articulos/<id>/`. La composición es una utilidad pura en `src/utils/` al estilo de `excerptOf`/`formatFecha`: misma entrada, mismo resultado para página y salidas futuras.
 
-- [ ] Crear `site/src/env.d.ts` con `/// <reference types="astro/client" />`
+- [x] Crear `site/src/env.d.ts` con `/// <reference types="astro/client" />`
   - Aporta: tipa los imports `*?raw` e `import.meta.env.SITE` que la composición necesita; es el archivo estándar de Astro que el proyecto no tenía
-- [ ] Crear `site/src/utils/accompaniment.ts` con `pausesOf(body)` y `protocolOf(article)`
+- [x] Crear `site/src/utils/accompaniment.ts` con `pausesOf(body)` y `protocolOf(article)`
   - Aporta: `pausesOf` extrae los bloques `:::pausa` en orden de aparición y aplana cada indicación a texto plano (regex sobre el crudo, patrón de `excerptOf`); `protocolOf` devuelve `null` sin declaración y con `agente: false`, y con declaración produce protocolo común + bloque `## Ficha del artículo` en `clave: valor` (`URL:` absoluta, `Tema:`, `Nivel:` y `Prerequisitos:` omitidas si vacías, `Pausas:` numeradas por orden en el cuerpo)
   - Contexto: artículo declarado con cero `:::pausa` degrada —produce el protocolo sin sección de pausas, no falla (decisión del usuario); el código va en inglés (corrección del usuario), el contenido que compone sigue en español del blog; `## Ficha del artículo` + `clave: valor` casa con la voz de metadatos de la casa
-- [ ] Ejercitar la composición contra entradas de muestra por la pipeline de Vite y verificar la suite
+- [x] Ejercitar la composición contra entradas de muestra por la pipeline de Vite y verificar la suite
   - Aporta: no hay runner de pruebas; la verificación es por salida inspeccionada (`ssrLoadModule` con entradas estructurales), como en la 022
-- [ ] Arnés: `check`, `lint`, `format:check`, `build` en verde
+- [x] Arnés: `check`, `lint`, `format:check`, `build` en verde
   - Aporta: confirma que `env.d.ts` tipa el import `?raw` y que nada del sitio existente se rompe
 
 ## Suite de pruebas esperada
