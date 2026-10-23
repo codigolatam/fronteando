@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -93,6 +93,6 @@ El resaltado hoy solo tiene cuatro colores efectivos porque el reparto de variab
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-23 — Aprueba (hallazgo de redacción en la regla corregido; changed/deleted próximos en diffs —sin fences diff en el corpus—; comment y punctuation comparten muted por decisión documentada)
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

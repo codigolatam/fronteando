@@ -85,7 +85,8 @@ Tema oscuro —los mismos roles, encendidos para el fondo oscuro:
 
 Reglas: los colores de sintaxis viven solo en bloques de código —ningún
 elemento interactivo los usa—; el acento queda fuera del código salvo
-en los enlaces —la única pieza interactiva del bloque—; comentarios y
+en los tokens de enlace —la sintaxis de enlace hereda el color del
+enlace real—; comentarios y
 puntuación llevan `--color-text-muted` —el ruido se atenúa, no
 desaparece—; los parámetros van en `--color-text` —son identificadores,
 no roles—; en diffs lo insertado usa `--color-syntax-string`, lo
