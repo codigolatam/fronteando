@@ -1,6 +1,6 @@
 ---
 title: "El carrito a lo bruto: construyendo un componente web sin seguir un patrón"
-description: "Un carrito de la compra sin framework que funciona y aun así cuesta mantener: construirlo, pedirle un cambio normal y nombrar el enredo que lo resiste."
+description: "Un carrito de compras sin framework que funciona y aun así cuesta mantener: construirlo, pedirle un cambio normal y nombrar el enredo que lo resiste."
 date: 2026-10-21T19:56:00Z
 categoria: arquitectura
 nivel: intermedio
@@ -8,7 +8,7 @@ tags: ["javascript", "mvc", "dom"]
 ---
 
 Añadir productos, quitar productos y calcular el total: el carrito de
-compra de este artículo funciona sin necesidad de ningún framework, y
+compras de este artículo funciona sin necesidad de ningún framework, y
 sin embargo es código que nadie quiere mantener porque el estado, los
 eventos y el DOM están tan enredados que cualquier cambio conlleva más
 riesgo de lo que debería.
@@ -104,8 +104,8 @@ igual.
 
 ## La petición más normal del mundo
 
-Llega la solicitud del cambio: que la cantidad de cada producto se
-pueda editar en la propia línea del carrito. Es lo que cualquier
+Llega la solicitud: que la cantidad de cada producto se pueda editar
+en la propia línea del carrito. Es lo que cualquier
 tienda hace, un `<input>` por línea. La versión razonable del `<li>`
 y su nuevo manejador quedan así:
 
@@ -163,8 +163,8 @@ cada cambio pequeño obliga a gestionar el cableado a mano, y si se te
 olvida un botón la interfaz se ve igual pero ya no responde.
 
 Cada síntoma encarece el siguiente cambio. Por eso el código espagueti
-no se rompe de golpe hasta que el cambio más simple te lleva toda una
-tarde.
+no se rompe de golpe: se rompe el día que el cambio más simple te
+lleva toda una tarde.
 
 ## Lo que este post no soluciona (todavía)
 
