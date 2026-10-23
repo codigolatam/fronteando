@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -62,5 +62,5 @@ Post corto, sin código, de categoría `meta` — la revisión es de voz y metad
 ## Revisión
 
 - Subagente: 2026-10-23 — Aprueba (previo en dos párrafos —desviación formal sin efecto visible, a decidir—; solape tagline/description del sitio preexistente —nota de corpus, fuera de alcance—)
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-23 — Aprueba
+- Usuario (cierre): 2026-10-23 — Aprueba
