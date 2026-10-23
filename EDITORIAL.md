@@ -117,8 +117,11 @@ explican el porqué, no solo el qué.
 - **Título descriptivo:** nombra el contenido en palabras del
   lector; el gerundio entra cuando describe la acción del post, no
   por costumbre.
-- **`description`:** el previo en prosa para metadatos y OG (una
-  frase que enuncia la promesa sin adjetivos valorativos).
+- **`description`:** la promesa en una frase escrita para leerse
+  fuera del post: alimenta la meta descripción (SERP), las tarjetas
+  OG y el RSS — la ve quien aún no ha abierto nada. Máximo ~150
+  caracteres, la tensión o el gancho dentro, sin adjetivos
+  valorativos. No es el previo: es su propia pieza.
 
 ## Taxonomía
 
