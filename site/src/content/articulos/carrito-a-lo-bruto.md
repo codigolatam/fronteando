@@ -1,5 +1,5 @@
 ---
-title: "El carrito a lo bruto: construir un componente sin patrón"
+title: "El carrito a lo bruto: construyendo un componente web sin seguir un patrón"
 description: "Un carrito de la compra sin framework que funciona y aun así cuesta mantener: construirlo, pedirle un cambio normal y nombrar el enredo que lo resiste."
 date: 2026-10-21T19:56:00Z
 categoria: arquitectura
@@ -7,27 +7,28 @@ nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
 ---
 
-Añade productos, quita productos, el total cuadra: el carrito de la
-compra de este artículo funciona sin tocar ningún framework. Y sin
-embargo es código que nadie quiere mantener, porque el estado, los
-eventos y el DOM están tan enredados que cualquier cambio cuesta más
-de lo que debería.
+Añadir productos, quitar productos y calcular el total: el carrito de
+compra de este artículo funciona sin necesidad de ningún framework, y
+sin embargo es código que nadie quiere mantener porque el estado, los
+eventos y el DOM están tan enredados que cualquier cambio conlleva más
+riesgo de lo que debería.
 
 <!--more-->
 
-Vamos a construir ese carrito a lo bruto (catálogo, añadir, quitar y
-total, sin patrón de por medio) y después le vamos a pedir el cambio
-más normal del mundo: que la cantidad de cada producto se pueda editar
-en la propia lista. El código se va a resistir, y la resistencia tiene
-nombre: al terminar podrás decir con precisión qué tres cosas se
-enredaron en un componente sin estructura y por qué cada cambio nuevo
-sale más caro que el anterior.
+Vamos a construir el carrito y sus funcionalidades (catálogo, añadir,
+quitar y total) a lo bruto, sin un patrón de diseño, y después vamos
+a pedir el cambio más normal del mundo: que la cantidad de cada
+producto se pueda editar en la propia lista. El código se va a
+resistir a los cambios debido a la forma en que está construido y al
+terminar podrás decir con precisión qué cosas se enredaron en este
+componente sin estructura y por qué cada cambio nuevo sale más caro
+que el anterior.
 
 ## El resultado primero
 
-Antes de mirarle las tripas conviene verlo funcionar. Este es el
-carrito completo, tal como lo escribe cualquiera cuando el componente
-es pequeño y el framework parece exceso:
+Antes de mirar su forma y estructura conviene verlo funcionar. Este es
+el carrito completo, tal como lo escribe cualquiera cuando el
+componente es pequeño y se está trabajando sin un framework:
 
 ```html
 <ul id="catalogo"></ul>
@@ -71,41 +72,42 @@ productos.forEach((p) => {
 });
 ```
 
-Pulsando los tres «Añadir» la lista muestra tres líneas, el contador
-dice 3 y el total $250. Quitando el teclado quedan dos líneas y
-$205. Nada que reprochar: el componente hace lo que promete.
+Al hacer clic en los tres «Añadir» la lista muestra tres líneas, el
+contador dice 3 y el total $250. Quitando el teclado quedan dos
+líneas y $205. Nada que reprochar: el componente hace lo que promete.
 
-## Un componente como otro cualquiera
+## Un componente como cualquier otro
 
 Nadie escribe este código con mala intención. Es el resultado natural
-de ir resolviendo lo que la pantalla pide, una línea cada vez (y sin
-embargo, si lo lees con atención, las decisiones ya están tomadas).
+de ir resolviendo lo que la pantalla pide, una línea cada vez.
 
 El estado está repartido. `carrito` guarda los productos, `total` y
-`unidades` guardan dos números, y el propio DOM guarda otro trozo de
-la verdad: cada `<li>` lleva el nombre, la cantidad y el subtotal
-soldados en su texto. ¿Cuántos teclados hay en el carrito? Depende de
+`unidades` guardan los datos numéricos, y el DOM guarda otra parte
+de la verdad: cada `<li>` lleva el nombre, la cantidad y el subtotal
+dentro de su texto. ¿Cuántos teclados hay en el carrito? Depende de
 a quién le preguntes: el array sabe una cosa, el `<li>` otra y el
 contador otra. Mientras coincidan, nadie lo nota. Y de las tres
 copias, las que viven en el DOM son las traicioneras: no salen en un
 `console.log` como el array, pero son las que el usuario tiene
 delante.
 
-Los manejadores tocan de todo. El de «Añadir» empuja al array, crea un
-nodo, le cablea otro manejador y actualiza dos `<span>`; el de
-«Quitar» borra el nodo, toca dos variables, dos `<span>` y el array.
-Ninguno tiene una responsabilidad que quepa en una frase.
+Los manejadores de eventos tocan de todo. El de «Añadir» agrega datos
+al array, crea un nodo, le cablea otro manejador y actualiza dos
+`<span>`; el de «Quitar» borra el nodo, toca dos variables, dos
+`<span>` y el array. Ninguno tiene una responsabilidad que quepa
+en una frase.
 
-Y el cableado es manual y disperso: cada `<li>` nuevo nace con sus
-manejadores conectados a mano desde dentro de otro manejador. Nada
-conecta las piezas salvo nuestra costumbre de hacerlo siempre igual.
+Además el cableado es manual y disperso: cada `<li>` nuevo nace con
+sus manejadores conectados a mano desde dentro de otro manejador.
+Nada conecta las piezas salvo nuestra costumbre de hacerlo siempre
+igual.
 
 ## La petición más normal del mundo
 
-Llega el cambio: que la cantidad de cada producto se pueda editar en
-la propia línea del carrito. Es lo que cualquier tienda hace, un
-`<input>` por línea. La versión razonable del `<li>` y su nuevo
-manejador quedan así:
+Llega la solicitud del cambio: que la cantidad de cada producto se
+pueda editar en la propia línea del carrito. Es lo que cualquier
+tienda hace, un `<input>` por línea. La versión razonable del `<li>`
+y su nuevo manejador quedan así:
 
 ```js
 // extracto: dentro del manejador de «Añadir», el <li> cambia
@@ -125,89 +127,81 @@ item.querySelector("input").addEventListener("change", (e) => {
 
 Fíjate en lo que ese `change` tuvo que hacer para una sola edición:
 tocar el array, recalcular dos variables, pintar dos `<span>` y
-reescribir el `<li>` entero. Cantidad, unidades y subtotal viven ahora
-en tres sitios a la vez (el array, el `value` del input y el texto del
-`<li>`), y todas hay que mantenerlas a mano.
+reescribir el `<li>` entero. Los datos de cantidad, unidades y
+subtotal ahora viven en tres sitios a la vez (el array, el `value`
+del input y el texto del `<li>`), y todas hay que mantenerlas a mano.
 
-Pero lo peor no es el trabajo extra: es que funciona y aun así rompe
-cosas. Ejecutado de verdad, cambiar la cantidad del teclado a 3
+Lo peor no es el trabajo extra: es que funciona y aun así rompe
+cosas. Al ejecutarlo de verdad, cambiar la cantidad del teclado a 3
 actualiza todo correctamente (total $135, contador 3, subtotal
 $135) y en ese mismo instante el botón «Quitar» de esa línea deja de
-funcionar: el `innerHTML` dejó el botón viejo fuera del DOM y el nuevo
-nació sin manejadores. El input que acababas de usar corrió
-la misma suerte: nodo nuevo, foco perdido a mitad de la edición. La
-pantalla miente: parece un carrito normal y es un carrito con un
-botón muerto y un campo que ya no escucha.
+funcionar: el `innerHTML` eliminó el botón viejo del DOM y el nuevo
+nació sin manejadores. El input corrió la misma suerte: con un nodo
+nuevo el foco se perdió a mitad de la edición.
+
+La pantalla miente: parece un carrito normal y es un carrito con un
+botón muerto y un campo que ya no escucha los cambios.
 
 ## El diagnóstico: tres cosas enredadas
 
-El carrito no está mal programado; está enredado. Y el enredo tiene
+El carrito no está mal programado, está enredado, y el enredo tiene
 tres caras reconocibles:
 
 **El estado no tiene dueño.** La verdad vive repartida entre un array,
 unas variables sueltas y el propio DOM, y ninguna es la referencia de
-las demás. Cada actualización debe acordarse de todas las copias; la
-que se olvide es el bug de mañana.
+las demás. Cada actualización debe aplicarse en todas las copias. Que
+una se olvide es un bug el día de mañana.
 
 **Los manejadores deciden de todo.** Cada evento ejecuta directamente
-sus consecuencias (mutar estado, repintar, cablear) sin pasar por
-ningún sitio común. Añadir una vía nueva (un input, un cupón, un
-contador más) significa repetir la cascada en un sitio más.
+las acciones (mutar estado, repintar, cablear) sin pasar por ningún
+sitio común. Añadir una vía nueva (un input, un cupón, un contador
+más) significa repetir la cascada en un sitio más.
 
-**El render destruye y re-cablea.** Actualizar el marcado con
+**El render destruye y re-cablea.** Actualizar la maqueta con
 `innerHTML` crea nodos nuevos que nacen sin manejadores ni estado:
-cada cambio pequeño obliga a rehacer el cableado a mano, y el que se
-olvide de un botón deja una interfaz que parece viva y está muerta.
-
-De las tres, la última tiene ya media respuesta en este blog:
-[«Un store reactivo en vanilla JS»](/articulos/un-store-reactivo-en-vanilla-js/)
-enseñaba cómo un mecanismo mínimo mantiene la pantalla al día sin
-re-cablear nada a mano. Las otras dos siguen abiertas.
+cada cambio pequeño obliga a gestionar el cableado a mano, y si se te
+olvida un botón la interfaz deja de funcionar.
 
 Cada síntoma encarece el siguiente cambio. Por eso el código espagueti
-no se rompe de golpe: se encarece gota a gota, hasta que el cambio más
-tonto cuesta una tarde.
+no se rompe de golpe hasta que el cambio más simple te lleva toda una
+tarde.
 
-## Lo que este post no arregla (todavía)
+## Lo que este post no soluciona (todavía)
 
 Este capítulo se queda en el diagnóstico a propósito: no hemos
-separado nada, y el carrito del final sigue tan enredado como el del
-principio. Desenredarlo (quién guarda el estado, quién escucha, quién
-pinta) es exactamente el trabajo de los capítulos que siguen.
+separado nada, y el carrito del final sigue siendo tan enredado como
+el del principio. Desenredarlo (separar en capas quién guarda el
+estado, quién escucha los eventos, quién pinta los elementos) es
+exactamente el trabajo de los capítulos siguientes.
 
-Tampoco el ejemplo es un espantapájaros: es el código que escribe una
-persona razonable con prisa razonable, y sus síntomas son los de un
-componente real pequeño. Uno más grande no introduce problemas nuevos;
-hace que estos cuesten más. Y la versión corta también es verdad: para
-un catálogo de tres productos, meter un patrón sería sobre-ingeniería
-y este código la cantidad justa; la trampa es que el enredo no se
-declara en ningún sitio, solo aparece, como acaba de pasar, cuando
-llega el cambio normal.
+El ejemplo tampoco es una versión difícil de ver, es el código que
+escribe una persona razonable con prisa y tiene la forma de un
+componente real pequeño. En uno más grande no se introducen problemas
+nuevos sino que hace que estos cuesten más.
 
-Habrá quien ya esté pensando en los escapes de manual: delegar los
+Habrá quien ya esté pensando en las soluciones de manual: delegar los
 eventos en el `<ul>` padre (que nunca se regenera y por tanto nunca
 pierde sus manejadores) o tocar solo el trozo que cambia (un
 `textContent` en el `.subtotal` en lugar de rehacer el `<li>`
-entero). Los dos
-funcionan, y ninguno desenreda nada: son dos líneas más de disciplina
-que hay que acordarse de mantener, aplicadas a un síntoma de tres. El
-carrito con esos parches sigue sin dueño para su estado ni sitio
-común para sus decisiones.
+entero). Los dos funcionan pero ninguno mejora nada: son dos líneas
+más que hay que acordarse de mantener. El carrito con esos parches
+sigue sin gestionar su estado ni tener un sitio común para sus
+decisiones.
 
-Y aunque el patrón que falta aquí tiene nombre y décadas (Modelo,
-Vista y Controlador, que [Trygve Reenskaug concibió en Xerox
+Aunque el patrón que falta aquí tiene nombre y décadas de historia
+(Modelo, Vista y Controlador, que [Trygve Reenskaug concibió en Xerox
 PARC](http://www.ifi.uio.no/~trygver/1979/mvc-2/1979-12-MVC.pdf)
 allá por 1979), conocerlo de nombre no te dice dónde cortar tu
-componente. Por eso la serie lo construye pieza a pieza en lugar de
-copiarlo de un diagrama.
+componente. Por eso en esta serie lo construimos pieza a pieza en
+lugar de copiarlo de un diagrama.
 
 ## El punto
 
-El espagueti no es un código roto: es un código sin reparto. Míralo
-al revés de cómo debería ser: el estado se escribe en la pantalla, la
-pantalla se lee como estado y los eventos deciden y repintan a la
-vez. Tres preguntas quedan flotando sobre el carrito (quién guarda
-el estado, quién decide lo que pasa y quién pinta) y el enredo es lo
-que ocurre cuando todas se responden con «donde caiga». La siguiente
-parada de la serie responde la primera: el Modelo, el estado que por
-fin tiene un sitio.
+El ejemplo del carrito en la forma que tiene muestra algunos errores
+comunes: el estado se escribe en la pantalla, la pantalla se lee como
+estado y los eventos gestionan tanto la lógica como la composición
+visual. Tres preguntas quedan flotando sobre el carrito: quién guarda
+el estado, quién decide lo que pasa y quién pinta los elementos. El
+enredo es lo que ocurre cuando todas se responden con «donde caiga».
+La siguiente parte de la serie responde la primera pregunta: el estado
+se gestiona mediante un Modelo.
