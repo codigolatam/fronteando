@@ -1,0 +1,61 @@
+# Revisar el post de reactividad con la guía editorial nueva
+
+## Estado
+
+**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+
+## Tipo
+
+mantenimiento
+
+## Objetivo
+
+Actualizar «Un store reactivo en vanilla JS» a la guía editorial vigente —español latinoamericano neutro, claro antes que denso, metáforas simples y comunes, `description` como pieza de preview, eco de la promesa, título descriptivo, incisos entre paréntesis— para que el corpus publicado hable con una sola voz.
+
+## Dependencias
+
+- Ninguna
+
+## Entrada
+
+- `EDITORIAL.md` vigente — la guía que el dogfooding de la 018 dejó actualizada.
+- `site/src/content/articulos/un-store-reactivo-en-vanilla-js.md` — el post a revisar, publicado en la tarea 011.
+- `docs/lessons/espanol-del-blog.md` y `docs/lessons/copy-fuera-del-post.md` — las lecciones que esta revisión debe aplicar.
+- `site/src/content/articulos/carrito-a-lo-bruto.md` — el capítulo 1 como referencia de voz al día.
+- La fricción abierta de la 018 sobre incisos: este post usa raya larga sistemáticamente; su revisión decide el precedente del corpus.
+
+## Resultado esperado
+
+- El post revisado —voz, estructura y metadatos conformes a la guía— publicado vía PR.
+- Una lista de las divergencias encontradas entre el texto publicado y la guía vigente, para evaluar si la guía cubre bien la revisión de corpus.
+
+## Criterios de calidad
+
+- Los incisos quedan según la decisión tomada (paréntesis o regla relajada), los regionalismos fuera y las figuras restringidas a metáforas simples y comunes.
+- La `description` está reescrita como pieza propia para preview —efecto y consecuencia que el lector reconoce—; el título se evalúa contra la regla descriptiva.
+- El código del post sigue ejecutándose igual; si un snippet se toca, se verifica su comportamiento.
+- La ronda mecánica corre sobre la versión final y la revisión editorial cubre el diff completo.
+- `check`, `lint`, `format:check` y `build` en verde.
+
+## Procedimiento sugerido
+
+1. Releer el post completo contra `EDITORIAL.md` y las lecciones, registrando cada divergencia —voz, metáforas, regionalismos, incisos, description, título, eco de la promesa—.
+2. Decidir con el usuario el precedente de los incisos (normalizar el corpus a paréntesis o relajar la regla) y la lista de correcciones antes de tocar el texto.
+3. Aplicar las correcciones, correr la ronda mecánica y la revisión editorial sobre el diff.
+4. Publicar por el ciclo general.
+
+## Notas
+
+- Es la primera revisión de corpus: las divergencias registradas alimentan la evaluación de si la guía cubre bien la actualización de posts ya publicados.
+- El post fue el precedente de voz antes de que existiera la guía completa; la decisión sobre incisos afecta también a `hola-fronteando.md` si la tuviera.
+
+## Contexto
+
+- `Lecciones:` `docs/lessons/espanol-del-blog.md`, `docs/lessons/copy-fuera-del-post.md`, `docs/lessons/incisos-entre-parentesis.md`
+- `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el previo sale del cuerpo.
+
+## Revisión
+
+- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
