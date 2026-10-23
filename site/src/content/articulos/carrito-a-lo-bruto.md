@@ -1,7 +1,7 @@
 ---
 title: "El carrito a lo bruto: construyendo un componente web sin seguir un patrón"
 description: "Un carrito de compras construido sin seguir un patrón de diseño cuesta mantener: veremos por qué cada cambio nuevo sale más caro que el anterior."
-date: 2026-10-21T19:56:00Z
+date: 2026-10-23T16:54:09Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
