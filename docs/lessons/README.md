@@ -88,3 +88,11 @@
 - changelog-de-producto.md
   - Disparadores: changelog, CHANGELOG.md, entrada, release, publicación, artículo, mantener-changelog
   - Resumen: las publicaciones de artículos no van al changelog —registra capacidades del producto, no contenido—
+
+- idioma-del-codigo.md
+  - Disparadores: código nuevo, identificador, nombre de función, nombre de variable, comentario, nombre de archivo, .ts, utilidad, inglés
+  - Resumen: el código nuevo se escribe en inglés —identificadores, comentarios y nombres de archivo—; el español queda para el contenido editorial
+
+- nombres-de-tests.md
+  - Disparadores: test, vitest, describe, it, expect, .test.ts, nombre de test, suite de pruebas
+  - Resumen: los tests se nombran por comportamiento —`describe` la unidad, `when` el contexto, `it` el comportamiento—, sin referencias internas del proyecto

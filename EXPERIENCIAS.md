@@ -174,3 +174,17 @@
   Obtenido: se registró como entrada la publicación del capítulo 1 —contenido, no capacidad—
   Corrección: las publicaciones de artículos no van al changelog; el changelog registra lo que el producto puede hacer, no el contenido que el blog publica
   Estado: consolidada
+
+- Id: 20261023T143838
+  Tarea: docs/tasks/023-composicion-del-material.md
+  Esperado: el código nuevo sale en inglés
+  Obtenido: el plan e implementación trajeron identificadores, comentarios y nombres de archivo en español (acompanamiento.ts, protocolo-acompanamiento.md, decl, ficha)
+  Corrección: funciones, variables, comentarios y nombres de archivo de código en inglés; solo el contenido editorial —metadato agente, texto compuesto del protocolo— sigue en español del blog
+  Estado: consolidada
+
+- Id: 20261023T143840
+  Tarea: docs/tasks/023-composicion-del-material.md
+  Esperado: los nombres de los tests siguen convenciones de testing
+  Obtenido: los nombres llevaban referencias internas del proyecto —CU-1, letras ZOMBIE— en lugar de describir el comportamiento
+  Corrección: describe nombra la unidad, when el contexto e it el comportamiento esperado; nada de identificadores internos del proyecto en los nombres de test
+  Estado: consolidada
