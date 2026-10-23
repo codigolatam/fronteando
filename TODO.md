@@ -16,3 +16,5 @@
 ## General
 
 ## Propuestas en revisión
+
+- [p] docs/proposals/003-lectura-acompanada-por-llm/ — Lectura acompañada por LLM (4 borradores)

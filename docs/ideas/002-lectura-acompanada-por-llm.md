@@ -3,6 +3,7 @@
 > **Tipo:** idea de funcionalidad — épica (complejidad media-alta)
 > **Fecha:** 2026-10
 > **Orden sugerido:** 2 de 5 (bloque inicial) — es el diferenciador editorial y define el esquema de contenido que `blog-legible-para-maquinas` consume.
+> **Procesada en:** docs/proposals/003-lectura-acompanada-por-llm
 
 ## Problema
 
