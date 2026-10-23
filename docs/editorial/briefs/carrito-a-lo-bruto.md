@@ -44,8 +44,8 @@
 ```js
 document.body.innerHTML = `<ul id="carrito"><li>Teclado <button>Quitar</button></li></ul><input id="cantidad" value="2">`;
 let clicks = 0;
-const btnViejo = document.querySelector('button');
-btnViejo.addEventListener('click', () => clicks++);
+const btnViejo = document.querySelector("button");
+btnViejo.addEventListener("click", () => clicks++);
 document.body.innerHTML = `<ul id="carrito"><li>Teclado <button>Quitar</button></li><li>Ratón <button>Quitar</button></li></ul><input id="cantidad">`;
 // salida verificada: { clicksTrasReRender: 1, valorInputTrasReRender: "", btnViejoSigueEnDOM: false }
 ```
@@ -82,4 +82,4 @@ document.body.innerHTML = `<ul id="carrito"><li>Teclado <button>Quitar</button><
 - [x] El carrito espagueti es código honesto, no un hombre de paja: la resistencia del cambio se demuestra, no se declara
 - [x] El bug del foco (el input de cantidad destruido por el re-render) se reproduce y se muestra
 - [x] Ninguna separación se adelanta: el post termina con el enredo nombrado, no con el arreglo
-- [x] El enlace al post del mini-store aparece donde el hilo lo pide, sin forzarlo
+- [x] El enlace al mini-store se evaluó y se decidió fuera: el enlazado entre posts es criterio de la serie, no del capítulo
