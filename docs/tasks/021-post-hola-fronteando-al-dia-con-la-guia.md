@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -48,8 +48,19 @@ Actualizar «Hola, Fronteando» a la guía editorial vigente —español latinoa
 
 - `Lecciones:` `docs/lessons/espanol-del-blog.md`, `docs/lessons/copy-fuera-del-post.md`
 
+## Divergencias encontradas
+
+Post corto, sin código, de categoría `meta` — la revisión es de voz y metadatos; las divergencias mapean todas a regla escrita:
+
+- **`description` en modo agenda:** «Qué es Fronteando, para quién es y qué vas a encontrar aquí.» enumera las secciones del post en vez de prometerle algo a quien aún no lo abrió — la pieza de preview que la guía y `copy-fuera-del-post` piden. _Corregida:_ «Un blog de frontend en español para quien quiere entender, no solo resolver la tarea de hoy.» — línea promesa-y-contraste elegida por el usuario; los asistentes quedan fuera por ser apoyo, no idea central.
+- **«sobre lo que usas a diario»:** accesibilidad y rendimiento no se usan, son propiedades de lo que se construye. _Corregido_ a «sobre lo que construyes a diario» — segunda pasada con la descripción como lente.
+- **Dos incisos con raya larga:** «—piezas para entender, no recetas para copiar—» y «—o asistentes—» → paréntesis, decisión de corpus vigente desde la 019.
+- **`<!--more-->` ausente:** sin marcador el previo de portada cae al primer párrafo solo; los otros dos posts lo usan y el segundo párrafo completa la unidad del gancho (qué es + para quién). _Corregido_ insertando el marcador tras ese párrafo.
+- **«sacar partido a un agente»:** la forma continental más común es «sacar provecho de». _Corregido_ a «sacar provecho de un agente como apoyo».
+- **Conforme de origen:** título descriptivo, español neutro sin regionalismos ni nominalizaciones proscritas, metáforas simples («primera página», «acaba de nacer»), voz y función `meta` intactas —presentar el proyecto, no enseñar—.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-23 — Aprueba (previo en dos párrafos —desviación formal sin efecto visible, a decidir—; solape tagline/description del sitio preexistente —nota de corpus, fuera de alcance—)
+- Usuario (ejecución): 2026-10-23 — Aprueba
+- Usuario (cierre): 2026-10-23 — Aprueba

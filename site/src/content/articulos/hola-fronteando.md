@@ -1,6 +1,6 @@
 ---
 title: "Hola, Fronteando"
-description: "Qué es Fronteando, para quién es y qué vas a encontrar aquí."
+description: "Un blog de frontend en español para quien quiere entender, no solo resolver la tarea de hoy."
 date: 2026-10-16T16:57:45Z
 categoria: meta
 tags: ["anuncio"]
@@ -12,6 +12,8 @@ medio**.
 
 Escribimos para quien quiere entender cómo funcionan las cosas por
 dentro, no solo para quien necesita resolver la tarea de hoy.
+
+<!--more-->
 
 ## Por qué existe
 
@@ -31,8 +33,8 @@ en español.
 
 ## Qué vas a encontrar
 
-Artículos de fondo —piezas para entender, no recetas para copiar— sobre
-lo que usas a diario:
+Artículos de fondo (piezas para entender, no recetas para copiar) sobre
+lo que construyes a diario:
 
 - **CSS:** layouts, cascada y lo que el navegador hace con tus estilos.
 - **JavaScript:** el modelo mental del lenguaje, no solo su sintaxis.
@@ -42,13 +44,13 @@ lo que usas a diario:
 
 ## Con o sin asistente
 
-Quien aprende frontend hoy convive con los agentes de código —o
-asistentes—: unos los tienen siempre a mano, otros prefieren no usarlos.
+Quien aprende frontend hoy convive con los agentes de código (o
+asistentes): unos los tienen siempre a mano, otros prefieren no usarlos.
 Nuestro objetivo es que una persona aprenda y mejore, no que una máquina
 resuelva por ella.
 
 Por eso el contenido está pensado para funcionar en ambos casos: habrá
-recursos interactivos y secciones diseñadas para sacar partido a un
+recursos interactivos y secciones diseñadas para sacar provecho de un
 agente como apoyo, pero ningún artículo lo exige. Si lo usas, te sirve
 de compañero; si no, el texto se sostiene solo.
 
