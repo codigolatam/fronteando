@@ -111,17 +111,25 @@ y su nuevo manejador quedan así:
 
 ```js
 // extracto: dentro del manejador de «Añadir», el <li> cambia
-item.innerHTML = `${p.nombre} x<input type="number" value="1" min="1"> — <span class="subtotal">$${p.precio}</span> <button>Quitar</button>`;
+item.innerHTML = `${p.nombre}
+  x<input type="number" value="1" min="1">
+  — <span class="subtotal">$${p.precio}</span>
+  <button>Quitar</button>`;
 item.querySelector("input").addEventListener("change", (e) => {
   const cantidad = Number(e.target.value);
-  const i = carrito.findIndex((c) => c.id === p.id);
-  carrito[i].cantidad = cantidad;
+  // tocar el array
+  carrito.find((c) => c.id === p.id).cantidad = cantidad;
+  // recalcular las dos variables
   total = carrito.reduce((s, c) => s + c.precio * c.cantidad, 0);
   unidades = carrito.reduce((s, c) => s + c.cantidad, 0);
+  // pintar los dos <span>
   document.querySelector("#total").textContent = `$${total}`;
   document.querySelector("#contador").textContent = unidades;
-  // y para que el <li> enseñe el subtotal nuevo, lo re-renderizamos
-  item.innerHTML = `${p.nombre} x<input type="number" value="${cantidad}" min="1"> — <span class="subtotal">$${p.precio * cantidad}</span> <button>Quitar</button>`;
+  // reescribir el <li> entero para que enseñe el subtotal nuevo
+  item.innerHTML = `${p.nombre}
+    x<input type="number" value="${cantidad}" min="1">
+    — <span class="subtotal">$${p.precio * cantidad}</span>
+    <button>Quitar</button>`;
 });
 ```
 
