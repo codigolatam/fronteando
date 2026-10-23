@@ -95,9 +95,9 @@ Las entradas de la colección traen la declaración `agente` (de la 022) y el `b
 
 - [ ] Crear `site/src/env.d.ts` con `/// <reference types="astro/client" />`
   - Aporta: tipa los imports `*?raw` e `import.meta.env.SITE` que la composición necesita; es el archivo estándar de Astro que el proyecto no tenía
-- [ ] Crear `site/src/utils/acompanamiento.ts` con `pausasOf(body)` y `protocoloDe(articulo)`
-  - Aporta: `pausasOf` extrae los bloques `:::pausa` en orden de aparición y aplana cada indicación a texto plano (regex sobre el crudo, patrón de `excerptOf`); `protocoloDe` devuelve `null` sin declaración y con `agente: false`, y con declaración produce protocolo común + bloque `## Ficha del artículo` en `clave: valor` (`URL:` absoluta, `Tema:`, `Nivel:` y `Prerequisitos:` omitidas si vacías, `Pausas:` numeradas por orden en el cuerpo)
-  - Contexto: artículo declarado con cero `:::pausa` degrada —produce el protocolo sin sección de pausas, no falla (decisión del usuario); el cierre del común («si después de estas reglas viene la URL…») no prescribe formato, pero `## Ficha del artículo` + `clave: valor` casa con la voz de metadatos de la casa y se lee limpio tras el texto
+- [ ] Crear `site/src/utils/accompaniment.ts` con `pausesOf(body)` y `protocolOf(article)`
+  - Aporta: `pausesOf` extrae los bloques `:::pausa` en orden de aparición y aplana cada indicación a texto plano (regex sobre el crudo, patrón de `excerptOf`); `protocolOf` devuelve `null` sin declaración y con `agente: false`, y con declaración produce protocolo común + bloque `## Ficha del artículo` en `clave: valor` (`URL:` absoluta, `Tema:`, `Nivel:` y `Prerequisitos:` omitidas si vacías, `Pausas:` numeradas por orden en el cuerpo)
+  - Contexto: artículo declarado con cero `:::pausa` degrada —produce el protocolo sin sección de pausas, no falla (decisión del usuario); el código va en inglés (corrección del usuario), el contenido que compone sigue en español del blog; `## Ficha del artículo` + `clave: valor` casa con la voz de metadatos de la casa
 - [ ] Ejercitar la composición contra entradas de muestra por la pipeline de Vite y verificar la suite
   - Aporta: no hay runner de pruebas; la verificación es por salida inspeccionada (`ssrLoadModule` con entradas estructurales), como en la 022
 - [ ] Arnés: `check`, `lint`, `format:check`, `build` en verde
