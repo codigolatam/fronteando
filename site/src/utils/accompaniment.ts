@@ -1,9 +1,9 @@
 import type { CollectionEntry } from "astro:content";
-import commonProtocol from "../data/protocolo-acompanamiento.md?raw";
+import commonProtocol from "../data/accompaniment-protocol.md?raw";
 
-const PAUSA_BLOCK = /^:::pausa[ \t]*\r?\n([\s\S]*?)\r?\n:::[ \t]*$/gm;
+const PAUSE_BLOCK = /^:::pausa[ \t]*\r?\n([\s\S]*?)\r?\n:::[ \t]*$/gm;
 
-// Indicación de una pausa a texto plano en una línea: sin markup.
+// A pause indication as plain text on one line: no markup.
 function plainText(md: string): string {
   return md
     .replace(/```[\s\S]*?```/g, "")
@@ -20,37 +20,37 @@ function plainText(md: string): string {
     .trim();
 }
 
-// Las indicaciones de las pausas del cuerpo, en orden de lectura.
-// Los fences de código se despojan antes: un :::pausa dentro de un
-// ejemplo no es una pausa real.
+// The pause indications from the body, in reading order.
+// Code fences are stripped first: a :::pausa inside an
+// example is not a real pause.
 export function pausesOf(body: string): string[] {
   const withoutCode = body.replace(/```[\s\S]*?(```|$)/g, "");
-  return [...withoutCode.matchAll(PAUSA_BLOCK)]
+  return [...withoutCode.matchAll(PAUSE_BLOCK)]
     .map((m) => plainText(m[1]))
     .filter((p) => p.length > 0);
 }
 
-// Protocolo de lectura acompañada: común + ficha del artículo.
-// null cuando el artículo no lo declara o declara el opt-out.
+// Accompanied-reading protocol: common text + article card.
+// null when the article does not declare it or opts out.
 export function protocolOf(
   article: CollectionEntry<"articulos">,
 ): string | null {
-  const decl = article.data.agente;
-  if (!decl) return null;
+  const declaration = article.data.agente;
+  if (!declaration) return null;
 
   const lines = [
     `URL: ${import.meta.env.SITE}/articulos/${article.id}/`,
-    `Tema: ${decl.tema}`,
+    `Tema: ${declaration.tema}`,
   ];
   if (article.data.nivel) lines.push(`Nivel: ${article.data.nivel}`);
-  if (decl.prerequisitos.length > 0)
-    lines.push(`Prerequisitos: ${decl.prerequisitos.join(", ")}`);
+  if (declaration.prerequisitos.length > 0)
+    lines.push(`Prerequisitos: ${declaration.prerequisitos.join(", ")}`);
 
-  const ficha = ["## Ficha del artículo", "", ...lines];
+  const details = ["## Ficha del artículo", "", ...lines];
   const pauses = pausesOf(article.body ?? "");
   if (pauses.length > 0) {
-    ficha.push("", "Pausas:", ...pauses.map((p, i) => `${i + 1}. ${p}`));
+    details.push("", "Pausas:", ...pauses.map((p, i) => `${i + 1}. ${p}`));
   }
 
-  return `${commonProtocol.trimEnd()}\n\n${ficha.join("\n")}\n`;
+  return `${commonProtocol.trimEnd()}\n\n${details.join("\n")}\n`;
 }

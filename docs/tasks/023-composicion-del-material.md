@@ -98,8 +98,9 @@ Las entradas de la colección traen la declaración `agente` (de la 022) y el `b
 - [x] Crear `site/src/utils/accompaniment.ts` con `pausesOf(body)` y `protocolOf(article)`
   - Aporta: `pausesOf` extrae los bloques `:::pausa` en orden de aparición y aplana cada indicación a texto plano (regex sobre el crudo, patrón de `excerptOf`); `protocolOf` devuelve `null` sin declaración y con `agente: false`, y con declaración produce protocolo común + bloque `## Ficha del artículo` en `clave: valor` (`URL:` absoluta, `Tema:`, `Nivel:` y `Prerequisitos:` omitidas si vacías, `Pausas:` numeradas por orden en el cuerpo)
   - Contexto: artículo declarado con cero `:::pausa` degrada —produce el protocolo sin sección de pausas, no falla (decisión del usuario); el código va en inglés (corrección del usuario), el contenido que compone sigue en español del blog; `## Ficha del artículo` + `clave: valor` casa con la voz de metadatos de la casa
-- [x] Ejercitar la composición contra entradas de muestra por la pipeline de Vite y verificar la suite
-  - Aporta: no hay runner de pruebas; la verificación es por salida inspeccionada (`ssrLoadModule` con entradas estructurales), como en la 022
+- [x] Cubrir la suite con tests continuos: vitest + `accompaniment.test.ts`, con `import.meta.env.SITE` definido desde `astro.config.mjs` en `vitest.config.ts`
+  - Aporta: las expectativas de la suite quedan ejecutables en cada cambio, no solo inspeccionadas una vez
+  - Contexto: el usuario pidió la capa de tests con vitest durante la ejecución (antes: verificación por salida inspeccionada sin runner); vitest@4.1.12 por vite ^8 (peer) y madurez >7 días
 - [x] Arnés: `check`, `lint`, `format:check`, `build` en verde
   - Aporta: confirma que `env.d.ts` tipa el import `?raw` y que nada del sitio existente se rompe
 
@@ -118,6 +119,11 @@ Las entradas de la colección traen la declaración `agente` (de la 022) y el `b
   - Con `agente: false`, devuelve `null` — el opt-out se preserva. (I)
 - **Arnés:**
   - `check`, `lint`, `format:check` y `build` en verde; `env.d.ts` tipa el import `?raw`.
+
+## Desviaciones del plan
+
+- **Capa de tests con vitest.** El plan verificaba la composición por salida inspeccionada (sin runner); el usuario pidió dejar las pruebas continuas: se instaló `vitest@^4` (resuelve 4.1.12, compatible con vite ^8 y >7 días publicada), script `test`, `vitest.config.ts` que define `import.meta.env.SITE` importando `astro.config.mjs` —una sola fuente del dominio— y `src/utils/accompaniment.test.ts` con las 10 expectativas de la suite trazadas a CU-1/CU-3/CU-4. Decisión del usuario, registrada.
+- **Código nuevo íntegro en inglés.** El usuario corrigió el plan: el código va en inglés. Además de `pausesOf`/`protocolOf`, se renombraron `PAUSA_BLOCK`→`PAUSE_BLOCK`, `decl`→`declaration`, `ficha`→`details`, los comentarios a inglés y el archivo de datos `protocolo-acompanamiento.md`→`accompaniment-protocol.md` (referencia actualizada en `EDITORIAL.md`). El contenido compuesto sigue en español del blog.
 
 ## Revisión
 
