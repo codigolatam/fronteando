@@ -9,6 +9,10 @@ function plainText(md: string): string {
     .replace(/```[\s\S]*?```/g, "")
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
     .replace(/\[([^\]]*)\]\([^)]*\)/g, "$1")
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^>\s?/gm, "")
+    .replace(/^\s*[-*+]\s+/gm, "")
+    .replace(/^\s*\d+\.\s+/gm, "")
     .replace(/(\*\*|__)([\s\S]*?)\1/g, "$2")
     .replace(/(\*|_)([^*_]*?)\1/g, "$2")
     .replace(/`([^`]*)`/g, "$1")
@@ -17,8 +21,11 @@ function plainText(md: string): string {
 }
 
 // Las indicaciones de las pausas del cuerpo, en orden de lectura.
+// Los fences de código se despojan antes: un :::pausa dentro de un
+// ejemplo no es una pausa real.
 export function pausesOf(body: string): string[] {
-  return [...body.matchAll(PAUSA_BLOCK)]
+  const withoutCode = body.replace(/```[\s\S]*?(```|$)/g, "");
+  return [...withoutCode.matchAll(PAUSA_BLOCK)]
     .map((m) => plainText(m[1]))
     .filter((p) => p.length > 0);
 }
