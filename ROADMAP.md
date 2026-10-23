@@ -11,21 +11,16 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-- 1. Flujo de escritura de posts (hito 1) — guía editorial, pipeline
-  de contenido y los tres skills del flujo (encuadre, redacción,
-  revisión); capacidad interna que sostiene la línea editorial y se
-  valida escribiendo el primer capítulo de la serie MVC.
-
 ## Next
 
 - 2. Lectura acompañada por LLM (idea 002) — el diferenciador editorial;
-  se diseña y verifica contra el post real que el post inaugural deja
-  publicado.
+     se diseña y verifica contra el post real que el post inaugural deja
+     publicado.
 - 3. Demos de código ejecutables (idea 004) — ejemplos que el lector
-  puede tocar dentro del artículo; enriquecen directamente la escritura
-  que la lectura acompañada estructura.
+     puede tocar dentro del artículo; enriquecen directamente la escritura
+     que la lectura acompañada estructura.
 - 4. Blog legible para máquinas (idea 003) — salidas `.md` y `llms.txt`;
-  deriva del esquema que la lectura acompañada define.
+     deriva del esquema que la lectura acompañada define.
 
 ## Later
 
