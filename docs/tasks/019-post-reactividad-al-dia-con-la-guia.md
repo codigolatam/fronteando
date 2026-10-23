@@ -54,8 +54,18 @@ Actualizar «Un store reactivo en vanilla JS» a la guía editorial vigente —e
 - `Lecciones:` `docs/lessons/espanol-del-blog.md`, `docs/lessons/copy-fuera-del-post.md`, `docs/lessons/incisos-entre-parentesis.md`
 - `Decisiones:` `docs/decisions/D002-previo-de-articulos-desde-el-cuerpo.md` — el previo sale del cuerpo.
 
+## Divergencias encontradas
+
+Lo que el post publicado tenía contra la guía vigente — todas las divergencias mapeaban a regla escrita, así que la guía cubre bien la revisión de corpus:
+
+- **Incisos con raya larga:** 7 incisos en el cuerpo — la fricción abierta de la 018. _Decisión del usuario:_ normalizar el corpus a paréntesis; donde el contenido era enumerativo o causal se usaron dos puntos, más claros.
+- **«no el animal completo»:** figura poco común. _Corregida_ al literal «no el framework completo», más preciso con la frase que sigue.
+- **Eco de la promesa:** el ancla «cincuenta líneas» no reaparecía en el cuerpo. _Corregida_ con el paréntesis «(en unas cincuenta líneas)» en el cierre de la sección de límites.
+- **Conforme de origen:** anatomía completa, sin proscritos ni regionalismos, `description` con gancho y promesa en 148 caracteres, `title` descriptivo — el post fue precedente de voz y envejeció bien.
+- **Hallazgos de segunda pasada (revisión editorial):** la nominalización proscrita «la suscripción colgada del dato equivocado» —estaba en la tabla y la primera lectura no la cazó— y cuatro giros menores («levantar» una bandera, «los de» elíptico, «recorre a», «con eso» telegráfico). _Dato para la evaluación:_ la guía cubre todo lo encontrado, pero la revisión de corpus necesita la pasada sistemática por regla, no solo lectura general.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-23 — Solicita cambios (los 5 hallazgos aplicados)
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
