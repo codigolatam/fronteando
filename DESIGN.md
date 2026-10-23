@@ -66,6 +66,33 @@ artículo —el contraste de lectura larga no se degrada—; el acento del
 tema claro sobre `surface` mide ≈4.5:1 —el borde de AA—: sobre ese fondo
 el acento nunca baja de tamaño ni de peso.
 
+Sintaxis —los bloques de código añaden cuatro hues por tema, sobrios
+como el resto de la paleta —nunca neón—:
+
+Tema claro:
+
+- `--color-syntax-keyword` `#7c3aed` — violeta: palabras clave y control
+- `--color-syntax-string` `#3f6212` — verde: cadenas y contenido literal
+- `--color-syntax-function` `#1d4ed8` — azul: funciones, tipos y atributos
+- `--color-syntax-constant` `#9a3412` — ámbar quemado: números, constantes y valores incorporados
+
+Tema oscuro —los mismos roles, encendidos para el fondo oscuro:
+
+- `--color-syntax-keyword` `#a78bfa`
+- `--color-syntax-string` `#86efac`
+- `--color-syntax-function` `#93c5fd`
+- `--color-syntax-constant` `#fdba74`
+
+Reglas: los colores de sintaxis viven solo en bloques de código —ningún
+elemento interactivo los usa—; el acento queda fuera del código salvo
+en los enlaces —la única pieza interactiva del bloque—; comentarios y
+puntuación llevan `--color-text-muted` —el ruido se atenúa, no
+desaparece—; los parámetros van en `--color-text` —son identificadores,
+no roles—; en diffs lo insertado usa `--color-syntax-string`, lo
+eliminado `--color-danger` y lo cambiado `--color-syntax-constant` —la
+semántica convencional—; cada par sintaxis/`surface` mide ≥4.5:1 en
+ambos temas —AA—.
+
 ## Tipografía
 
 Una sola familia con tres cortes —IBM Plex, diseñada como sistema

@@ -70,16 +70,16 @@ Todo lo que la tarea asume existe: el tema `css-variables` de Shiki emite un con
 
 El resaltado hoy solo tiene cuatro colores efectivos porque el reparto de variables colapsa los roles en `accent`/`text`/`muted`. La paleta de `DESIGN.md` no tiene hues para código —el acento está reservado a la señal interactiva y el danger a errores—, así que la tarea la extiende con una sub-paleta de sintaxis por tema y remapea las variables de Shiki a ella. Criterio de asignación: `keyword` al violeta (el rol de control), `constant` al ámbar quemado, `string` y `string-expression` al verde —las etiquetas HTML dentro de template literals siguen siendo contenido de cadena—, `function` al azul, `parameter` al texto plano (son identificadores), `comment` y `punctuation` al muted —el ruido se atenúa—, `link` al acento —es la única pieza interactiva del código—, `inserted` al verde de cadena, `deleted` al danger y `changed` al ámbar de constante —semántica convencional de diffs—.
 
-- [ ] Extender `DESIGN.md` en la sección «Color» con la sub-paleta «Sintaxis»: `--color-syntax-keyword`, `--color-syntax-string`, `--color-syntax-function` y `--color-syntax-constant` para ambos temas, con la regla atemporal —los colores de sintaxis no reutilizan acento ni danger, viven solo en bloques de código y cada par con `surface` cumple AA—
+- [x] Extender `DESIGN.md` en la sección «Color» con la sub-paleta «Sintaxis»: `--color-syntax-keyword`, `--color-syntax-string`, `--color-syntax-function` y `--color-syntax-constant` para ambos temas, con la regla atemporal —los colores de sintaxis no reutilizan acento ni danger, viven solo en bloques de código y cada par con `surface` cumple AA—
   - Aporta: la fuente única de valores léxicos que el criterio exige
   - Contexto: comment/punctuation reutilizan `text-muted` y no ganan token propio —se documenta en la regla—
-- [ ] Declarar los cuatro tokens en `global.css`: `:root` claro —keyword `#7c3aed` (4.96), string `#3f6212` (6.16), function `#1d4ed8` (5.83), constant `#9a3412` (6.35)— y los dos bloques oscuros —`#a78bfa` (6.03), `#86efac` (11.69), `#93c5fd` (9.11), `#fdba74` (9.74)—, todos AA ≥4.5 sobre su `surface`
+- [x] Declarar los cuatro tokens en `global.css`: `:root` claro —keyword `#7c3aed` (4.96), string `#3f6212` (6.16), function `#1d4ed8` (5.83), constant `#9a3412` (6.35)— y los dos bloques oscuros —`#a78bfa` (6.03), `#86efac` (11.69), `#93c5fd` (9.11), `#fdba74` (9.74)—, todos AA ≥4.5 sobre su `surface`
   - Aporta: cuatro hues distinguibles por tema sin salir del carácter «terminal viva» —violeta/azul/verde/ámbar sobrios, no neón—
-- [ ] Remapear `--astro-code-*` a la sub-paleta: keyword→syntax-keyword, constant→syntax-constant, string y string-expression→syntax-string, function→syntax-function, parameter→text, comment y punctuation→text-muted, link→accent, inserted→syntax-string, deleted→danger, changed→syntax-constant
+- [x] Remapear `--astro-code-*` a la sub-paleta: keyword→syntax-keyword, constant→syntax-constant, string y string-expression→syntax-string, function→syntax-function, parameter→text, comment y punctuation→text-muted, link→accent, inserted→syntax-string, deleted→danger, changed→syntax-constant
   - Aporta: los tres roles más frecuentes del corpus dejan de compartir color
   - Contexto: el bloque de tokens de código queda solo en `:root` —los valores ya son indirección a `--color-*` y cambian solos con el tema—
-- [ ] Validación estática: ningún literal fuera de `:root` y sus overrides; recomputar el contraste de cada par syntax/surface en ambos temas; `check`, `lint`, `format:check` y `build` en verde
-- [ ] Evidencia renderizada: `astro dev --background`, capturar un bloque variado del capítulo 1 en ambos temas (`data-theme` claro y oscuro) y confrontar distinguibilidad y sobriedad con `aplicar-guia-estilo`
+- [x] Validación estática: ningún literal fuera de `:root` y sus overrides; recomputar el contraste de cada par syntax/surface en ambos temas; `check`, `lint`, `format:check` y `build` en verde
+- [x] Evidencia renderizada: `astro dev --background`, capturar un bloque variado del capítulo 1 en ambos temas (`data-theme` claro y oscuro) y confrontar distinguibilidad y sobriedad con `aplicar-guia-estilo`
   - Aporta: el criterio de evidencia renderizada adjunta al PR
 
 ## Suite de pruebas esperada

@@ -6,6 +6,10 @@
   --color-accent: #0e7a70;
   --color-danger: #a03030;
   --color-border: #e3e0d8;
+  --color-syntax-keyword: #7c3aed;
+  --color-syntax-string: #3f6212;
+  --color-syntax-function: #1d4ed8;
+  --color-syntax-constant: #9a3412;
 
   --font-display: "IBM Plex Serif", serif;
   --font-body: "IBM Plex Sans", system-ui, sans-serif;
@@ -45,18 +49,18 @@
 
   --astro-code-foreground: var(--color-text);
   --astro-code-background: var(--color-surface);
-  --astro-code-token-constant: var(--color-accent);
-  --astro-code-token-string: var(--color-accent);
-  --astro-code-token-string-expression: var(--color-accent);
-  --astro-code-token-keyword: var(--color-accent);
+  --astro-code-token-constant: var(--color-syntax-constant);
+  --astro-code-token-string: var(--color-syntax-string);
+  --astro-code-token-string-expression: var(--color-syntax-string);
+  --astro-code-token-keyword: var(--color-syntax-keyword);
   --astro-code-token-link: var(--color-accent);
-  --astro-code-token-function: var(--color-text);
+  --astro-code-token-function: var(--color-syntax-function);
   --astro-code-token-parameter: var(--color-text);
   --astro-code-token-comment: var(--color-text-muted);
   --astro-code-token-punctuation: var(--color-text-muted);
-  --astro-code-token-inserted: var(--color-accent);
+  --astro-code-token-inserted: var(--color-syntax-string);
   --astro-code-token-deleted: var(--color-danger);
-  --astro-code-token-changed: var(--color-text-muted);
+  --astro-code-token-changed: var(--color-syntax-constant);
 
   color-scheme: light;
 }
@@ -70,6 +74,10 @@
     --color-accent: #2dd4bf;
     --color-danger: #e0655f;
     --color-border: #3a352a;
+    --color-syntax-keyword: #a78bfa;
+    --color-syntax-string: #86efac;
+    --color-syntax-function: #93c5fd;
+    --color-syntax-constant: #fdba74;
 
     color-scheme: dark;
   }
@@ -83,6 +91,10 @@
   --color-accent: #2dd4bf;
   --color-danger: #e0655f;
   --color-border: #3a352a;
+  --color-syntax-keyword: #a78bfa;
+  --color-syntax-string: #86efac;
+  --color-syntax-function: #93c5fd;
+  --color-syntax-constant: #fdba74;
 
   color-scheme: dark;
 }
