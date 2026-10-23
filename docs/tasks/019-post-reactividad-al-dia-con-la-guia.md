@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -67,5 +67,5 @@ Lo que el post publicado tenía contra la guía vigente — todas las divergenci
 ## Revisión
 
 - Subagente: 2026-10-23 — Solicita cambios (los 5 hallazgos aplicados)
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-23 — Aprueba
+- Usuario (cierre): 2026-10-23 — Aprueba
