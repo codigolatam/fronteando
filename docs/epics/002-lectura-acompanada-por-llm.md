@@ -25,7 +25,7 @@ técnicos publicados.
 
 - [x] docs/tasks/022-declaracion-y-protocolo-comun.md — declaración de
       acompañamiento y protocolo común
-- [ ] docs/tasks/023-composicion-del-material.md — composición del
+- [x] docs/tasks/023-composicion-del-material.md — composición del
       material de acompañamiento
 - [ ] docs/tasks/024-experiencia-en-pagina.md — experiencia de lectura
       acompañada en página
