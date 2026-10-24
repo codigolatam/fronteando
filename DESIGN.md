@@ -5,8 +5,7 @@ donde todo valor del código referencia los tokens declarados aquí, y la
 de comportamiento, con las garantías de interacción que cruzan la
 interfaz— y su fundamentación en los principios que arbitran las
 decisiones nuevas. La identidad es propia —«terminal viva»: la interfaz
-habla en monospace, la voz de la herramienta que el lector ya usa— y
-todos los componentes están pendientes de implementación.
+habla en monospace, la voz de la herramienta que el lector ya usa.
 
 ## Principios
 
@@ -44,6 +43,7 @@ Tema claro —papel cálido, nunca blanco puro:
 - `--color-text` `#1c1917` — texto principal
 - `--color-text-muted` `#6b675f` — metadatos y texto secundario
 - `--color-accent` `#0e7a70` — teal fósforo: enlaces, acciones primarias y foco
+- `--color-accent-hover` `#0d6e65` — un paso más oscuro del acento: hover del botón primario
 - `--color-danger` `#a03030` — carmesí: errores de formulario y estados destructivos
 - `--color-border` `#e3e0d8` — bordes de cards y separadores
 
@@ -54,11 +54,13 @@ Tema oscuro —la misma terminal, de noche:
 - `--color-text` `#ede9e1` — texto principal
 - `--color-text-muted` `#a69f90` — metadatos y texto secundario
 - `--color-accent` `#2dd4bf` — el mismo fósforo, encendido para el fondo oscuro
+- `--color-accent-hover` `#42d8c5` — un paso más claro del acento: hover del botón primario
 - `--color-danger` `#e0655f` — el carmesí, aclarado para el fondo oscuro
 - `--color-border` `#3a352a` — bordes de cards y separadores
 
 Reglas de combinación: el acento solo aparece en enlaces, acciones
-primarias, foco, el marcador de checkpoint y el cursor de la marca
+primarias, foco, el marcador de checkpoint, el cursor de la marca y la
+espina y el `>` de la nota de acompañamiento (excepción, ver Componentes)
 —reservarlo mantiene su señal de interactividad—; los errores usan
 `--color-danger`, nunca el acento —un error en color de acción se leería
 como enlace y gastaría la señal—; el texto en `muted` nunca es cuerpo de
@@ -129,12 +131,14 @@ declaran como `--font-display` (Serif), `--font-body` (Sans) y
 
 Pesos declarados —ninguno fuera de esta lista—: Serif solo 700; Sans 400
 y 600 —el 600 es el énfasis de `strong` en prosa—; Mono 400 y 500 —el
-500 marca checkpoints y la marca del sitio—.
+500 marca checkpoints, la marca del sitio y la nota de acompañamiento—.
 
 Reglas: el cuerpo nunca baja de 18px —la lectura larga es el uso
 principal—; tracking negativo permitido solo en el título del artículo;
 la familia monoespaciada se reserva a código, metadatos, navegación,
-botones, marcadores y la marca —nunca prosa—; el código en bloque va
+botones, marcadores y la marca —nunca prosa del artículo—. La frase de
+instrucción de la nota de acompañamiento es la única excepción: habla con la
+voz de la herramienta, no con la del artículo; el código en bloque va
 ligeramente por debajo del cuerpo —a igual tamaño la mono se ve mayor y
 consume la medida útil de la línea de código—; el código inline va en
 mono a 0.9em del cuerpo sobre chip de `--color-surface` con borde —la
@@ -164,31 +168,49 @@ es la promesa de la terminal viva—.
   separa superficie de control—.
 - Sombras: ninguna —la superficie se distingue por color y borde; la
   elevación no aporta a leer—.
+- Bordes y foco: `--border-width` 1px; el foco es un contorno de
+  `--focus-width` 2px en `--color-accent`, separado `--focus-offset` 2px del
+  elemento.
+- Objetivo táctil: `--target-min` 44px, altura mínima de todo control.
+- Metadatos: `--line-height-meta` 1.5, la altura de línea de la tipografía
+  de metadatos.
 - Contenedor: ancho máximo `--container-max` 68ch con gutters
   `--gutter` 24px —protege la medida de línea de la prosa técnica—; en
   pantallas estrechas los gutters son `--gutter-sm` 16px.
 
 ## Componentes
 
-- **Card de acompañamiento (bootstrap):** superficie `--color-surface`
-  con borde `--color-border`, el protocolo de inicio listo para copiar y
-  acciones para abrir la conversación en ChatGPT o Claude; se distingue
-  del artículo sin competir con él —el acompañamiento no interrumpe—.
-- **Bloque de checkpoint:** recuadro `--color-surface` encabezado por el
-  marcador `> NN` en IBM Plex Mono 500 y `--color-accent`, seguido del
-  texto sugerido para el acompañante, copiable individualmente —el
-  numerado es la referencia que el lector menciona a su LLM y el `>` es
-  el rasgo de la terminal viva—.
+- **Card de acompañamiento (bootstrap):** sin caja: una espina vertical
+  de `--color-accent` en el borde izquierdo y el marcador `>` en el mismo
+  acento; el título va en `--color-text-muted`. Contiene el protocolo de
+  inicio listo para copiar, una acción primaria («copiar protocolo») y
+  acciones secundarias para abrir la conversación en ChatGPT o Claude,
+  que aparecen solo cuando el protocolo cabe en el límite del proveedor.
+  En columna lateral queda siempre abierta con JS; sin JS queda plegada y
+  se abre al pulsarla. Sin JS, el botón copiar no aparece y el protocolo
+  se copia desde su bloque desplegable. El protocolo se ajusta a la línea,
+  porque es texto para pegar y no código. En columna única va plegada como
+  una línea. La espina y el `>` son una excepción a la reserva del
+  acento: marcan la pertenencia a la nota, no una acción (el
+  acompañamiento no interrumpe ni compite con el texto).
+- **Bloque de checkpoint:** recuadro `--color-surface` plegado que
+  muestra el marcador `> NN` en IBM Plex Mono 500 y `--color-accent`;
+  al abrirlo expone el texto sugerido para el acompañante, copiable
+  individualmente —la indicación es del acompañante y viaja en el
+  protocolo, así que la marca basta y la lectura no se interrumpe; el
+  numerado es la referencia que el lector menciona a su LLM y el `>`
+  es el rasgo de la terminal viva—.
 - **Bloque de código:** fondo `--color-surface`, IBM Plex Mono a `--font-size-code`,
   botón copiar visible al foco o al pasar el puntero; scroll horizontal,
   nunca ajuste de línea —la indentación es contenido—.
 - **Botón primario:** pill con fondo `--color-accent` y texto en
   `--color-background` —legible en ambos temas—; hover aclara u oscurece
-  el fondo un paso dentro del mismo acento —confirma la interacción sin
-  cambiar de señal—; variantes secondary (texto `--color-text` con borde
-  `--color-border`) y ghost (texto `--color-text` sin borde) por
-  jerarquía de acción —el acento se reserva a la acción primaria—; el
-  hover de secondary y ghost colorea el texto en `--color-accent`.
+  el fondo al token `--color-accent-hover` (un paso dentro del mismo
+  acento), que confirma la interacción sin cambiar de señal; variantes
+  secondary (texto `--color-text` con borde `--color-border`) y ghost
+  (texto `--color-text` sin borde) por jerarquía de acción —el acento se
+  reserva a la acción primaria—; el hover de secondary y ghost colorea el
+  texto en `--color-accent`, y el de secondary también su borde.
 - **Input y formulario de newsletter:** borde `--color-border`, radio
   `--radius`, foco con contorno `--color-accent`.
 - **Navegación:** cabecera con la marca `fronteando_` y enlaces a
@@ -220,12 +242,31 @@ barras laterales —la atención del lector va a una sola corriente de
 contenido—. En pantallas estrechas todo colapsa a la misma columna con
 los gutters reducidos a 16px.
 
+Excepción: columna lateral de acompañamiento. En artículos con
+acompañamiento declarado y desde 1240px, la nota de lectura acompañada
+ocupa una columna de `--rail-width` 280px a la derecha de la medida de
+lectura. El texto conserva `--container-max` y las pausas siguen en el
+flujo. La columna solo aloja UI de acompañamiento, nunca contenido del
+artículo, y es pegajosa para quedar accesible durante el scroll. Por
+debajo de 1240px la nota vuelve a la columna única como línea plegada.
+El umbral es 1240px. El conjunto necesita 1080px (texto de 768px, hueco de
+32px y columna de 280px) más los márgenes de página, medidos en 56px por
+lado a 1240px: 1192px es el mínimo derivado, y 1240px deja margen sobre
+él. Dentro de la nota, el protocolo tiene altura máxima
+`--protocol-max-height` (30vh) y se desplaza por dentro, para que la nota
+completa quepa en la pantalla.
+
+Alineación: en artículos con nota, el texto y la columna se centran como
+un conjunto, así que el texto queda desplazado a la izquierda de la
+cabecera y del pie (156px a 1500px). La cabecera,
+el pie y los artículos sin nota conservan su eje.
+
 ## Movimiento
 
-Sin animación decorativa: solo transiciones de estado de ≤150ms en
-hover, foco y confirmación de copiado —confirman la interacción sin
-robar atención a la lectura—. El cursor de la marca es estático:
-parpadear sería animación decorativa.
+Sin animación decorativa: solo transiciones de estado de ≤150ms
+(`--duration-fast`) en hover, foco y confirmación de copiado —confirman la
+interacción sin robar atención a la lectura—. El cursor de la marca es
+estático: parpadear sería animación decorativa.
 
 ## Contrato de experiencia
 
@@ -233,7 +274,10 @@ parpadear sería animación decorativa.
   el primer render —sin banners tardíos ni contenido que aparece—; el
   intercambio de fuentes (`font-display: swap`) no cuenta como
   desplazamiento de bloques; se comprueba midiendo que no hay cambios de
-  layout estructurales en carga.
+  layout estructurales en carga. La columna lateral no desplaza el texto
+  mientras la nota sea más baja que el artículo. La apertura con JS al
+  cargar de la nota (ver Componentes) es la única excepción a este
+  contrato.
 - **Tema coherente:** todos los tokens de color cambian juntos al
   alternar el tema —no hay superficies del tema contrario ni texto
   heredado—; se comprueba alternando `prefers-color-scheme`.
