@@ -32,3 +32,7 @@
 - D005-serie-como-epica-editorial.md
   - Disparadores: serie, pieza, planeador, editorial, kanban, arco, épica, docs/editorial, series
   - Resumen: la serie es el análogo editorial de la épica (marco propio, ciclo propuesta→en curso→cerrada, fuera del kanban) y la pieza es la unidad publicable; el índice muestra el estado del arco como sufijo de la línea
+
+- D006-columna-lateral-para-el-acompanamiento-en-pantallas-anchas.md
+  - Disparadores: aside, columna lateral, raíl, rail, sticky, layout, grid, card, acompañamiento, lectura acompañada, article-rail, rail-width, 1240px, DESIGN.md, columna única, AccompanimentCard.astro, global.css
+  - Resumen: en pantallas desde 1240px la nota de acompañamiento vive en una columna lateral pegajosa de 280px junto al texto, que conserva su medida; es la única excepción a la columna única de la guía

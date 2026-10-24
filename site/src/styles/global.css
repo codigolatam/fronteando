@@ -4,6 +4,7 @@
   --color-text: #1c1917;
   --color-text-muted: #6b675f;
   --color-accent: #0e7a70;
+  --color-accent-hover: #0d6e65;
   --color-danger: #a03030;
   --color-border: #e3e0d8;
   --color-syntax-keyword: #7c3aed;
@@ -41,6 +42,8 @@
   --radius-pill: 999px;
 
   --container-max: 68ch;
+  --rail-width: 280px;
+  --protocol-max-height: 30vh;
   --gutter: 24px;
   --gutter-sm: 16px;
 
@@ -75,6 +78,7 @@
     --color-text: #ede9e1;
     --color-text-muted: #a69f90;
     --color-accent: #2dd4bf;
+    --color-accent-hover: #42d8c5;
     --color-danger: #e0655f;
     --color-border: #3a352a;
     --color-syntax-keyword: #a78bfa;
@@ -95,6 +99,7 @@
   --color-text: #ede9e1;
   --color-text-muted: #a69f90;
   --color-accent: #2dd4bf;
+  --color-accent-hover: #42d8c5;
   --color-danger: #e0655f;
   --color-border: #3a352a;
   --color-syntax-keyword: #a78bfa;
@@ -448,5 +453,237 @@ html:not(.js) .theme-toggle {
   .copy-btn {
     opacity: 1;
     pointer-events: auto;
+  }
+}
+
+/* accompaniment card and pauses */
+
+.prose {
+  counter-reset: pause;
+}
+
+.prose .pause {
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0 var(--space-2);
+}
+
+.prose .accompaniment {
+  border-left: var(--border-width) solid var(--color-accent);
+  padding: 0 0 0 var(--space-2);
+  margin-block: var(--space-3) var(--space-4);
+}
+
+.prose .pause {
+  counter-increment: pause;
+  position: relative;
+  margin-block: 0 var(--space-3);
+}
+
+.prose .accompaniment > summary,
+.prose .pause > summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--target-min);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-meta);
+  line-height: var(--line-height-meta);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  cursor: pointer;
+}
+
+.prose .accompaniment > summary::before {
+  content: ">";
+  color: var(--color-accent);
+}
+
+.prose .pause > summary::before {
+  content: "> " counter(pause, decimal-leading-zero);
+  color: var(--color-accent);
+}
+
+.prose .accompaniment > summary::after,
+.prose .pause > summary::after {
+  content: "[+]";
+}
+
+.prose .accompaniment[open] > summary::after,
+.prose .pause[open] > summary::after {
+  content: "[-]";
+}
+
+.prose .accompaniment[open] > summary,
+.prose .pause[open] > summary {
+  margin-block-end: var(--space-1);
+}
+
+.prose .pause > p:last-of-type {
+  margin-block-end: var(--space-1);
+}
+
+.prose .accompaniment-text {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-meta);
+  line-height: var(--line-height-meta);
+  color: var(--color-text-muted);
+  margin-block: 0 var(--space-2);
+}
+
+.prose .accompaniment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block-end: var(--space-2);
+}
+
+.prose .btn {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-meta);
+  line-height: var(--line-height-meta);
+  min-height: var(--target-min);
+  padding-inline: var(--space-2);
+  border-radius: var(--radius-pill);
+  border: var(--border-width) solid var(--color-border);
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    color var(--duration-fast),
+    border-color var(--duration-fast),
+    background-color var(--duration-fast);
+}
+
+.prose .btn-primary {
+  color: var(--color-background);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.prose .btn-primary:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.prose .btn-primary.error,
+.prose .btn-primary.error:hover {
+  color: var(--color-danger);
+  background: none;
+  border-color: var(--color-danger);
+}
+
+.prose .btn-secondary {
+  color: var(--color-text);
+  background: none;
+}
+
+.prose .btn-secondary:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+html:not(.js) .accompaniment-copy {
+  display: none;
+}
+
+.prose .accompaniment-protocol summary {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-meta);
+  line-height: var(--line-height-meta);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  min-height: var(--target-min);
+}
+
+.prose .accompaniment-protocol summary::before {
+  content: "▸";
+}
+
+.prose .accompaniment-protocol[open] summary::before {
+  content: "▾";
+}
+
+.prose .accompaniment-protocol pre {
+  background: var(--color-background);
+  font-size: var(--font-size-meta);
+  white-space: pre-wrap;
+  max-height: var(--protocol-max-height);
+  overflow-y: auto;
+  padding: var(--space-2);
+  margin-block: 0;
+}
+
+.pause:hover .copy-btn,
+.pause .copy-btn:focus-visible,
+.pause .copy-btn.copied,
+.pause .copy-btn.error {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 600px) {
+  .prose .accompaniment-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+/* wide-screen side rail for the accompaniment card.
+   The 1240px breakpoint must match matchMedia in AccompanimentCard.astro. */
+
+@media (min-width: 1240px) {
+  .site-main:has(.prose.has-rail) {
+    max-width: calc(var(--container-max) + var(--rail-width) + var(--space-4));
+  }
+
+  .prose.has-rail {
+    display: grid;
+    grid-template-columns: minmax(0, var(--container-max)) var(--rail-width);
+    column-gap: var(--space-4);
+  }
+
+  .prose.has-rail > * {
+    grid-column: 1;
+  }
+
+  .prose.has-rail > .article-rail {
+    grid-column: 2;
+    grid-row: 2 / span 3;
+  }
+
+  .prose.has-rail > .article-content > h2:first-child {
+    margin-block-start: calc(var(--space-6) - var(--space-3));
+  }
+
+  .prose.has-rail > .article-content > h3:first-child,
+  .prose.has-rail > .article-content > h4:first-child,
+  .prose.has-rail > .article-content > h5:first-child,
+  .prose.has-rail > .article-content > h6:first-child {
+    margin-block-start: calc(var(--space-4) - var(--space-3));
+  }
+
+  .article-rail .accompaniment {
+    position: sticky;
+    top: var(--space-3);
+    margin-block: 0;
+  }
+
+  html.js .article-rail .accompaniment > summary {
+    pointer-events: none;
+  }
+
+  .prose .article-rail .accompaniment[open] > summary::after {
+    content: none;
+  }
+
+  .article-rail .accompaniment-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

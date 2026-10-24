@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { CollectionEntry } from "astro:content";
-import { pausesOf, protocolOf } from "./accompaniment";
+import { assistantUrlsOf, pausesOf, protocolOf } from "./accompaniment";
 
 type Data = CollectionEntry<"articulos">["data"];
 
@@ -117,13 +117,108 @@ describe("protocolOf", () => {
 });
 
 describe("pausesOf", () => {
-  it("ignores a :::pausa block inside a code fence", () => {
-    const body =
-      "```md\n:::pausa\nEjemplo falso.\n:::\n```\n\n:::pausa\nLa real.\n:::\n";
-    expect(pausesOf(body)).toEqual(["La real."]);
+  describe("when a :::pausa block sits inside a code fence", () => {
+    it("ignores it", () => {
+      const body =
+        "```md\n:::pausa\nEjemplo falso.\n:::\n```\n\n:::pausa\nLa real.\n:::\n";
+      expect(pausesOf(body)).toEqual(["La real."]);
+    });
+
+    it("keeps the fence open until a closing run at least as long", () => {
+      const body =
+        "````md\n```\n:::pausa\nEjemplo falso.\n:::\n````\n\n:::pausa\nLa real.\n:::\n";
+      expect(pausesOf(body)).toEqual(["La real."]);
+    });
   });
 
-  it("returns an empty array when there are no pauses", () => {
-    expect(pausesOf("Sin pausas.")).toEqual([]);
+  describe("when a pause block opens with more than three colons", () => {
+    it("closes it on a line with the same number of colons", () => {
+      expect(pausesOf("::::pausa\nUno.\n::::\n")).toEqual(["Uno."]);
+    });
+
+    it("keeps a shorter closing line inside it as content", () => {
+      expect(pausesOf("::::pausa\nUno.\n:::\nDos.\n::::")).toEqual([
+        "Uno. ::: Dos.",
+      ]);
+    });
+  });
+
+  describe("when the body has no pause blocks", () => {
+    it("returns an empty array", () => {
+      expect(pausesOf("Sin pausas.")).toEqual([]);
+    });
+  });
+
+  describe("when a pause block is empty", () => {
+    it("keeps the block when its closing line follows directly", () => {
+      expect(pausesOf(":::pausa\n:::")).toEqual([""]);
+    });
+
+    it("keeps the block when a blank line precedes its closing line", () => {
+      expect(pausesOf(":::pausa\n\n:::\n\n:::pausa\nLa real.\n:::")).toEqual([
+        "",
+        "La real.",
+      ]);
+    });
+
+    it("does not merge it with the pause block that follows", () => {
+      expect(
+        pausesOf(":::pausa\n:::\n\nTexto\n\n:::pausa\nLa real.\n:::"),
+      ).toEqual(["", "La real."]);
+    });
+  });
+
+  describe("when a pause block runs to the end of the body", () => {
+    it("keeps it as the last pause", () => {
+      expect(pausesOf(":::pausa\nÚltima.")).toEqual(["Última."]);
+    });
+  });
+});
+
+describe("assistantUrlsOf", () => {
+  const chatgpt = "https://chatgpt.com/?q=";
+  const claude = "https://claude.ai/new?q=";
+
+  describe("when measuring the protocol against provider limits", () => {
+    it("offers both assistants when the protocol fits every limit", () => {
+      const urls = assistantUrlsOf("texto corto");
+      expect(urls.chatgpt).toBe(
+        `${chatgpt}${encodeURIComponent("texto corto")}`,
+      );
+      expect(urls.claude).toBe(`${claude}${encodeURIComponent("texto corto")}`);
+    });
+
+    it("offers only Claude when the protocol exceeds the ChatGPT limit", () => {
+      const urls = assistantUrlsOf("x".repeat(6001));
+      expect(urls.chatgpt).toBeUndefined();
+      expect(urls.claude).toBe(
+        `${claude}${encodeURIComponent("x".repeat(6001))}`,
+      );
+    });
+
+    it("keeps Claude at the 10000 character boundary", () => {
+      const urls = assistantUrlsOf("x".repeat(10000));
+      expect(urls.chatgpt).toBeUndefined();
+      expect(urls.claude).toBeDefined();
+    });
+
+    it("offers no links when the protocol exceeds every limit", () => {
+      const urls = assistantUrlsOf("x".repeat(10001));
+      expect(urls).toEqual({});
+    });
+
+    it("keeps both links at the ChatGPT limit boundary", () => {
+      const urls = assistantUrlsOf("x".repeat(6000));
+      expect(urls.chatgpt).toBeDefined();
+      expect(urls.claude).toBeDefined();
+    });
+
+    it("url-encodes the protocol, including accents and newlines", () => {
+      const urls = assistantUrlsOf("línea 1\nlínea 2");
+      expect(urls.chatgpt).toBe(
+        `${chatgpt}${encodeURIComponent("línea 1\nlínea 2")}`,
+      );
+      expect(urls.chatgpt).not.toContain("\n");
+    });
   });
 });
