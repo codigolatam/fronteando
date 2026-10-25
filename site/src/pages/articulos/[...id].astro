@@ -2,7 +2,9 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import AccompanimentCard from "../../components/AccompanimentCard.astro";
 import { formatFecha } from "../../utils/format";
+import { protocolOf } from "../../utils/accompaniment";
 
 export async function getStaticPaths() {
   const articulos = await getCollection("articulos", ({ data }) => !data.draft);
@@ -20,6 +22,7 @@ const { articulo } = Astro.props;
 const { Content } = await render(articulo);
 const fecha = formatFecha(articulo.data.date);
 const ogImagePath = `/og/${articulo.id}.png`;
+const protocol = protocolOf(articulo);
 ---
 
 <Base
@@ -28,7 +31,7 @@ const ogImagePath = `/og/${articulo.id}.png`;
   type="article"
   image={ogImagePath}
 >
-  <article class="prose">
+  <article class:list={["prose", { "has-rail": protocol }]}>
     <h1>{articulo.data.title}</h1>
     <p class="article-meta">
       <time datetime={articulo.data.date.toISOString().slice(0, 10)}>
@@ -40,6 +43,13 @@ const ogImagePath = `/og/${articulo.id}.png`;
       {articulo.data.nivel && `nivel: ${articulo.data.nivel} · `}pilar:{" "}
       {articulo.data.categoria}
     </p>
-    <Content />
+    {protocol && (
+      <div class="article-rail">
+        <AccompanimentCard protocol={protocol} />
+      </div>
+    )}
+    <div class="article-content">
+      <Content />
+    </div>
   </article>
 </Base>

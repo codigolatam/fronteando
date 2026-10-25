@@ -1,0 +1,119 @@
+---
+import { assistantUrlsOf } from "../utils/accompaniment";
+
+interface Props {
+  protocol: string;
+}
+
+const { protocol } = Astro.props;
+const urls = assistantUrlsOf(protocol);
+---
+
+<details class="accompaniment">
+  <summary>lectura acompañada</summary>
+  <div class="accompaniment-body">
+    <p class="accompaniment-text">
+      Pega este protocolo en tu asistente y avísale al llegar a cada pausa:
+      revisará tu comprensión ahí y al terminar el artículo.
+    </p>
+    <div class="accompaniment-actions">
+      <button class="btn btn-primary accompaniment-copy" type="button">
+        copiar protocolo
+      </button>
+      {urls.chatgpt && (
+        <a
+          class="btn btn-secondary"
+          href={urls.chatgpt}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          abrir en chatgpt
+        </a>
+      )}
+      {urls.claude && (
+        <a
+          class="btn btn-secondary"
+          href={urls.claude}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          abrir en claude
+        </a>
+      )}
+    </div>
+    <details class="accompaniment-protocol">
+      <summary>ver el protocolo</summary>
+      <pre tabindex="0">{protocol}</pre>
+    </details>
+  </div>
+</details>
+
+<script>
+  async function copyWithFeedback(
+    button: HTMLButtonElement,
+    text: string,
+    label: string,
+  ) {
+    button.classList.remove("error");
+    try {
+      await navigator.clipboard.writeText(text);
+      button.textContent = "copiado";
+      button.classList.add("copied");
+    } catch {
+      button.textContent = "error";
+      button.classList.add("error");
+    }
+    setTimeout(() => {
+      button.textContent = label;
+      button.classList.remove("copied", "error");
+    }, 1200);
+  }
+
+  // The card button copies the protocol shown in the details block.
+  const card = document.querySelector<HTMLDetailsElement>(".accompaniment");
+
+  // In the side rail (wide screens) the card is a margin note: always open.
+  // Below the breakpoint it stays a collapsed line. Without JS it remains
+  // collapsed everywhere and still opens on click.
+  // Same breakpoint as the rail media query in global.css.
+  const railMq = window.matchMedia("(min-width: 1240px)");
+  const syncCardState = () => {
+    if (card) card.open = railMq.matches;
+  };
+  railMq.addEventListener("change", syncCardState);
+  syncCardState();
+  card?.addEventListener("toggle", () => {
+    if (railMq.matches && card && !card.open) card.open = true;
+  });
+  const protocolText =
+    card?.querySelector(".accompaniment-protocol pre")?.textContent ?? "";
+  card
+    ?.querySelector<HTMLButtonElement>(".accompaniment-copy")
+    ?.addEventListener("click", (event) => {
+      copyWithFeedback(
+        event.currentTarget as HTMLButtonElement,
+        protocolText,
+        "copiar protocolo",
+      );
+    });
+
+  // Each pause gets its own copy button with the indication text.
+  function pauseText(pause: HTMLElement): string {
+    const clone = pause.cloneNode(true) as HTMLElement;
+    clone.querySelector("summary")?.remove();
+    clone.querySelectorAll(".copy-btn").forEach((btn) => btn.remove());
+    return (clone.textContent ?? "").replace(/\s+/g, " ").trim();
+  }
+
+  document.querySelectorAll<HTMLElement>("details.pause").forEach((pause) => {
+    if (!pauseText(pause)) return;
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "copy-btn";
+    button.textContent = "copiar";
+    button.addEventListener("click", () => {
+      copyWithFeedback(button, pauseText(pause), "copiar");
+    });
+    pause.appendChild(button);
+  });
+</script>
