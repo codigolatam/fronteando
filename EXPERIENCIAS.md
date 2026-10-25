@@ -188,3 +188,17 @@
   Obtenido: los nombres llevaban referencias internas del proyecto —CU-1, letras ZOMBIE— en lugar de describir el comportamiento
   Corrección: describe nombra la unidad, when el contexto e it el comportamiento esperado; nada de identificadores internos del proyecto en los nombres de test
   Estado: consolidada
+
+- Id: 20261025T171103
+  Tarea: docs/tasks/024-experiencia-en-pagina.md
+  Esperado: la suite de pruebas esperada pedía tests de render —card, details, marcadores— y HTML idéntico para artículos sin declaración.
+  Obtenido: el agente propuso automatizar las expectativas de render y leer el criterio «mismo HTML» literalmente.
+  Corrección: el usuario indicó que los tests son para lógica, no para diseño —el diseño se verifica con evidencia renderizada—, y que el criterio es el mismo diseño, no el mismo HTML.
+  Estado: consolidada
+
+- Id: 20261025T171104
+  Tarea: docs/tasks/024-experiencia-en-pagina.md
+  Esperado: la suite pedía HTML idéntico en artículos sin acompañamiento.
+  Obtenido: el agente señaló el wrapper article-content como incumplimiento del criterio.
+  Corrección: el criterio es el mismo diseño —posiciones, márgenes, fuentes—, no la estructura del DOM; el usuario lo aclaró y se verificó con mediciones renderizadas.
+  Estado: consolidada

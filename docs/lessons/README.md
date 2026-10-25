@@ -49,6 +49,10 @@
   - Disparadores: categoria, tags, taxonomía, pilares, nivel, frontmatter, enum, metadatos, ortogonal
   - Resumen: las categorías son especializaciones ortogonales mutuamente excluyentes —lo que todo el corpus comparte es tag, no pilar—; nivel es opcional
 
+- alcance-de-la-verificacion.md
+  - Disparadores: suite de pruebas, tests, vitest, render, evidencia, criterio de calidad, verificación, HTML, diseño
+  - Resumen: los tests automatizados cubren lógica —el diseño se verifica con evidencia renderizada— y «el mismo resultado» en un criterio significa el mismo diseño, no el mismo HTML
+
 - metadatos-clave-valor.md
   - Disparadores: metadatos, chips, badges, patrones UI, article-meta, nivel, pilar, terminal
   - Resumen: la identidad también arbitra patrones de UI —el metadato estructural va en `clave: valor`, no en chips que insinúan interactividad—
