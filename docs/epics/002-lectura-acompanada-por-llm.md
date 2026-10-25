@@ -27,7 +27,7 @@ técnicos publicados.
       acompañamiento y protocolo común
 - [x] docs/tasks/023-composicion-del-material.md — composición del
       material de acompañamiento
-- [ ] docs/tasks/024-experiencia-en-pagina.md — experiencia de lectura
+- [x] docs/tasks/024-experiencia-en-pagina.md — experiencia de lectura
       acompañada en página
 - [ ] docs/tasks/025-adaptar-el-corpus.md — adaptar el corpus a la
       lectura acompañada

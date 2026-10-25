@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -151,7 +151,7 @@ fixture temporal que se retira antes de cerrar.
   - Aporta: CU-1 completo — copiar garantizado, enlaces como comodidad, todo con tokens
 - [x] `site/src/pages/articulos/[...id].astro` — `const protocol = protocolOf(articulo)`; renderiza la card entre el meta y `<Content />` solo cuando no es `null`
 - [x] Estilos en `site/src/styles/global.css` — `.accompaniment` (card) y `.pause` (checkpoint con marcador `> NN` vía `counter-reset` en `.prose` y `counter-increment` en `.pause`, `summary::before` en Mono 500 acento, distinguible por marcador y recuadro, no solo color) y posición del `.copy-btn` de pausa. Solo tokens
-- [ ] Fixture temporal — artículo con `agente` + dos `:::pausa` para la evidencia renderizada en ambos temas; se retira antes de cerrar
+- [x] Fixture temporal — artículo con `agente` + dos `:::pausa` para la evidencia renderizada en ambos temas; se retira antes de cerrar
 - [x] Tests — extender `accompaniment.test.ts` con el comportamiento de `assistantUrlsOf`
 - [x] Arnés — `check`, `lint`, `format:check`, `test`, `build` + evidencia renderizada claro/oscuro
 
@@ -204,4 +204,4 @@ fixture temporal que se retira antes de cerrar.
 
 - Subagente: 2026-10-23 — Solicita cambios (residuales aceptados por el usuario)
 - Usuario (ejecución): 2026-10-23 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-10-23 — Aprueba
