@@ -216,3 +216,10 @@
   Obtenido: la ficha llevaba URL, tema, nivel y prerequisitos, pero no el título; propuesto como mejora y el usuario la ordenó aplicar.
   Corrección: evaluar el material que viaja a un asistente como prompt —un agente sin acceso a la URL reconoce el texto por su título—.
   Estado: consolidada
+
+- Id: 20261026T161722
+  Tarea: docs/tasks/030-demo-del-carrito.md
+  Esperado: que los archivos nuevos cart.ts y cart.test.ts salieran ya escritos en el estilo de Prettier del proyecto
+  Obtenido: los archivos se escribieron con un estilo ajeno y el usuario los reformateó a mano
+  Corrección: el usuario reformató ambos archivos y recordó que el código nuevo debe escribirse ya en el estilo de Prettier, no a la espera de un pase posterior
+  Estado: consolidada
