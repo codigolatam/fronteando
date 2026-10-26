@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -184,5 +184,5 @@ terminada en `.md`.
 ## Revisión
 
 - Subagente: 2026-10-25 — Aprueba
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-26 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
