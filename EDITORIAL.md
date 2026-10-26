@@ -213,6 +213,12 @@ pulsa **+** y observa cómo cambia el estado interno.
   estilos scoped del componente viven en su propio shadow y los
   tokens `--*` los alcanzan por herencia. La pieza `contador` es la
   implementación de referencia del convenio.
+- **El DOM inyectado por la pieza no lleva scope:** los nodos que el
+  código de una pieza crea con `innerHTML` o `createElement` no
+  llevan el atributo que Svelte usa para acotar sus estilos; se
+  estilan con selectores `:global()` dentro del `<style>` del
+  componente —`.zone :global(li)`— que siguen viviendo en el shadow
+  del custom element. La pieza `carrito` es el ejemplo.
 - **Tipos de pieza** (vocabulario del género, ver
   `docs/research/2026-10-el-genero-explorable-explanations.md`):
   simulación jugable, vista instrumentada de un sistema, stepper guiado

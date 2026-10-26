@@ -59,8 +59,9 @@ Tema oscuro —la misma terminal, de noche:
 - `--color-border` `#3a352a` — bordes de cards y separadores
 
 Reglas de combinación: el acento solo aparece en enlaces, acciones
-primarias, foco, el marcador de checkpoint, el cursor de la marca y la
-espina y el `>` de la nota de acompañamiento (excepción, ver Componentes)
+primarias, foco, el marcador de checkpoint, el cursor de la marca, la
+espina y el `>` de la nota de acompañamiento y el marco de las piezas
+interactivas (excepciones, ver Componentes)
 —reservarlo mantiene su señal de interactividad—; los errores usan
 `--color-danger`, nunca el acento —un error en color de acción se leería
 como enlace y gastaría la señal—; el texto en `muted` nunca es cuerpo de
@@ -210,6 +211,12 @@ es la promesa de la terminal viva—.
 - **Bloque de código:** fondo `--color-surface`, IBM Plex Mono a `--font-size-code`,
   botón copiar visible al foco o al pasar el puntero; scroll horizontal,
   nunca ajuste de línea —la indentación es contenido—.
+- **Marco de pieza interactiva (`fronteando-demo`):** recuadro
+  `--color-surface` con borde `--color-accent` —excepción de la
+  reserva, como la espina del acompañamiento: la pieza es la región
+  interactiva de la página y el marco la señala como tal, no una
+  acción suelta—; su chrome usa el tier `--demo-*` y reserva altura
+  desde el HTML para no desplazar la lectura al montar.
 - **Botón primario:** pill con fondo `--color-accent` y texto en
   `--color-background` —legible en ambos temas—; hover aclara u oscurece
   el fondo al token `--color-accent-hover` (un paso dentro del mismo

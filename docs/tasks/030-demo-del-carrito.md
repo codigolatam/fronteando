@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -192,7 +192,7 @@ código funciona y aun así nadie quiere mantenerlo.
   al pulsar «Quitar» en esa línea no pasa nada —la pantalla mintió
   delante de él—.
 
-- [ ] Escribir `cart.ts` en `site/src/demos/carrito/` con el código
+- [x] Escribir `cart.ts` en `site/src/demos/carrito/` con el código
       del artículo: `mountCart` (listado completo) y la variante
       con cantidad del extracto; `document` como parámetro acotado
   - Aporta: la pieza corre exactamente lo que el texto desmonta —
@@ -202,7 +202,7 @@ código funciona y aun así nadie quiere mantenerlo.
     `ScopedDocument` expone `querySelector` y `createElement`; las
     búsquedas del código son `#catalogo`, `#carrito`, `#contador`
     y `#total`
-- [ ] Construir `cart-demo.svelte` (CE `demo-carrito`): el
+- [x] Construir `cart-demo.svelte` (CE `demo-carrito`): el
       esqueleto `html` del artículo, estilos con tokens y montaje
       de la variante según el atributo `modo`
   - Aporta: la UI reconocible funcionando donde el texto la
@@ -211,10 +211,10 @@ código funciona y aun así nadie quiere mantenerlo.
     el componente monta el carrito tras el primer render; dos
     instancias pueden convivir en el artículo (cada shadow aísla
     los ids)
-- [ ] Escribir el `index.ts` adaptador del convenio: lee `modo`
+- [x] Escribir el `index.ts` adaptador del convenio: lee `modo`
       del host y lo propaga al custom element
   - Aporta: una sola pieza sirve a los dos puntos de lectura
-- [ ] Declarar las dos piezas y adaptar el texto:
+- [x] Declarar las dos piezas y adaptar el texto:
       `:::demo{nombre="carrito"}` tras el listado JS en «El
       resultado primero» y `:::demo{nombre="carrito"
       modo="cantidad"}` en «La petición más normal del mundo»;
@@ -225,16 +225,16 @@ código funciona y aun así nadie quiere mantenerlo.
   - Contexto: el fallback de la segunda declara el bug esperado
     (el botón «Quitar» muere tras editar la cantidad); pausas y
     `agente` intactos
-- [ ] Añadir `happy-dom` como devDependency y el pragma
+- [x] Añadir `happy-dom` como devDependency y el pragma
       `// @vitest-environment happy-dom` en el test
   - Aporta: la suite prueba DOM real sin servidor
   - Contexto: vitest 4 soporta pragma por archivo; no hace falta
     entorno global
-- [ ] Calibrar `altura`/`altura-estrecha` midiendo la pieza
+- [x] Calibrar `altura`/`altura-estrecha` midiendo la pieza
       montada y verificar renderizado (desktop/mobile, temas,
       teclado, fallback, `.md`)
   - Aporta: el criterio exige evidencia renderizada
-- [ ] Puertas: `check`, `lint`, `test`, `build`, `format:check`
+- [x] Puertas: `check`, `lint`, `test`, `build`, `format:check`
   - Aporta: la regresión no entra
 
 ## Suite de pruebas esperada
@@ -261,8 +261,28 @@ código funciona y aun así nadie quiere mantenerlo.
 - Solo tokens de `DESIGN.md`; operable por teclado; pausas y
   acompañamiento intactos (regresión).
 
+## Desviaciones del plan
+
+- El plan asumía los estilos scoped de Svelte como suficientes; el
+  código del artículo inyecta sus nodos con `innerHTML`, que no
+  llevan el atributo de scope. Los estilos de esos nodos van con
+  `:global()` dentro del `<style>` del componente —siguen en el
+  shadow del custom element— y el hallazgo quedó documentado en
+  `EDITORIAL.md`.
+- `mountCart` y `mountCartWithQuantity` duplican el andamiaje del
+  programa en lugar de compartirlo: cada función es el listado
+  completo de su versión del artículo y el delta entre ambas
+  refleja el cambio que el texto introduce. Compartir el scaffold
+  habría añadido una capa que el código del post no tiene.
+- El anillo de foco dentro del shadow no hereda el estilo global
+  de la página; se añadió `outline` con tokens (`--focus-width`,
+  `--color-accent`, `--focus-offset`) sobre `button` e `input`.
+- El marco `fronteando-demo` pasa de borde `--color-border` a `--color-accent` a petición del usuario, para señalar la región interactiva; queda documentado en `DESIGN.md` como componente con su excepción de la reserva del acento y aplica a todas las piezas, incluida la del store.
+- La línea de estado única reordenó el esqueleto del artículo: `#contador` dejó el `<h3>` —que queda estático— y vive en `<p role="status">` como «N productos · Total: $X», para que una sola región anuncie ambos valores sin ráfagas.
+- El `input` de cantidad lleva `aria-label="Cantidad"` que el listado impreso no tiene: es invisible, no cambia el comportamiento que el artículo disecciona y da nombre accesible al campo.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-26 — Aprueba
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
