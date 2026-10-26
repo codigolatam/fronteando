@@ -3,6 +3,7 @@
 > **Tipo:** idea de funcionalidad — conjunto (complejidad media)
 > **Fecha:** 2026-10
 > **Orden sugerido:** 4 de 5 (bloque inicial) — enriquece los artículos pero es ortogonal al resto; puede esperar a que el sitio y su editorial existan.
+> **Procesada en:** docs/proposals/005-demos-de-codigo-ejecutables/
 
 ## Problema
 
