@@ -36,3 +36,7 @@
 - D006-columna-lateral-para-el-acompanamiento-en-pantallas-anchas.md
   - Disparadores: aside, columna lateral, raíl, rail, sticky, layout, grid, card, acompañamiento, lectura acompañada, article-rail, rail-width, 1240px, DESIGN.md, columna única, AccompanimentCard.astro, global.css
   - Resumen: en pantallas desde 1240px la nota de acompañamiento vive en una columna lateral pegajosa de 280px junto al texto, que conserva su medida; es la única excepción a la columna única de la guía
+
+- D007-piezas-interactivas-en-svelte-compilado-a-custom-elements.md
+  - Disparadores: svelte, pieza, demo, custom element, ::demo, fronteando-demo, demos/, componente, artefacto, shadow DOM, mount
+  - Resumen: las piezas interactivas se escriben en Svelte compilado a custom elements (piece.svelte + index.ts adaptador); el contrato mount(host, container) no cambia y el runtime solo viaja en el chunk de cada pieza
