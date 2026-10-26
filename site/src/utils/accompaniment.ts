@@ -70,7 +70,7 @@ export function protocolOf(
 
   const lines = [
     `Título: ${article.data.title}`,
-    `URL: ${import.meta.env.SITE}/articulos/${article.id}/`,
+    `URL: ${import.meta.env.SITE}/articulos/${article.id}.md`,
     `Tema: ${declaration.tema}`,
   ];
   if (article.data.nivel) lines.push(`Nivel: ${article.data.nivel}`);

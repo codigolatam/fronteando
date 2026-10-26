@@ -70,10 +70,10 @@ describe("protocolOf", () => {
       expect(i2).toBeGreaterThan(i1);
     });
 
-    it("emits the absolute URL from site and the article route", () => {
+    it("emits the absolute URL of the plain-text version", () => {
       const out = protocolOf(article({ data: { agente: declared } }));
       expect(out).toContain(
-        `URL: ${import.meta.env.SITE}/articulos/carrito-a-lo-bruto/`,
+        `URL: ${import.meta.env.SITE}/articulos/carrito-a-lo-bruto.md`,
       );
     });
 
