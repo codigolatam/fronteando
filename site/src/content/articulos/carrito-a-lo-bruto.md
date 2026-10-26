@@ -76,9 +76,18 @@ productos.forEach((p) => {
 });
 ```
 
-Al hacer clic en los tres «Añadir» la lista muestra tres líneas, el
-contador dice 3 y el total $250. Quitando el teclado quedan dos
-líneas y $205. Nada que reprochar: el componente hace lo que promete.
+Puedes tocarlo aquí mismo: la pieza de abajo ejecuta ese mismo
+código. Al pulsar los tres «Añadir» la lista muestra tres líneas, el
+contador dice 3 y el total $250; quitando el teclado quedan dos
+líneas y $205. Nada que reprochar: el componente hace lo que
+promete.
+
+:::demo{nombre="carrito" altura="272px" altura-estrecha="372px"}
+El carrito del artículo funcionando: el catálogo con sus botones
+«Añadir», la lista del carrito con «Quitar», el contador y el total.
+Resultado esperado: añadir los tres productos deja tres líneas,
+contador 3 y total $250; quitar el teclado deja dos líneas y $205.
+:::
 
 ## Un componente como cualquier otro
 
@@ -149,12 +158,19 @@ subtotal ahora viven en tres sitios a la vez (el array, el `value`
 del input y el texto del `<li>`), y todas hay que mantenerlas a mano.
 
 Lo peor no es el trabajo extra: es que funciona y aun así rompe
-cosas. Al ejecutarlo de verdad, cambiar la cantidad del teclado a 3
-actualiza todo correctamente (total $135, contador 3, subtotal
-$135) y en ese mismo instante el botón «Quitar» de esa línea deja de
-funcionar: el `innerHTML` eliminó el botón viejo del DOM y el nuevo
-nació sin manejadores. El input corrió la misma suerte: con un nodo
-nuevo el foco se perdió a mitad de la edición.
+cosas. Pruébalo en la pieza de abajo: cambia la cantidad del teclado
+a 3 y todo se actualiza correctamente (total $135, contador 3,
+subtotal $135) y en ese mismo instante el botón «Quitar» de esa
+línea deja de funcionar: el `innerHTML` eliminó el botón viejo del
+DOM y el nuevo nació sin manejadores. El input corrió la misma
+suerte: con un nodo nuevo el foco se perdió a mitad de la edición.
+
+:::demo{nombre="carrito" modo="cantidad" altura="272px" altura-estrecha="372px"}
+El mismo carrito con el campo de cantidad por línea. Resultado
+esperado: cambiar la cantidad del teclado a 3 recalcula el subtotal,
+el total y el contador; el botón «Quitar» de esa línea deja de
+responder (el `innerHTML` crea un botón nuevo sin manejadores).
+:::
 
 La pantalla miente: parece un carrito normal y es un carrito con un
 botón muerto y un campo que ya no escucha los cambios.
