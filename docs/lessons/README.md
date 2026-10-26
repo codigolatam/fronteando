@@ -53,6 +53,10 @@
   - Disparadores: suite de pruebas, tests, vitest, render, evidencia, criterio de calidad, verificación, HTML, diseño
   - Resumen: los tests automatizados cubren lógica —el diseño se verifica con evidencia renderizada— y «el mismo resultado» en un criterio significa el mismo diseño, no el mismo HTML
 
+- texto-para-agentes.md
+  - Disparadores: agente, tema, pausa, protocolo, prompt, asistente, ficha, acompañamiento, :::pausa
+  - Resumen: los campos que consume un agente se redactan como instrucción accionable para ese consumidor, y el material que viaja a un asistente se evalúa como prompt, no como prosa
+
 - metadatos-clave-valor.md
   - Disparadores: metadatos, chips, badges, patrones UI, article-meta, nivel, pilar, terminal
   - Resumen: la identidad también arbitra patrones de UI —el metadato estructural va en `clave: valor`, no en chips que insinúan interactividad—
