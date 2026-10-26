@@ -11,22 +11,15 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-- 1. Demos de código ejecutables (idea 004)
-  - Estado: pendiente de arrancar.
-  - Justificación: la tercera redefinición del post — si se escribieran
-    capítulos nuevos ahora habría que volver sobre ellos para insertar
-    demos donde la explicación las necesita. Cierra el bloque de
-    funcionalidades antes de retomar la escritura.
-
-## Next
-
 - 1. Serie MVC en vanilla JS — continuación
      (docs/editorial/series/mvc-en-vanilla-js.md)
-  - Justificación: en pausa, no desplazada — queda primera en Next
-    porque su arco ya está planeado (cuatro piezas en lista) y retoma
-    con el blog completo: los capítulos restantes nacerán con
+  - Justificación: en pausa, no desplazada — queda primera porque su
+    arco ya está planeado (cuatro piezas en lista) y retoma con el
+    blog completo: los capítulos restantes nacerán con
     acompañamiento, formato legible y demos disponibles, sin
     reescritura.
+
+## Next
 
 ## Later
 
