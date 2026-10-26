@@ -117,10 +117,7 @@
           class:primary={pending.length === 0}
           bind:this={levelButton}
           onclick={() =>
-            perform(
-              () => (program.estado.nivel += 1),
-              "estado.nivel += 1",
-            )}
+            perform(() => (program.estado.nivel += 1), "estado.nivel += 1")}
         >
           estado.nivel += 1
         </button>
@@ -185,8 +182,8 @@
         class="code"
         tabindex="0"
         aria-label={stepMode
-            ? "Programa que se ejecuta; la flecha marca la línea en curso"
-            : "Programa que se ejecuta"}><code
+          ? "Programa que se ejecuta; la flecha marca la línea en curso"
+          : "Programa que se ejecuta"}><code
           >{#each lines as line, index}<span
               class="line"
               class:active={index === activeLine}
@@ -209,7 +206,9 @@
               : "null"}
           </code>
         </p>
-        <p class="gloss">el efecto que se ejecuta ahora (en reposo vale null)</p>
+        <p class="gloss">
+          el efecto que se ejecuta ahora (en reposo vale null)
+        </p>
       </div>
       <div class="field">
         <p class="field-line"><code>suscriptoresPorProp</code></p>
@@ -430,9 +429,7 @@
   }
 
   .trace {
-    min-block-size: calc(
-      10 * var(--demo-font-size) * var(--line-height-meta)
-    );
+    min-block-size: calc(10 * var(--demo-font-size) * var(--line-height-meta));
     margin: 0;
     padding: 0;
     list-style: none;
