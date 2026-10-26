@@ -11,18 +11,12 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-- 1. Lectura acompañada por LLM (idea 002)
-  - Estado: pendiente de arrancar.
-  - Justificación: el diferenciador editorial y la cabeza del bloque —
-    el esquema de contenido que define es la entrada de blog-legible-
-    para-máquinas, y su protocolo es lo primero que se adaptaría en cada
-    post existente.
-- 2. Blog legible para máquinas (idea 003)
+- 1. Blog legible para máquinas (idea 003)
   - Estado: pendiente de arrancar.
   - Justificación: hermana menor de la lectura acompañada — consume el
     esquema que aquella define, así que ejecutarla inmediatamente
     después la hace casi mecánica; antes sería trabajo doble.
-- 3. Demos de código ejecutables (idea 004)
+- 2. Demos de código ejecutables (idea 004)
   - Estado: pendiente de arrancar.
   - Justificación: la tercera redefinición del post — si se escribieran
     capítulos nuevos ahora habría que volver sobre ellos para insertar

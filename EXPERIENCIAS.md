@@ -202,3 +202,17 @@
   Obtenido: el agente señaló el wrapper article-content como incumplimiento del criterio.
   Corrección: el criterio es el mismo diseño —posiciones, márgenes, fuentes—, no la estructura del DOM; el usuario lo aclaró y se verificó con mediciones renderizadas.
   Estado: consolidada
+
+- Id: 20261025T211939
+  Tarea: docs/tasks/025-adaptar-el-corpus.md
+  Esperado: las indicaciones de pausa como verificación de la comprensión del lector.
+  Obtenido: el agente las redactó como capacidad —«verifica que puedas decir X»—, forma que invita a una pregunta sí/no cuando el asistente la aplica literalmente.
+  Corrección: el usuario pidió evaluar el protocolo como instrucción para un agente; las indicaciones quedaron como la acción que el lector produce —«explica», «señala», «nombra»— y el tema como texto explicativo, no oración nominal.
+  Estado: consolidada
+
+- Id: 20261025T211940
+  Tarea: docs/tasks/025-adaptar-el-corpus.md
+  Esperado: la ficha del protocolo suficiente para que el asistente identifique el artículo.
+  Obtenido: la ficha llevaba URL, tema, nivel y prerequisitos, pero no el título; propuesto como mejora y el usuario la ordenó aplicar.
+  Corrección: evaluar el material que viaja a un asistente como prompt —un agente sin acceso a la URL reconoce el texto por su título—.
+  Estado: consolidada

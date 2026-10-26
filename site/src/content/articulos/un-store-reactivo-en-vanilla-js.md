@@ -5,6 +5,13 @@ date: 2026-10-16T21:15:00Z
 nivel: intermedio
 categoria: fundamentos
 tags: ["javascript", "reactividad"]
+agente:
+  tema: "construir un store reactivo desde cero en JavaScript sin librerías: un signal que notifica, un effect que se registra solo y un Proxy que lo generaliza por propiedad"
+  prerequisitos:
+    [
+      "JavaScript con soltura (funciones, closures)",
+      "getters y setters de objetos",
+    ]
 ---
 
 Cambia una variable y la pantalla se actualiza sola. Si has usado Vue,
@@ -84,6 +91,11 @@ componente real (varias propiedades, varios consumidores) el cableado
 manual se convierte en la fuente de los errores: el efecto que nadie
 suscribió, el que quedó suscrito al dato equivocado.
 
+:::pausa
+Explica con tus palabras qué le cuesta al consumidor suscribirse a
+mano y qué errores trae ese cableado.
+:::
+
 ## El efecto que se registra solo
 
 El paso que convierte esto en reactividad es un cambio de dirección: en
@@ -141,6 +153,11 @@ El grafo de dependencias se construye solo: cada efecto queda anotado
 en los signals que lee cada vez que corre. Ese matiz («cada vez que
 corre») importa; volveremos a él en los límites.
 
+:::pausa
+Explica quién toma nota de quién: por qué el suscriptor es `correr`
+y no `fn`.
+:::
+
 ## De un valor a un objeto: la store
 
 Un `signal` envuelve un valor. La generalización natural es un objeto
@@ -190,6 +207,11 @@ estado.nombre = "lu"; // y otra vez
 Y la prueba de que el grafo es fino: un efecto que solo lee
 `estado.nombre` no corre cuando cambia `estado.nivel`. La reactividad
 ya no es por variable, es por propiedad.
+
+:::pausa
+Explica por qué un efecto que solo lee `estado.nombre` no se
+reejecuta cuando cambia `estado.nivel`.
+:::
 
 ## Lo que falta para ser un framework
 

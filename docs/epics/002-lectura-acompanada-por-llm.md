@@ -2,7 +2,7 @@
 
 ## Estado
 
-[x] Planificada | [ ] Completada
+[x] Planificada | [x] Completada
 
 ## Objetivo
 
@@ -29,7 +29,7 @@ técnicos publicados.
       material de acompañamiento
 - [x] docs/tasks/024-experiencia-en-pagina.md — experiencia de lectura
       acompañada en página
-- [ ] docs/tasks/025-adaptar-el-corpus.md — adaptar el corpus a la
+- [x] docs/tasks/025-adaptar-el-corpus.md — adaptar el corpus a la
       lectura acompañada
 
 ## Plan técnico
