@@ -632,6 +632,10 @@ html:not(.js) .accompaniment-copy {
    visible until the piece upgrades— already wears the same surface. */
 
 .prose fronteando-demo {
+  /* Component tier: pieces consume --demo-* tokens, declared on the
+     host so they inherit the site scale by default and a piece can
+     pin its own density without touching it. */
+  --demo-font-size: var(--font-size-meta);
   display: block;
   margin-block: 0 var(--space-3);
   background: var(--color-surface);

@@ -128,6 +128,13 @@ declaran como `--font-display` (Serif), `--font-body` (Sans) y
 | Cuerpo                | `--font-size-body` 20px    | Sans    | 400  | 1.65            |
 | Código en bloque      | `--font-size-code` 18px    | Mono    | 400  | 1.55            |
 | Metadatos y chrome    | `--font-size-meta` 15px    | Mono    | 400  | 1.5             |
+| Piezas interactivas   | `--demo-font-size` 15px    | Mono    | 400  | 1.5             |
+
+`--demo-font-size` pertenece a una tier de componente: se declara sobre
+`fronteando-demo` (no en `:root`) respaldado por `--font-size-meta`, así
+las piezas interactivas consumen un token con su propia intención
+—chrome denso de demo— y cada pieza puede redefinirlo en su host sin
+tocar la escala global.
 
 Pesos declarados —ninguno fuera de esta lista—: Serif solo 700; Sans 400
 y 600 —el 600 es el énfasis de `strong` en prosa—; Mono 400 y 500 —el

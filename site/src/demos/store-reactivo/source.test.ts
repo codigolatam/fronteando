@@ -32,6 +32,15 @@ describe("sourceLines", () => {
       expect(
         text(sourceLines({ prop: "nombre", value: '"lu"' })[WRITE_LINE]),
       ).toBe('estado.nombre = "lu";');
+      expect(
+        text(
+          sourceLines({
+            prop: "nivel",
+            value: "2",
+            statement: "estado.nivel += 1",
+          })[WRITE_LINE],
+        ),
+      ).toBe("estado.nivel += 1");
     });
   });
 });

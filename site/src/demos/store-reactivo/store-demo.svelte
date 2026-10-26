@@ -14,12 +14,13 @@
   const NAMES = ["ana", "lu", "mara"];
   const OUTPUTS = [
     { runner: "title", label: "document.title (simulado)" },
-    { runner: "greeting", label: "saludo.textContent" },
+    { runner: "greeting", label: "saludo.textContent (simulado)" },
   ] as const;
 
   let captured: ProgramObservation[] = [];
   const program = createProgram((observation) => captured.push(observation));
   let view = $state.raw(captured.reduce(applyObservation, initialView()));
+  let lastStatement = $state<string | null>(null);
   captured = [];
 
   let stepMode = $state(false);
@@ -27,7 +28,9 @@
   let total = $state(0);
   let levelButton = $state<HTMLButtonElement>();
 
-  const lines = $derived(sourceLines(view.write));
+  const lines = $derived(
+    sourceLines(view.write && { ...view.write, statement: lastStatement }),
+  );
   // The arrow is a program counter: it only means something while the
   // reader is stepping through an operation.
   const activeLine = $derived(stepMode && total > 0 ? view.line : null);
@@ -52,8 +55,9 @@
   // Every write runs synchronously through the program; the batch of
   // observations it produced is then shown at once or one step at a
   // time, so the stepped view replays what really happened.
-  function perform(write: () => void) {
+  function perform(write: () => void, statement: string) {
     finish();
+    lastStatement = statement;
     captured = [];
     write();
     const batch = captured;
@@ -112,13 +116,21 @@
           type="button"
           class:primary={pending.length === 0}
           bind:this={levelButton}
-          onclick={() => perform(() => (program.estado.nivel += 1))}
+          onclick={() =>
+            perform(
+              () => (program.estado.nivel += 1),
+              "estado.nivel += 1",
+            )}
         >
           estado.nivel += 1
         </button>
         <button
           type="button"
-          onclick={() => perform(() => (program.estado.nombre = nextName))}
+          onclick={() =>
+            perform(
+              () => (program.estado.nombre = nextName),
+              `estado.nombre = "${nextName}"`,
+            )}
         >
           estado.nombre = "{nextName}"
         </button>
@@ -152,7 +164,7 @@
     <section class="trace-section" aria-labelledby="trace-label">
       <p class="label" id="trace-label">&gt; traza</p>
       <p class="sr-only" role="status">{status}</p>
-      <ol class="trace">
+      <ol class="trace" role="list">
         {#each view.trace as entry, index (entry.id)}
           <li
             style:--depth={entry.depth}
@@ -172,7 +184,9 @@
       <pre
         class="code"
         tabindex="0"
-        aria-label="Programa que se ejecuta; la flecha marca la línea en curso"><code
+        aria-label={stepMode
+            ? "Programa que se ejecuta; la flecha marca la línea en curso"
+            : "Programa que se ejecuta"}><code
           >{#each lines as line, index}<span
               class="line"
               class:active={index === activeLine}
@@ -200,7 +214,7 @@
       <div class="field">
         <p class="field-line"><code>suscriptoresPorProp</code></p>
         <p class="gloss">quién escucha a cada propiedad</p>
-        <ul class="subscribers">
+        <ul class="subscribers" role="list">
           {#each Object.entries(view.snapshot.subscribers) as [prop, runners] (prop)}
             <li>
               <code>{prop}</code> →
@@ -239,7 +253,7 @@
       "internals";
     gap: var(--space-2) var(--space-3);
     font-family: var(--font-mono);
-    font-size: var(--font-size-meta);
+    font-size: var(--demo-font-size);
     line-height: var(--line-height-meta);
     color: var(--color-text);
   }
@@ -417,7 +431,7 @@
 
   .trace {
     min-block-size: calc(
-      10 * var(--font-size-meta) * var(--line-height-meta)
+      10 * var(--demo-font-size) * var(--line-height-meta)
     );
     margin: 0;
     padding: 0;
@@ -444,7 +458,7 @@
     margin: 0;
     padding: var(--space-1) 0;
     overflow-x: auto;
-    font-size: var(--font-size-meta);
+    font-size: var(--demo-font-size);
     line-height: var(--line-height-code);
     background: var(--color-surface);
     border: var(--border-width) solid var(--color-border);
@@ -459,7 +473,7 @@
 
   .line {
     display: block;
-    min-block-size: calc(var(--font-size-meta) * var(--line-height-code));
+    min-block-size: calc(var(--demo-font-size) * var(--line-height-code));
     padding-inline: var(--space-1) var(--space-2);
     white-space: pre;
   }

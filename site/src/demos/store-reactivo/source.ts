@@ -59,17 +59,23 @@ const SOURCE_LINES: readonly SourceLine[] = [
 export interface Write {
   prop: string;
   value: string;
+  // The statement the reader actually ran (from the control that
+  // triggered it); when present it is shown verbatim.
+  statement?: string;
 }
 
 // The last line is the reader's own assignment, once there is one.
 export function sourceLines(write: Write | null): readonly SourceLine[] {
   if (!write) return SOURCE_LINES;
-  const literal: Token = [
-    write.value,
-    write.value.startsWith('"') ? "string" : "constant",
-  ];
-  return SOURCE_LINES.map((line, index) =>
-    index === WRITE_LINE ? [[`estado.${write.prop} = `], literal, [";"]] : line,
+  const line: SourceLine = write.statement
+    ? [[write.statement]]
+    : [
+        [`estado.${write.prop} = `],
+        [write.value, write.value.startsWith('"') ? "string" : "constant"],
+        [";"],
+      ];
+  return SOURCE_LINES.map((sourceLine, index) =>
+    index === WRITE_LINE ? line : sourceLine,
   );
 }
 

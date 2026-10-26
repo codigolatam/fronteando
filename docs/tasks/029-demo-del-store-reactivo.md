@@ -162,7 +162,7 @@ correr → escribe), mostrado en dos vistas sincronizadas.
     la traza como lista acotada (las entradas recientes primero) con
     rol `log` o `status` para lectores de pantalla
 - [x] Declarar la pieza y adaptar el texto: `:::demo{nombre=
-      "store-reactivo"}` tras el bloque de código en «El resultado
+    "store-reactivo"}` tras el bloque de código en «El resultado
       primero», fallback descriptivo y párrafo circundante ajustado
   - Aporta: CU-1/CU-2 en el punto donde el artículo lo promete;
     el `.md` y sin-JS quedan legibles por el fallback
@@ -216,10 +216,13 @@ correr → escribe), mostrado en dos vistas sincronizadas.
   (ocurría en el mismo momento que el montaje) y el alto de la pieza
   cambia con el ancho (760px y 1220px medidos). La directiva valida que
   sean longitudes CSS simples. `EDITORIAL.md` lo documenta.
-- El código dentro de la pieza usa `--font-size-meta` y no
-  `--font-size-code`: la línea más larga (62 caracteres) solo cabe en
-  la medida de la pieza a 15px; en pantallas estrechas el bloque hace
-  scroll horizontal, como pide la guía.
+- El texto y el código dentro de la pieza usan `--demo-font-size`
+  (15px), un token de la tier de componente declarado sobre
+  `fronteando-demo` y respaldado por `--font-size-meta`: separa la
+  intención «chrome de demo» de la escala editorial, y quedó
+  documentado en `DESIGN.md`. La línea más larga (62 caracteres) solo
+  cabe en la medida de la pieza a 15px; en pantallas estrechas el
+  bloque hace scroll horizontal, como pide la guía.
 - La demo se mantiene en «El resultado primero» y no se reubica: con el
   programa visible dentro de la pieza, `efectoActivo` y
   `suscriptoresPorProp` ya no llegan sin ancla. El párrafo previo se
@@ -233,3 +236,4 @@ correr → escribe), mostrado en dos vistas sincronizadas.
 - Subagente: 2026-10-26 — Aprueba
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Subagente (rediseño): 2026-10-26 — Aprueba
