@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -167,7 +167,7 @@ verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
 - La pieza puede reservar altura con el atributo `altura` —el contrato
   de «lectura estable» de `DESIGN.md`—.
 
-- [ ] Crear el plugin `demo-directive` —`:::demo{nombre="…"}` emite
+- [x] Crear el plugin `demo-directive` —`:::demo{nombre="…"}` emite
       `<fronteando-demo nombre="…">`, los atributos pasan a
       `hProperties` y los hijos quedan intactos— y registrarlo en
       `astro.config.mjs`
@@ -176,17 +176,17 @@ verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
   - Contexto: mismo patrón que `pause-directive`; el PoC verificó que
     `node.attributes` llega poblado; `nombre` ausente reporta
     diagnóstico de error en build vía `ctx.report`
-- [ ] Crear la clase del elemento `fronteando-demo`: en
+- [x] Crear la clase del elemento `fronteando-demo`: en
       `connectedCallback` lee `nombre`, resuelve el módulo de la pieza
       con `import.meta.glob` sobre `src/demos/*/index.ts` y lo monta en
       su shadow root; `disconnectedCallback` la libera
   - Aporta: un solo elemento y una sola convención; cada pieza carga su
     código solo cuando se declara (code splitting por pieza)
-- [ ] Establecer la convención de artefacto `site/src/demos/<nombre>/`
+- [x] Establecer la convención de artefacto `site/src/demos/<nombre>/`
       y construir la pieza mínima de ejemplo que ejercita el mecanismo
   - Aporta: el punto de extensión reutilizable y la pieza de
     verificación del criterio de calidad
-- [ ] Cargar el script del mecanismo solo en artículos con demos:
+- [x] Cargar el script del mecanismo solo en artículos con demos:
       `[...id].astro` detecta `:::demo` en el cuerpo y renderiza el
       `<script>` del registro condicionalmente
   - Aporta: «rápido por defecto» de `DESIGN.md` —los artículos sin
@@ -194,18 +194,18 @@ verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
   - Contexto: el script procesado se deduplica por página; si el
     `<script>` condicional diera problemas, la alternativa es un loader
     ínfimo siempre incluido que retorna sin elementos `fronteando-demo`
-- [ ] Dar el marco de la pieza: `:host` con borde `--color-border`,
+- [x] Dar el marco de la pieza: `:host` con borde `--color-border`,
       `--radius` y fondo `--color-surface`; `fronteando-demo` con
       `display: block` en el CSS global —sin ello el fallback nace
       inline—; `altura` opcional como altura mínima reservada
   - Aporta: superficie consistente de la guía y sin salto de layout al
     mejorar (contrato «lectura estable»)
-- [ ] Resolver sin-JS y `.md` por construcción y verificarlo: los
+- [x] Resolver sin-JS y `.md` por construcción y verificarlo: los
       hijos no sloteados desaparecen al mejorar —el fallback se ve hasta
       entonces y viaja literal en el `.md`—
   - Aporta: CU-4 y CU-5 salen del modelo de upgrade nativo, sin trabajo
     adicional
-- [ ] Verificar la pieza mínima durante el desarrollo: se declara
+- [x] Verificar la pieza mínima durante el desarrollo: se declara
       temporalmente en un artículo del árbol de trabajo —sin
       commitear—, se verifica renderizada y se revierte la
       declaración; nada de la pieza de ejemplo queda en la
@@ -215,13 +215,13 @@ verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
   - Contexto: decisión del usuario —la pieza mínima es solo de
     desarrollo; el artefacto de `src/demos/` sí queda como
     implementación de referencia del convenio—
-- [ ] Documentar el convenio en `EDITORIAL.md`: sintaxis `:::demo`,
+- [x] Documentar el convenio en `EDITORIAL.md`: sintaxis `:::demo`,
       layout del artefacto, contrato del fallback —tres lectores,
       evaluado como prompt—, tipos de pieza según el género
       (simulación, vista instrumentada, stepper) y comportamiento sin
       JS
   - Aporta: la convención de autoría que el objetivo exige
-- [ ] Verificación renderizada: dev server en background + Firefox —
+- [x] Verificación renderizada: dev server en background + Firefox —
       pieza en su lugar, interacción, página sin JS, salida `.md`,
       ambos temas—
   - Aporta: el criterio de calidad exige evidencia renderizada, no solo
@@ -246,8 +246,30 @@ verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
 - La pieza mínima monta, responde a la interacción y es operable por
   teclado (CU-1; B).
 
+## Desviaciones del plan
+
+- **El marco de la pieza vive en el CSS global sobre el elemento, no en
+  `:host` dentro del shadow.** El plan preveía reglas `:host`; la
+  implementación estiliza `fronteando-demo` desde `global.css`
+  (surface, borde, radio, padding, `display: block`). Motivo: el host
+  es estilizable desde fuera con o sin shadow, y así el fallback
+  anterior a la mejora ya lleva el mismo marco —no hay salto visual al
+  hacer upgrade—. La decisión no cambia la superficie prometida; el
+  shadow queda libre para los estilos internos de cada pieza.
+- **`mount` recibe un `DocumentFragment`, no el `ShadowRoot`.** La
+  pieza construye su interfaz en un fragmento que el elemento anexa al
+  shadow solo si `mount` terminó sin error: si la pieza falla, no se
+  adjunta shadow y el fallback no desaparece (un shadow vacío lo
+  ocultaría para siempre). Refuerza el criterio «nombre sin pieza
+  deja el fallback visible» que el plan ya fijaba.
+- **`nombre` reactivo además de `altura`.** El plan solo declaraba
+  `altura` observado; `nombre` también quedó observado para permitir
+  remontar si el atributo cambia en runtime —caso barato de cubrir con
+  la misma vía de `attributeChangedCallback`—.
+- **El shadow mantiene un `<slot>` como estado degradado, no solo para el primer montaje.** La revisión encontró que `attachShadow` no puede deshacerse y que un shadow vacío oculta el fallback para siempre en remontaje, reconexión y nombre inválido. Decisión: el shadow contiene siempre la pieza o un `<slot>` que proyecta el fallback —toda ruta de fallo (pieza desconocida, mount que lanza, mount vacío, nombre ausente, desconexión) devuelve el elemento al fallback en lugar de romperse—. También quedó `nombre` reactivo con deduplicación de cargas en vuelo y verificación del atributo tras el `await`.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-26 — Aprueba
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

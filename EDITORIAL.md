@@ -13,6 +13,7 @@ documentación del proyecto, que no se rige por esta guía.
 - [Anatomía del post](#anatomía-del-post)
 - [Contrato de metadatos](#contrato-de-metadatos)
 - [Lectura acompañada](#lectura-acompañada)
+- [Piezas interactivas](#piezas-interactivas)
 - [Taxonomía](#taxonomía)
 - [Niveles de edición](#niveles-de-edición)
 - [Manuales de referencia](#manuales-de-referencia)
@@ -167,6 +168,50 @@ solo lo propio.
   comprensión (un concepto nuevo, un resultado contraintuitivo), no
   tras la mecánica. Dos o tres por post suelen bastar: cada pausa es
   un punto donde perderse cuesta caro.
+
+## Piezas interactivas
+
+Los artículos pueden hospedar piezas interactivas (demos, simulaciones,
+visualizaciones instrumentadas) declaradas en el cuerpo del texto con
+una directiva de contenedor:
+
+```md
+:::demo{nombre="store-reactivo"}
+Pieza interactiva: el _store_ del artículo, funcionando. El lector
+pulsa **+** y observa cómo cambia el estado interno.
+:::
+```
+
+- **`nombre` es obligatorio** y selecciona el artefacto de la pieza en
+  `site/src/demos/<nombre>/index.ts`. Los demás atributos de la
+  directiva (`{modo="pasos"}`…) llegan al elemento como configuración;
+  `altura="320px"` reserva altura mínima para que la pieza no desplace
+  el texto al montar.
+- **El cuerpo de la directiva es el fallback**, escrito en markdown
+  pleno. Sirve a tres lectores: el humano sin JavaScript, el humano que
+  aún está cargando la página y el agente que lee el `.md` del artículo.
+  Se escribe como descripción honesta estilo figura —qué es la pieza,
+  qué hace, qué puede tocar el lector— y se evalúa como prompt para el
+  agente, no solo como prosa.
+- **Cada pieza es un artefacto propio:** un directorio
+  `site/src/demos/<nombre>/` cuyo `index.ts` exporta
+  `mount(host, container)`. Recibe el elemento `fronteando-demo` y un
+  fragmento donde construir su interfaz —controles nativos, estilos con
+  los tokens `--*` de `DESIGN.md`, que cruzan el límite del shadow DOM—
+  y puede devolver una función de limpieza. La pieza se ejecuta en
+  shadow DOM: aislada de los estilos de la página, pero heredando los
+  tokens.
+- **Tipos de pieza** (vocabulario del género, ver
+  `docs/research/2026-10-el-genero-explorable-explanations.md`):
+  simulación jugable, vista instrumentada de un sistema, stepper guiado
+  y documento reactivo.
+- **Sin JavaScript la página no se rompe:** el lector ve el fallback en
+  el lugar de la pieza, y si el `nombre` no tiene artefacto registrado
+  el fallback también permanece. Nunca se publica una pieza cuyo
+  fallback sea vacío o engañoso.
+- **La pieza es parte del artículo, no decoración:** se declara donde
+  el texto la necesita, es operable por teclado y respeta
+  `prefers-reduced-motion`.
 
 ## Taxonomía
 
