@@ -633,9 +633,10 @@ html:not(.js) .accompaniment-copy {
 
 .prose fronteando-demo {
   /* Component tier: pieces consume --demo-* tokens, declared on the
-     host so they inherit the site scale by default and a piece can
-     pin its own density without touching it. */
-  --demo-font-size: var(--font-size-meta);
+     host with their own value —demo chrome keeps its density whether
+     or not the site scale is retuned— and a piece can pin its own
+     without touching either. */
+  --demo-font-size: 15px;
   display: block;
   margin-block: 0 var(--space-3);
   background: var(--color-surface);
