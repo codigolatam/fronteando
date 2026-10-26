@@ -4,29 +4,24 @@
 // emits a typed event and a real snapshot at each observable step so
 // the piece can show the mechanism without diverging from it.
 
-export type Stage = "effect" | "store" | "program";
+export type RunnerId = "title" | "greeting";
+
+export const RUNNERS: readonly RunnerId[] = ["title", "greeting"];
 
 export type DemoEvent =
-  | { stage: "effect"; kind: "run-start" | "run-end"; runner: string }
-  | { stage: "store"; kind: "subscribe"; prop: string; runner: string }
-  | {
-      stage: "store";
-      kind: "notify";
-      prop: string;
-      value: string;
-      count: number;
-    }
-  | {
-      stage: "program";
-      kind: "write";
-      prop: "title" | "console";
-      value: string;
-    };
+  | { kind: "run-start" | "run-end"; runner: RunnerId }
+  | { kind: "subscribe"; prop: string; runner: RunnerId }
+  // value is the source literal of the assignment ("lu", 2).
+  | { kind: "notify"; prop: string; value: string; count: number }
+  // Instrumentation only: an effect that did not read `prop`, so the
+  // write left it alone. The article's mechanics emit nothing here.
+  | { kind: "skip"; prop: string; runner: RunnerId }
+  | { kind: "write"; runner: RunnerId; value: string };
 
 export interface ProgramSnapshot {
   state: { nombre: string; nivel: number };
-  activeEffect: string | null;
-  subscribers: Record<string, string[]>;
+  activeEffect: RunnerId | null;
+  subscribers: Record<string, RunnerId[]>;
 }
 
 export interface ProgramObservation {
@@ -39,16 +34,22 @@ export function createProgram(
 ) {
   const target = { nombre: "ana", nivel: 1 };
   const subscribersPerProp = new Map<string, Set<() => void>>();
-  const runnerLabels = new WeakMap<() => void, string>();
+  const runnerIds = new Map<() => void, RunnerId>();
   let activeEffect: (() => void) | null = null;
+
+  const idOf = (runner: () => void) => {
+    const id = runnerIds.get(runner);
+    if (!id) throw new Error("subscriber is not a registered effect");
+    return id;
+  };
 
   const snapshot = (): ProgramSnapshot => ({
     state: { ...target },
-    activeEffect: activeEffect ? (runnerLabels.get(activeEffect) ?? "?") : null,
+    activeEffect: activeEffect ? idOf(activeEffect) : null,
     subscribers: Object.fromEntries(
-      [...subscribersPerProp.entries()].map(([prop, subscribers]) => [
+      [...subscribersPerProp].map(([prop, subscribers]) => [
         prop,
-        [...subscribers].map((runner) => runnerLabels.get(runner) ?? "?"),
+        [...subscribers].map(idOf),
       ]),
     ),
   });
@@ -64,15 +65,15 @@ export function createProgram(
 
   // The article's `effect`: correr declares itself the active effect,
   // runs fn and cleans up —each run re-registers what it reads.
-  function effect(fn: () => void, label: string) {
+  function effect(fn: () => void, id: RunnerId) {
     const correr = () => {
-      runnerLabels.set(correr, label);
       activeEffect = correr;
-      emit({ stage: "effect", kind: "run-start", runner: label });
+      emit({ kind: "run-start", runner: id });
       fn();
       activeEffect = null;
-      emit({ stage: "effect", kind: "run-end", runner: label });
+      emit({ kind: "run-end", runner: id });
     };
+    runnerIds.set(correr, id);
     correr();
   }
 
@@ -86,10 +87,9 @@ export function createProgram(
         const runner = activeEffect;
         subsOf(prop).add(runner);
         emit({
-          stage: "store",
           kind: "subscribe",
           prop,
-          runner: runnerLabels.get(runner) ?? "?",
+          runner: idOf(runner),
         });
       }
       return value;
@@ -98,37 +98,37 @@ export function createProgram(
       if (typeof prop !== "string") return Reflect.set(obj, prop, next);
       (obj as Record<string, unknown>)[prop] = next;
       const subscribers = subsOf(prop);
+      const listening = new Set([...subscribers].map(idOf));
+      const skipped = RUNNERS.filter((id) => !listening.has(id));
       emit({
-        stage: "store",
         kind: "notify",
         prop,
-        value: String(next),
+        value: typeof next === "string" ? JSON.stringify(next) : String(next),
         count: subscribers.size,
       });
       subscribers.forEach((runner) => runner());
+      skipped.forEach((runner) => emit({ kind: "skip", prop, runner }));
       return true;
     },
   });
 
-  // Two effects so the fine graph is provable: correr2 reads only
-  // `nombre`, so writes to `nivel` never re-run it.
+  // Two effects with a job each, so the fine graph is provable: the
+  // greeting reads only `nombre`, so writes to `nivel` never re-run it.
   effect(() => {
     emit({
-      stage: "program",
       kind: "write",
-      prop: "title",
+      runner: "title",
       value: `${estado.nombre} · nivel ${estado.nivel}`,
     });
-  }, "correr1");
+  }, "title");
 
   effect(() => {
     emit({
-      stage: "program",
       kind: "write",
-      prop: "console",
-      value: `${estado.nombre}`,
+      runner: "greeting",
+      value: `Hola, ${estado.nombre}`,
     });
-  }, "correr2");
+  }, "greeting");
 
   return { estado, getSnapshot: snapshot };
 }

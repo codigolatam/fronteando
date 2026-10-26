@@ -200,6 +200,33 @@ correr → escribe), mostrado en dos vistas sincronizadas.
   los efectos que reejecuta) y anuncia una sola línea de estado por
   operación, para evitar que cada escritura produzca una ráfaga de
   entradas en lectores de pantalla.
+- Crítica de diseño del usuario (desktop y mobile) tras la primera
+  revisión: la pieza se rediseñó. Los dos efectos pasan a tener un
+  trabajo (título y saludo), el programa es visible dentro de la pieza
+  con marcador de línea, hay modo paso a paso (el replay de lo que
+  ocurrió de verdad), la traza es cronológica con sangría y marca
+  «no se ejecutó», el layout responde al ancho del contenedor y los
+  inputs de texto se retiraron (cada letra provocaba un `set`). Se
+  corrigieron además `box-sizing` dentro del shadow DOM, la fuente de
+  `<code>` y el uso de `<output>` (live region implícita).
+- Cambio al mecanismo de la tarea 028: `altura` ya no se aplica con
+  JavaScript al montar, y se añade `altura-estrecha`. Ambas viajan en
+  el HTML como custom properties y solo reservan espacio con
+  `html.js`. Motivo: la reserva por JavaScript no evitaba el salto
+  (ocurría en el mismo momento que el montaje) y el alto de la pieza
+  cambia con el ancho (760px y 1220px medidos). La directiva valida que
+  sean longitudes CSS simples. `EDITORIAL.md` lo documenta.
+- El código dentro de la pieza usa `--font-size-meta` y no
+  `--font-size-code`: la línea más larga (62 caracteres) solo cabe en
+  la medida de la pieza a 15px; en pantallas estrechas el bloque hace
+  scroll horizontal, como pide la guía.
+- La demo se mantiene en «El resultado primero» y no se reubica: con el
+  programa visible dentro de la pieza, `efectoActivo` y
+  `suscriptoresPorProp` ya no llegan sin ancla. El párrafo previo se
+  reescribió como invitación a un experimento y el encabezado «la
+  store» pasó a «el store» (como el título del artículo).
+- El rediseño no ha pasado revisión independiente: el veredicto del
+  subagente de la sección Revisión corresponde a la versión anterior.
 
 ## Revisión
 

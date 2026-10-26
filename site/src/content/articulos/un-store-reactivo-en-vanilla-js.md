@@ -41,22 +41,41 @@ effect(() => {
 count.value = 1; // el título del documento ya dice «count: 1»
 ```
 
-La pieza de abajo ejecuta la versión con `store` que construiremos al
-final y deja el estado interno a la vista.
-
-:::demo{nombre="store-reactivo" altura="720px"}
-Pieza interactiva: la `store` del artículo funcionando e instrumentada.
-Cambia `estado.nombre` o `estado.nivel` para ver cómo responde el título
-simulado. La vista interna muestra `efectoActivo`, `suscriptoresPorProp`
-y la traza de lecturas, suscripciones, escrituras y reejecuciones.
-:::
-
 Ninguna línea avisa de nada a nadie: asignar `count.value` basta para
-que el título se reescriba. En la pieza puedes provocar esas mismas
-operaciones sobre `estado`: cada `get` registra un efecto y cada `set`
-notifica solo a quien leyó la propiedad. Tres piezas lo hacen posible:
-`signal`, `effect` y un truco pequeño que las conecta. Las construiremos
-una a una.
+que el título se reescriba. Tres piezas lo hacen posible: `signal`,
+`effect` y un truco pequeño que las conecta. Las construiremos una a
+una.
+
+Mientras tanto, puedes ver el mismo mecanismo en una demo. El estado es
+ahora un objeto con dos propiedades, `nombre` y `nivel`, y hay dos
+efectos que leen de él. Sube `nivel` y observa qué efectos se ejecutan;
+luego cambia `nombre` y compara.
+
+:::demo{nombre="store-reactivo" altura="760px" altura-estrecha="1220px"}
+Demo interactiva del mismo mecanismo con un estado de dos propiedades
+(`nombre` y `nivel`) y dos efectos: uno escribe el título del documento
+y otro un saludo. Este es el programa que ejecuta:
+
+```js
+const estado = store({ nombre: "ana", nivel: 1 });
+
+effect(() => {
+  document.title = `${estado.nombre} · nivel ${estado.nivel}`;
+});
+
+effect(() => {
+  saludo.textContent = `Hola, ${estado.nombre}`;
+});
+```
+
+Con JavaScript, la demo permite escribir en el estado
+(`estado.nivel += 1`, `estado.nombre = "lu"`), marca en el programa la
+línea que se ejecuta, muestra el valor de `efectoActivo` y el mapa
+`suscriptoresPorProp`, y registra una traza de cada lectura, escritura y
+reejecución (también paso a paso). Resultado esperado: al subir `nivel`
+solo se reejecuta el efecto del título, porque el saludo no lee `nivel`;
+al cambiar `nombre` se reejecutan los dos.
+:::
 
 ## Estado que notifica
 
@@ -170,7 +189,7 @@ Explica quién toma nota de quién: por qué el suscriptor es `correr`
 y no `fn`.
 :::
 
-## De un valor a un objeto: la store
+## De un valor a un objeto: el store
 
 Un `signal` envuelve un valor. La generalización natural es un objeto
 donde cada propiedad se comporta igual: leer registra, escribir
