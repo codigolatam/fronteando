@@ -12,7 +12,7 @@ frontend, con o sin asistente de por medio.
 ## Now
 
 - 1. Blog legible para máquinas (idea 003)
-  - Estado: pendiente de arrancar.
+  - Estado: en curso.
   - Justificación: hermana menor de la lectura acompañada — consume el
     esquema que aquella define, así que ejecutarla inmediatamente
     después la hace casi mecánica; antes sería trabajo doble.
