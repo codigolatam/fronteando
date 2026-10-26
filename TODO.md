@@ -20,7 +20,7 @@
 <!-- épica: docs/epics/004-demos-de-codigo-ejecutables.md -->
 
 - [x] docs/tasks/028-mecanismo-de-piezas-interactivas.md — el mecanismo de piezas interactivas en el artículo
-- [r] docs/tasks/029-demo-del-store-reactivo.md — demo viva del store reactivo
+- [x] docs/tasks/029-demo-del-store-reactivo.md — demo viva del store reactivo
 - [ ] docs/tasks/030-demo-del-carrito.md — demo viva del carrito a lo bruto
 
 ## Propuestas en revisión
