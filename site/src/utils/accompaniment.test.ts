@@ -44,11 +44,16 @@ describe("protocolOf", () => {
       const out = protocolOf(
         article({
           body: withPauses,
-          data: { agente: declared, nivel: "intermedio" },
+          data: {
+            title: "El carrito a lo bruto",
+            agente: declared,
+            nivel: "intermedio",
+          },
         }),
       );
       expect(out).toContain("# Lectura acompañada");
       expect(out).toContain("## Ficha del artículo");
+      expect(out).toContain("Título: El carrito a lo bruto");
       expect(out).toContain("Tema: un carrito construido sin patrón");
       expect(out).toContain("Nivel: intermedio");
       expect(out).toContain("Prerequisitos: javascript básico, DOM");

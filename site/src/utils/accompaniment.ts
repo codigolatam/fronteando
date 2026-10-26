@@ -69,6 +69,7 @@ export function protocolOf(
   if (!declaration) return null;
 
   const lines = [
+    `Título: ${article.data.title}`,
     `URL: ${import.meta.env.SITE}/articulos/${article.id}/`,
     `Tema: ${declaration.tema}`,
   ];
