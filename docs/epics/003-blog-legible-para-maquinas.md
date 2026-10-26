@@ -2,7 +2,7 @@
 
 ## Estado
 
-[x] Planificada | [ ] Completada
+[x] Planificada | [x] Completada
 
 ## Objetivo
 
@@ -25,9 +25,9 @@ mano.
 
 ## Piezas
 
-- [ ] docs/tasks/026-version-markdown-por-articulo.md — versión en
+- [x] docs/tasks/026-version-markdown-por-articulo.md — versión en
       texto plano de cada artículo
-- [ ] docs/tasks/027-descubrimiento-y-acceso.md — descubrimiento para
+- [x] docs/tasks/027-descubrimiento-y-acceso.md — descubrimiento para
       agentes y acceso para el lector
 
 ## Plan técnico

@@ -11,12 +11,7 @@ frontend, con o sin asistente de por medio.
 
 ## Now
 
-- 1. Blog legible para máquinas (idea 003)
-  - Estado: en curso.
-  - Justificación: hermana menor de la lectura acompañada — consume el
-    esquema que aquella define, así que ejecutarla inmediatamente
-    después la hace casi mecánica; antes sería trabajo doble.
-- 2. Demos de código ejecutables (idea 004)
+- 1. Demos de código ejecutables (idea 004)
   - Estado: pendiente de arrancar.
   - Justificación: la tercera redefinición del post — si se escribieran
     capítulos nuevos ahora habría que volver sobre ellos para insertar
