@@ -20,7 +20,7 @@
 <!-- épica: docs/epics/003-blog-legible-para-maquinas.md -->
 
 - [x] docs/tasks/026-version-markdown-por-articulo.md — versión en texto plano de cada artículo
-- [ ] docs/tasks/027-descubrimiento-y-acceso.md — descubrimiento para agentes y acceso para el lector
+- [r] docs/tasks/027-descubrimiento-y-acceso.md — descubrimiento para agentes y acceso para el lector
 
 ## Propuestas en revisión
 

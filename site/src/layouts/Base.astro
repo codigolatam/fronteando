@@ -12,6 +12,7 @@ interface Props {
   description?: string;
   type?: "website" | "article";
   image?: string;
+  alternateMarkdown?: string;
   noindex?: boolean;
 }
 
@@ -20,6 +21,7 @@ const {
   description,
   type = "website",
   image,
+  alternateMarkdown,
   noindex = false,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -40,6 +42,9 @@ const ogImage = image ? new URL(image, Astro.site) : undefined;
       title="Fronteando"
       href="/rss.xml"
     />
+    {alternateMarkdown && (
+      <link rel="alternate" type="text/markdown" href={alternateMarkdown} />
+    )}
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta property="og:site_name" content="Fronteando" />

@@ -22,6 +22,7 @@ const { articulo } = Astro.props;
 const { Content } = await render(articulo);
 const fecha = formatFecha(articulo.data.date);
 const ogImagePath = `/og/${articulo.id}.png`;
+const markdownPath = `/articulos/${articulo.id}.md`;
 const protocol = protocolOf(articulo);
 ---
 
@@ -30,6 +31,7 @@ const protocol = protocolOf(articulo);
   description={articulo.data.description}
   type="article"
   image={ogImagePath}
+  alternateMarkdown={markdownPath}
 >
   <article class:list={["prose", { "has-rail": protocol }]}>
     <h1>{articulo.data.title}</h1>
@@ -41,7 +43,8 @@ const protocol = protocolOf(articulo);
     </p>
     <p class="article-meta article-meta-struct">
       {articulo.data.nivel && `nivel: ${articulo.data.nivel} · `}pilar:{" "}
-      {articulo.data.categoria}
+      {articulo.data.categoria} · texto plano:{" "}
+      <a href={markdownPath}>markdown</a>
     </p>
     {protocol && (
       <div class="article-rail">
