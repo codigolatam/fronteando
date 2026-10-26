@@ -640,6 +640,22 @@ html:not(.js) .accompaniment-copy {
   padding: var(--space-2) var(--space-3);
 }
 
+/* The height a piece declares (altura, altura-estrecha) is held from
+   the first render, but only when JavaScript will mount it: without JS
+   the frame wraps just the fallback. A piece that lays out differently
+   on narrow screens reserves a different height there; 657px is where
+   its 560px container breakpoint meets the frame's padding and border
+   at the page gutter. */
+html.js .prose fronteando-demo {
+  min-height: var(--demo-min-height, 0);
+}
+
+@media (max-width: 657px) {
+  html.js .prose fronteando-demo {
+    min-height: var(--demo-min-height-narrow, var(--demo-min-height, 0));
+  }
+}
+
 @media (max-width: 600px) {
   .prose .accompaniment-actions {
     flex-direction: column;

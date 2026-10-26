@@ -184,9 +184,14 @@ pulsa **+** y observa cómo cambia el estado interno.
 
 - **`nombre` es obligatorio** y selecciona el artefacto de la pieza en
   `site/src/demos/<nombre>/index.ts`. Los demás atributos de la
-  directiva (`{modo="pasos"}`…) llegan al elemento como configuración;
+  directiva (`{modo="pasos"}`…) llegan al elemento como configuración.
   `altura="320px"` reserva altura mínima para que la pieza no desplace
-  el texto al montar.
+  el texto al montar; se escribe en el HTML, así que el espacio está
+  ahí desde el primer render (solo para quien tiene JavaScript: sin él
+  el marco envuelve únicamente el fallback). Si la pieza se reorganiza
+  en pantallas estrechas, `altura-estrecha` da la altura para ≤657px.
+  Ambas aceptan una longitud CSS simple (`760px`, `clamp(…)`); se
+  calibran midiendo la pieza montada, no a ojo.
 - **El cuerpo de la directiva es el fallback**, escrito en markdown
   pleno. Sirve a tres lectores: el humano sin JavaScript, el humano que
   aún está cargando la página y el agente que lee el `.md` del artículo.
