@@ -155,8 +155,8 @@ solo lo propio.
 
   ```md
   :::pausa
-  Verifica que puedas explicar por qué el estado vive en un solo
-  lugar antes de seguir.
+  Explica con tus palabras por qué el estado vive en un solo lugar
+  antes de seguir.
   :::
   ```
 

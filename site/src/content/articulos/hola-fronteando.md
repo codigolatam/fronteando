@@ -4,6 +4,7 @@ description: "Un blog de frontend en español para quien quiere entender, no sol
 date: 2026-10-16T16:57:45Z
 categoria: meta
 tags: ["anuncio"]
+agente: false
 ---
 
 Fronteando es un blog técnico de desarrollo web frontend, escrito en

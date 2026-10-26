@@ -5,6 +5,10 @@ date: 2026-10-23T16:54:09Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
+agente:
+  tema: "un carrito de compras en vanilla JS construido sin patrón, a lo bruto: el diagnóstico de por qué cada cambio nuevo sale más caro (estado repartido, manejadores que deciden de todo y un render que destruye el cableado)"
+  prerequisitos:
+    ["JavaScript y DOM básicos (createElement, addEventListener, innerHTML)"]
 ---
 
 Añadir productos, quitar productos y calcular el total: el carrito de
@@ -102,6 +106,11 @@ sus manejadores conectados a mano desde dentro de otro manejador.
 Nada conecta las piezas salvo nuestra costumbre de hacerlo siempre
 igual.
 
+:::pausa
+Señala en cuántos sitios vive la misma verdad en el carrito y por
+qué las que viven en el DOM son las traicioneras.
+:::
+
 ## La petición más normal del mundo
 
 Llega la solicitud: que la cantidad de cada producto se pueda editar
@@ -150,6 +159,11 @@ nuevo el foco se perdió a mitad de la edición.
 La pantalla miente: parece un carrito normal y es un carrito con un
 botón muerto y un campo que ya no escucha los cambios.
 
+:::pausa
+Explica por qué murió el botón «Quitar» y por qué el input perdió
+el foco al cambiar la cantidad.
+:::
+
 ## El diagnóstico: tres cosas enredadas
 
 El carrito no está mal programado, está enredado, y el enredo tiene
@@ -173,6 +187,10 @@ olvida un botón la interfaz se ve igual pero ya no responde.
 Cada síntoma encarece el siguiente cambio. Por eso el código espagueti
 no se rompe de golpe: se rompe el día que el cambio más simple te
 lleva toda una tarde.
+
+:::pausa
+Nombra con tus palabras las tres caras del enredo.
+:::
 
 ## Lo que este post no soluciona (todavía)
 
