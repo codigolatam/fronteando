@@ -82,6 +82,168 @@ insertado a mano.
    el convenio en `EDITORIAL.md`.
 5. Verificar renderizado y las puertas del proyecto.
 
+## Contexto
+
+- **Archivos similares:**
+  - `site/src/utils/pause-directive.ts` — el modelo del plugin mdast: `containerDirective` sobre satteri con `ctx.setProperty(node, "data", {hName, hProperties})` y `ctx.prependChild`; los atributos `{k="v"}` llegan en `node.attributes`.
+  - `site/src/components/AccompanimentCard.astro` — el componente con markup + script de cliente en el mismo archivo.
+  - `site/src/utils/article-markdown.ts` y `site/src/pages/articulos/[...id].md.ts` — la vía `.md`: el cuerpo viaja crudo, lo que el autor escribe en la marca es lo que el agente lee.
+  - `site/src/pages/articulos/[...id].astro` — la página del artículo: punto donde un componente condicional podría cargar los scripts de piezas.
+  - `site/src/styles/global.css` — los tokens `--*` en `:root` que la superficie de la pieza consume.
+- **Patrones:**
+  - Plugins mdast registrados en `astro.config.mjs` vía `mdastPlugins` con `features.directive: true`; cada directiva es un `MdastPluginDefinition` nombrado.
+  - Scripts `<script>` en componentes Astro: procesados (TypeScript, bundle, `type="module"`, deduplicados por página); viajan solo si el componente se renderiza.
+  - Sin literales visuales fuera de tokens; tests con Vitest junto al archivo (`*.test.ts`); estilo Prettier (2 espacios, comillas dobles).
+  - El código de piezas corre solo en el cliente: nada de globals de navegador en el ámbito del módulo durante SSR/build.
+- **Dominio:** sin aportación —el proyecto no tiene `docs/domains/`—.
+- **Producto:** sin aportación —el proyecto no tiene `product-docs/`—.
+- **PRD:** `docs/prd/004-demos-de-codigo-ejecutables.md` — CU-3 (el autor declara la pieza sin editar la plantilla), CU-4 (sin JS la lectura no se rompe y conserva lo esencial), CU-5 (el `.md` describe la pieza con texto honesto); CU-1 y CU-2 los ejercitan las piezas reales de 029/030 sobre el mecanismo.
+- **Lecciones:**
+  - `texto-para-agentes` — el contenido interno de la pieza se evalúa como prompt para el agente, no como prosa.
+  - `nombres-de-tests` — `describe` nombra la unidad, `when` el contexto, `it` el comportamiento.
+  - `formato-de-codigo-generado` — el código nuevo nace en estilo Prettier.
+  - `plantillas-de-astro` — whitespace JSX junto a etiquetas: `{" "}` donde importe.
+  - `opciones-comparables` — las alternativas evaluadas en el plan deben ser comparables entre sí.
+- **Decisiones:**
+  - D001 — el sitio es estático sobre Cloudflare Workers: las piezas no pueden depender de ejecución en servidor.
+  - D006 — la columna lateral es solo para acompañamiento: las piezas viven en el flujo del artículo, nunca en el rail.
+- **Investigación de la tarea** (corpus propio en `docs/research/`, rama de esta tarea):
+  - `2026-10-vehiculos-para-piezas-interactivas.md` — custom elements como vehículo, verificado en el DOM de seis referentes.
+  - `2026-10-mecanica-de-elementos-personalizados.md` — shadow DOM + tokens `--*` que cruzan el límite, atributos, carga por artículo, ciclo de vida.
+  - `2026-10-degradacion-y-representacion-de-piezas.md` — el contenido interno como contrato para tres lectores.
+  - `2026-10-sintaxis-de-declaracion-de-piezas.md` — `:::demo{nombre=…}` como declaración; el markdown dentro de HTML crudo no se procesa (CommonMark §HTML blocks).
+  - `2026-10-el-genero-explorable-explanations.md` — el género, su taxonomía y el vocabulario de tipos de pieza.
+
+## Conectividad
+
+**Veredicto: conectada.**
+
+Todo lo que la tarea asume existe con la forma esperada: la colección
+`articulos` y su página, la infraestructura de directivas `:::` de
+satteri —`pause-directive` ya emite `hName`/`hProperties` y la API
+expone `attributes` del contenedor—, los tokens de `DESIGN.md` en
+`global.css`, el endpoint `.md` por artículo y los scripts procesados
+por página de Astro. Las piezas son JS de cliente puro —compatible con
+el despliegue estático de D001—.
+
+Lo que la tarea debe crear —el plugin de la directiva de demo, el
+directorio de artefactos de piezas, la clase base del elemento y el
+convenio en `EDITORIAL.md`— es el propio alcance de la tarea, no
+capacidad base ausente. Única incertidumbre técnica, absorbible en el
+plan: que el parser de satteri pueble `node.attributes` con la sintaxis
+`{k="v"}` y propague el `hName` de elemento personalizado —el tipado lo
+declara y `:::pausa` demuestra el mecanismo; el plan lo cierra con una
+prueba de concepto—.
+
+## Plan técnico
+
+**Resumen del subsistema:** los artículos se compilan con satteri —
+`features.directive` convierte las marcas `:::` en nodos
+`containerDirective` que los plugins mdast transforman a HTML vía
+`hName`/`hProperties`, con los hijos procesados como markdown normal—.
+La página del artículo renderiza `Content` dentro de `.prose` y sirve
+además el cuerpo crudo en `/articulos/<id>.md`. La prueba de concepto
+verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
+`node.attributes` y un `hName` de elemento personalizado emite
+`<fronteando-demo nombre="x">` con el contenido ya renderizado dentro
+—la vía de declaración queda confirmada con código—.
+
+**Decisiones transversales:**
+
+- La declaración es la directiva de contenedor `:::demo{nombre="…"}`:
+  el cuerpo es el fallback en markdown pleno y los atributos nombran la
+  pieza y su configuración simple.
+- Un único elemento `fronteando-demo` hospeda toda pieza: el atributo
+  `nombre` selecciona el artefacto —la directiva queda tonta y el
+  registro en un solo sitio—.
+- Cada pieza es un artefacto propio en `site/src/demos/<nombre>/` —
+  módulo autocontenido con su lógica y su estilo—.
+- La pieza usa shadow DOM: los tokens `--*` del sitio cruzan el límite
+  por herencia de custom properties; los hijos no sloteados dejan de
+  renderizarse al mejorar el elemento —el fallback se ve hasta el
+  upgrade y viaja literal en el `.md`—.
+- El script del mecanismo viaja solo en artículos que declaran demos:
+  la página lo detecta en el cuerpo del artículo.
+- La pieza puede reservar altura con el atributo `altura` —el contrato
+  de «lectura estable» de `DESIGN.md`—.
+
+- [ ] Crear el plugin `demo-directive` —`:::demo{nombre="…"}` emite
+      `<fronteando-demo nombre="…">`, los atributos pasan a
+      `hProperties` y los hijos quedan intactos— y registrarlo en
+      `astro.config.mjs`
+  - Aporta: el autor declara la pieza en el fuente sin tocar la
+    plantilla (CU-3); el cuerpo es el fallback en markdown pleno
+  - Contexto: mismo patrón que `pause-directive`; el PoC verificó que
+    `node.attributes` llega poblado; `nombre` ausente reporta
+    diagnóstico de error en build vía `ctx.report`
+- [ ] Crear la clase del elemento `fronteando-demo`: en
+      `connectedCallback` lee `nombre`, resuelve el módulo de la pieza
+      con `import.meta.glob` sobre `src/demos/*/index.ts` y lo monta en
+      su shadow root; `disconnectedCallback` la libera
+  - Aporta: un solo elemento y una sola convención; cada pieza carga su
+    código solo cuando se declara (code splitting por pieza)
+- [ ] Establecer la convención de artefacto `site/src/demos/<nombre>/`
+      y construir la pieza mínima de ejemplo que ejercita el mecanismo
+  - Aporta: el punto de extensión reutilizable y la pieza de
+    verificación del criterio de calidad
+- [ ] Cargar el script del mecanismo solo en artículos con demos:
+      `[...id].astro` detecta `:::demo` en el cuerpo y renderiza el
+      `<script>` del registro condicionalmente
+  - Aporta: «rápido por defecto» de `DESIGN.md` —los artículos sin
+    demos no pagan el bundle—
+  - Contexto: el script procesado se deduplica por página; si el
+    `<script>` condicional diera problemas, la alternativa es un loader
+    ínfimo siempre incluido que retorna sin elementos `fronteando-demo`
+- [ ] Dar el marco de la pieza: `:host` con borde `--color-border`,
+      `--radius` y fondo `--color-surface`; `fronteando-demo` con
+      `display: block` en el CSS global —sin ello el fallback nace
+      inline—; `altura` opcional como altura mínima reservada
+  - Aporta: superficie consistente de la guía y sin salto de layout al
+    mejorar (contrato «lectura estable»)
+- [ ] Resolver sin-JS y `.md` por construcción y verificarlo: los
+      hijos no sloteados desaparecen al mejorar —el fallback se ve hasta
+      entonces y viaja literal en el `.md`—
+  - Aporta: CU-4 y CU-5 salen del modelo de upgrade nativo, sin trabajo
+    adicional
+- [ ] Declarar la pieza mínima en `hola-fronteando` —el post de
+      presentación donde una demo mínima del blog encaja
+      editorialmente— para la verificación renderizada
+  - Aporta: verificación en artículo real sin adelantar las demos de
+    029/030
+  - Contexto: un artículo `draft` de apoyo no se renderiza
+    (`getStaticPaths` lo filtra); la alternativa sería una página de
+    apoyo fuera de la colección —queda a decisión del usuario—
+- [ ] Documentar el convenio en `EDITORIAL.md`: sintaxis `:::demo`,
+      layout del artefacto, contrato del fallback —tres lectores,
+      evaluado como prompt—, tipos de pieza según el género
+      (simulación, vista instrumentada, stepper) y comportamiento sin
+      JS
+  - Aporta: la convención de autoría que el objetivo exige
+- [ ] Verificación renderizada: dev server en background + Firefox —
+      pieza en su lugar, interacción, página sin JS, salida `.md`,
+      ambos temas—
+  - Aporta: el criterio de calidad exige evidencia renderizada, no solo
+    build
+
+## Suite de pruebas esperada
+
+- `:::demo{nombre="x"}` emite `<fronteando-demo nombre="x">` con el
+  contenido de la directiva como hijos renderizados (CU-3; I).
+- Los atributos adicionales de la directiva viajan como atributos del
+  elemento (CU-3; M).
+- `:::demo` sin `nombre` reporta diagnóstico y no emite el elemento
+  (CU-3; E).
+- `:::pausa` y el resto del documento quedan intactos (regresión).
+- La página de un artículo con `:::demo` incluye el script del
+  mecanismo; un artículo sin demos no lo incluye (CU-3; Z/O —
+  verificado en el HTML servido).
+- Sin JavaScript el contenido de la pieza se ve en su lugar (CU-4; B).
+- El `.md` del artículo muestra la marca `:::demo` con su texto de
+  fallback legible para un agente (CU-5; I).
+- Un `nombre` sin pieza registrada deja el fallback visible (CU-4; E).
+- La pieza mínima monta, responde a la interacción y es operable por
+  teclado (CU-1; B).
+
 ## Revisión
 
 - Subagente: [fecha] — [Aprueba | Solicita cambios]
