@@ -3,6 +3,7 @@
 > **Tipo:** idea de funcionalidad — conjunto (complejidad media-baja)
 > **Fecha:** 2026-10
 > **Orden sugerido:** 3 de 5 (bloque inicial) — deriva de la fuente única que `lectura-acompanada-por-llm` define; ejecutarla después la hace casi mecánica.
+> **Procesada en:** docs/proposals/004-blog-legible-para-maquinas
 
 ## Problema
 
