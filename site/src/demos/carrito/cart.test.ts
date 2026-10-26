@@ -24,7 +24,7 @@ function addButton(root: HTMLElement, nombre: string) {
   const li = [...root.querySelectorAll("#catalogo li")].find((el) =>
     el.textContent?.includes(nombre),
   );
-  return li?.querySelector("button") ?? null;
+  return li?.querySelector<HTMLButtonElement>("button") ?? null;
 }
 
 describe("mountCart", () => {
@@ -79,7 +79,7 @@ describe("mountCart", () => {
     it("returns to an empty cart with zero counter and total", () => {
       const root = scaffold(mountCart);
       addButton(root, "Teclado")!.click();
-      root.querySelector("#carrito li button")!.click();
+      root.querySelector<HTMLElement>("#carrito li button")!.click();
       expect(root.querySelectorAll("#carrito li")).toHaveLength(0);
       expect(root.querySelector("#contador")?.textContent).toBe("0");
       expect(root.querySelector("#total")?.textContent).toBe("$0");
@@ -90,7 +90,7 @@ describe("mountCart", () => {
       addButton(root, "Teclado")!.click();
       addButton(root, "Monitor")!.click();
       const items = [...root.querySelectorAll("#carrito li")];
-      items[0].querySelector("button")!.click();
+      items[0].querySelector<HTMLElement>("button")!.click();
       const remaining = root.querySelectorAll("#carrito li");
       expect(remaining).toHaveLength(1);
       expect(remaining[0].textContent).toContain("Monitor");
@@ -135,7 +135,7 @@ describe("mountCartWithQuantity", () => {
       input.dispatchEvent(new Event("change"));
       // The rewritten innerHTML replaced the wired button with a fresh
       // one: clicking it does nothing —the bug, alive in the demo.
-      item.querySelector("button")!.click();
+      item.querySelector<HTMLElement>("button")!.click();
       expect(item.parentElement?.id).toBe("carrito");
       expect(root.querySelectorAll("#carrito li")).toHaveLength(1);
     });
@@ -148,7 +148,7 @@ describe("mountCartWithQuantity", () => {
       const input = items[0].querySelector("input")!;
       input.value = "3";
       input.dispatchEvent(new Event("change"));
-      items[1].querySelector("button")!.click();
+      items[1].querySelector<HTMLElement>("button")!.click();
       expect(root.querySelectorAll("#carrito li")).toHaveLength(1);
       expect(root.querySelector("#carrito li")!.textContent).toContain(
         "Teclado",
