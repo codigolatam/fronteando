@@ -41,7 +41,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 - `docs/editorial/piezas/<slug>.md`: el archivo de cada pieza, con su formato en `assets/pieza.md`.
 - `docs/editorial/series/<slug>.md`: el archivo de cada serie, con su formato en `assets/serie.md`.
 - `EDITORIAL.md` y el corpus publicado en `site/src/content/articulos/` para idear contra la línea editorial real (pilares, series, precedentes).
-- Las capacidades de artefactos: `consultar-artefactos` para las lecturas del catálogo (los campos de piezas y series y la lista `## Piezas` son lecturas directas); `actualizar-artefactos` para las mutaciones (`añadir`, `mover` y `retirar` de `editorial.sh` sobre el índice).
+- Las capacidades de artefactos: `consultar-artefactos` para las lecturas del catálogo (los campos de piezas y series y la lista `## Piezas` son lecturas directas); `actualizar-artefactos` para las mutaciones (`añadir`, `mover` y `retirar` sobre el índice, según su `references/editorial.md`).
 - `crear-tareas` para el alta de la tarea `contenido` cuando la pieza entra en redacción.
 
 ## Salida
@@ -67,7 +67,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 
 1. **Dialogar lo mínimo** para bajar la idea a los campos del formato (qué pregunta responde, qué aportaríamos, con qué se sostiene); lo que no salga queda `[por madurar]` sin drama.
 2. **Crear `piezas/<slug>.md`** desde `assets/pieza.md` con `estado: idea` (escritura directa: la pieza es archivo nuevo).
-3. **Registrar en el índice** delegando en `actualizar-artefactos` «añadir la línea `- [<título>](piezas/<slug>.md)` a la sección `idea` del índice del planeador» (operación `añadir` de `editorial.sh`).
+3. **Registrar en el índice** delegando en `actualizar-artefactos` «añadir la línea `- [<título>](piezas/<slug>.md)` a la sección `idea` del índice del planeador».
 
 ### Idear en lote
 
@@ -78,7 +78,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 
 6. **Verificar los tres requisitos** en el archivo de la pieza: pregunta del lector, ángulo y soporte presentes y con contenido real (no `[por madurar]`). Si falta alguno, madurar en diálogo con el usuario rellenando el archivo; la pieza sigue en `idea` hasta completarse.
 7. **Confirmar con el usuario** la promoción (pasar a `lista` declara intención de escribirla).
-8. **Sobre el sí:** actualizar `- estado: lista` en la pieza (escritura directa) y mover su línea en el índice delegando «mover la pieza `<texto>` a la sección `lista` del índice del planeador» en `actualizar-artefactos` (operación `mover` de `editorial.sh`).
+8. **Sobre el sí:** actualizar `- estado: lista` en la pieza (escritura directa) y mover su línea en el índice delegando «mover la pieza `<texto>` a la sección `lista` del índice del planeador» en `actualizar-artefactos`.
 
 ### Mover entre estados
 
@@ -98,7 +98,7 @@ Instrucciones para que un agente gestione el planeador editorial: el pipeline de
 ### Cerrar una serie
 
 15. **Verificar el cierre:** cuando el ejecutor informa el último `publicado` o el usuario lo pide, comprobar que toda pieza listada en `## Piezas` tiene `estado: publicado` en su archivo (la pieza es la fuente). Si falta alguna, informar cuáles quedan abiertas y terminar sin cerrar.
-16. **Sobre el sí:** `estado: cerrada` en la serie (el archivo queda como registro) y retirar su línea del índice delegando «retirar la línea `<texto>` del índice del planeador» en `actualizar-artefactos` (operación `retirar` de `editorial.sh`).
+16. **Sobre el sí:** `estado: cerrada` en la serie (el archivo queda como registro) y retirar su línea del índice delegando «retirar la línea `<texto>` del índice del planeador» en `actualizar-artefactos`.
 
 ## Finalización
 
