@@ -627,6 +627,19 @@ html:not(.js) .accompaniment-copy {
   pointer-events: auto;
 }
 
+/* interactive pieces: the :::demo directive emits <fronteando-demo>;
+   the frame styles the element itself so the fallback —its children,
+   visible until the piece upgrades— already wears the same surface. */
+
+.prose fronteando-demo {
+  display: block;
+  margin-block: 0 var(--space-3);
+  background: var(--color-surface);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+}
+
 @media (max-width: 600px) {
   .prose .accompaniment-actions {
     flex-direction: column;

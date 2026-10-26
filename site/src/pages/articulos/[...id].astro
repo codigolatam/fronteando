@@ -24,6 +24,8 @@ const fecha = formatFecha(articulo.data.date);
 const ogImagePath = `/og/${articulo.id}.png`;
 const markdownPath = `/articulos/${articulo.id}.md`;
 const protocol = protocolOf(articulo);
+// Articles without :::demo declarations don't pay for the mechanism.
+const hasDemos = /^[ \t]{0,3}:{3,}demo(?:[\s{[]|$)/m.test(articulo.body ?? "");
 ---
 
 <Base
@@ -55,4 +57,5 @@ const protocol = protocolOf(articulo);
       <Content />
     </div>
   </article>
+  {hasDemos && <script src="../../demos/fronteando-demo.ts"></script>}
 </Base>

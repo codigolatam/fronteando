@@ -19,7 +19,7 @@
 ## Hito 1: Demos de código ejecutables
 <!-- épica: docs/epics/004-demos-de-codigo-ejecutables.md -->
 
-- [ ] docs/tasks/028-mecanismo-de-piezas-interactivas.md — el mecanismo de piezas interactivas en el artículo
+- [r] docs/tasks/028-mecanismo-de-piezas-interactivas.md — el mecanismo de piezas interactivas en el artículo
 - [ ] docs/tasks/029-demo-del-store-reactivo.md — demo viva del store reactivo
 - [ ] docs/tasks/030-demo-del-carrito.md — demo viva del carrito a lo bruto
 
