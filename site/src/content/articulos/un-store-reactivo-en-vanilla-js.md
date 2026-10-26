@@ -41,10 +41,22 @@ effect(() => {
 count.value = 1; // el título del documento ya dice «count: 1»
 ```
 
+La pieza de abajo ejecuta la versión con `store` que construiremos al
+final y deja el estado interno a la vista.
+
+:::demo{nombre="store-reactivo" altura="720px"}
+Pieza interactiva: la `store` del artículo funcionando e instrumentada.
+Cambia `estado.nombre` o `estado.nivel` para ver cómo responde el título
+simulado. La vista interna muestra `efectoActivo`, `suscriptoresPorProp`
+y la traza de lecturas, suscripciones, escrituras y reejecuciones.
+:::
+
 Ninguna línea avisa de nada a nadie: asignar `count.value` basta para
-que el título se reescriba. Tres piezas lo hacen posible: `signal`,
-`effect` y un truco pequeño que las conecta. Las construiremos una a
-una.
+que el título se reescriba. En la pieza puedes provocar esas mismas
+operaciones sobre `estado`: cada `get` registra un efecto y cada `set`
+notifica solo a quien leyó la propiedad. Tres piezas lo hacen posible:
+`signal`, `effect` y un truco pequeño que las conecta. Las construiremos
+una a una.
 
 ## Estado que notifica
 

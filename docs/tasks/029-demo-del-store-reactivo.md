@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -147,13 +147,13 @@ correr → escribe), mostrado en dos vistas sincronizadas.
   compensar la ausencia («ninguna línea avisa de nada») a invitar a
   tocar la pieza —ajuste mínimo, voz intacta, pausas sin mover—.
 
-- [ ] Escribir el store instrumentado del artículo en
+- [x] Escribir el store instrumentado del artículo en
       `site/src/demos/store-reactivo/` —`signal`/`effect`/`store` del
       texto más una capa que emite eventos de traza (suscribe,
       notifica, corre, escribe)—
   - Aporta: la honestidad de la observación —la pieza ejecuta la
     mecánica que el artículo explica, no una copia—
-- [ ] Construir `store-demo.svelte` (CE `demo-store-reactivo`) con las
+- [x] Construir `store-demo.svelte` (CE `demo-store-reactivo`) con las
       dos vistas y el `index.ts` adaptador del convenio
   - Aporta: la vista instrumentada —el programa y su interior
     respondiendo a la misma escritura—
@@ -161,16 +161,16 @@ correr → escribe), mostrado en dos vistas sincronizadas.
     tokens `--*`, `prefers-reduced-motion`, operable por teclado;
     la traza como lista acotada (las entradas recientes primero) con
     rol `log` o `status` para lectores de pantalla
-- [ ] Declarar la pieza y adaptar el texto: `:::demo{nombre=
+- [x] Declarar la pieza y adaptar el texto: `:::demo{nombre=
       "store-reactivo"}` tras el bloque de código en «El resultado
       primero», fallback descriptivo y párrafo circundante ajustado
   - Aporta: CU-1/CU-2 en el punto donde el artículo lo promete;
     el `.md` y sin-JS quedan legibles por el fallback
-- [ ] Verificación renderizada en Firefox: dos vistas bailando, grafo
+- [x] Verificación renderizada en Firefox: dos vistas bailando, grafo
       fino (nivel no reejecuta el efecto de nombre), traza ordenada,
       sin-JS, `.md`, temas y teclado
   - Aporta: el criterio exige evidencia renderizada
-- [ ] Puertas: check, lint, test, build, format:check
+- [x] Puertas: check, lint, test, build, format:check
   - Aporta: la regresión no entra
 
 ## Suite de pruebas esperada
@@ -189,8 +189,20 @@ correr → escribe), mostrado en dos vistas sincronizadas.
 - Solo tokens de `DESIGN.md`; operable por teclado; pausas y
   acompañamiento intactos (regresión).
 
+## Desviaciones del plan
+
+- El plan mencionaba instrumentar `signal`, `effect` y `store`; la
+  pieza ejecuta `effect` + `store`, porque el diseño aprobado muestra
+  la versión con `store` (`estado.nombre`, `estado.nivel`). La
+  suscripción automática que `signal` introduce queda cubierta por el
+  `get` del `Proxy` en la traza.
+- La traza muestra la última operación completa (desde el `set` hasta
+  los efectos que reejecuta) y anuncia una sola línea de estado por
+  operación, para evitar que cada escritura produzca una ráfaga de
+  entradas en lectores de pantalla.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-26 — Aprueba
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
