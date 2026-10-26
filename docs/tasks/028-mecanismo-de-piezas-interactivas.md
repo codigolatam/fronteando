@@ -267,6 +267,7 @@ verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
   remontar si el atributo cambia en runtime —caso barato de cubrir con
   la misma vía de `attributeChangedCallback`—.
 - **El shadow mantiene un `<slot>` como estado degradado, no solo para el primer montaje.** La revisión encontró que `attachShadow` no puede deshacerse y que un shadow vacío oculta el fallback para siempre en remontaje, reconexión y nombre inválido. Decisión: el shadow contiene siempre la pieza o un `<slot>` que proyecta el fallback —toda ruta de fallo (pieza desconocida, mount que lanza, mount vacío, nombre ausente, desconexión) devuelve el elemento al fallback en lugar de romperse—. También quedó `nombre` reactivo con deduplicación de cargas en vuelo y verificación del atributo tras el `await`.
+- **Las piezas se escriben en Svelte compilado a custom elements.** A petición del usuario durante la revisión: `piece.svelte` con `<svelte:options customElement="…" />` junto al `index.ts` adaptador (import + `appendChild`), en lugar de la construcción imperativa de DOM. El componente monta su propio shadow con estilos scoped dentro del del anfitrión; los tokens heredan a través de ambos. Añade `@astrojs/svelte` y `svelte` como dependencias de build —el runtime solo viaja en el chunk de la pieza—.
 
 ## Revisión
 

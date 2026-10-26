@@ -201,6 +201,13 @@ pulsa **+** y observa cómo cambia el estado interno.
   y puede devolver una función de limpieza. La pieza se ejecuta en
   shadow DOM: aislada de los estilos de la página, pero heredando los
   tokens.
+- **Las piezas se escriben en Svelte** compilado a custom elements:
+  un `piece.svelte` con `<svelte:options customElement="demo-x" />`
+  junto al `index.ts`, que importa el componente y lo monta con
+  `container.appendChild(document.createElement("demo-x"))`. Los
+  estilos scoped del componente viven en su propio shadow y los
+  tokens `--*` los alcanzan por herencia. La pieza `contador` es la
+  implementación de referencia del convenio.
 - **Tipos de pieza** (vocabulario del género, ver
   `docs/research/2026-10-el-genero-explorable-explanations.md`):
   simulación jugable, vista instrumentada de un sistema, stepper guiado
