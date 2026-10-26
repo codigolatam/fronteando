@@ -4,7 +4,7 @@
 
 ## Propósito
 
-Documentar el género al que pertenecen las piezas interactivas de la épica 004 (su origen, su canon, la taxonomía de técnicas y las herramientas) para que Fronteando hable su idioma: qué tipos de pieza existen, qué afordancia aporta cada una y qué vocabulario usar en `EDITORIAL.md`.
+Documentar el género al que pertenecen las piezas interactivas de la épica 004 (su origen, su canon, la taxonomía de técnicas y las herramientas) para que Fronteando hable su idioma: qué tipos de pieza existen, qué posibilidad aporta cada una y qué vocabulario usar en `EDITORIAL.md`.
 
 ## Contexto
 
@@ -24,11 +24,11 @@ Un principio del ensayo es directamente el del store de Fronteando: la figura de
 
 Nicky Case consolidó el género con el catálogo explorabl.es y sus jams [2]. El paper de Distill «Communicating with Interactive Articles» (Hohman, Conlen, Heer, Chau, 2020) es la referencia teórica: sintetiza 60+ piezas y registra que el medio aún no tiene nombre estándar (conviven *explorable explanations, explainables, exploranations, active essays, interactive non-fiction*) [3].
 
-### La taxonomía de Distill: cinco afordancias
+### La taxonomía de Distill: cinco posibilidades
 
-El paper organiza las técnicas en cinco afordancias [3]:
+El paper organiza las técnicas en cinco posibilidades [3]:
 
-| Afordancia | Qué aporta | Pieza típica |
+| Posibilidad | Qué aporta | Pieza típica |
 |---|---|---|
 | **Conectar personas y datos** | engagement; animación para transiciones de estado y causalidad; unit visualizations que humanizan | gráficos animados, datos por individuo |
 | **Hacer los sistemas jugables** | el lector experimenta con un modelo/sandbox | simulaciones con parámetros |
@@ -63,7 +63,7 @@ Y el género está casi ausente en español: el catálogo explorabl.es es abruma
 
 Fronteando se inscribe en el género **explorable explanations / interactive articles**. La contribución concreta de esta investigación al proyecto:
 
-- **Vocabulario editorial para `EDITORIAL.md`:** la pieza se clasifica por su tipo (simulación, vista instrumentada, stepper, documento reactivo) y por la afordancia que sirve (jugabilidad, autorreflexión, ritmo del lector, carga cognitiva). Toda pieza nueva se anuncia con su tipo.
+- **Vocabulario editorial para `EDITORIAL.md`:** la pieza se clasifica por su tipo (simulación, vista instrumentada, stepper, documento reactivo) y por la posibilidad que sirve (jugabilidad, autorreflexión, ritmo del lector, carga cognitiva). Toda pieza nueva se anuncia con su tipo.
 - **Principio rector para las demos:** una pieza instrumentada no enseña *el resultado*: enseña *el mecanismo*; las múltiples representaciones que danzan juntas (DOM + estado interno) son la forma canónica.
 - **Validación de la arquitectura:** el género paga su valor exactamente donde duele (autoría costosa); el mecanismo convencionado es la respuesta correcta según la propia literatura del género.
 

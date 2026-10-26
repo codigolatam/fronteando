@@ -205,14 +205,16 @@ verificó la hipótesis clave: `:::demo{nombre="x"}` puebla
       entonces y viaja literal en el `.md`—
   - Aporta: CU-4 y CU-5 salen del modelo de upgrade nativo, sin trabajo
     adicional
-- [ ] Declarar la pieza mínima en `hola-fronteando` —el post de
-      presentación donde una demo mínima del blog encaja
-      editorialmente— para la verificación renderizada
-  - Aporta: verificación en artículo real sin adelantar las demos de
-    029/030
-  - Contexto: un artículo `draft` de apoyo no se renderiza
-    (`getStaticPaths` lo filtra); la alternativa sería una página de
-    apoyo fuera de la colección —queda a decisión del usuario—
+- [ ] Verificar la pieza mínima durante el desarrollo: se declara
+      temporalmente en un artículo del árbol de trabajo —sin
+      commitear—, se verifica renderizada y se revierte la
+      declaración; nada de la pieza de ejemplo queda en la
+      publicación final
+  - Aporta: verificación en artículo real sin tocar contenido
+    publicado ni adelantar las demos de 029/030
+  - Contexto: decisión del usuario —la pieza mínima es solo de
+    desarrollo; el artefacto de `src/demos/` sí queda como
+    implementación de referencia del convenio—
 - [ ] Documentar el convenio en `EDITORIAL.md`: sintaxis `:::demo`,
       layout del artefacto, contrato del fallback —tres lectores,
       evaluado como prompt—, tipos de pieza según el género
