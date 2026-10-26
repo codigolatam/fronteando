@@ -15,14 +15,13 @@ export interface DemoModule {
 const modules = import.meta.glob<DemoModule>("./*/index.ts");
 
 export class FronteandoDemo extends HTMLElement {
-  static observedAttributes = ["nombre", "altura"];
+  static observedAttributes = ["nombre"];
 
   #mounted: string | null = null;
   #loading: string | null = null;
   #cleanup: (() => void) | undefined;
 
   connectedCallback() {
-    this.#applyHeight();
     void this.#mount();
   }
 
@@ -35,7 +34,6 @@ export class FronteandoDemo extends HTMLElement {
     oldValue: string | null,
     newValue: string | null,
   ) {
-    if (name === "altura") this.#applyHeight();
     if (name === "nombre" && oldValue !== newValue && this.isConnected) {
       void this.#mount();
     }
@@ -112,10 +110,6 @@ export class FronteandoDemo extends HTMLElement {
     this.#cleanup = undefined;
     this.#mounted = null;
     this.shadowRoot?.replaceChildren(document.createElement("slot"));
-  }
-
-  #applyHeight() {
-    this.style.minHeight = this.getAttribute("altura") ?? "";
   }
 }
 

@@ -32,16 +32,35 @@ describe("demoDirective", () => {
       const ctx = visitDirective("demo", {
         nombre: "store-reactivo",
         modo: "pasos",
-        altura: "320px",
+      });
+      expect(ctx.setProperty).toHaveBeenCalledWith(expect.anything(), "data", {
+        hName: "fronteando-demo",
+        hProperties: { nombre: "store-reactivo", modo: "pasos" },
+      });
+    });
+
+    it("reserves the declared heights in the markup as custom properties", () => {
+      const ctx = visitDirective("demo", {
+        nombre: "store-reactivo",
+        altura: "800px",
+        "altura-estrecha": "clamp(1000px, 300vw, 1300px)",
       });
       expect(ctx.setProperty).toHaveBeenCalledWith(expect.anything(), "data", {
         hName: "fronteando-demo",
         hProperties: {
           nombre: "store-reactivo",
-          modo: "pasos",
-          altura: "320px",
+          altura: "800px",
+          "altura-estrecha": "clamp(1000px, 300vw, 1300px)",
+          style:
+            "--demo-min-height: 800px; --demo-min-height-narrow: clamp(1000px, 300vw, 1300px)",
         },
       });
+    });
+
+    it("emits no style when no height is declared", () => {
+      const ctx = visitDirective("demo", { nombre: "x" });
+      const [, , data] = ctx.setProperty.mock.calls[0];
+      expect(data.hProperties).not.toHaveProperty("style");
     });
 
     it("trims whitespace around nombre", () => {
@@ -72,6 +91,19 @@ describe("demoDirective", () => {
 
     it("reports a diagnostic when nombre is empty", () => {
       const ctx = visitDirective("demo", { nombre: "" });
+      expect(ctx.report).toHaveBeenCalledWith(
+        expect.objectContaining({ severity: "error" }),
+      );
+      expect(ctx.setProperty).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("when a declared height is not a plain CSS length", () => {
+    it("reports a build diagnostic instead of writing it into the style", () => {
+      const ctx = visitDirective("demo", {
+        nombre: "x",
+        altura: "1px; background: red",
+      });
       expect(ctx.report).toHaveBeenCalledWith(
         expect.objectContaining({ severity: "error" }),
       );
