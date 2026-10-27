@@ -56,9 +56,10 @@ Llevar la pieza «Sacar el estado del DOM: un modelo que notifica sus cambios» 
 
 - Se añadió la sección «Conectar el modelo con la pantalla» con el suscriptor que pinta a mano: el brief lo declaraba en el alcance, pero no en el outline. No cambia la promesa.
 - El resultado primero muestra el programa y su salida antes de la clase, como pide la anatomía; el orden del outline se mantuvo.
+- La edición de cantidad queda fuera de este capítulo: el método `cambiarCantidad` se retiró del modelo y el ejemplo conductor del brief se ajustó a catálogo, añadir, quitar y total. Decisión del usuario tras la revisión editorial (la alternativa era mostrar la edición en el post).
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente (revisión editorial, ronda 1): 2026-10-26 — Solicita cambios
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

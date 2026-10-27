@@ -21,7 +21,7 @@
   - La prueba sin DOM: el modelo se ejecuta en Node y comprueba el total y las unidades sin navegador.
   - Los límites honestos: el DOM sigue sin actualizarse solo; el suscriptor pinta a mano y eso es el problema que queda para el capítulo de la vista.
   - El cierre: la pregunta abierta —el DOM ya no es la verdad, pero ¿quién lo mantiene al día?— y la puerta al capítulo de la vista.
-- **Ejemplo conductor:** el mismo carrito del capítulo 1 (catálogo, añadir, quitar, total y cantidad editable), con su estado movido al modelo.
+- **Ejemplo conductor:** el mismo carrito del capítulo 1 (catálogo, añadir, quitar y total), con su estado movido al modelo. La edición de cantidad queda fuera de este capítulo (ver `## Desviaciones` de la tarea).
 - **Alcance:** sin vista separada (la pintura sigue en un suscriptor sencillo); sin controlador (los eventos del DOM siguen llamando al modelo desde el propio componente); sin persistencia ni frameworks; sin reactividad fina ni signals (eso es el post del store, enlazado en la serie). El modelo no crea una arquitectura completa, solo la primera separación.
 - **Metadatos:**
   - `slug` sacar-el-estado-del-dom
@@ -42,11 +42,10 @@
 ```text
 tras 3 agregar: 3 250
 tras quitar la línea 1: 2 205
-tras cantidad 3 en ratón: 4 255
-notificaciones: [ '1 u / $45', '2 u / $70', '3 u / $250', '2 u / $205', '4 u / $255' ]
+notificaciones: [ '1 u / $45', '2 u / $70', '3 u / $250', '2 u / $205' ]
 ```
 
-Las dos primeras líneas de la salida son las cifras del capítulo 1 (3 añadidos → $250; quitar el teclado → $205). La tercera (cantidad 3 en el ratón) solo sirve si el post muestra la edición de cantidad; si no, se omite.
+Las cifras son las del capítulo 1 (3 añadidos → $250; quitar el teclado → $205). El método `cambiarCantidad` se retiró del modelo: el capítulo no lo usa.
 
 ```js
 class Carrito {
@@ -83,11 +82,6 @@ class Carrito {
     this.#lineas = this.#lineas.filter((l) => l.linea !== linea);
     this.#notificar();
   }
-
-  cambiarCantidad(linea, cantidad) {
-    this.#lineas.find((l) => l.linea === linea).cantidad = cantidad;
-    this.#notificar();
-  }
 }
 ```
 
@@ -110,13 +104,13 @@ class Carrito {
 - [x] El gancho planta una tensión y la resuelve dentro del previo
 - [x] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
 - [x] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal (56 palabras)
-- [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos (150 caracteres)
+- [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos (125 caracteres)
 - [x] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
 - [ ] `date` con la hora real del commit o del merge (se ajusta al fusionar el PR)
 - [x] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
 - [x] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
 - [x] Los límites honestos tienen sección propia; el cierre abre una puerta
-- [x] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
+- [ ] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final (pendiente: repasar los párrafos reescritos tras la revisión editorial)
 - [x] Las cifras del post vienen de una sola versión del ejemplo (no mezclar $255 del modelo con $135 del capítulo 1)
 - [x] El título es idiomático en español, sin calcos del inglés
 - [x] Los incisos van entre paréntesis y las citas en comillas latinas, según la guía
