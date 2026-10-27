@@ -1,4 +1,4 @@
-# Brief — Sacar el estado del DOM: un modelo que avisa cuando cambia
+# Brief — Sacar el estado del DOM: un modelo que notifica sus cambios
 
 ## Estado
 
@@ -11,13 +11,13 @@
 ## Encuadre
 
 - **Audiencia:** quien ya leyó el capítulo 1 y vio cómo el carrito reparte la verdad entre el array, las variables y el DOM. Sabe JS con clases y `addEventListener`, conoce el MVC de nombre y todavía no ha separado nada a mano.
-- **Promesa:** «después de leer esto, el lector podrá sacar el estado de su componente a un modelo que avisa de sus cambios, y probar esa lógica sin tocar el DOM»
+- **Promesa:** «después de leer esto, el lector podrá sacar el estado de su componente a un modelo que notifica sus cambios, y probar esa lógica sin tocar el DOM»
 - **Arco:**
   - Gancho y previo: el carrito del capítulo 1 se puede probar solo mirando el DOM; quitar esa dependencia es el primer paso del desenredo. Tensión resuelta dentro del previo.
-  - La promesa: el modelo guarda ítems y total, avisa a quien se suscriba y no sabe nada del DOM.
+  - La promesa: el modelo guarda ítems y total, notifica a quien se suscriba y no sabe nada del DOM.
   - Resultado primero: el carrito funcionando sobre el modelo, con la misma salida que el capítulo 1 (tres añadidos, $250; quitar el teclado, $205).
   - Del DOM al modelo: qué datos salen del DOM (ítems, cantidades, total) y cuáles no (el texto de los `<li>`).
-  - El modelo que notifica: `suscribir` y el aviso tras cada cambio, con el origen en el patrón que describe Stearns.
+  - El modelo que notifica: `suscribir` y la notificación tras cada cambio, con el origen en el patrón que describe Stearns.
   - La prueba sin DOM: el modelo se ejecuta en Node y comprueba el total y las unidades sin navegador.
   - Los límites honestos: el DOM sigue sin actualizarse solo; el suscriptor pinta a mano y eso es el problema que queda para el capítulo de la vista.
   - El cierre: la pregunta abierta —el DOM ya no es la verdad, pero ¿quién lo mantiene al día?— y la puerta al capítulo de la vista.
@@ -32,8 +32,8 @@
 ## Temas de investigación
 
 - [x] ¿El snippet del modelo corre tal cual en Node y da las cifras del texto? (resuelto: Node 24.21.0, salida en `## Material`)
-- [x] ¿Qué dice Stearns sobre el modelo que avisa? (resuelto: página consultada el 2026-10-26; su clase `Model` base registra oyentes con `addChangeListener` y los notifica en `raiseChange()`; las vistas se re-pintan solas al recibir el aviso; fuente en `## Material`)
-- [x] ¿Cómo nombramos el patrón de suscriptores en el post? (resuelto: el método del snippet es `suscribir`, verbo de uso común en español; el post nombra el patrón Observer una vez, en el aviso con origen, sin jerga adicional)
+- [x] ¿Qué dice Stearns sobre el modelo que notifica? (resuelto: página consultada el 2026-10-26; su clase `Model` base registra oyentes con `addChangeListener` y los notifica en `raiseChange()`; las vistas se re-pintan solas al recibir la notificación; fuente en `## Material`)
+- [x] ¿Cómo nombramos el patrón de suscriptores en el post? (resuelto: el método del snippet es `suscribir`, verbo de uso común en español; el post nombra el patrón Observer una vez, en la sección que le da origen, sin jerga adicional)
 
 ## Material
 
@@ -43,7 +43,7 @@
 tras 3 agregar: 3 250
 tras quitar la línea 1: 2 205
 tras cantidad 3 en ratón: 4 255
-avisos: [ '1 u / $45', '2 u / $70', '3 u / $250', '2 u / $205', '4 u / $255' ]
+notificaciones: [ '1 u / $45', '2 u / $70', '3 u / $250', '2 u / $205', '4 u / $255' ]
 ```
 
 Las dos primeras líneas de la salida son las cifras del capítulo 1 (3 añadidos → $250; quitar el teclado → $205). La tercera (cantidad 3 en el ratón) solo sirve si el post muestra la edición de cantidad; si no, se omite.
@@ -58,7 +58,7 @@ class Carrito {
     this.#suscriptores.push(fn);
   }
 
-  #avisar() {
+  #notificar() {
     for (const fn of this.#suscriptores) fn(this);
   }
 
@@ -76,31 +76,31 @@ class Carrito {
 
   agregar(producto) {
     this.#lineas.push({ linea: this.#siguienteId++, ...producto, cantidad: 1 });
-    this.#avisar();
+    this.#notificar();
   }
 
   quitar(linea) {
     this.#lineas = this.#lineas.filter((l) => l.linea !== linea);
-    this.#avisar();
+    this.#notificar();
   }
 
   cambiarCantidad(linea, cantidad) {
     this.#lineas.find((l) => l.linea === linea).cantidad = cantidad;
-    this.#avisar();
+    this.#notificar();
   }
 }
 ```
 
-**La fuente: Dave Stearns.** «The Model-View-Controller (MVC) Architecture», última edición del 23 de octubre de 2021 (https://drstearns.github.io/tutorials/mvc/). Su clase `Model` registra oyentes de cambio (`addChangeListener`) y los avisa en `raiseChange()`; la vista escucha y se re-pinta sola. Es la base conceptual del capítulo; el snippet de arriba es una versión mínima, sin JSDoc ni herencia.
+**La fuente: Dave Stearns.** «The Model-View-Controller (MVC) Architecture», última edición del 23 de octubre de 2021 (https://drstearns.github.io/tutorials/mvc/). Su clase `Model` registra oyentes de cambio (`addChangeListener`) y los notifica en `raiseChange()`; la vista escucha y se re-pinta sola. Es la base conceptual del capítulo; el snippet de arriba es una versión mínima, sin JSDoc ni herencia.
 
 ## Borrador del outline
 
 - Gancho: el carrito del capítulo 1 solo se puede comprobar mirando la pantalla; el desenredo empieza por quitar esa dependencia (negación de la casa, resuelta dentro del previo).
-- `<!--more-->` inmediatamente después + el párrafo de promesa: sacamos ítems y total a un modelo que avisa; el lector se lleva un modelo probable sin DOM.
+- `<!--more-->` inmediatamente después + el párrafo de promesa: sacamos ítems y total a un modelo que notifica; el lector se lleva un modelo probable sin DOM.
 - Resultado primero: el carrito del capítulo 1 funcionando sobre el modelo, con la misma salida (3 añadidos → $250; quitar → $205).
 - Qué sale del DOM: ítems, cantidades y total pasan a la clase; el texto de los `<li>` deja de ser fuente de verdad.
-- La clase `Carrito`: el estado privado (`#lineas`), `suscribir` y el aviso tras cada cambio; por qué el aviso va después de mutar.
-- El aviso con origen: el patrón que describe Stearns, y en qué se diferencia de lo que ya hacíamos a mano.
+- La clase `Carrito`: el estado privado (`#lineas`), `suscribir` y la notificación tras cada cambio; por qué la notificación va después de mutar.
+- El patrón con nombre: el observador que describe Stearns, y en qué se diferencia de lo que ya hacíamos a mano.
 - La prueba sin DOM: el modelo corre en Node y el total y las unidades se comprueban sin navegador.
 - Los límites honestos: el DOM sigue sin actualizarse solo; el suscriptor pinta a mano; el componente todavía mezcla eventos y composición.
 - El cierre: el DOM ya no es la verdad, pero sigue sin actualizarse solo; la pregunta abierta y la puerta al capítulo de la vista.
@@ -110,13 +110,13 @@ class Carrito {
 - [x] El gancho planta una tensión y la resuelve dentro del previo
 - [x] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
 - [x] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal (56 palabras)
-- [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos (145 caracteres)
+- [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos (150 caracteres)
 - [x] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
 - [ ] `date` con la hora real del commit o del merge (se ajusta al fusionar el PR)
 - [x] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
 - [x] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
 - [x] Los límites honestos tienen sección propia; el cierre abre una puerta
-- [ ] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
+- [x] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
 - [x] Las cifras del post vienen de una sola versión del ejemplo (no mezclar $255 del modelo con $135 del capítulo 1)
 - [x] El título es idiomático en español, sin calcos del inglés
 - [x] Los incisos van entre paréntesis y las citas en comillas latinas, según la guía

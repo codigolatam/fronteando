@@ -10,7 +10,6 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## lista
 
-- [El Modelo: el estado que notifica](piezas/mvc-modelo.md)
 - [La Vista: el render como función del estado](piezas/mvc-vista.md)
 - [El Controlador: cerrar el ciclo](piezas/mvc-controlador.md)
 - [Los límites del MVC a mano](piezas/mvc-limites.md)
@@ -18,6 +17,8 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 ## en redacción
 
 ## en revisión
+
+- [El Modelo: el estado que notifica](piezas/mvc-modelo.md)
 
 ## publicado
 

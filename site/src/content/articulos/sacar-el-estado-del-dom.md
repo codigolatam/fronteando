@@ -1,38 +1,38 @@
 ---
-title: "Sacar el estado del DOM: un modelo que avisa cuando cambia"
-description: "Pasamos el estado del carrito a una clase que avisa de sus cambios: el total deja de depender de la pantalla y se puede comprobar en la terminal."
+title: "Sacar el estado del DOM: un modelo que notifica sus cambios"
+description: "¿Cómo compruebas el total del carrito sin abrir el navegador? Sacando el estado del DOM a un modelo que notifica sus cambios."
 date: 2026-10-26T12:00:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
 draft: true
 agente:
-  tema: "un modelo en vanilla JS que guarda el estado de un carrito y avisa a quien se suscriba cuando cambia, para sacar el estado del DOM y probar su lógica sin navegador"
+  tema: "un modelo en vanilla JS que guarda el estado de un carrito y notifica a quien se suscriba cuando cambia, para sacar el estado del DOM y probar su lógica sin navegador"
   prerequisitos:
     [
       "JavaScript con clases y métodos privados, DOM básico (querySelector, textContent)",
     ]
 ---
 
-El carrito del capítulo anterior hace lo que promete, pero su estado
-está repartido entre un array, unas variables y el texto de la
-pantalla. Para saber cuánto vale hay que mirar la página. Hoy sacamos
-ese estado a una clase que avisa de sus cambios, y así podemos
-comprobar el total sin abrir el navegador.
+El [carrito del capítulo anterior](/articulos/carrito-a-lo-bruto/) hace
+lo que promete, pero su estado está repartido entre un array, unas
+variables y el texto de la pantalla. Para saber cuánto vale hay que
+mirar la página. Hoy sacamos ese estado a una clase que notifica sus
+cambios, y así podemos comprobar el total sin abrir el navegador.
 
 <!--more-->
 
 Vamos a construir el modelo del carrito: una clase que guarda las
-líneas y el total, y que avisa a quien se haya suscrito cada vez que
-algo cambia. Al terminar podrás sacar el estado de tu componente a un
-modelo que avisa de sus cambios y probar esa lógica sin tocar el DOM.
+líneas y el total, y que notifica a quien se haya suscrito cada vez
+que algo cambia. Al terminar podrás sacar el estado de tu componente a
+un modelo que notifica sus cambios y probar esa lógica sin tocar el DOM.
 
 ## El resultado primero
 
 Antes de abrir la clase conviene ver qué hace. Este es el carrito del
-capítulo anterior ejecutado sobre el modelo, sin ninguna pantalla: tres
-añadidos y un quitar, con un suscriptor que imprime el estado cada vez
-que el modelo avisa.
+capítulo anterior ejecutado sobre el modelo, sin ninguna pantalla:
+añadimos los tres productos y quitamos el primero, con un suscriptor
+que imprime el estado cada vez que el modelo notifica.
 
 ```js
 const carrito = new Carrito();
@@ -43,7 +43,7 @@ carrito.agregar({ id: 3, nombre: "Monitor", precio: 180 });
 carrito.quitar(1);
 ```
 
-Cada línea de la salida corresponde a un aviso:
+Cada línea de la salida corresponde a una notificación:
 
 ```text
 1 u / $45
@@ -85,7 +85,7 @@ class Carrito {
     this.#suscriptores.push(fn);
   }
 
-  #avisar() {
+  #notificar() {
     for (const fn of this.#suscriptores) fn(this);
   }
 
@@ -103,17 +103,17 @@ class Carrito {
 
   agregar(producto) {
     this.#lineas.push({ linea: this.#siguienteId++, ...producto, cantidad: 1 });
-    this.#avisar();
+    this.#notificar();
   }
 
   quitar(linea) {
     this.#lineas = this.#lineas.filter((l) => l.linea !== linea);
-    this.#avisar();
+    this.#notificar();
   }
 
   cambiarCantidad(linea, cantidad) {
     this.#lineas.find((l) => l.linea === linea).cantidad = cantidad;
-    this.#avisar();
+    this.#notificar();
   }
 }
 ```
@@ -131,9 +131,10 @@ se piden. Ya no hay dos sitios que sincronizar, y el primer problema
 del capítulo anterior, el estado sin dueño, queda resuelto por
 diseño.
 
-**Cada cambio termina en un aviso.** Los tres métodos que modifican
-el estado llaman a `#avisar()` al final, después de mutar. El orden
-importa: el suscriptor debe leer el estado ya nuevo.
+**Cada cambio termina en una notificación.** Los tres métodos que
+modifican
+el estado llaman a `#notificar()` al final, después de mutar. El orden
+importa: el suscriptor debe leer el estado ya actualizado.
 
 :::pausa
 Explica por qué `total` y `unidades` no pueden desincronizarse de las
@@ -143,15 +144,15 @@ líneas, y qué tendrías que cambiar para que sí pudieran.
 ## Un patrón con nombre
 
 El modelo no sabe quién escucha ni para qué. Solo guarda una lista de
-suscriptores y los avisa cuando sus datos cambian. Es el patrón de
+suscriptores y los notifica cuando sus datos cambian. Es el patrón de
 observador, y conviene conocerlo con su nombre porque aparece en muchas
 herramientas de estado.
 
 Dave Stearns describe este mismo arreglo en su [tutorial sobre MVC](https://drstearns.github.io/tutorials/mvc/):
-un modelo que mantiene una lista de oyentes y los avisa cuando sus
-datos cambian, y una vista que se vuelve a pintar sola al recibir el
-aviso. Nuestro modelo pasa el propio carrito al suscriptor, para que
-pueda leer el estado sin tener una referencia aparte.
+un modelo que mantiene una lista de oyentes y los notifica cuando sus
+datos cambian, y una vista que se vuelve a pintar sola al recibir la
+notificación. Nuestro modelo pasa el propio carrito al suscriptor, para
+que pueda leer el estado sin tener una referencia aparte.
 
 ## Probarlo sin DOM
 
@@ -207,7 +208,8 @@ carrito.suscribir((c) => {
 });
 ```
 
-Cada aviso repinta el total, el contador y la lista entera. Es poco
+Cada notificación repinta el total, el contador y la lista entera. Es
+poco
 código, y los datos solo viven en el modelo: la pantalla es una copia
 que se regenera en cada cambio.
 
@@ -216,14 +218,16 @@ que se regenera en cada cambio.
 Este paso deja tres cosas sin resolver, y conviene nombrarlas.
 
 - **La pantalla no se actualiza sola.** Si alguien olvida suscribirse,
-  la página vuelve a mostrar datos viejos. El modelo no puede evitarlo.
+  la página se queda mostrando datos viejos. El modelo no puede
+  evitarlo.
 - **El código que pinta sigue junto al que cambia los datos.** Quien
   llama a `agregar` y a `quitar` es el mismo componente que decide cómo
   se ve la lista, así que la separación todavía está a medias.
-- **El suscriptor repinta todo en cada aviso.** Con tres líneas no se
+- **El suscriptor repinta todo en cada notificación.** Con tres líneas
+  no se
   nota. Con una lista larga, habrá que decidir qué se repinta y cuándo.
 
-## El cierre
+## El punto
 
 El DOM ya no es la verdad, pero sigue sin actualizarse solo. ¿Quién
 lo mantiene al día sin que tengamos que escribir cada suscriptor a

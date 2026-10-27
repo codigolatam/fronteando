@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -10,7 +10,7 @@ contenido
 
 ## Objetivo
 
-Llevar la pieza «Sacar el estado del DOM: un modelo que avisa cuando cambia» (`docs/editorial/piezas/mvc-modelo.md`) por el flujo de escritura completo —encuadre → redacción → revisión editorial → publicación—. El capítulo refactoriza el carrito del capítulo 1 para que los ítems y el total vivan en un modelo que notifica a sus suscriptores, sin tocar el DOM.
+Llevar la pieza «Sacar el estado del DOM: un modelo que notifica sus cambios» (`docs/editorial/piezas/mvc-modelo.md`) por el flujo de escritura completo —encuadre → redacción → revisión editorial → publicación—. El capítulo refactoriza el carrito del capítulo 1 para que los ítems y el total vivan en un modelo que notifica a sus suscriptores, sin tocar el DOM.
 
 ## Dependencias
 
@@ -45,12 +45,12 @@ Llevar la pieza «Sacar el estado del DOM: un modelo que avisa cuando cambia» (
 
 ## Notas
 
-- Título de trabajo del capítulo: «Sacar el estado del DOM: un modelo que avisa cuando cambia». Se fijó tras revisar el calco «el estado que notifica».
+- Título de trabajo del capítulo: «Sacar el estado del DOM: un modelo que notifica sus cambios». Se revisó dos veces por idiomaticidad: «el estado que notifica» y «avisa» eran calcos del inglés («notificar» es el verbo instalado del patrón en español, verificado en fuentes técnicas en español).
 
 ## Encuadre
 
 - **Brief:** `docs/editorial/briefs/sacar-el-estado-del-dom.md` — aprobado 2026-10-26
-- **Promesa:** «después de leer esto, el lector podrá sacar el estado de su componente a un modelo que avisa de sus cambios, y probar esa lógica sin tocar el DOM»
+- **Promesa:** «después de leer esto, el lector podrá sacar el estado de su componente a un modelo que notifica sus cambios, y probar esa lógica sin tocar el DOM»
 
 ## Desviaciones del brief
 
