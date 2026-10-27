@@ -60,6 +60,6 @@ Llevar la pieza «Sacar el estado del DOM: un modelo que notifica sus cambios» 
 
 ## Revisión
 
-- Subagente (revisión editorial, ronda 1): 2026-10-26 — Solicita cambios
+- Subagente (revisión editorial): 2026-10-26 — Aprueba (ronda 6; las rondas 1 a 5 solicitaron cambios, aplicados en la tarea)
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

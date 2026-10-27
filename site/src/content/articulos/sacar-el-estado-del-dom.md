@@ -10,7 +10,7 @@ agente:
   tema: "explica cómo sacar el estado de un carrito en vanilla JS a una clase que notifica a sus suscriptores, y cómo probar esa lógica en Node sin DOM"
   prerequisitos:
     [
-      "JavaScript con clases y métodos privados; DOM básico (querySelector, textContent, createElement)",
+      "JavaScript con clases y métodos privados; DOM básico (querySelector, textContent, createElement, addEventListener)",
     ]
 ---
 
@@ -117,7 +117,7 @@ class Carrito {
 }
 ```
 
-Hay tres decisiones en esa clase que conviene mirar de cerca.
+En esa clase tomamos tres decisiones que conviene mirar de cerca.
 
 **Los datos son privados.** `#lineas` solo se modifica desde dentro de
 la clase, así que nadie puede cambiar el array por accidente desde
@@ -126,7 +126,7 @@ copia, el modelo no se entera, y eso es lo que queremos.
 
 **El total y las unidades se calculan.** `total` y `unidades` no son
 variables: son cuentas hechas sobre las líneas en el momento en que
-se piden. Ya no hay dos sitios que sincronizar, y el primer problema del
+se piden. Ya no tenemos dos sitios que sincronizar, y el primer problema del
 capítulo anterior, el estado sin dueño, queda resuelto por diseño.
 
 **Cada cambio termina en una notificación.** Los dos métodos que
