@@ -52,6 +52,11 @@ Llevar la pieza «Sacar el estado del DOM: un modelo que avisa cuando cambia» (
 - **Brief:** `docs/editorial/briefs/sacar-el-estado-del-dom.md` — aprobado 2026-10-26
 - **Promesa:** «después de leer esto, el lector podrá sacar el estado de su componente a un modelo que avisa de sus cambios, y probar esa lógica sin tocar el DOM»
 
+## Desviaciones del brief
+
+- Se añadió la sección «Conectar el modelo con la pantalla» con el suscriptor que pinta a mano: el brief lo declaraba en el alcance, pero no en el outline. No cambia la promesa.
+- El resultado primero muestra el programa y su salida antes de la clase, como pide la anatomía; el orden del outline se mantuvo.
+
 ## Revisión
 
 - Subagente: [fecha] — [Aprueba | Solicita cambios]

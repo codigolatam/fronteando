@@ -107,16 +107,16 @@ class Carrito {
 
 ## Checklist de publicación
 
-- [ ] El gancho planta una tensión y la resuelve dentro del previo
-- [ ] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
-- [ ] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal
-- [ ] `description` enuncia la promesa en una frase, sin adjetivos valorativos
-- [ ] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
-- [ ] `date` con la hora real del commit o del merge
-- [ ] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
-- [ ] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
-- [ ] Los límites honestos tienen sección propia; el cierre abre una puerta
+- [x] El gancho planta una tensión y la resuelve dentro del previo
+- [x] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
+- [x] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal (56 palabras)
+- [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos (145 caracteres)
+- [x] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
+- [ ] `date` con la hora real del commit o del merge (se ajusta al fusionar el PR)
+- [x] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
+- [x] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
+- [x] Los límites honestos tienen sección propia; el cierre abre una puerta
 - [ ] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
-- [ ] Las cifras del post vienen de una sola versión del ejemplo (no mezclar $255 del modelo con $135 del capítulo 1)
-- [ ] El título es idiomático en español, sin calcos del inglés
-- [ ] Los incisos van entre paréntesis y las citas en comillas latinas, según la guía
+- [x] Las cifras del post vienen de una sola versión del ejemplo (no mezclar $255 del modelo con $135 del capítulo 1)
+- [x] El título es idiomático en español, sin calcos del inglés
+- [x] Los incisos van entre paréntesis y las citas en comillas latinas, según la guía
