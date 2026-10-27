@@ -5,6 +5,7 @@ date: 2026-10-26T12:00:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
+draft: true
 agente:
   tema: "un modelo en vanilla JS que guarda el estado de un carrito y avisa a quien se suscriba cuando cambia, para sacar el estado del DOM y probar su lógica sin navegador"
   prerequisitos:
