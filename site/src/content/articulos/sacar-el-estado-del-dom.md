@@ -186,20 +186,42 @@ otro teclado, y comprueba la predicción con `node`.
 ## Conectar el modelo con la pantalla
 
 El modelo no pinta nada. Para que la página se entere de los cambios,
-alguien tiene que suscribirse y pintar. El suscriptor trabaja sobre
-este marcado, que es el del capítulo anterior sin la lista de catálogo
-(`#catalogo`) y sin los botones:
+alguien tiene que suscribirse y pintar. Este es el marcado del carrito,
+el mismo del capítulo anterior:
 
 ```html
+<ul id="catalogo"></ul>
 <h3>Tu carrito (<span id="contador">0</span>)</h3>
 <ul id="carrito"></ul>
 <p>Total: <span id="total">$0</span></p>
 ```
 
-Con ese marcado, el suscriptor se ve así:
+El catálogo ya no guarda nada: cada «Añadir» le pide al modelo que
+agregue el producto.
 
 ```js
 // extracto: sigue a `const carrito = new Carrito();` del bloque anterior
+const productos = [
+  { id: 1, nombre: "Teclado", precio: 45 },
+  { id: 2, nombre: "Ratón", precio: 25 },
+  { id: 3, nombre: "Monitor", precio: 180 },
+];
+
+for (const producto of productos) {
+  const li = document.createElement("li");
+  li.textContent = `${producto.nombre} — $${producto.precio} `;
+  const añadir = document.createElement("button");
+  añadir.textContent = "Añadir";
+  añadir.addEventListener("click", () => carrito.agregar(producto));
+  li.append(añadir);
+  document.querySelector("#catalogo").append(li);
+}
+```
+
+El suscriptor pinta el carrito a partir del modelo:
+
+```js
+// extracto: sigue al bloque anterior
 const totalEl = document.querySelector("#total");
 const contadorEl = document.querySelector("#contador");
 const listaEl = document.querySelector("#carrito");
@@ -210,7 +232,11 @@ carrito.suscribir((c) => {
   listaEl.replaceChildren(
     ...c.lineas.map((l) => {
       const li = document.createElement("li");
-      li.textContent = `${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad}`;
+      li.textContent = `${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad} `;
+      const quitar = document.createElement("button");
+      quitar.textContent = "Quitar";
+      quitar.addEventListener("click", () => carrito.quitar(l.linea));
+      li.append(quitar);
       return li;
     }),
   );
