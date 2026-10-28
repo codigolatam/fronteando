@@ -14,22 +14,22 @@ agente:
 ---
 
 El carrito ya se actualiza solo: cada cambio del modelo llega a la
-pantalla. Pero el código que pinta es un suscriptor que toca tres
-elementos a mano, y el HTML inicial repite un estado que puede
+pantalla. Pero el código que aplica los cambios es un suscriptor que toca tres
+elementos a mano, y el HTML inicial muestra un estado que puede
 mentir. Hoy convertimos todo lo que se ve en una función del estado.
 
 <!--more-->
 
 Vamos a convertir el código que pinta el carrito en una función:
-dado el modelo, `render` genera todo el HTML de la vista, y hasta la
-primera pantalla sale de ella. Al terminar podrás hacer que la
-pantalla de tu componente sea una función de su estado, y verás qué
+dado el modelo, `render` genera todo el HTML de la vista, incluso la
+primer pantalla. Al terminar podrás hacer que la
+parte visual de tu componente sea una función de su estado, y verás qué
 queda por separar.
 
 ## El resultado primero
 
-Antes de abrir la función conviene ver qué hace. Así se pone en
-marcha el carrito sobre el modelo del
+Antes de abrir la función conviene ver qué hace. Así se inicializa
+el carrito sobre el modelo del
 [capítulo anterior](/articulos/sacar-el-estado-del-dom/): un `<div>`
 vacío en la página, una suscripción y una llamada inicial.
 
