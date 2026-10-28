@@ -5,6 +5,9 @@
   import { mountView } from "./view";
   import type { ScopedDocument } from "./view";
 
+  // "controlador" mounts the chapter-4 program —delegated listener and
+  // the full cycle in the register— instead of the chapter-3 one.
+  let { modo = "" }: { modo?: string } = $props();
   let root: HTMLElement;
 
   onMount(() => {
@@ -12,7 +15,7 @@
       querySelector: (selector) => root.querySelector(selector),
       createElement: (tag) => document.createElement(tag),
     };
-    mountView(scoped);
+    mountView(scoped, modo);
   });
 </script>
 

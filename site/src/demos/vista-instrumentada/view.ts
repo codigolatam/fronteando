@@ -1,12 +1,11 @@
-// The view refactor from «La vista como función del estado», verbatim:
-// the model from «Sacar el estado del DOM», a `render` that regenerates
-// all the markup and a `conectar` that re-wires the handlers after each
-// repaint —run against a document scoped to the piece instead of the
-// global one. The only addition is the live register: a second
-// subscriber that logs every notification → repaint pair, capped so the
-// list stays readable.
+// The cart view programs from the MVC series, verbatim: the chapter-3
+// listing (render + conectar, run with no modo) and the chapter-4 one
+// (delegated controller, run with modo="controlador") —each against a
+// document scoped to the piece instead of the global one. The only
+// addition is the live register: subscribers that log the cycle they
+// make visible, capped so the list stays readable.
 
-// The slice of Document the program touches: element lookups scoped to
+// The slice of Document the programs touch: element lookups scoped to
 // the piece's container plus createElement for the register entries.
 export interface ScopedDocument {
   querySelector(selector: string): Element | null;
@@ -18,53 +17,55 @@ type CartLine = CartProduct & { linea: number; cantidad: number };
 
 const MAX_ENTRIES = 5;
 
-export function mountView(document: ScopedDocument): void {
-  class Carrito {
-    #lineas: CartLine[] = [];
-    #siguienteId = 1;
-    #suscriptores: ((c: Carrito) => void)[] = [];
+class Carrito {
+  #lineas: CartLine[] = [];
+  #siguienteId = 1;
+  #suscriptores: ((c: Carrito) => void)[] = [];
 
-    suscribir(fn: (c: Carrito) => void) {
-      this.#suscriptores.push(fn);
-    }
-
-    #notificar() {
-      for (const fn of this.#suscriptores) fn(this);
-    }
-
-    get lineas() {
-      return this.#lineas.map((l) => ({ ...l }));
-    }
-
-    get unidades() {
-      return this.#lineas.reduce((suma, l) => suma + l.cantidad, 0);
-    }
-
-    get total() {
-      return this.#lineas.reduce((suma, l) => suma + l.precio * l.cantidad, 0);
-    }
-
-    agregar(producto: CartProduct) {
-      this.#lineas.push({
-        linea: this.#siguienteId++,
-        ...producto,
-        cantidad: 1,
-      });
-      this.#notificar();
-    }
-
-    quitar(linea: number) {
-      this.#lineas = this.#lineas.filter((l) => l.linea !== linea);
-      this.#notificar();
-    }
+  suscribir(fn: (c: Carrito) => void) {
+    this.#suscriptores.push(fn);
   }
 
-  const productos: CartProduct[] = [
-    { id: 1, nombre: "Teclado", precio: 45 },
-    { id: 2, nombre: "Ratón", precio: 25 },
-    { id: 3, nombre: "Monitor", precio: 180 },
-  ];
+  #notificar() {
+    for (const fn of this.#suscriptores) fn(this);
+  }
 
+  get lineas() {
+    return this.#lineas.map((l) => ({ ...l }));
+  }
+
+  get unidades() {
+    return this.#lineas.reduce((suma, l) => suma + l.cantidad, 0);
+  }
+
+  get total() {
+    return this.#lineas.reduce((suma, l) => suma + l.precio * l.cantidad, 0);
+  }
+
+  agregar(producto: CartProduct) {
+    this.#lineas.push({ linea: this.#siguienteId++, ...producto, cantidad: 1 });
+    this.#notificar();
+  }
+
+  quitar(linea: number) {
+    this.#lineas = this.#lineas.filter((l) => l.linea !== linea);
+    this.#notificar();
+  }
+}
+
+const productos: CartProduct[] = [
+  { id: 1, nombre: "Teclado", precio: 45 },
+  { id: 2, nombre: "Ratón", precio: 25 },
+  { id: 3, nombre: "Monitor", precio: 180 },
+];
+
+function cap(log: Element) {
+  while (log.children.length > MAX_ENTRIES) log.lastElementChild!.remove();
+}
+
+// Chapter 3: render + per-button re-wiring after each repaint, logging
+// every notification → repaint pair.
+function mountChapter3(document: ScopedDocument): void {
   const host = document.querySelector("#carrito-app") as HTMLElement;
   const log = document.querySelector("#log")!;
 
@@ -110,16 +111,87 @@ export function mountView(document: ScopedDocument): void {
   };
   carrito.suscribir(actualizar);
 
-  // Instrumentation, not part of the article listing: the model has no
-  // idea this second subscriber exists, which is the point of suscribir.
   let notifications = 0;
   carrito.suscribir((c) => {
     notifications += 1;
     const li = document.createElement("li");
     li.textContent = `notificación ${notifications} → repintado: ${c.unidades} u / $${c.total}`;
     log.prepend(li);
-    while (log.children.length > MAX_ENTRIES) log.lastElementChild!.remove();
+    cap(log);
   });
 
   actualizar();
+}
+
+// Chapter 4: buttons declare intent, a delegated listener on the host
+// translates clicks to actions —and the register logs the whole cycle.
+function mountChapter4(document: ScopedDocument): void {
+  const host = document.querySelector("#carrito-app") as HTMLElement;
+  const log = document.querySelector("#log")!;
+
+  function render(modelo: Carrito) {
+    host.innerHTML = `
+      <ul id="catalogo">
+        ${productos
+          .map(
+            (p) =>
+              `<li>${p.nombre} — $${p.precio} <button data-accion="agregar" data-id="${p.id}">Añadir</button></li>`,
+          )
+          .join("")}
+      </ul>
+      <h3>Tu carrito (<span id="contador">${modelo.unidades}</span>)</h3>
+      <ul id="carrito">
+        ${modelo.lineas
+          .map(
+            (l) =>
+              `<li>${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad} <button data-accion="quitar" data-linea="${l.linea}">Quitar</button></li>`,
+          )
+          .join("")}
+      </ul>
+      <p>Total: <span id="total">$${modelo.total}</span></p>`;
+  }
+
+  const carrito = new Carrito();
+  carrito.suscribir(() => render(carrito));
+
+  // Instrumentation listener, registered first: it only remembers which
+  // action the click meant so the register can name it.
+  let pendingAction: string | null = null;
+  host.addEventListener("click", (e) => {
+    const b = (e.target as Element).closest("[data-accion]");
+    if (b) pendingAction = (b as HTMLElement).dataset.accion ?? null;
+  });
+
+  host.addEventListener("click", (e) => {
+    const boton = (e.target as Element).closest("[data-accion]") as HTMLElement;
+    if (!boton) return;
+    const acciones: Record<string, () => void> = {
+      agregar: () =>
+        carrito.agregar(
+          productos.find((p) => p.id === Number(boton.dataset.id))!,
+        ),
+      quitar: () => carrito.quitar(Number(boton.dataset.linea)),
+    };
+    acciones[boton.dataset.accion!]?.();
+  });
+
+  let notifications = 0;
+  carrito.suscribir((c) => {
+    notifications += 1;
+    const li = document.createElement("li");
+    li.textContent = `clic → acción ${pendingAction} → notificación ${notifications} → repintado: ${c.unidades} u / $${c.total}`;
+    pendingAction = null;
+    log.prepend(li);
+    cap(log);
+  });
+
+  render(carrito);
+}
+
+export function mountView(document: ScopedDocument, modo = ""): void {
+  if (modo === "controlador") {
+    mountChapter4(document);
+  } else {
+    mountChapter3(document);
+  }
 }
