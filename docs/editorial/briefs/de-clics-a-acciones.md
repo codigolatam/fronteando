@@ -88,15 +88,15 @@ La `vista-instrumentada` del capítulo 3 se extiende (decisión de la puerta): e
 
 ## Checklist de publicación
 
-- [ ] El gancho planta una tensión y la resuelve dentro del previo
-- [ ] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
-- [ ] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal
-- [ ] `description` enuncia la promesa en una frase, sin adjetivos valorativos
-- [ ] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
-- [ ] `date` con la hora real del commit o del merge
-- [ ] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
-- [ ] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
-- [ ] Los límites honestos tienen sección propia; el cierre abre una puerta
-- [ ] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
-- [ ] La salida del resultado primero viene de clics reales sobre los botones, incluido el «añadir» posterior a repintados que demuestra que el listener no se recablea
-- [ ] La `vista-instrumentada` extendida (aprobada en la puerta) registra el ciclo completo clic → acción → notificación → repintado que la prosa describe
+- [x] El gancho planta una tensión y la resuelve dentro del previo
+- [x] `<!--more-->` inmediatamente tras el gancho (el previo sale del cuerpo, decisión D002)
+- [x] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal
+- [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos
+- [x] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
+- [x] `date` con la hora real del commit o del merge
+- [x] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
+- [x] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
+- [x] Los límites honestos tienen sección propia; el cierre abre una puerta
+- [x] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
+- [x] La salida del resultado primero viene de clics reales sobre los botones, incluido el «añadir» posterior a repintados que demuestra que el listener no se recablea
+- [x] La `vista-instrumentada` extendida (aprobada en la puerta) registra el ciclo completo clic → acción → notificación → repintado que la prosa describe
