@@ -18,10 +18,9 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## en revisión
 
-- [El Modelo: el estado que notifica](piezas/mvc-modelo.md)
-
 ## publicado
 
+- [El Modelo: sacar el estado del DOM](../../site/src/content/articulos/sacar-el-estado-del-dom.md)
 - [Un store reactivo en vanilla JS](../../site/src/content/articulos/un-store-reactivo-en-vanilla-js.md)
 - [El carrito a lo bruto: construyendo un componente web sin seguir un patrón](../../site/src/content/articulos/carrito-a-lo-bruto.md)
 

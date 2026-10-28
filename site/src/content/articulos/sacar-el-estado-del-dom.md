@@ -1,7 +1,7 @@
 ---
 title: "Sacar el estado del DOM: un modelo que notifica sus cambios"
 description: "¿Cómo compruebas el total del carrito sin abrir el navegador? Sacando el estado del DOM a un modelo que notifica sus cambios."
-date: 2026-10-26T12:00:00Z
+date: 2026-10-28T01:59:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]

@@ -1,6 +1,6 @@
 # El Modelo: el estado que notifica
 
-- estado: en revisión
+- estado: publicado
 - serie: mvc-en-vanilla-js
 - **Pregunta del lector:** ¿cómo saco el estado del DOM sin framework?
 - **Ángulo:** la primera separación del espagueti hecha visible — el modelo como objeto que guarda el estado y anuncia sus cambios a suscriptores, sin saber nada del DOM.

@@ -223,3 +223,10 @@
   Obtenido: los archivos se escribieron con un estilo ajeno y el usuario los reformateó a mano
   Corrección: el usuario reformató ambos archivos y recordó que el código nuevo debe escribirse ya en el estilo de Prettier, no a la espera de un pase posterior
   Estado: consolidada
+
+- Id: 20261028T015908
+  Tarea: docs/tasks/031-capitulo-2-serie-mvc.md
+  Esperado: título y description idiomáticos en español, no calcos del inglés.
+  Obtenido: el título decía «el estado que notifica» y la description «un modelo que avisa», ambos calcos (*state that notifies*, *a model that notifies* sin complemento).
+  Corrección: el usuario rechazó ambos; se verificó en fuentes técnicas en español que el verbo instalado del patrón es «notificar» y que «avisar» exige complemento («avisar a alguien de algo»). Quedó «un modelo que notifica sus cambios» en título, código y prosa.
+  Estado: consolidada

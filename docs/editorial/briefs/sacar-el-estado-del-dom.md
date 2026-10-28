@@ -106,7 +106,7 @@ class Carrito {
 - [x] El previo es una unidad: un párrafo breve y autocontenido, diseñado como tal (56 palabras)
 - [x] `description` enuncia la promesa en una frase, sin adjetivos valorativos (125 caracteres)
 - [x] Frontmatter completo: `title`, `description`, `date`, `categoria`, `tags` (`nivel` solo si el encuadre lo decidió)
-- [ ] `date` con la hora real del commit o del merge (se ajusta al fusionar el PR)
+- [x] `date` con la hora real del commit o del merge
 - [x] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
 - [x] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
 - [x] Los límites honestos tienen sección propia; el cierre abre una puerta

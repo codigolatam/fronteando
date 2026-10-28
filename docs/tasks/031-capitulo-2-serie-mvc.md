@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -61,5 +61,5 @@ Llevar la pieza «Sacar el estado del DOM: un modelo que notifica sus cambios» 
 ## Revisión
 
 - Subagente (revisión editorial): 2026-10-26 — Aprueba (ronda 6; las rondas 1 a 5 solicitaron cambios, aplicados en la tarea)
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-28 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
