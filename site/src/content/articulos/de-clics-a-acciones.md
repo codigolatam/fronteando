@@ -5,7 +5,7 @@ date: 2026-10-28T16:00:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
-draft: true
+draft: false
 agente:
   tema: "explica cómo sacar los manejadores de eventos de la vista a un controlador que traduce clics a acciones del modelo, cerrando el ciclo evento → acción → modelo → notificación → vista"
   prerequisitos:
@@ -102,8 +102,8 @@ quién la interpreta es otro.
 ## El controlador
 
 El segundo cambio es quién escucha. En lugar de un manejador por
-botón, un único listener sobre el `host` — el `<div>` que `render`
-llena pero no recrea — traduce cada clic en la acción que declara:
+botón, un único listener sobre el `host` (el `<div>` que `render`
+llena pero no recrea) traduce cada clic en la acción que declara:
 
 ```js
 // extracto: el listener del resultado primero, de nuevo
@@ -120,8 +120,8 @@ host.addEventListener("click", (e) => {
 ```
 
 Tres cosas que conviene mirar. La primera: el listener vive sobre un
-elemento que sobrevive a los repintados — `render` reescribe su
-`innerHTML` pero no lo reemplaza —, así que se conecta una sola vez y
+elemento que sobrevive a los repintados (`render` reescribe su
+`innerHTML` pero no lo reemplaza), así que se conecta una sola vez y
 nunca se recablea. La segunda: `closest` encuentra el botón aunque el
 clic caiga en cualquier nodo interior, y `dataset` trae los
 argumentos. La tercera: la tabla `acciones` es el único sitio del
@@ -174,7 +174,7 @@ hasta el `<li>` nuevo en pantalla, nombrando cada pieza que toca.
 ## Los límites de este paso
 
 Las tres piezas están separadas, pero hay cosas que esta separación
-no compra.
+no resuelve.
 
 - **El controlador conoce la forma del DOM.** Lee `data-accion` y los
   atributos que `render` escribe: si la vista cambia los nombres, el

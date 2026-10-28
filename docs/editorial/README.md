@@ -10,12 +10,13 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## lista
 
-- [El Controlador: cerrar el ciclo](piezas/mvc-controlador.md)
 - [Los límites del MVC a mano](piezas/mvc-limites.md)
 
 ## en redacción
 
 ## en revisión
+
+- [El Controlador: cerrar el ciclo](piezas/mvc-controlador.md)
 
 ## publicado
 
