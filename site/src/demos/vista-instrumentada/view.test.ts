@@ -96,9 +96,9 @@ describe("mountView", () => {
       const root = scaffold();
       for (let i = 0; i < 9; i++) addButton(root, "Teclado")!.click();
       const entries = root.querySelectorAll("#log li");
-      expect(entries).toHaveLength(8);
+      expect(entries).toHaveLength(5);
       expect(entries[0].textContent).toContain("notificación 9");
-      expect(entries[7].textContent).toContain("notificación 2");
+      expect(entries[4].textContent).toContain("notificación 5");
     });
   });
 

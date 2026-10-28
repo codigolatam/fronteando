@@ -21,7 +21,7 @@
     <div class="zone" id="carrito-app"></div>
     <section class="zone" aria-labelledby="log-heading">
       <h3 class="heading" id="log-heading">Registro del modelo</h3>
-      <p class="initial">pintado inicial: 0 u / $0 (sin notificación)</p>
+      <p class="initial">render inicial: 0 u / $0 (sin notificación)</p>
       <ol class="entries" id="log" aria-live="polite"></ol>
     </section>
   </div>

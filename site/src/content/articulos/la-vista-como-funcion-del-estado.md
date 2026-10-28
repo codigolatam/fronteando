@@ -1,12 +1,12 @@
 ---
 title: "La vista como función del estado"
-description: "¿Quién mantiene la pantalla al día cuando cambia el modelo? Un render que la regenera entera en cada notificación, desde el primer pintado."
+description: "¿Quién mantiene la pantalla al día cuando cambia el modelo? Un render que la regenera entera en cada notificación, desde el primer render."
 date: 2026-10-28T02:37:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
 agente:
-  tema: "explica cómo convertir el código que pinta un componente en una función render que regenera toda la vista desde el modelo, con el primer pintado incluido"
+  tema: "explica cómo convertir el código que pinta un componente en una función render que regenera toda la vista desde el modelo, con el primer render incluido"
   prerequisitos:
     [
       "el modelo del capítulo anterior (la clase Carrito con suscribir y notificar); DOM básico (innerHTML, querySelector, addEventListener)",
@@ -15,21 +15,21 @@ agente:
 
 El carrito ya se actualiza solo: cada cambio del modelo llega a la
 pantalla. Pero el código que pinta es un suscriptor que toca tres
-elementos a mano, y el marcado inicial repite un estado que puede
+elementos a mano, y el HTML inicial repite un estado que puede
 mentir. Hoy convertimos todo lo que se ve en una función del estado.
 
 <!--more-->
 
 Vamos a convertir el código que pinta el carrito en una función:
-`render(modelo)` produce el marcado completo del componente y hasta el
-primer pintado sale de ella. Al terminar podrás hacer que la pantalla
-de tu componente sea una función de su estado, y verás qué queda por
-separar todavía.
+dado el modelo, `render` genera todo el HTML de la vista, y hasta la
+primera pantalla sale de ella. Al terminar podrás hacer que la
+pantalla de tu componente sea una función de su estado, y verás qué
+queda por separar.
 
 ## El resultado primero
 
-Antes de abrir la función conviene ver qué hace. Este es el arranque
-del carrito sobre el modelo del
+Antes de abrir la función conviene ver qué hace. Así se pone en
+marcha el carrito sobre el modelo del
 [capítulo anterior](/articulos/sacar-el-estado-del-dom/): un `<div>`
 vacío en la página, una suscripción y una llamada inicial.
 
@@ -56,7 +56,7 @@ tras quitar el primero:  2 ítems / $205
 
 Las mismas cifras de siempre, con una diferencia: el primer `0 / $0`
 ya no está escrito en el HTML: lo produjo `render`. La pantalla
-empieza siendo una función del estado, no un marcado que alguien
+empieza siendo una función del estado, no HTML que alguien
 escribió a mano esperando acertar.
 
 ## Lo que el suscriptor hacía a mano
@@ -72,7 +72,7 @@ elemento, y con una trampa escondida en el propio HTML:
 <p>Total: <span id="total">$0</span></p>
 ```
 
-Ese `0` y ese `$0` son estado escrito a mano en el marcado. Si nadie
+Ese `0` y ese `$0` son estado escrito a mano en el HTML. Si nadie
 se suscribe, la página se queda mostrándolos para siempre, como
 vimos en los límites del capítulo anterior: el HTML miente con total
 tranquilidad. Hay dos fuentes de verdad y una de ellas es texto que
@@ -80,15 +80,15 @@ nadie actualiza.
 
 ## La vista
 
-La refactorización es una sola idea: todo lo que se ve lo produce una
-función del modelo. El HTML de la página queda reducido a un host
-vacío:
+La refactorización cabe en una idea: todo lo que se ve sale de una
+función del modelo. El HTML de la página queda reducido a un
+contenedor vacío:
 
 ```html
 <div id="carrito-app"></div>
 ```
 
-Y `render` genera el marcado completo, catálogo incluido:
+Y `render` genera todo el HTML, catálogo incluido:
 
 ```js
 // extracto: `productos` es el array del catálogo, ya visto
@@ -107,8 +107,8 @@ function render(modelo) {
 }
 ```
 
-Tres cosas que cambian aquí. La primera: ya no hay marcado inicial que
-pueda mentir, porque ya no hay marcado inicial. El `0` y el `$0` que
+Tres cosas que cambian aquí. La primera: ya no hay HTML escrito a mano que
+pueda mentir, porque ya no hay HTML escrito a mano. El `0` y el `$0` que
 antes vivían en el HTML ahora salen de `modelo.unidades` y
 `modelo.total`. La segunda: la vista entera está en un solo lugar; si
 la pantalla muestra algo raro, la función `render` es el único sitio
@@ -117,24 +117,25 @@ donde mirar. La tercera es sutil: los botones llevan atributos
 puesto, porque el HTML se escribe como texto y los nodos todavía no
 existen cuando se compone.
 
-## El primer pintado
+## El primer render
 
-El arranque del resultado primero tiene dos líneas que hacen todo el
+El programa del resultado primero tiene dos líneas que hacen todo el
 trabajo:
 
 ```js
-// extracto: el arranque del resultado primero, de nuevo
+// extracto: el mismo programa del resultado primero
 carrito.suscribir(actualizar);
 actualizar();
 ```
 
-La primera es la de siempre: cada notificación del modelo dispara
-`actualizar`, que repinta y recablea. La segunda es la que faltaba:
-una llamada inicial para que la primera pantalla también la pinte
-`render`. Antes, el estado inicial lo escribía el HTML a mano y la
-página solo se ponía al día con la primera notificación; ahora el
-primer pintado sigue el mismo camino que todos los demás. La pantalla
-nunca muestra un estado que el modelo no tenga.
+La primera es la de siempre: cada notificación del modelo llama a
+`actualizar`, que repinta la vista y vuelve a conectar los botones.
+La segunda es la que faltaba: una llamada inicial, para que la primera
+pantalla también la produzca `render`. Antes, el estado inicial lo
+escribía el HTML a mano y la página solo se ponía al día cuando
+llegaba la primera notificación; ahora la primera vista sale por el
+mismo camino que todas las demás. La pantalla nunca muestra un estado
+que el modelo no tenga.
 
 :::pausa
 Predice qué muestra la página antes de la primera notificación, y
@@ -166,18 +167,19 @@ botones. Y funciona, pero mira quién decide qué pasa al pulsar: la
 propia vista. Cada botón recién nacido llama a `agregar` o a `quitar`
 del modelo directamente.
 
-La literatura del patrón lo dice sin rodeos. Tania Rascia, en su
+El patrón tiene una regla explícita sobre eso, y la literatura la
+repite. Tania Rascia, en su
 [tutorial de MVC](https://www.taniarascia.com/javascript-mvc-todo-app/),
-lo resume en una letanía: «the view never touches the model». La vista
-no toca el modelo; la nuestra lo toca en cada clic. Dave Stearns
-[matiza la regla](https://drstearns.github.io/tutorials/mvc/): en la
-variante moderna la vista sí captura los eventos de usuario, como hace
-la nuestra. Decidir qué se hace con ellos es otro trabajo, y es el paso
-que queda.
+la deja en una sola línea: «the view never touches the model». La
+vista nunca toca el modelo; la nuestra lo toca en cada clic. Dave
+Stearns [matiza la regla](https://drstearns.github.io/tutorials/mvc/):
+en la variante moderna la vista sí captura los eventos de usuario,
+como hace la nuestra. Decidir qué se hace con ellos es otro trabajo, y
+es el paso que queda.
 
 La pieza siguiente es el carrito de este capítulo funcionando, con un
 registro en vivo: cada notificación del modelo y el
-repintado que provoca. La línea fija de arriba del registro recuerda que el pintado
+repintado que provoca. La línea fija de arriba del registro recuerda que el render
 inicial no vino de ninguna notificación.
 
 :::demo{nombre="vista-instrumentada" altura="290px" altura-estrecha="400px"}
@@ -186,7 +188,7 @@ cada «Añadir» o «Quitar» produce una línea «notificación N →
 repintado: M u / $X» en el registro, la más nueva arriba. Resultado
 esperado: tres añadidos dejan tres notificaciones, contador 3 y
 total $250; quitar la primera línea deja $205. La línea fija de
-arriba del registro recuerda el pintado inicial, que no llegó por
+arriba del registro recuerda el render inicial, que no llegó por
 notificación.
 :::
 
@@ -216,8 +218,8 @@ precio que conviene nombrar.
 
 ## El punto
 
-El DOM ya no es fuente de verdad ni de marcado: todo lo que se ve
-sale de `render(modelo)`, desde el primer pintado. Lo que queda suelto
+El DOM ya no es fuente de verdad ni de HTML: todo lo que se ve
+sale de `render(modelo)`, desde el primer render. Lo que queda suelto
 son los eventos: los clics entran por dentro de la vista y alcanzan el
 modelo sin intermediario. ¿Quién traduce un «Añadir» en una acción, y
 una acción en un cambio del modelo? Ese es el trabajo del controlador,
