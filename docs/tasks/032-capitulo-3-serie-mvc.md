@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -48,6 +48,11 @@ Llevar la pieza «La Vista: el render como función del estado» (`docs/editoria
 
 - Título de trabajo del capítulo: «La Vista: el render como función del estado» (título de la pieza en el planeador; el definitivo se decide en el encuadre).
 - Candidata natural a pieza interactiva: una vista instrumentada que haga visible la notificación del modelo en vivo (conversado en la tarea 031; la decisión corresponde al encuadre, no es requisito previo).
+
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/la-vista-como-funcion-del-estado.md` — aprobado 2026-10-28
+- **Promesa:** «después de leer esto, el lector podrá convertir el código que pinta su componente en un `render(modelo)` que regenera la vista completa (el primer pintado incluido) y entender qué queda por separar»
 
 ## Revisión
 
