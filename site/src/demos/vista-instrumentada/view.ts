@@ -16,7 +16,7 @@ export interface ScopedDocument {
 type CartProduct = { id: number; nombre: string; precio: number };
 type CartLine = CartProduct & { linea: number; cantidad: number };
 
-const MAX_ENTRIES = 8;
+const MAX_ENTRIES = 5;
 
 export function mountView(document: ScopedDocument): void {
   class Carrito {
