@@ -21,8 +21,8 @@ cambios, y así podemos comprobar el total sin abrir el navegador.
 
 <!--more-->
 
-Vamos a construir el modelo del carrito: una clase que guarda las
-líneas y calcula el total, y que notifica a quien se haya suscrito
+Vamos a construir el modelo del carrito: una clase que guarda los
+ítems y calcula el total, y que notifica a quien se haya suscrito
 cada vez que algo cambia. Al terminar podrás sacar el estado de tu
 componente a un modelo que notifica sus cambios y probar esa lógica
 sin tocar el DOM.
@@ -68,9 +68,8 @@ que acordarse de tocar las demás.
 
 Lo que sale del DOM son los ítems, las cantidades y el total. La
 página sigue mostrándolos, pero ya no los guarda: solo los pinta a
-partir de los datos. El texto de cada `<li>` tampoco sale como fuente:
-era una copia más, y la pantalla solo la repite. El DOM deja de ser la
-fuente de verdad y pasa a ser un reflejo de ella.
+partir de los datos. Así, el DOM deja de ser la fuente de verdad y pasa
+a ser un reflejo de ella.
 
 ## El modelo
 
