@@ -5,7 +5,6 @@ date: 2026-10-28T02:37:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
-draft: true
 agente:
   tema: "explica cómo convertir el código que pinta un componente en una función render que regenera toda la vista desde el modelo, con el primer pintado incluido"
   prerequisitos:
@@ -92,7 +91,9 @@ vacío:
 Y `render` genera el marcado completo, catálogo incluido:
 
 ```js
-// extracto: `productos` es el array del catálogo, ya visto; `host` es el `<div>` anterior
+// extracto: `productos` es el array del catálogo, ya visto
+const host = document.querySelector("#carrito-app");
+
 function render(modelo) {
   host.innerHTML = `
     <ul id="catalogo">
@@ -176,7 +177,7 @@ que queda.
 
 La pieza siguiente es el carrito de este capítulo funcionando, con un
 registro en vivo: cada notificación del modelo y el
-repintado que provoca. El primer renglón recuerda que el pintado
+repintado que provoca. La línea fija de arriba del registro recuerda que el pintado
 inicial no vino de ninguna notificación.
 
 :::demo{nombre="vista-instrumentada" altura="290px" altura-estrecha="400px"}
