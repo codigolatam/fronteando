@@ -50,9 +50,9 @@ Con eso montado, pulsamos «Añadir» en los tres productos y después
 «Quitar» en la primera línea. Esto es lo que muestra la pantalla en cada momento:
 
 ```text
-al montar:             0 ítems / $0
-tras 3 «Añadir»:       3 ítems / $250
-tras quitar el primero: 2 ítems / $205
+al montar:               0 ítems / $0
+tras 3 «Añadir»:         3 ítems / $250
+tras quitar el primero:  2 ítems / $205
 ```
 
 Las mismas cifras de siempre, con una diferencia: el primer `0 / $0`
