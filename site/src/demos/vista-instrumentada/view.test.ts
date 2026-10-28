@@ -5,16 +5,19 @@ import { mountView } from "./view";
 // The scaffold is the piece's markup contract —an empty host for the
 // render plus the register list— with a document scoped to it, as the
 // piece provides inside its shadow.
-function scaffold() {
+function scaffold(modo = "") {
   const root = document.createElement("div");
   root.innerHTML = `
     <div id="carrito-app"></div>
     <ol id="log"></ol>
   `;
-  mountView({
-    querySelector: (selector) => root.querySelector(selector),
-    createElement: (tag) => document.createElement(tag),
-  });
+  mountView(
+    {
+      querySelector: (selector) => root.querySelector(selector),
+      createElement: (tag) => document.createElement(tag),
+    },
+    modo,
+  );
   return root;
 }
 
@@ -111,6 +114,47 @@ describe("mountView", () => {
       expect(first.querySelectorAll("#log li")).toHaveLength(1);
       expect(second.querySelector("#total")?.textContent).toBe("$0");
       expect(second.querySelectorAll("#log li")).toHaveLength(0);
+    });
+  });
+});
+
+describe('mountView with modo "controlador"', () => {
+  function addButton(root: HTMLElement, nombre: string) {
+    const li = [...root.querySelectorAll("#catalogo li")].find((el) =>
+      el.textContent?.includes(nombre),
+    );
+    return (
+      li?.querySelector<HTMLButtonElement>('[data-accion="agregar"]') ?? null
+    );
+  }
+
+  describe("when products are added and removed", () => {
+    it("logs the whole cycle: click, action, notification, repaint", () => {
+      const root = scaffold("controlador");
+      addButton(root, "Teclado")!.click();
+      addButton(root, "Ratón")!.click();
+      addButton(root, "Monitor")!.click();
+      root.querySelector<HTMLElement>('[data-accion="quitar"]')!.click();
+      const entries = [...root.querySelectorAll("#log li")].map(
+        (li) => li.textContent,
+      );
+      expect(entries[0]).toBe(
+        "clic → acción quitar → notificación 4 → repintado: 2 u / $205",
+      );
+      expect(entries[3]).toBe(
+        "clic → acción agregar → notificación 1 → repintado: 1 u / $45",
+      );
+      expect(root.querySelectorAll("#carrito li")).toHaveLength(2);
+    });
+  });
+
+  describe("when buttons die and are recreated by repaints", () => {
+    it("keeps handling clicks without re-wiring any listener", () => {
+      const root = scaffold("controlador");
+      addButton(root, "Teclado")!.click();
+      addButton(root, "Teclado")!.click();
+      expect(root.querySelector("#total")?.textContent).toBe("$90");
+      expect(root.querySelectorAll("#log li")).toHaveLength(2);
     });
   });
 });
