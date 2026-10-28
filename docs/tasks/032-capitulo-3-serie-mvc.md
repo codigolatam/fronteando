@@ -54,6 +54,11 @@ Llevar la pieza «La Vista: el render como función del estado» (`docs/editoria
 - **Brief:** `docs/editorial/briefs/la-vista-como-funcion-del-estado.md` — aprobado 2026-10-28
 - **Promesa:** «después de leer esto, el lector podrá convertir el código que pinta su componente en un `render(modelo)` que regenera la vista completa (el primer pintado incluido) y entender qué queda por separar»
 
+## Desviaciones del brief
+
+- El registro en vivo de la pieza usa una línea fija «pintado inicial» fuera de la lista de notificaciones, en lugar de una entrada más del registro: así el mensaje no se desplaza cuando el registro llega a su tope de ocho entradas.
+- El bloque `text` del resultado primero muestra estados de pantalla («0 ítems / $0») en lugar de salida de consola, porque el programa del capítulo pinta en el DOM y no imprime nada.
+
 ## Revisión
 
 - Subagente: [fecha] — [Aprueba | Solicita cambios]
