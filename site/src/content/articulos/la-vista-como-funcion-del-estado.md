@@ -30,8 +30,9 @@ separar todavía.
 ## El resultado primero
 
 Antes de abrir la función conviene ver qué hace. Este es el arranque
-del carrito sobre el modelo del capítulo anterior: un `<div>` vacío en
-la página, una suscripción y una llamada inicial.
+del carrito sobre el modelo del
+[capítulo anterior](/articulos/sacar-el-estado-del-dom/): un `<div>`
+vacío en la página, una suscripción y una llamada inicial.
 
 ```js
 // extracto: requiere la clase `Carrito` del capítulo anterior, el array `productos`,
@@ -45,8 +46,8 @@ carrito.suscribir(actualizar);
 actualizar();
 ```
 
-Con eso montado, pulsamos tres veces «Añadir» y después «Quitar» en la
-primera línea. Esto es lo que muestra la pantalla en cada momento:
+Con eso montado, pulsamos «Añadir» en los tres productos y después
+«Quitar» en la primera línea. Esto es lo que muestra la pantalla en cada momento:
 
 ```text
 al montar:             0 ítems / $0
@@ -121,6 +122,7 @@ El arranque del resultado primero tiene dos líneas que hacen todo el
 trabajo:
 
 ```js
+// extracto: el arranque del resultado primero, de nuevo
 carrito.suscribir(actualizar);
 actualizar();
 ```
@@ -169,8 +171,8 @@ lo resume en una letanía: «the view never touches the model». La vista
 no toca el modelo; la nuestra lo toca en cada clic. Dave Stearns
 [matiza la regla](https://drstearns.github.io/tutorials/mvc/): en la
 variante moderna la vista sí captura los eventos de usuario, como hace
-la nuestra; lo que no debería hacer es decidir qué se hace con ellos.
-Ese es el paso que queda.
+la nuestra. Decidir qué se hace con ellos es otro trabajo, y es el paso
+que queda.
 
 La pieza siguiente es el carrito de este capítulo funcionando, con un
 registro en vivo: cada notificación del modelo y el
@@ -201,7 +203,7 @@ precio que conviene nombrar.
   catálogo entero, que nunca cambia, y recrea todos los nodos. Con
   tres productos no se nota; con una lista larga, sí.
 - **Los nodos se destruyen y recrean.** Si una línea tuviera un campo
-  de texto —el campo de cantidad que sigue fuera del arco—, cada
+  de texto (el campo de cantidad que sigue fuera del arco), cada
   repintado borraría su contenido y le quitaría el foco mientras
   escribes.
 - **Los manejadores viven dentro de la vista y tocan el modelo a
