@@ -1,9 +1,9 @@
-# Brief — El controlador cierra el ciclo
+# Brief — De clics a acciones: el controlador
 
 ## Estado
 
-- estado: borrador
-- aprobado:
+- estado: aprobado
+- aprobado: 2026-10-28
 
 **Pieza:** docs/editorial/piezas/mvc-controlador.md
 **Tarea:** docs/tasks/033-capitulo-4-serie-mvc.md
@@ -24,7 +24,7 @@
 - **Ejemplo conductor:** el mismo carrito del arco sobre el modelo del capítulo 2 y el `render` del capítulo 3: `conectar` se retira y un único listener delegado traduce cada clic en una acción.
 - **Alcance:** sin comandos deshacer/rehacer ni cola de acciones (el «controlador» aquí es el cable que traduce eventos, no una capa de aplicación); sin validación del lado del modelo; sin separar el catálogo del carrito.
 - **Metadatos:**
-  - `slug` el-controlador-cierra-el-ciclo
+  - `slug` de-clics-a-acciones
   - `categoria` arquitectura
   - `nivel` intermedio
   - `tags` javascript, mvc, dom
@@ -69,7 +69,7 @@ Detalle técnico que sostiene el capítulo: el listener vive sobre `host`, un el
 
 Fuentes: Dave Stearns (el controlador conecta modelo y vista y traduce los eventos de usuario a operaciones del modelo); Tania Rascia (el controlador «binds» los eventos a manejadores que llaman al modelo — la vista queda limpia).
 
-Decisión de la pieza interactiva pendiente de la puerta: la `vista-instrumentada` del capítulo 3 ya muestra notificación → repintado; el capítulo 4 puede extenderla para mostrar el ciclo entero (clic → acción → notificación → repintado) o quedarse sin pieza nueva.
+La `vista-instrumentada` del capítulo 3 se extiende (decisión de la puerta): el registro muestra el ciclo completo — «clic en Añadir → acción agregar → notificación N → repintado: M u / $X» — para que la afirmación del capítulo (evento → acción → modelo → notificación → vista) sea visible en vivo. La extensión escucha los clics del controlador y enriquece cada entrada del registro con la acción que la provocó; se verifica renderizada como el resto de la pieza.
 
 ## Borrador del outline
 
@@ -81,6 +81,7 @@ Decisión de la pieza interactiva pendiente de la puerta: la `vista-instrumentad
 - El controlador: el listener delegado, `closest`, `dataset`, la tabla de acciones; `conectar` desaparece.
 - El ciclo cerrado: evento → acción → modelo → notificación → vista, dicho en palabras; la vista ya no toca el modelo.
 - `:::pausa` tras «El controlador»: explica por qué el listener no muere en los repintados si los botones sí.
+- `:::demo{nombre="vista-instrumentada"}` tras «El ciclo cerrado» (la pieza extendida con la acción en cada entrada), con fallback descriptivo y alturas calibradas sobre la pieza montada.
 - `:::pausa` tras «El ciclo cerrado»: cuenta el recorrido completo de un clic en «Quitar».
 - Límites honestos: el controlador conoce la forma del DOM; el modelo acepta cualquier llamada externa; ¿esto escala a muchas vistas y suscriptores?
 - El punto: las tres piezas separadas — y la pregunta del último capítulo.
@@ -98,4 +99,4 @@ Decisión de la pieza interactiva pendiente de la puerta: la `vista-instrumentad
 - [ ] Los límites honestos tienen sección propia; el cierre abre una puerta
 - [ ] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
 - [ ] La salida del resultado primero viene de clics reales sobre los botones, incluido el «añadir» posterior a repintados que demuestra que el listener no se recablea
-- [ ] Decisión pendiente de la puerta: ¿la `vista-instrumentada` se extiende para mostrar el ciclo completo (clic → acción → notificación → repintado) o el capítulo va sin pieza?
+- [ ] La `vista-instrumentada` extendida (aprobada en la puerta) registra el ciclo completo clic → acción → notificación → repintado que la prosa describe
