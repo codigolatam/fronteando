@@ -50,6 +50,11 @@ Llevar la pieza «El Controlador: cerrar el ciclo» (`docs/editorial/piezas/mvc-
 - Título de trabajo del capítulo: «El Controlador: cerrar el ciclo» (título de la pieza en el planeador; el definitivo se decide en el encuadre).
 - La pieza cierra con la pregunta abierta «¿esto escala?», que prepara el capítulo 5.
 
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/de-clics-a-acciones.md` — aprobado 2026-10-28
+- **Promesa:** «después de leer esto, el lector podrá sacar los manejadores de eventos de su vista a un controlador que traduce clics a acciones del modelo, cerrando el ciclo evento → acción → modelo → notificación → vista»
+
 ## Revisión
 
 - Subagente: [fecha] — [Aprueba | Solicita cambios]
