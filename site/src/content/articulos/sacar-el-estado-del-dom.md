@@ -5,7 +5,6 @@ date: 2026-10-26T12:00:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
-draft: true
 agente:
   tema: "explica cómo sacar el estado de un carrito en vanilla JS a una clase que notifica a sus suscriptores, y cómo probar esa lógica en Node sin DOM"
   prerequisitos:

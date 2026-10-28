@@ -110,7 +110,7 @@ class Carrito {
 - [x] `categoria` es el pilar decidido en el encuadre; ningún tag coincide con una categoría
 - [x] Cada snippet corre tal cual aparece (ejecutado antes de incluirse) o se marca explícitamente como extracto
 - [x] Los límites honestos tienen sección propia; el cierre abre una puerta
-- [ ] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final (pendiente: repasar los párrafos reescritos tras la revisión editorial)
+- [x] Ronda de escritura completa (`revisar-redaccion` y luego `pulir-escritura`) sobre la versión final
 - [x] Las cifras del post vienen de una sola versión del ejemplo (no mezclar $255 del modelo con $135 del capítulo 1)
 - [x] El título es idiomático en español, sin calcos del inglés
 - [x] Los incisos van entre paréntesis y las citas en comillas latinas, según la guía
