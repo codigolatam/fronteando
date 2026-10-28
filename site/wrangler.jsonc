@@ -11,8 +11,14 @@
   "previews": {},
   // Publica cada preview en <preview>-fronteando.gilmrjc.workers.dev.
   "preview_urls": true,
-  // Producción se sirve en el dominio propio de la zona fronteando.dev.
+  // Producción se sirve en el dominio propio de la zona fronteando.dev,
+  // tanto en el apex como en www.
   "routes": [
+    {
+      "pattern": "fronteando.dev",
+      "zone_name": "fronteando.dev",
+      "custom_domain": true,
+    },
     {
       "pattern": "www.fronteando.dev",
       "zone_name": "fronteando.dev",
