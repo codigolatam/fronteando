@@ -117,6 +117,6 @@ Las pruebas automatizadas cubren la lógica; el diseño se verifica renderizado 
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-10-31 — Aprueba (ronda 4; las rondas 1 a 3 solicitaron cambios, aplicados en la tarea)
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
