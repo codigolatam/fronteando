@@ -15,6 +15,8 @@
 
 ## General
 
+- [ ] docs/tasks/035-benchmark-diseno-blogs-desarrollo.md — Revisar el diseño del sitio con benchmark frente a blogs de desarrollo web
+
 ## Hito 1: Serie MVC en vanilla JS
 
 - [ ] docs/tasks/032-capitulo-3-serie-mvc.md — Escribir el capítulo 3 de la serie MVC
