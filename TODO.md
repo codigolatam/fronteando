@@ -15,7 +15,7 @@
 
 ## General
 
-- [ ] docs/tasks/035-benchmark-diseno-blogs-desarrollo.md — Revisar el diseño del sitio con benchmark frente a blogs de desarrollo web
+- [~] docs/tasks/035-benchmark-diseno-blogs-desarrollo.md — Revisar el diseño del sitio con benchmark frente a blogs de desarrollo web
 
 ## Hito 1: Serie MVC en vanilla JS
 

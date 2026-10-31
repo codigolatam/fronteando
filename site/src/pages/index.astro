@@ -7,21 +7,22 @@ import { formatFecha } from "../utils/format";
 const articulos = (
   await getCollection("articulos", ({ data }) => !data.draft)
 ).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const description =
+  "Blog técnico de desarrollo web frontend, escrito en español: un lugar donde aprenderlo, con o sin asistente de por medio.";
 ---
 
-<Base
-  title="Fronteando"
-  description="Blog técnico de desarrollo web frontend, escrito en español: un lugar donde aprenderlo, con o sin asistente de por medio."
->
+<Base title="Fronteando" description={description}>
   <div class="prose">
     <h1>Fronteando</h1>
+    <p class="home-lead">{description}</p>
   </div>
   {articulos.length === 0 ? (
     <p class="article-empty">Aún no hay artículos publicados.</p>
   ) : (
     <ul class="article-list" role="list">
-      {articulos.map((articulo) => (
+      {articulos.map((articulo, index) => (
         <li class="article-list-item">
+          {index === 0 && <p class="article-label">último artículo</p>}
           <a class="article-list-link" href={`/articulos/${articulo.id}/`}>
             {articulo.data.title}
           </a>
