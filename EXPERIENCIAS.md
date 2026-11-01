@@ -230,3 +230,17 @@
   Obtenido: el título decía «el estado que notifica» y la description «un modelo que avisa», ambos calcos (*state that notifies*, *a model that notifies* sin complemento).
   Corrección: el usuario rechazó ambos; se verificó en fuentes técnicas en español que el verbo instalado del patrón es «notificar» y que «avisar» exige complemento («avisar a alguien de algo»). Quedó «un modelo que notifica sus cambios» en título, código y prosa.
   Estado: consolidada
+
+- Id: 20261101T134515
+  Tarea: docs/tasks/035-benchmark-diseno-blogs-desarrollo.md
+  Esperado: el procedimiento de la tarea escrito con el término genérico «navegador».
+  Obtenido: el archivo de la tarea decía «abrir el sitio con Firefox», nombrando el producto concreto de la sesión.
+  Corrección: «no menciones abrir con firefox, menciona abrir con navegador» — en los artefactos se nombra la categoría de la herramienta, no el producto, salvo que el usuario lo pida.
+  Estado: consolidada
+
+- Id: 20261101T134516
+  Tarea: docs/tasks/035-benchmark-diseno-blogs-desarrollo.md
+  Esperado: «revisar el diseño del sitio» cubría todas las páginas principales, incluida la portada.
+  Obtenido: las mejoras aplicadas solo tocaban artículos y navegación; la portada quedó sin cambios propios.
+  Corrección: «pero que me dices del diseño del homepage?» — el usuario reclamó la portada y pidió una segunda ronda de benchmark centrada en ella.
+  Estado: consolidada

@@ -20,6 +20,7 @@
   --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --font-size-title: 36px;
+  --font-size-title-narrow: 30px;
   --font-size-section: 24px;
   --font-size-body: 20px;
   --font-size-code: 18px;
@@ -50,6 +51,8 @@
   --border-width: 1px;
   --focus-width: 2px;
   --focus-offset: 2px;
+  --nav-current-width: 2px;
+  --nav-current-offset: 2px;
   --duration-fast: 150ms;
   --target-min: 44px;
 
@@ -213,8 +216,15 @@ body {
   transition: color var(--duration-fast);
 }
 
-.site-nav a:hover {
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
   color: var(--color-accent);
+}
+
+.site-nav a[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-thickness: var(--nav-current-width);
+  text-underline-offset: var(--nav-current-offset);
 }
 
 .theme-toggle {
@@ -306,6 +316,26 @@ html:not(.js) .theme-toggle {
   color: var(--color-accent);
 }
 
+.prose .home-lead {
+  font-size: var(--font-size-section);
+  line-height: var(--line-height-section);
+  color: var(--color-text-muted);
+  margin-block: 0 var(--space-4);
+}
+
+.article-list-item + .article-list-item {
+  border-top: var(--border-width) solid var(--color-border);
+  padding-top: var(--space-4);
+}
+
+.article-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-meta);
+  line-height: var(--line-height-meta);
+  color: var(--color-text-muted);
+  margin-block: 0 var(--space-1);
+}
+
 .article-list-item .article-meta {
   margin-block: var(--space-1) 0;
 }
@@ -329,6 +359,12 @@ html:not(.js) .theme-toggle {
   font-weight: 700;
   line-height: var(--line-height-title);
   margin-block: 0 var(--space-4);
+}
+
+@media (max-width: 640px) {
+  article.prose h1 {
+    font-size: var(--font-size-title-narrow);
+  }
 }
 
 .prose h2 {
@@ -675,7 +711,9 @@ html.js .prose fronteando-demo {
    The 1240px breakpoint must match matchMedia in AccompanimentCard.astro. */
 
 @media (min-width: 1240px) {
-  .site-main:has(.prose.has-rail) {
+  .site-main:has(.prose.has-rail),
+  body:has(.prose.has-rail) .site-header .container,
+  body:has(.prose.has-rail) .site-footer .container {
     max-width: calc(var(--container-max) + var(--rail-width) + var(--space-4));
   }
 
