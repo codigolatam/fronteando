@@ -104,3 +104,11 @@
 - nombres-de-tests.md
   - Disparadores: test, vitest, describe, it, expect, .test.ts, nombre de test, suite de pruebas
   - Resumen: los tests se nombran por comportamiento —`describe` la unidad, `when` el contexto, `it` el comportamiento—, sin referencias internas del proyecto
+
+- terminologia-generica-de-herramientas.md
+  - Disparadores: artefacto, tarea, procedimiento, navegador, Firefox, herramienta, criterios de calidad, crear-tareas, docs/tasks
+  - Resumen: en los artefactos de proceso se nombra la categoría de la herramienta —«navegador»—, no el producto concreto de la sesión, salvo que el usuario lo pida
+
+- cobertura-del-alcance.md
+  - Disparadores: alcance, sitio, portada, homepage, superficie, benchmark, páginas, diseño, revisión
+  - Resumen: cuando el encargo nombra una superficie amplia —«el diseño del sitio»— la entrega cubre todas sus páginas principales o declara qué queda fuera
