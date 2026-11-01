@@ -125,6 +125,7 @@ declaran como `--font-display` (Serif), `--font-body` (Sans) y
 | Rol                   | Token                      | Familia | Peso | Altura de línea |
 | --------------------- | -------------------------- | ------- | ---- | --------------- |
 | Título de artículo    | `--font-size-title` 36px   | Serif   | 700  | 1.2             |
+| Título de artículo en pantalla estrecha | `--font-size-title-narrow` 30px | Serif | 700 | 1.2 |
 | Encabezado de sección | `--font-size-section` 24px | Serif   | 700  | 1.3             |
 | Cuerpo                | `--font-size-body` 20px    | Sans    | 400  | 1.65            |
 | Código en bloque      | `--font-size-code` 18px    | Mono    | 400  | 1.55            |
@@ -142,7 +143,10 @@ y 600 —el 600 es el énfasis de `strong` en prosa—; Mono 400 y 500 —el
 500 marca checkpoints, la marca del sitio y la nota de acompañamiento—.
 
 Reglas: el cuerpo nunca baja de 18px —la lectura larga es el uso
-principal—; tracking negativo permitido solo en el título del artículo;
+principal—; el título del artículo usa `--font-size-title-narrow` en
+pantallas de 640px o menos —ocupa una o dos líneas en lugar de tres,
+sin tocar el resto de titulares—; tracking negativo permitido solo en el
+título del artículo;
 la familia monoespaciada se reserva a código, metadatos, navegación,
 botones, marcadores y la marca —nunca prosa del artículo—. La frase de
 instrucción de la nota de acompañamiento es la única excepción: habla con la
@@ -229,7 +233,17 @@ es la promesa de la terminal viva—.
   `--radius`, foco con contorno `--color-accent`.
 - **Navegación:** cabecera con la marca `fronteando_` y enlaces a
   secciones en IBM Plex Mono, minúsculas; sin menús desplegables —la
-  arquitectura del blog es plana—.
+  arquitectura del blog es plana—. La sección que contiene la página
+  activa se subraya en `--color-accent` con trazo de
+  `--nav-current-width` (2px) a `--nav-current-offset` (2px) y el enlace
+  lo declara con `aria-current` —el lector sabe dónde está sin que se
+  añada chrome—.
+- **Entrada de portada:** la lista abre con una presentación del blog en
+  `--font-size-section` y `--color-text-muted` —contexto antes que
+  contenido—; las entradas se separan con borde superior
+  `--color-border` y aire extra, y la más reciente lleva la etiqueta
+  «último artículo» en IBM Plex Mono muted —texto estructural, no chip,
+  como el metadato—.
 - **Metadato estructural:** nivel y pilar del artículo van en una
   segunda línea `clave: valor` en IBM Plex Mono muted (la terminal
   no imprime chips: el metadato se diferencia por etiqueta, no por
@@ -270,10 +284,10 @@ lado a 1240px: 1192px es el mínimo derivado, y 1240px deja margen sobre
 `--protocol-max-height` (30vh) y se desplaza por dentro, para que la nota
 completa quepa en la pantalla.
 
-Alineación: en artículos con nota, el texto y la columna se centran como
-un conjunto, así que el texto queda desplazado a la izquierda de la
-cabecera y del pie (156px a 1500px). La cabecera,
-el pie y los artículos sin nota conservan su eje.
+Alineación: en artículos con nota, la cabecera, el texto del artículo y
+el pie comparten el borde izquierdo —los contenedores de cabecera y pie
+se ensanchan para cubrir texto y columna como un solo eje—. Los
+artículos sin nota conservan la columna única centrada.
 
 ## Movimiento
 

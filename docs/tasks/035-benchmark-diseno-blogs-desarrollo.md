@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | **[~] En progreso** | [r] En revisión | [x] Completada | [!] Bloqueada
+[x] Completada
 
 ## Tipo
 
@@ -118,5 +118,5 @@ Las pruebas automatizadas cubren la lógica; el diseño se verifica renderizado 
 ## Revisión
 
 - Subagente: 2026-10-31 — Aprueba (ronda 4; las rondas 1 a 3 solicitaron cambios, aplicados en la tarea)
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-10-31 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
