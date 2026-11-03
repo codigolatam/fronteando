@@ -31,13 +31,15 @@ modelo → notificación → vista) y las tres piezas del patrón separadas.
 ## El resultado primero
 
 Antes de abrir el controlador conviene ver qué queda cuando se quita
-`conectar`. Así se pone en marcha el carrito completo sobre el modelo
-y la vista de los capítulos anteriores:
+`conectar`. Así se pone en marcha el carrito completo sobre el
+[modelo](/articulos/sacar-el-estado-del-dom/) y la
+[vista](/articulos/la-vista-como-funcion-del-estado/) de los capítulos
+anteriores:
 
 ```js
 // extracto: requiere la clase `Carrito`, el array `productos`, la función
-// `render` del capítulo anterior (con `data-accion`, más abajo) y un
-// `<div id="carrito-app">` vacío
+// `render` del capítulo anterior (con `data-accion`, más abajo), un
+// `<div id="carrito-app">` vacío y `host` apuntando a ese `<div>`
 const carrito = new Carrito();
 carrito.suscribir(() => render(carrito));
 
@@ -72,7 +74,8 @@ botones siguen respondiendo sin que nadie los haya vuelto a conectar.
 
 ## Quién decide hoy
 
-En el capítulo anterior la vista tenía dos trabajos. `render` generaba
+En el [capítulo anterior](/articulos/la-vista-como-funcion-del-estado/)
+la vista tenía dos trabajos. `render` generaba
 el HTML, y `conectar` recorría los botones recién nacidos para darles
 su manejador: cada «Añadir» llamaba a `carrito.agregar` y cada
 «Quitar» a `carrito.quitar`. Funcionaba, pero la decisión de qué pasa
