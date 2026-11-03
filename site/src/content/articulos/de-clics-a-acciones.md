@@ -5,7 +5,7 @@ date: 2026-10-28T16:00:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
-draft: false
+draft: true
 agente:
   tema: "explica cómo sacar los manejadores de eventos de la vista a un controlador que traduce clics a acciones del modelo, cerrando el ciclo evento → acción → modelo → notificación → vista"
   prerequisitos:
