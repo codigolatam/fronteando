@@ -5,7 +5,6 @@ date: 2026-10-28T16:00:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
-draft: true
 agente:
   tema: "explica cómo sacar los manejadores de eventos de la vista a un controlador que traduce clics a acciones del modelo, cerrando el ciclo evento → acción → modelo → notificación → vista"
   prerequisitos:
@@ -34,7 +33,8 @@ Antes de abrir el controlador conviene ver qué queda cuando se quita
 `conectar`. Así se pone en marcha el carrito completo sobre el
 [modelo](/articulos/sacar-el-estado-del-dom/) y la
 [vista](/articulos/la-vista-como-funcion-del-estado/) de los capítulos
-anteriores:
+anteriores —la vista ya con `data-accion` en los botones, que es el
+cambio de la sección siguiente—:
 
 ```js
 // extracto: requiere la clase `Carrito`, el array `productos`, la función
@@ -128,8 +128,8 @@ elemento que sobrevive a los repintados (`render` reescribe su
 nunca se recablea. La segunda: `closest` encuentra el botón aunque el
 clic caiga en cualquier nodo interior, y `dataset` trae los
 argumentos. La tercera: la tabla `acciones` es el único sitio del
-programa que conoce los métodos del modelo; los botones solo nombran
-intenciones.
+programa que llama a los métodos que cambian el modelo; los botones solo
+nombran intenciones.
 
 Esa tabla es el controlador: la pieza que recibe los eventos del
 usuario y los convierte en operaciones del modelo. Stearns lo describe
