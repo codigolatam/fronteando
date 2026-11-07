@@ -10,9 +10,9 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## lista
 
-- [Los límites del MVC a mano](piezas/mvc-limites.md)
-
 ## en redacción
+
+- [Los límites del MVC a mano](piezas/mvc-limites.md)
 
 ## en revisión
 

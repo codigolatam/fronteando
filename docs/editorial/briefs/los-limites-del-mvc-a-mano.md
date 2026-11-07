@@ -2,7 +2,8 @@
 
 ## Estado
 
-- estado: borrador
+- estado: aprobado
+- aprobado: 2026-11-01
 
 **Pieza:** docs/editorial/piezas/mvc-limites.md
 **Tarea:** docs/tasks/034-capitulo-5-serie-mvc.md
@@ -94,7 +95,7 @@ Cascada — cada vista suscrita repinta entera: con la vista del carrito y un ba
 
 Fuentes: las referencias del género en `docs/research/2026-10-referencias-mvc-vanilla-js.md` (Rascia y Stearns; el caveat de boilerplate es tropo compartido).
 
-Decisión para la puerta: la `vista-instrumentada` puede ganar un `modo="limites"` que corre el escenario de la regla en vivo —el lector pulsa «Añadir» y ve el repintado anidado en el registro—, coherente con la pieza del capítulo 4. Alternativa: capítulo sin demo, solo snippets con salida.
+Decisión de la puerta: la `vista-instrumentada` gana un `modo="limites"` que corre el escenario de la regla en vivo —el lector pulsa «Añadir» y ve el repintado anidado en el registro—, coherente con la pieza del capítulo 4.
 
 ## Borrador del outline
 

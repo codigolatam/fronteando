@@ -188,8 +188,91 @@ function mountChapter4(document: ScopedDocument): void {
   render(carrito);
 }
 
+// Chapter 5: the same delegated program with a business rule as one
+// more subscriber —when the total reaches $200 it mutates the model
+// inside the notification, and the register marks the nested repaint.
+function mountChapter5(document: ScopedDocument): void {
+  const host = document.querySelector("#carrito-app") as HTMLElement;
+  const log = document.querySelector("#log")!;
+
+  function render(modelo: Carrito) {
+    host.innerHTML = `
+      <ul id="catalogo">
+        ${productos
+          .map(
+            (p) =>
+              `<li>${p.nombre} — $${p.precio} <button data-accion="agregar" data-id="${p.id}">Añadir</button></li>`,
+          )
+          .join("")}
+      </ul>
+      <h3>Tu carrito (<span id="contador">${modelo.unidades}</span>)</h3>
+      <ul id="carrito">
+        ${modelo.lineas
+          .map(
+            (l) =>
+              `<li>${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad} <button data-accion="quitar" data-linea="${l.linea}">Quitar</button></li>`,
+          )
+          .join("")}
+      </ul>
+      <p>Total: <span id="total">$${modelo.total}</span></p>`;
+  }
+
+  const carrito = new Carrito();
+  carrito.suscribir(() => render(carrito));
+
+  let pendingAction: string | null = null;
+  host.addEventListener("click", (e) => {
+    const b = (e.target as Element).closest("[data-accion]");
+    if (b) pendingAction = (b as HTMLElement).dataset.accion ?? null;
+  });
+
+  host.addEventListener("click", (e) => {
+    const boton = (e.target as Element).closest("[data-accion]") as HTMLElement;
+    if (!boton) return;
+    const acciones: Record<string, () => void> = {
+      agregar: () =>
+        carrito.agregar(
+          productos.find((p) => p.id === Number(boton.dataset.id))!,
+        ),
+      quitar: () => carrito.quitar(Number(boton.dataset.linea)),
+    };
+    acciones[boton.dataset.accion!]?.();
+  });
+
+  // The register subscribes before the rule, so the outer notification
+  // is logged first and the nested repaint arrives marked as nested.
+  let notifications = 0;
+  carrito.suscribir((c) => {
+    notifications += 1;
+    const li = document.createElement("li");
+    li.textContent = enRegla
+      ? `regla → acción regalo → notificación ${notifications} (anidada) → repintado: ${c.unidades} u / $${c.total}`
+      : `clic → acción ${pendingAction} → notificación ${notifications} → repintado: ${c.unidades} u / $${c.total}`;
+    pendingAction = null;
+    log.prepend(li);
+    cap(log);
+  });
+
+  // The stress rule: gift when the total reaches $200 —a subscriber
+  // that mutates the model inside the notification it is handling.
+  let regaloDado = false;
+  let enRegla = false;
+  carrito.suscribir((c) => {
+    if (!regaloDado && c.total >= 200) {
+      regaloDado = true;
+      enRegla = true;
+      c.agregar({ id: 99, nombre: "Regalo", precio: 0 });
+      enRegla = false;
+    }
+  });
+
+  render(carrito);
+}
+
 export function mountView(document: ScopedDocument, modo = ""): void {
-  if (modo === "controlador") {
+  if (modo === "limites") {
+    mountChapter5(document);
+  } else if (modo === "controlador") {
     mountChapter4(document);
   } else {
     mountChapter3(document);
