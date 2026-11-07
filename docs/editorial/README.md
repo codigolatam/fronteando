@@ -12,9 +12,9 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## en redacción
 
-- [Los límites del MVC a mano](piezas/mvc-limites.md)
-
 ## en revisión
+
+- [Los límites del MVC a mano](piezas/mvc-limites.md)
 
 - [La Vista: el render como función del estado](piezas/mvc-vista.md)
 - [El Controlador: cerrar el ciclo](piezas/mvc-controlador.md)
