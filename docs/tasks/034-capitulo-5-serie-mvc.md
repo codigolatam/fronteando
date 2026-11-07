@@ -52,6 +52,11 @@ Llevar la pieza «Los límites del MVC a mano» (`docs/editorial/piezas/mvc-limi
 - Título de trabajo del capítulo: «Los límites del MVC a mano» (título de la pieza en el planeador; el definitivo se decide en el encuadre).
 - Es el cierre del arco: al publicarse, la serie pasa a completada y el hito del índice se agota (`cerrar-conjunto`).
 
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/los-limites-del-mvc-a-mano.md` — aprobado 2026-11-01
+- **Promesa:** «después de leer esto, el lector podrá nombrar dónde cede el MVC hecho a mano —el repintado total por cambios mínimos, la vista parcial que diverge, el suscriptor que se pisa— y qué problema resolvió la reactividad»
+
 ## Revisión
 
 - Subagente: [fecha] — [Aprueba | Solicita cambios]
