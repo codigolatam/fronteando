@@ -1,6 +1,6 @@
 # Los límites del MVC a mano
 
-- estado: lista
+- estado: en revisión
 - serie: mvc-en-vanilla-js
 - **Pregunta del lector:** ¿hasta dónde aguanta el MVC hecho a mano y cuándo empieza a necesitarse un framework?
 - **Ángulo:** honestidad de la casa — el patrón funciona hasta cierto tamaño; vistas parciales, renders en cascada y sincronización fina entre estado y DOM nombran el problema que la reactividad resolvió después.
