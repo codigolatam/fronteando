@@ -13,6 +13,7 @@ frontend, con o sin asistente de por medio.
 
 - 1. Serie MVC en vanilla JS — continuación
      (docs/editorial/series/mvc-en-vanilla-js.md)
+  - Estado: en curso
   - Justificación: en pausa, no desplazada — queda primera porque su
     arco ya está planeado (cuatro piezas en lista) y retoma con el
     blog completo: los capítulos restantes nacerán con

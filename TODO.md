@@ -15,8 +15,6 @@
 
 ## General
 
-- [ ] docs/tasks/036-pagina-404-en-cloudflare.md — Página 404 servida por Cloudflare
-
 ## Hito 1: Serie MVC en vanilla JS
 
 - [ ] docs/tasks/032-capitulo-3-serie-mvc.md — Escribir el capítulo 3 de la serie MVC

@@ -25,3 +25,7 @@ y el proyecto se adhiere a [Versionado Semántico](https://semver.org/spec/v2.0.
 ### Changed
 
 - La portada y los artículos ganan jerarquía visual tras un benchmark frente a blogs populares de desarrollo web: la portada presenta el blog antes de la lista, distingue el artículo más reciente y separa las entradas; en artículos con lectura acompañada la cabecera y el pie se alinean con el texto, la navegación marca la sección activa y el título del artículo ocupa menos en pantallas estrechas (docs/tasks/035-benchmark-diseno-blogs-desarrollo.md).
+
+### Fixed
+
+- Las URLs inexistentes del sitio sirven la página 404 propia con estado 404: la página se generaba en cada build pero el Worker respondía con su error genérico, por falta de `not_found_handling` en la configuración de assets (docs/tasks/036-pagina-404-en-cloudflare.md).

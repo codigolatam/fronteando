@@ -5,6 +5,8 @@
   "compatibility_date": "2026-10-15",
   "assets": {
     "directory": "./dist",
+    // Sirve 404.html con estado 404 cuando la ruta no casa ningún asset.
+    "not_found_handling": "404-page",
   },
   // Requerido por `wrangler preview`, el comando de deploy de las
   // builds de preview de Workers Builds.
