@@ -15,7 +15,7 @@
 
 ## General
 
-- [ ] docs/tasks/037-identificadores-en-ingles-en-los-posts.md — Identificadores en inglés en el código de los posts publicados
+- [ ] docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md — Alinear los posts publicados con las reglas nuevas de la guía
 
 ## Hito 1: Serie MVC en vanilla JS
 
