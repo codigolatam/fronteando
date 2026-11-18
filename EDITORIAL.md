@@ -11,6 +11,7 @@ documentación del proyecto, que no se rige por esta guía.
 
 - [Voz y registro](#voz-y-registro)
 - [Anatomía del post](#anatomía-del-post)
+- [Forma del post largo](#forma-del-post-largo)
 - [Contrato de metadatos](#contrato-de-metadatos)
 - [Lectura acompañada](#lectura-acompañada)
 - [Piezas interactivas](#piezas-interactivas)
@@ -29,21 +30,51 @@ entender por qué, no instrucciones para copiar.
 - **Primera persona del plural** para el proyecto («vamos a
   construir», «nuestro efecto»); **segunda persona** para el lector
   («tu pantalla», «ya sabes qué acaba de ocurrir»). Nunca tercera
-  persona
-  impersonal cuando cabe una de las dos.
+  persona impersonal cuando cabe una de las dos.
+- **Conversacional de trabajo.** La prosa suena a conversación entre
+  colegas, no a documento: frases cortas cuando rematan y frases
+  articuladas cuando explican; humor cotidiano sí, solemnidad y
+  burocracia no. La prueba: ¿hablaría así con un colega técnico? (Y
+  la de voz alta: intro y cierre se leen en voz alta; lo forzado se
+  reescribe.) Metáforas simples y de uso común (una figura que el
+  lector tenga que traducir es relleno) y preguntas retóricas sí.
+- **Continuidad.** Cada frase deja preparada la siguiente, y el
+  conector dice la relación (causa, concesión, consecuencia) en lugar
+  de dejarla por deducir. En un texto largo esto sostiene la atención:
+  el código también encadena, y cada fragmento retoma lo que la prosa
+  planteó. Cada sección termina con una frase que abre la siguiente,
+  de modo que el post se lee de corrido. Un párrafo correcto que no
+  engancha con el anterior es un defecto de revisión, no de estilo.
+- **Mostrar antes que calificar.** Un valor de tabla, una línea de
+  salida o un caso sostienen una idea mejor que el adjetivo que la
+  resume: «toca tres elementos a mano» enseña más que «el código está
+  acoplado». En este género el material concreto es el programa (la
+  salida, la traza, el comportamiento que el lector puede reproducir),
+  y un término abstracto se gana su lugar con un ejemplo que lo
+  respalde.
+- **Se enseña entre pares.** El lector es un profesional que ya
+  programa. El post no define lo que el oficio da por sabido, explica
+  cada decisión con su coste (qué se gana y qué se paga) y declara el
+  límite del enfoque. La forma es didáctica (un ejemplo conductor, el
+  resultado antes que la explicación) y el trato es de igual a igual:
+  ni lección desde arriba ni repaso de lo básico.
 - **Claro antes que denso.** Se prefiere la frase que no exige
   deducir nada a la telegráfica: la subordinada que explicita la
   causa gana a la elipsis. Cada párrafo desarrolla una idea y cada
   frase trabaja; el relleno se corta, pero la explicitud no es
   relleno.
-- **Conversacional de trabajo.** La prueba: ¿hablaría así con un
-  colega técnico? (Y la de voz alta: intro y cierre se leen en voz
-  alta; lo forzado se reescribe.) Metáforas simples y de uso común
-  (una figura que el lector tenga que traducir es relleno) y
-  preguntas retóricas sí; solemnidad y burocracia no.
+- **Sin adjetivos que vendan.** Las virtudes del código se cuentan
+  con lo que hace (la salida, la prueba, el límite nombrado), no con
+  calificativos como «elegante», «potente» o «robusto». Tampoco se
+  presta el elogio a terceros: el dato va y el lector saca la
+  conclusión.
 - **Honesto antes que entusiasta.** Los límites se nombran, los
   trade-offs se declaran. La confianza la da admitir lo que falta, no
   fingir que no falta nada.
+- **Opinión declarada como opinión.** Lo que es preferencia se dice
+  en primera persona del plural («preferimos repintar entero», no
+  «repintar entero es lo correcto»). Cuando dos enfoques conviven, se
+  nombra primero lo que comparten y después la diferencia.
 - **Sin _gatekeeping_.** Proscritos «simplemente», «obviamente»,
   «fácil», «solo hay que»: nada es obvio para quien lo está
   aprendiendo.
@@ -53,21 +84,26 @@ entender por qué, no instrucciones para copiar.
   los regionalismos quedan fuera. `store`, `signal`, `batching`,
   `render`, `diffing`, `cleanup` van así, sin cursiva ni comillas;
   el español no tiene equivalente instalado. Los calcos
-  síntácticos no valen: «Con eso dicho» por _with that said_ queda
+  sintácticos no valen: «Con eso dicho» por _with that said_ queda
   fuera. La lista es orientativa, no cerrada (el criterio es el
   equivalente instalado: trade-offs, snippet entran por la misma
   puerta). Los extranjerismos no asimilados llevan cursiva
   (_gatekeeping_).
 - **Ortotipografía de la casa:** comillas latinas «» para citas y
-  usos metalingüísticos; los incisos van entre paréntesis (la casa
-  los prefiere sobre la raya larga, que solo queda como recurso
-  excepcional).
+  usos metalingüísticos; los incisos van entre paréntesis o comas
+  (la casa los prefiere sobre la raya larga, que solo queda como
+  recurso excepcional). El énfasis lo da la frase (la puntuación,
+  el orden de las palabras), no el formato: la cursiva se reserva
+  para extranjerismos no asimilados o para un énfasis que deba ser
+  explícito.
 
 ## Anatomía del post
 
 Un post es una promesa cumplida: si no cabe en «después de leer esto,
-el lector podrá ___», el post no está listo. La anatomía describe el
-post técnico (el género de la casa); las piezas meta (presentaciones,
+el lector podrá ___», el post no está listo. Primero van la tensión o
+el programa; la idea llega cuando el lector ya la vio funcionar, así
+que se presenta como conclusión y no como premisa. La anatomía describe
+el post técnico (el género de la casa); las piezas meta (presentaciones,
 notas) adaptan los pasos donde aplican.
 
 1. **El gancho.** Una o dos frases (o un párrafo breve de preparación
@@ -85,8 +121,8 @@ notas) adaptan los pasos donde aplican.
 4. **El resultado primero.** Mostrar el programa funcionando antes de
    explicarlo: el final gana la atención que la explicación sostiene.
 5. **Las secciones.** Encabezados descriptivos que permiten aprender
-   hojeando; cada sección aporta algo que el arco necesita. Las
-   tangentes se cortan.
+   hojeando; cada sección aporta algo que el arco necesita y deja
+   lista la que sigue (ver «Continuidad»). Las tangentes se cortan.
 6. **Los límites honestos.** Sección propia que nombra lo que quedó
    fuera y por qué importa (cada omisión es una pregunta legítima).
 7. **El cierre.** La conclusión (el último párrafo) en dos o tres
@@ -97,6 +133,39 @@ notas) adaptan los pasos donde aplican.
 ejecutándolo antes de publicar) o se marca explícitamente como
 extracto. Snippets cortos que muestran la salida que el lector verá y
 explican el porqué, no solo el qué.
+
+## Forma del post largo
+
+El post técnico de la casa es un texto largo que enseña a un
+profesional. La extensión la da la promesa: se escribe lo necesario
+para cumplirla, ni un paso más ni uno menos. No hay cuotas de
+secciones, bloques de código ni pausas; hay funciones, y cada parte
+del post tiene que cumplir la suya.
+
+- **Cada sección aporta un paso.** Una sección que no acerca al
+  lector a la promesa se corta o se funde con otra; el post no se
+  alarga por volumen.
+- **Los términos se definen al introducirlos.** Un patrón, una API o
+  un concepto que el post presenta por primera vez se define con una
+  frase y un ejemplo en su primera aparición. Lo que el oficio da por
+  sabido no se define: se declara como prerrequisito en `agente` y se
+  sigue.
+- **El código se presenta y se lee.** Cada bloque va precedido de una
+  frase que dice qué muestra y seguido de otra que dice qué debe
+  notar el lector. Un bloque que cambia algo respecto al anterior lo
+  dice en prosa: qué se mueve, qué desaparece. Los identificadores van
+  en inglés, como el código del proyecto (`docs/lessons/idioma-del-codigo.md`),
+  y significan lo mismo en todo el post y en toda la serie. La prosa
+  sigue en español.
+- **Cada afirmación se sostiene.** Lo que hace una herramienta se
+  demuestra con código ejecutado o se enlaza a su documentación. Lo
+  que dijo una persona se cita con sus palabras exactas y el enlace,
+  y se atribuye a quien lo dijo: nunca a «la literatura» ni a
+  «muchos autores».
+- **Las series: cada capítulo empieza donde terminó el anterior.**
+  Declara el punto de partida (el capítulo previo enlazado y el código
+  que hereda) y cierra abriendo el siguiente. La serie es la unidad
+  editorial del arco (D005); el capítulo, la unidad publicable.
 
 ## Contrato de metadatos
 
@@ -265,6 +334,10 @@ editorial estándar:
 párrafo reescrito tras la ronda (por revisión técnica o editorial)
 necesita una pasada nueva sobre lo cambiado.
 
+**Orden de la revisión sustantiva:** estructura y promesa, claridad,
+revisión técnica ejecutando el código y lectura en voz alta de intro
+y cierre. La mecánica entra después, sobre el texto que ya no cambia.
+
 ## Manuales de referencia
 
 Jerarquía, como en las guías canónicas:
@@ -282,6 +355,7 @@ Jerarquía, como en las guías canónicas:
 | Proscrito                                                      | Usar                                        |
 | -------------------------------------------------------------- | ------------------------------------------- |
 | «corrida»                                                      | «ejecución»                                 |
+| «marcado»                                                      | «HTML»                                      |
 | «corre X» transitivo («corre `fn`»)                            | «ejecuta X» («corre» intransitivo admitido) |
 | «Con eso dicho»                                                | «Y sin embargo», «Dicho esto»               |
 | «simplemente», «obviamente», «fácil», «solo hay que»           | (suprimir)                                  |
@@ -295,8 +369,13 @@ prohibida entra con su sustituto).
 - Gancho con negación: «Parece magia. No lo es.»
 - Resultado primero: «Antes de desmontar la magia conviene verla
   funcionar.»
+- Registro conversacional: «el HTML miente con total tranquilidad».
+- Idea como consecuencia: «Hay dos fuentes de verdad y una de ellas
+  es texto que nadie actualiza.»
 - Límite honesto: «Nuestro efecto reescribe `document.title` entero;
   escalar eso al DOM es justamente lo que los frameworks resuelven.»
+- Continuidad entre secciones: «Decidir qué se hace con ellos es otro
+  trabajo, y es el paso que queda.»
 - Cierre con puerta: «De esa pregunta va la siguiente serie.»
 
 ## Fuera de alcance
@@ -306,4 +385,4 @@ prohibida entra con su sustituto).
 - **Mantenimiento de publicados** (corregir o actualizar artículos
   que envejecen: tensión conocida, declarada en
   `docs/research/2026-10-procesos-gestion-editorial.md`, sin proceso
-  aún.
+  aún).

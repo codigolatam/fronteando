@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -49,8 +49,18 @@ Llevar la pieza «La Vista: el render como función del estado» (`docs/editoria
 - Título de trabajo del capítulo: «La Vista: el render como función del estado» (título de la pieza en el planeador; el definitivo se decide en el encuadre).
 - Candidata natural a pieza interactiva: una vista instrumentada que haga visible la notificación del modelo en vivo (conversado en la tarea 031; la decisión corresponde al encuadre, no es requisito previo).
 
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/la-vista-como-funcion-del-estado.md` — aprobado 2026-10-28
+- **Promesa:** «después de leer esto, el lector podrá convertir el código que pinta su componente en un `render(modelo)` que regenera la vista completa (el primer pintado incluido) y entender qué queda por separar»
+
+## Desviaciones del brief
+
+- El registro en vivo de la pieza usa una línea fija «render inicial» fuera de la lista de notificaciones, en lugar de una entrada más del registro: así el mensaje no se desplaza cuando el registro llega a su tope de cinco entradas.
+- El bloque `text` del resultado primero muestra estados de pantalla («0 ítems / $0») en lugar de salida de consola, porque el programa del capítulo pinta en el DOM y no imprime nada.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Revisión editorial: 2026-11-18 — Aprueba (rondas de corrección aplicadas en la rama)
+- Usuario (ejecución): 2026-11-18 — Aprueba
+- Usuario (cierre): 2026-11-18 — Aprueba
