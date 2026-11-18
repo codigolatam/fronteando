@@ -19,9 +19,8 @@
 
 ## Hito 1: Serie MVC en vanilla JS
 
-- [ ] docs/tasks/033-capitulo-4-serie-mvc.md — Escribir el capítulo 4 de la serie MVC
-- [!] docs/tasks/034-capitulo-5-serie-mvc.md — Escribir el capítulo 5 de la serie MVC y cerrar el arco
-  - [ ] docs/tasks/033-capitulo-4-serie-mvc.md
+- [x] docs/tasks/033-capitulo-4-serie-mvc.md — Escribir el capítulo 4 de la serie MVC
+- [ ] docs/tasks/034-capitulo-5-serie-mvc.md — Escribir el capítulo 5 de la serie MVC y cerrar el arco
 
 ## Propuestas en revisión
 

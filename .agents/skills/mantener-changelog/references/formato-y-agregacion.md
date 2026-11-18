@@ -28,6 +28,7 @@ Un cambio merece entrada cuando tiene impacto observable para el consumidor del 
 
 - **Entran:** funcionalidad nueva, cambio de comportamiento, deprecación, retirada de funcionalidad, corrección de errores y corrección de vulnerabilidades. También refactorings, cambios de entornos soportados y documentación nueva cuando tienen efecto para el consumidor.
 - **Quedan fuera:** trabajo de proceso interno, dotfiles, dependencias de desarrollo, cambios de estilo o formato de código, y cambios que se anulan entre sí dentro del mismo periodo no liberado.
+- **Quedan fuera en este proyecto:** la publicación de contenido del blog —las tareas `contenido` que añaden o editan artículos—, porque es el flujo ordinario del producto y no un cambio de su funcionalidad. Lo que sí se registra de esas tareas es lo observable en el sitio: una pieza interactiva nueva, una sección o metadato nuevo del artículo, etc.
 
 Los cambios incompatibles con la interfaz pública —API, CLI, formato de archivo o configuración, según lo que el proyecto declare— se marcan en línea con el prefijo `**Breaking:**` dentro de su categoría, no en una sección aparte.
 

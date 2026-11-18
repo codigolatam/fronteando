@@ -2,7 +2,7 @@
 
 ## Estado
 
-[!] Bloqueada | **[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada
+[x] Completada
 
 ## Tipo
 
@@ -50,8 +50,18 @@ Llevar la pieza «El Controlador: cerrar el ciclo» (`docs/editorial/piezas/mvc-
 - Título de trabajo del capítulo: «El Controlador: cerrar el ciclo» (título de la pieza en el planeador; el definitivo se decide en el encuadre).
 - La pieza cierra con la pregunta abierta «¿esto escala?», que prepara el capítulo 5.
 
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/de-clics-a-acciones.md` — aprobado 2026-10-28
+- **Promesa:** «después de leer esto, el lector podrá sacar los manejadores de eventos de su vista a un controlador que traduce clics a acciones del modelo, cerrando el ciclo evento → acción → modelo → notificación → vista»
+
+## Desviaciones del brief
+
+- La pieza se extiende con un `modo="controlador"` en lugar de una pieza nueva: el listener de instrumentación registra la acción antes del handler del controlador, y el registro muestra el ciclo entero; el modo por defecto (capítulo 3) queda intacto.
+- El bloque `text` del resultado primero muestra estados de pantalla («0 ítems / $0») en lugar de salida de consola, como en el capítulo 3.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-11-18 — Aprueba
+- Usuario (ejecución): 2026-11-18 — Aprueba
+- Usuario (cierre): 2026-11-18 — Aprueba

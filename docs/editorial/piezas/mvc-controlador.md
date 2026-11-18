@@ -1,6 +1,6 @@
 # El Controlador: cerrar el ciclo
 
-- estado: lista
+- estado: publicado
 - serie: mvc-en-vanilla-js
 - **Pregunta del lector:** ¿dónde pongo los manejadores de eventos para que dejen de tocarlo todo?
 - **Ángulo:** los eventos se traducen a acciones sobre el modelo — nada de tocar estado y DOM a discreción — y el ciclo se cierra: evento → acción → modelo → notificación → vista.
