@@ -1,7 +1,7 @@
 ---
 title: "De clics a acciones: el controlador"
 description: "¿Quién decide qué pasa al pulsar un botón? Sacar los manejadores de la vista a un controlador que solo traduce clics a acciones del modelo."
-date: 2026-11-18T20:50:00Z
+date: 2026-11-18T23:45:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]

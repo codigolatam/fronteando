@@ -64,4 +64,4 @@ Llevar la pieza «El Controlador: cerrar el ciclo» (`docs/editorial/piezas/mvc-
 
 - Subagente: 2026-11-18 — Aprueba
 - Usuario (ejecución): 2026-11-18 — Aprueba
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-11-18 — Aprueba
