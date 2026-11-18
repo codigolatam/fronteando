@@ -13,10 +13,11 @@ agente:
     ]
 ---
 
-El carrito ya se actualiza solo: cada cambio del modelo llega a la
-pantalla. Pero el código que aplica los cambios es un suscriptor que toca tres
-elementos a mano, y el HTML inicial muestra un estado que puede
-mentir. Hoy convertimos todo lo que se ve en una función del estado.
+El carrito se actualiza solo: su estado vive en un modelo aparte del
+DOM y cada cambio llega a la pantalla. Pero el código que aplica esos
+cambios toca tres elementos a mano, y el HTML inicial muestra un
+estado que puede mentir. Hoy convertimos todo lo que se ve en una
+función del estado.
 
 <!--more-->
 
