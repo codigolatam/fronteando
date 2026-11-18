@@ -1,7 +1,7 @@
 ---
 title: "De clics a acciones: el controlador"
 description: "¿Quién decide qué pasa al pulsar un botón? Sacar los manejadores de la vista a un controlador que solo traduce clics a acciones del modelo."
-date: 2026-11-18T16:50:00Z
+date: 2026-11-18T20:50:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
@@ -13,11 +13,11 @@ agente:
     ]
 ---
 
-La vista ya es una función del estado: cada cambio del modelo repinta
-la pantalla entera. Pero los botones que pinta `render` siguen
-llamando al modelo directamente, así que la vista decide qué pasa al
-pulsar. Un solo manejador en el contenedor se lleva esa decisión: traduce
-cada clic en una acción sobre el modelo.
+Nuestro carrito ya separa dos cosas: el estado vive en un modelo que
+notifica sus cambios y la vista se repinta entera con cada notificación.
+Pero los botones que pinta `render` llaman al modelo directamente:
+la vista decide qué pasa al pulsar. Un manejador en el contenedor
+se lleva esa decisión: traduce cada clic en una acción sobre el modelo.
 
 <!--more-->
 
@@ -79,14 +79,14 @@ la vista tenía dos trabajos. `render` generaba
 el HTML, y `conectar` recorría los botones recién nacidos para darles
 su manejador: cada «Añadir» llamaba a `carrito.agregar` y cada
 «Quitar» a `carrito.quitar`. Funcionaba, pero la decisión de qué pasa
-al pulsar vivía dentro de la función que pinta.
+al pulsar vivía dentro de la vista.
 
 Eso es lo que la regla de Tania Rascia prohíbe en su
 [tutorial de MVC](https://www.taniarascia.com/javascript-mvc-todo-app/):
 «the view never touches the model». Nuestra vista lo tocaba en cada
 clic, y lo peor no
 era la regla incumplida sino la acumulación: cada manejador nuevo que
-nazca en `render` tendrá que aprender a llamar al modelo, y cada
+nazca en `conectar` tendrá que aprender a llamar al modelo, y cada
 repintado tendrá que volver a conectarlos.
 
 ## De llamadas a intenciones
@@ -136,9 +136,10 @@ programa que llama a los métodos que cambian el modelo; los botones solo
 nombran intenciones.
 
 Esa tabla es el controlador: la parte que recibe los eventos del
-usuario y los convierte en operaciones del modelo. Stearns describe el
-controlador clásico con esa tarea y con la de conectar modelo y vista,
-en su [tutorial de MVC](https://drstearns.github.io/tutorials/mvc/). En
+usuario y los convierte en operaciones del modelo. Dave Stearns
+describe el controlador clásico con esa tarea y con la de conectar
+modelo y vista, en su
+[tutorial de MVC](https://drstearns.github.io/tutorials/mvc/). En
 las variantes más recientes, dice, esa tarea pasa a la vista, que es la
 que crea los elementos y está mejor situada para atender sus eventos.
 Nuestro controlador recupera la tarea clásica sin pintar nada: el
@@ -156,7 +157,7 @@ si los botones sí, y qué habría que cambiar si `render` reemplazara el
 Con el controlador en su sitio, el recorrido de un clic queda completo
 y en una sola dirección: el usuario pulsa «Quitar» (evento), el
 controlador lee `data-accion` y llama a `carrito.quitar` (acción), el
-modelo quita la línea y avisa a sus suscriptores (notificación), y la
+modelo quita la línea y notifica a sus suscriptores (notificación), y la
 suscripción vuelve a llamar a `render` (vista). Nadie se salta el
 orden: la vista no toca el modelo, el modelo no toca la vista, y los
 eventos entran por una sola puerta.
