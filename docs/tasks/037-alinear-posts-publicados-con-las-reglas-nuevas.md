@@ -15,6 +15,8 @@ Alinear los posts ya publicados y sus demos con las reglas que `EDITORIAL.md` ga
 - **Identificadores en inglés** (sección «Forma del post largo»): el carrito de los posts usa nombres en español (`Carrito`, `agregar`, `quitar`, `suscribir`, `productos`); pasan a inglés como el código del proyecto (`docs/lessons/idioma-del-codigo.md`). El comportamiento y las cifras de las salidas no cambian.
 - **«Marcado» por «HTML»** (tabla «Palabras problemáticas»): `sacar-el-estado-del-dom.md` usa «marcado» dos veces; se sustituye por «HTML».
 
+Después de esos cambios se ejecuta una **revisión editorial** de cada post publicado contra `EDITORIAL.md` completa (voz, hilo, promesa, resultado primero, límites, cierre, metadatos, palabras problemáticas) para verificar que están bien alineados con la guía vigente, no solo con las dos reglas anteriores. Lo que esa revisión encuentre se anota en el archivo de la tarea y se decide con el usuario antes de tocar prosa.
+
 La prosa sigue en español.
 
 ## Dependencias
@@ -33,12 +35,14 @@ La prosa sigue en español.
 
 - Los bloques de código de los posts publicados indicados, y las demos asociadas, usan identificadores en inglés.
 - La prosa de esos posts que nombra esos identificadores (por ejemplo, «la clase `Carrito`») usa los nombres nuevos, y «marcado» queda sustituido por «HTML».
+- Cada post publicado tiene una revisión editorial contra `EDITORIAL.md` completa, con los desajustes encontrados anotados en este archivo y resueltos o diferidos por decisión del usuario.
 - El resto de cada post no cambia: título, descripción, fecha, slug, estructura y prosa que no nombra código ni usa «marcado».
 
 ## Criterios de calidad
 
 - Ningún identificador en español aparece en los bloques de código de los posts publicados ni en las demos asociadas, según la tabla de equivalencias.
-- Ninguna ocurrencia de «marcado» queda en los posts publicados.
+- Ninguna ocurrencia de «marcado» ni del resto de palabras proscritas de la tabla queda en los posts publicados.
+- La revisión editorial de cada post publicado está anotada en este archivo: desajustes encontrados y qué se hizo con cada uno (corregido aquí o diferido con tarea propia).
 - Cada bloque de código modificado corre con los nombres nuevos y produce la misma salida que antes, verificado ejecutándolo.
 - `npm test`, `npm run lint`, `npm run check`, `npm run format:check` y `npm run build` en verde.
 - Ninguna mención en prosa de un identificador que ya no existe en el código.
@@ -51,7 +55,9 @@ La prosa sigue en español.
 2. Presentar al usuario la tabla de equivalencias en inglés para su aprobación antes de renombrar.
 3. Renombrar en código, tests y prosa, tocando solo los identificadores, y sustituir «marcado» por «HTML».
 4. Ejecutar cada bloque de código modificado y comparar su salida con la anterior.
-5. Ejecutar las verificaciones del proyecto.
+5. Revisar cada post publicado contra `EDITORIAL.md` completa y anotar en este archivo los desajustes encontrados.
+6. Presentar los desajustes al usuario: los que apruebe se corrigen aquí; los que cambien la sustancia de un post se diferencian en una tarea propia.
+7. Ejecutar las verificaciones del proyecto.
 
 ## Notas
 
