@@ -15,6 +15,8 @@
 
 ## General
 
+- [ ] docs/tasks/037-identificadores-en-ingles-en-los-posts.md — Identificadores en inglés en el código de los posts publicados
+
 ## Hito 1: Serie MVC en vanilla JS
 
 - [r] docs/tasks/032-capitulo-3-serie-mvc.md — Escribir el capítulo 3 de la serie MVC
