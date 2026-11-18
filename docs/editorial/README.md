@@ -16,10 +16,9 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## en revisión
 
-- [El Controlador: cerrar el ciclo](piezas/mvc-controlador.md)
-
 ## publicado
 
+- [De clics a acciones: el controlador](../../site/src/content/articulos/de-clics-a-acciones.md)
 - [La Vista: el render como función del estado](../../site/src/content/articulos/la-vista-como-funcion-del-estado.md)
 - [El Modelo: sacar el estado del DOM](../../site/src/content/articulos/sacar-el-estado-del-dom.md)
 - [Un store reactivo en vanilla JS](../../site/src/content/articulos/un-store-reactivo-en-vanilla-js.md)

@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[x] Completada
 
 ## Tipo
 
@@ -62,6 +62,6 @@ Llevar la pieza «El Controlador: cerrar el ciclo» (`docs/editorial/piezas/mvc-
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-11-18 — Aprueba
+- Usuario (ejecución): 2026-11-18 — Aprueba
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
