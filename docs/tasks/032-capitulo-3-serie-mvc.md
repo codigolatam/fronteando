@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -61,6 +61,6 @@ Llevar la pieza «La Vista: el render como función del estado» (`docs/editoria
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Revisión editorial: 2026-11-18 — Aprueba (rondas de corrección aplicadas en la rama)
+- Usuario (ejecución): 2026-11-18 — Aprueba
+- Usuario (cierre): 2026-11-18 — Aprueba

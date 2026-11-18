@@ -1,7 +1,7 @@
 ---
 title: "La vista como función del estado"
 description: "¿Quién mantiene la pantalla al día cuando cambia el modelo? Un render que la regenera entera en cada notificación, incluido el primero."
-date: 2026-10-28T02:37:00Z
+date: 2026-11-18T16:28:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]

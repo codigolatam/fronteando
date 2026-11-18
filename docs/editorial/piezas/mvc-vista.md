@@ -1,6 +1,6 @@
 # La Vista: el render como función del estado
 
-- estado: lista
+- estado: publicado
 - serie: mvc-en-vanilla-js
 - **Pregunta del lector:** ¿cómo hago que la pantalla refleje el estado sin manipular el DOM a mano en cada sitio?
 - **Ángulo:** el render se vuelve una función del estado — dado el modelo, se genera el HTML completo y desaparece la manipulación dispersa del DOM.
