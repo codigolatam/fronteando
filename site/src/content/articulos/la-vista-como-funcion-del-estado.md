@@ -1,6 +1,6 @@
 ---
 title: "La vista como función del estado"
-description: "¿Quién mantiene la pantalla al día cuando cambia el modelo? Un render que la regenera entera en cada notificación, desde el primer render."
+description: "¿Quién mantiene la pantalla al día cuando cambia el modelo? Un render que la regenera entera en cada notificación, incluido el primero."
 date: 2026-10-28T02:37:00Z
 categoria: arquitectura
 nivel: intermedio
@@ -22,9 +22,8 @@ mentir. Hoy convertimos todo lo que se ve en una función del estado.
 
 Vamos a convertir el código que pinta el carrito en una función:
 dado el modelo, `render` genera todo el HTML de la vista, incluso la
-primer pantalla. Al terminar podrás hacer que la
-parte visual de tu componente sea una función de su estado, y verás qué
-queda por separar.
+primera pantalla. Al terminar podrás convertir la parte visual de tu
+componente en una función de su estado, y verás qué queda por separar.
 
 ## El resultado primero
 
@@ -55,9 +54,9 @@ tras quitar el primero:  2 ítems / $205
 ```
 
 Las mismas cifras de siempre, con una diferencia: el primer `0 / $0`
-ya no está escrito en el HTML: lo produjo `render`. La pantalla
-empieza siendo una función del estado, no HTML que alguien
-escribió a mano esperando acertar.
+no está escrito en el HTML. Lo produjo `render`. La pantalla empieza
+siendo una función del estado, no HTML que alguien escribió a mano
+esperando acertar.
 
 ## Lo que el suscriptor hacía a mano
 
@@ -107,15 +106,15 @@ function render(modelo) {
 }
 ```
 
-Tres cosas que cambian aquí. La primera: ya no hay HTML escrito a mano que
-pueda mentir, porque ya no hay HTML escrito a mano. El `0` y el `$0` que
-antes vivían en el HTML ahora salen de `modelo.unidades` y
-`modelo.total`. La segunda: la vista entera está en un solo lugar; si
-la pantalla muestra algo raro, la función `render` es el único sitio
-donde mirar. La tercera es sutil: los botones llevan atributos
+Tres cosas que cambian aquí. La primera: el marcado ya no guarda datos
+escritos a mano que puedan mentir. El `0` y el `$0` que antes vivían en
+el HTML ahora salen de `modelo.unidades` y `modelo.total`. La segunda:
+la vista entera está en un solo lugar. Si lo que se ve tiene una forma
+rara, el sitio donde mirar es `render`; si algo raro pasa al pulsar, es
+`conectar`. La tercera es sutil: los botones llevan atributos
 `data-agregar` y `data-quitar` en lugar de nacer con su manejador
-puesto, porque el HTML se escribe como texto y los nodos todavía no
-existen cuando se compone.
+puesto, porque el HTML se compone como texto y los nodos todavía no
+existen cuando lo escribimos.
 
 ## El primer render
 
@@ -167,8 +166,7 @@ botones. Y funciona, pero mira quién decide qué pasa al pulsar: la
 propia vista. Cada botón recién nacido llama a `agregar` o a `quitar`
 del modelo directamente.
 
-El patrón tiene una regla explícita sobre eso, y la literatura la
-repite. Tania Rascia, en su
+El patrón tiene una regla explícita sobre eso. Tania Rascia, en su
 [tutorial de MVC](https://www.taniarascia.com/javascript-mvc-todo-app/),
 la deja en una sola línea: «the view never touches the model». La
 vista nunca toca el modelo; la nuestra lo toca en cada clic. Dave
@@ -178,18 +176,17 @@ como hace la nuestra. Decidir qué se hace con ellos es otro trabajo, y
 es el paso que queda.
 
 La pieza siguiente es el carrito de este capítulo funcionando, con un
-registro en vivo: cada notificación del modelo y el
-repintado que provoca. La línea fija de arriba del registro recuerda que el render
-inicial no vino de ninguna notificación.
+registro en vivo: cada notificación del modelo y el repintado que
+provoca. La línea fija sobre el registro recuerda que el render
+inicial no llegó por notificación.
 
 :::demo{nombre="vista-instrumentada" altura="290px" altura-estrecha="400px"}
 El carrito del capítulo funcionando junto al registro del modelo:
 cada «Añadir» o «Quitar» produce una línea «notificación N →
 repintado: M u / $X» en el registro, la más nueva arriba. Resultado
 esperado: tres añadidos dejan tres notificaciones, contador 3 y
-total $250; quitar la primera línea deja $205. La línea fija de
-arriba del registro recuerda el render inicial, que no llegó por
-notificación.
+total $250; quitar la primera línea deja $205. La línea fija sobre el
+registro recuerda el render inicial, que no llegó por notificación.
 :::
 
 :::pausa
