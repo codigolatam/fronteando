@@ -137,15 +137,14 @@ explican el porqué, no solo el qué.
 ## Forma del post largo
 
 El post técnico de la casa es un texto largo que enseña a un
-profesional. En la práctica del blog ronda las 1.350 a 1.650 palabras
-(contando el código), entre seis y ocho secciones, tres a nueve
-bloques de código y dos o tres pausas. Son referencias de lo que ya
-funciona, no cuotas: lo que manda es que cada parte aporte un paso
-del arco.
+profesional. La extensión la da la promesa: se escribe lo necesario
+para cumplirla, ni un paso más ni uno menos. No hay cuotas de
+secciones, bloques de código ni pausas; hay funciones, y cada parte
+del post tiene que cumplir la suya.
 
 - **Cada sección aporta un paso.** Una sección que no acerca al
-  lector a la promesa se corta o se funde con otra; no se alarga para
-  llegar a una cifra.
+  lector a la promesa se corta o se funde con otra; el post no se
+  alarga por volumen.
 - **Los términos se definen al introducirlos.** Un patrón, una API o
   un concepto que el post presenta por primera vez se define con una
   frase y un ejemplo en su primera aparición. Lo que el oficio da por
