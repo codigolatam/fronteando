@@ -355,6 +355,7 @@ Jerarquía, como en las guías canónicas:
 | Proscrito                                                      | Usar                                        |
 | -------------------------------------------------------------- | ------------------------------------------- |
 | «corrida»                                                      | «ejecución»                                 |
+| «marcado»                                                      | «HTML»                                      |
 | «corre X» transitivo («corre `fn`»)                            | «ejecuta X» («corre» intransitivo admitido) |
 | «Con eso dicho»                                                | «Y sin embargo», «Dicho esto»               |
 | «simplemente», «obviamente», «fácil», «solo hay que»           | (suprimir)                                  |

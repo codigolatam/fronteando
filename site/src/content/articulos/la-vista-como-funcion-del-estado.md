@@ -106,7 +106,7 @@ function render(modelo) {
 }
 ```
 
-Tres cosas que cambian aquí. La primera: el marcado ya no guarda datos
+Tres cosas que cambian aquí. La primera: el HTML ya no guarda datos
 escritos a mano que puedan mentir. El `0` y el `$0` que antes vivían en
 el HTML ahora salen de `modelo.unidades` y `modelo.total`. La segunda:
 la vista entera está en un solo lugar. Si lo que se ve tiene una forma
