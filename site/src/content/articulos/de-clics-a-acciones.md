@@ -69,7 +69,7 @@ tras quitar el primero:  2 unidades / $205
 tras otro «Añadir»:      3 unidades / $250
 ```
 
-La última línea es la que importa: después de cuatro repintados, los
+La última línea es la que importa: después de cinco repintados, los
 botones siguen respondiendo sin que nadie los haya vuelto a conectar.
 En este capítulo `connect` ya no existe.
 
