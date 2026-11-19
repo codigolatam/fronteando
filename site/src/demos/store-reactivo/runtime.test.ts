@@ -22,30 +22,30 @@ describe("createProgram", () => {
       expect(snapshots[0].activeEffect).toBe("title");
       expect(events).toContainEqual({
         kind: "subscribe",
-        prop: "nombre",
+        prop: "name",
         runner: "title",
       });
       expect(events).toContainEqual({
         kind: "subscribe",
-        prop: "nivel",
+        prop: "level",
         runner: "title",
       });
       expect(events).toContainEqual({
         kind: "subscribe",
-        prop: "nombre",
+        prop: "name",
         runner: "greeting",
       });
       expect(events).not.toContainEqual({
         kind: "subscribe",
-        prop: "nivel",
+        prop: "level",
         runner: "greeting",
       });
       expect(program.getSnapshot()).toEqual({
-        state: { nombre: "ana", nivel: 1 },
+        state: { name: "ana", level: 1 },
         activeEffect: null,
         subscribers: {
-          nombre: ["title", "greeting"],
-          nivel: ["title"],
+          name: ["title", "greeting"],
+          level: ["title"],
         },
       });
     });
@@ -57,33 +57,33 @@ describe("createProgram", () => {
       events.length = 0;
       snapshots.length = 0;
 
-      program.estado.nivel = 2;
+      program.state.level = 2;
 
       expect(events[0]).toEqual({
         kind: "notify",
-        prop: "nivel",
+        prop: "level",
         value: "2",
         count: 1,
       });
       expect(snapshots[0].subscribers).toEqual({
-        nombre: ["title", "greeting"],
-        nivel: ["title"],
+        name: ["title", "greeting"],
+        level: ["title"],
       });
       const runs = events.filter((event) => event.kind === "run-start");
       expect(runs).toEqual([{ kind: "run-start", runner: "title" }]);
       expect(events.at(-1)).toEqual({
         kind: "skip",
-        prop: "nivel",
+        prop: "level",
         runner: "greeting",
       });
-      expect(snapshots.at(-1)?.state).toEqual({ nombre: "ana", nivel: 2 });
+      expect(snapshots.at(-1)?.state).toEqual({ name: "ana", level: 2 });
     });
 
     it("keeps the trace honest: get subscribes, set notifies", () => {
       const { events, program } = collect();
       events.length = 0;
 
-      program.estado.nombre = "lu";
+      program.state.name = "lu";
 
       expect(kinds(events)).toEqual([
         "notify",
@@ -98,14 +98,14 @@ describe("createProgram", () => {
         "run-end",
       ]);
       expect(events[0]).toMatchObject({ value: '"lu"', count: 2 });
-      expect(program.getSnapshot().state.nombre).toBe("lu");
+      expect(program.getSnapshot().state.name).toBe("lu");
     });
 
     it("does not skip anything when every effect reads the property", () => {
       const { events, program } = collect();
       events.length = 0;
 
-      program.estado.nombre = "lu";
+      program.state.name = "lu";
 
       expect(kinds(events)).not.toContain("skip");
     });
@@ -117,7 +117,7 @@ describe("createProgram", () => {
       const subscribers = program.getSnapshot().subscribers;
       events.length = 0;
 
-      const value = program.estado.nombre;
+      const value = program.state.name;
 
       expect(value).toBe("ana");
       expect(events).toHaveLength(0);

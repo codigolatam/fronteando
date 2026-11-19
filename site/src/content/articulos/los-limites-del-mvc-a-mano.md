@@ -20,16 +20,38 @@ falla por tamaño.
 
 <!--more-->
 
-Vamos a estresar el carrito del
-[capítulo anterior](/articulos/de-clics-a-acciones/) hasta que el
-patrón ceda, sin tocar una línea de su código: tres pruebas que corren
-tal cual, y al final el mapa de límites (qué aguanta el MVC hecho a
-mano y qué problema resolvió la reactividad después).
+Vamos a poner el carrito del
+[capítulo anterior](/articulos/de-clics-a-acciones/) en situaciones que
+crecen: más valores que repintar, más vistas que mantener, más reglas
+que se disparan a la vez. Sin tocar ni una línea de su código, veremos
+en cuál de ellas cede el patrón y qué problema resolvió la reactividad
+después.
+
+## Antes de empezar
+
+Este capítulo se lee mejor con el carrito de los dos anteriores abierto en otra pestaña.
+Estos son los términos que vas a encontrar:
+
+- **Repintado:** volver a dibujar elementos de la pantalla a partir del modelo.
+  Aquí, `render` repinta toda la vista en cada cambio.
+- **Suscriptor:** una función que se registra en el modelo con `subscribe`
+  y se ejecuta cada vez que el modelo notifica un cambio. En este capítulo
+  hay tres: `render`, el registro de la demo y la regla del regalo.
+- **Vista parcial:** una vista que solo actualiza algunos de sus elementos,
+  en lugar de la pantalla entera.
+- **Notificación anidada:** una notificación que dispara otra antes de que
+  la primera haya terminado.
+- **Pila de llamadas:** la lista de funciones que están abiertas a la vez.
+  Cada llamada dentro de otra ocupa un sitio en ella; si la lista se llena,
+  el navegador corta la ejecución con un error.
+
+Si tienes poco tiempo, lee el resultado primero y el mapa de límites. La
+prueba tres es la más difícil: tómatela con calma.
 
 ## El resultado primero
 
-Antes de explicar cada prueba, ahí va el banco de estrés corriendo. Las
-tres salidas vienen de la ejecución real sobre el carrito intacto:
+Antes de explicar cada prueba, conviene ver sus salidas. Las tres vienen de
+ejecutar el carrito intacto:
 
 ```text
 quitar 1 línea → el árbol entero se reescribe: 16 elementos
@@ -37,112 +59,160 @@ vista parcial a mano → modelo: 2 líneas, DOM: 0 líneas
 regla sin guardia → RangeError: Maximum call stack size exceeded
 ```
 
-Tres síntomas del mismo límite. Vamos uno por uno.
+Cada línea responde a una prueba: la primera, al repintado total; la segunda,
+a la vista parcial; la tercera, a la regla que se llama a sí misma. Vamos una
+por una.
 
 ## El experimento
 
-El código de partida es el del capítulo anterior, sin tocar: la clase
-`Carrito` con `suscribir` y `#notificar`, el `render` que reescribe
-`host.innerHTML` entero, el manejador delegado que traduce `data-accion`
-en acciones del modelo. Todo lo que sigue corre sobre esa base (los
-snippets llevan la marca `// extracto:` cuando necesitan ese contexto).
+El código de partida es el del capítulo anterior, sin cambios. Tiene tres
+piezas que nos interesan:
+
+- `Cart`, el modelo, con `subscribe` para suscribirse y `#notify` para avisar
+  a los suscriptores.
+- `render`, que reescribe `host.innerHTML` entero cada vez que se le llama.
+- El controlador, un único manejador sobre el host, que lee `data-action` y llama al modelo.
+
+Cada fragmento de código lleva la marca `// extracto:` cuando necesita
+contexto de los capítulos anteriores.
 
 ## Prueba uno: el repintado no sabe qué cambió
 
-Con tres productos en el carrito, quitamos una línea. Lo que cambia en
-la pantalla es poco: el contador, el total y una línea menos.
+Con tres productos en el carrito, quitamos una línea. En la pantalla cambian
+tres cosas: el contador, el total y una línea menos.
 
 ```js
 // extracto: el carrito del capítulo anterior ya suscrito y renderizado
-carrito.quitar(2); // solo cambian contador, total y un <li>
+cart.remove(2); // solo cambian contador, total y un <li>
 ```
 
 ```text
 el árbol entero se reescribe: 16 elementos (antes del cambio: 18)
 ```
 
-Para tocar tres valores el `render` reescribió los dieciséis elementos
-que quedaban. No es un bug: el `render` no sabe qué cambió, así que la
-única respuesta honesta que tiene es repintarlo todo. Mientras el
-componente es pequeño el costo es invisible; el problema es que crece
-con la vista, no con el cambio.
+Esos 16 elementos son todo lo que `render` vuelve a crear:
+
+- El catálogo: 1 lista + 3 elementos de lista + 3 botones «Añadir» = 7.
+- El título con el contador: `<h3>` + `<span>` = 2.
+- La lista del carrito: 1 lista + 2 líneas + 2 botones «Quitar» = 5.
+- El total: `<p>` + `<span>` = 2.
+
+Suman 16. Con tres líneas en el carrito, el bloque de la lista sumaba 7 en
+lugar de 5 y el árbol completo, 18.
+
+Para cambiar tres valores, `render` reescribió los 16 elementos. No es
+un fallo: `render` no sabe qué cambió, así que su única respuesta honesta es
+repintarlo todo. Con un carrito pequeño el coste es invisible. El problema es
+que el coste crece con el tamaño de la vista, no con el tamaño del cambio.
+
+:::pausa
+Predice cuántos elementos se reescriben si, en lugar de una línea, quitas
+dos. Después cuenta los elementos dentro de `#cart-app` con las herramientas
+de desarrollo del navegador y compara.
+:::
 
 ## Prueba dos: la vista parcial a mano diverge
 
-La tentación natural: si solo cambiaron dos números, actualicemos solo
-esos dos nodos. Sustituimos el `render` completo por un suscriptor
-parcial:
+La tentación natural: si solo cambiaron el contador y el total, actualicemos
+solo esos dos nodos. Sustituimos `render` por un suscriptor que toca
+únicamente esos dos elementos:
 
 ```js
 // extracto: el `host` ya pintado, y este suscriptor en lugar del render del capítulo anterior
-carrito.suscribir(() => {
-  host.querySelector("#contador").textContent = carrito.unidades;
-  host.querySelector("#total").textContent = `$${carrito.total}`;
+cart.subscribe(() => {
+  host.querySelector("#counter").textContent = cart.units;
+  host.querySelector("#total").textContent = `$${cart.total}`;
   // nos olvidamos de la <ul> de líneas
 });
 ```
 
-Tras tres «Añadir» y un «Quitar»:
+Hacemos tres «Añadir»: teclado, ratón y monitor. Después quitamos una línea
+desde código, con `cart.remove(1)`; en pantalla no hay ningún «Quitar» que
+pulsar, porque la lista nunca se repintó. Compara lo que dice el modelo con
+lo que se ve:
 
-```text
-modelo: 2 líneas
-DOM: 0 líneas
-```
+|          | Modelo | Pantalla |
+| -------- | ------ | -------- |
+| Líneas   | 2      | 0        |
+| Contador | 2      | 2        |
+| Total    | $205   | $205     |
 
-El modelo dice dos líneas y la pantalla muestra cero. Nadie te avisa: no
-hay error, no hay advertencia (la interfaz miente en silencio). La
-vista parcial a mano obliga a mantener dos listas sincronizadas de
-memoria: la de cosas que pueden cambiar y la de sitios donde se
-pintan. Olvidar un sitio no rompe nada visible en el momento del
-descuido; rompe la verdad de la pantalla.
+El contador y el total están bien porque el suscriptor los actualiza en cada
+notificación. La lista no, porque nadie la vuelve a pintar. El modelo dice dos
+líneas y la pantalla no muestra ninguna. No hay error ni advertencia: la
+interfaz miente en silencio.
+
+La vista parcial a mano obliga a mantener dos listas de memoria: la de lo que
+puede cambiar en el modelo y la de los sitios del DOM donde se pinta cada
+cosa. El suscriptor de arriba se olvidó de la `<ul>`: nadie se lo señaló. Si
+olvidas un sitio, no aparece ningún error. La pantalla deja de decir la
+verdad.
 
 :::pausa
-Explica por qué el DOM muestra 0 líneas cuando el modelo tiene 2, sin
-que haya saltado ningún error.
+Explica por qué el DOM muestra 0 líneas cuando el modelo tiene 2, sin que
+haya saltado ningún error.
 :::
 
 ## Prueba tres: el suscriptor que se pisa
 
-El carrito crece en reglas de negocio: si el total llega a $200, se
-regala un producto. Lo natural es escribirla como un suscriptor más:
+El carrito crece en reglas de negocio: si el total llega a $200, se regala un
+producto. Lo natural es escribir esa regla como un suscriptor más:
 
 ```js
 // extracto: requiere el carrito del capítulo anterior
-let regaloDado = false;
-carrito.suscribir((c) => {
-  if (!regaloDado && c.total >= 200) {
-    regaloDado = true;
-    c.agregar({ id: 99, nombre: "Regalo", precio: 0 }); // muta dentro de la notificación
+let giftGiven = false;
+cart.subscribe((c) => {
+  if (!giftGiven && c.total >= 200) {
+    giftGiven = true;
+    c.add({ id: 99, name: "Regalo", price: 0 }); // modifica dentro de la notificación
   }
 });
 ```
 
-Un clic en «Añadir» para el monitor ($180) y otro para el teclado
-($45) producen:
+Un clic en «Añadir» para el monitor ($180) y otro para el teclado ($45)
+producen estas notificaciones, de la más antigua a la más reciente:
 
 ```text
-repintado por notificación 1: 1 u / $180
-repintado por notificación 2: 2 u / $225
-repintado por notificación 3 (anidada): 3 u / $225
+clic → acción add → notificación 1 → repintado: 1 u / $180
+clic → acción add → notificación 2 → repintado: 2 u / $225
+regla → acción gift → notificación 3 (anidada) → repintado: 3 u / $225
 ```
 
-La regla se dispara dentro de la segunda notificación y su `agregar`
-abre una tercera antes de que la segunda termine. El repintado del
-regalo ocurre anidado dentro de la notificación que lo provocó.
-Cualquier suscriptor que asuma «una notificación, un turno completo»
-cuenta mal. Y la cuenta crece sola: cada vista suscrita repinta
-entera, así que un solo `agregar` produce un repintado por vista.
+Sigamos la secuencia paso a paso:
 
-Y la misma regla sin la guardia `regaloDado` no se detiene nunca:
+1. Clic en «Añadir» del monitor. `add` notifica (notificación 1). Los
+   suscriptores se ejecutan en el orden en que se suscribieron: `render`
+   (1 u / $180), luego el registro que escribe la línea del log y por último
+   la regla, que no hace nada porque el total es menor que $200.
+2. Clic en «Añadir» del teclado. `add` notifica (notificación 2). `render`
+   repinta (2 u / $225) y la regla ve que el total ya supera $200.
+3. La regla llama a `add` para el regalo. Eso notifica otra vez (notificación
+   3, anidada dentro de la 2). `render` repinta (3 u / $225) y la regla ya no
+   actúa, porque `giftGiven` vale `true`.
+4. Termina la notificación 3 y después la 2, que no tiene más suscriptores.
+
+La notificación 3 aparece antes de que termine la 2 porque `add` llama a
+`#notify` de inmediato, dentro de la regla: la 2 todavía no ha terminado de
+recorrer a sus suscriptores. Es una llamada dentro de otra llamada, como
+cualquier función que invoca a otra.
+
+El problema no es el regalo. Es que la notificación 2 sigue abierta mientras
+ocurre la 3. Cualquier suscriptor que asuma «una notificación, una ejecución
+completa» cuenta mal.
+
+Sin la guardia (una variable que impide repetir la acción), la regla no se
+detiene nunca. Cada notificación llama a `add`, que notifica otra vez, y así
+sin fin. Cada llamada anidada ocupa un sitio en la pila de llamadas. Cuando la
+pila se llena, el navegador corta con un error:
 
 ```text
 RangeError: Maximum call stack size exceeded
 ```
 
-La notificación llama a `agregar`, que notifica, que llama a la regla,
-que agrega de nuevo. El modelo no distingue «cambio del usuario» de
-«cambio que otro suscriptor acaba de causar»: la reentrada es legal y
-explosiva.
+Nada de esto es un error del modelo: notificar dentro de una notificación es
+legal, porque el modelo no distingue un «cambio del usuario» de un «cambio
+que otro suscriptor acaba de causar». Por eso la guardia es necesaria, y por
+eso el patrón deja la responsabilidad en quien escribe el suscriptor.
 
 :::demo{nombre="vista-instrumentada" modo="limites" altura="290px" altura-estrecha="400px"}
 Pieza interactiva: el carrito del capítulo anterior con la regla del
@@ -152,55 +222,68 @@ segunda.
 :::
 
 :::pausa
-Cuenta qué ocurre dentro de la segunda notificación antes de que
-termine: qué la dispara, qué repinta y en qué orden llegan las
-entradas al registro.
+Explica en tus palabras por qué la notificación 3 aparece antes de que
+termine la 2. Qué la dispara y qué repinta.
 :::
 
 ## El mapa de límites
 
-Las tres pruebas señalan el mismo sitio desde ángulos distintos:
+Las tres pruebas señalan el mismo sitio desde ángulos distintos. Cada límite
+tiene su prueba:
 
-- **El render no sabe qué cambió.** Repintar todo funciona mientras la
-  vista es pequeña; el costo crece con el árbol, no con el cambio.
-  Las vistas parciales a mano divergen en silencio.
-- **La notificación no sabe a quién le toca.** Todos los suscriptores
-  se enteran de todo y cada uno decide si le afecta (o muta a su vez
-  y abre una notificación anidada).
-- **La sincronización fina entre estado y DOM es trabajo manual.** El
-  patrón separa las piezas pero deja en tus manos la pregunta «¿qué
-  cambió y qué nodo hay que tocar?».
+- **El render no sabe qué cambió** (prueba uno). Repintar todo funciona
+  mientras la vista es pequeña. El coste crece con el tamaño de la vista,
+  aunque el cambio sea del mismo tamaño de siempre.
+- **La vista parcial diverge en silencio** (prueba dos). Decidir a mano qué
+  nodos tocar produce pantallas que mienten sin avisar.
+- **La notificación no sabe a quién le toca** (prueba tres). Todos los
+  suscriptores se enteran de todo. Cada uno decide si le afecta, y uno puede
+  modificar el modelo mientras los demás siguen leyendo la misma notificación.
 
-Lo que el MVC a mano aguanta bien: un componente con una vista, pocas
-reglas, notificación burda a todo el mundo. Ahí el patrón ordena de
-verdad: los capítulos anteriores son la prueba. Lo que no aguanta es
-la granularidad: saber qué cambió y tocar solo eso. Ese es el problema
-que la reactividad resolvió después, y el [store reactivo del
-blog](/articulos/un-store-reactivo-en-vanilla-js/) es justamente esa
-respuesta a mano: el estado recuerda quién depende de cada valor y
-solo notifica a quien lo usa, en lugar de gritar a todos que algo pasó.
+El MVC a mano aguanta bien en un componente con una vista, pocas reglas y
+cambios que afectan a casi toda la pantalla. Ahí el patrón ordena el código,
+como muestran los capítulos anteriores. Lo que no aguanta es la granularidad:
+saber qué cambió y tocar solo eso.
 
-## Los límites honestos
+Eso es lo que resolvió la reactividad. En el
+[store reactivo](/articulos/un-store-reactivo-en-vanilla-js/), escribir
+`state.level` vuelve a ejecutar el efecto del título y no el del saludo,
+porque el saludo nunca leyó `level`. Cada valor sabe quién depende de él y
+solo avisa a esos.
 
-Las cifras de este capítulo son conteos de nodos repintados, no
-mediciones de tiempo: en componentes de este tamaño el repintado total
-sigue siendo instantáneo, y el límite real se nota antes en la
-complejidad del código (dos listas a sincronizar, guardias contra la
-reentrada) que en el rendimiento bruto. El boilerplate tampoco es
-denuncia nuestra: es la salvedad clásica del género ([Rascia](https://www.taniarascia.com/javascript-mvc-todo-app/)
-y [Stearns](https://drstearns.github.io/tutorials/mvc/) lo
-advierten en los mismos tutoriales que citamos en la serie) y aquí lo
-convertimos en banco de pruebas. Quedaron fuera las respuestas
-históricas intermedias: eventos nombrados, PubSub, observables con
-canales; todas responden al mismo límite sin llegar a la granularidad.
+:::pausa
+Piensa en un proyecto tuyo: ¿qué vista repinta más de lo que cambió? Nombra
+un suscriptor que decida si le afecta un cambio y explica cómo lo sabe.
+:::
+
+## Lo que este experimento no mide
+
+Las cifras de este capítulo cuentan nodos repintados, no milisegundos. En un
+componente de este tamaño, repintar todo sigue siendo instantáneo. El límite
+real aparece antes en el código: dos listas que sincronizar y guardas que
+impidan las notificaciones anidadas.
+
+El código repetitivo (el boilerplate) es el precio conocido de este patrón.
+[Rascia](https://www.taniarascia.com/javascript-mvc-todo-app/) y
+[Stearns](https://drstearns.github.io/tutorials/mvc/) lo advierten en los
+tutoriales que citamos en la serie.
+
+Existen alternativas intermedias: emisores con eventos nombrados, el patrón de
+publicación y suscripción (PubSub) y observables como los de RxJS. Todas
+siguen avisando a todos los suscriptores, así que ninguna llega a acotar qué
+nodo hay que tocar.
 
 ## El punto
 
-El arco queda cerrado: del espagueti del primer capítulo al carrito
-con modelo, vista y controlador separados, y de ahí al mapa de dónde
-cede. El MVC a mano enseña a ordenar el código; el límite que toca es
-saber qué cambió. Esa pregunta («¿quién depende de este valor?») es la
-que la reactividad convirtió en sistema. De cómo se responde con
-signals y efectos ya habla el [post del store
-reactivo](/articulos/un-store-reactivo-en-vanilla-js/); qué forma toma
-eso en un framework queda para otra conversación.
+Lo que te llevas de este capítulo, en una frase por límite: repintar todo es
+correcto y barato mientras la vista es pequeña; las vistas parciales a mano
+divergen sin avisar; y una notificación avisa a todos, así que un suscriptor
+puede anidar otra notificación sin que el modelo lo impida.
+
+La pregunta que los tres límites no saben responder es la misma: «¿quién
+depende de este valor?». Esa es la pregunta que sí sabe responder la
+reactividad.
+
+El arco queda cerrado: del espagueti del [primer capítulo](/articulos/carrito-a-lo-bruto/) al carrito con
+modelo, vista y controlador separados, y de ahí al mapa de dónde cede. Qué
+forma toma eso en un framework queda para otra conversación.

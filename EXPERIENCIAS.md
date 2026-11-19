@@ -244,3 +244,52 @@
   Obtenido: las mejoras aplicadas solo tocaban artículos y navegación; la portada quedó sin cambios propios.
   Corrección: «pero que me dices del diseño del homepage?» — el usuario reclamó la portada y pidió una segunda ronda de benchmark centrada en ella.
   Estado: consolidada
+
+- Id: 20261119T162545
+  Tarea: docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md
+  Esperado: que el renombrado de identificadores cambiara solo el código y no el texto que el lector ve
+  Obtenido: el script alteró cadenas visibles y prosa («el cart cuadra», «El model», «de next») y un valor dentro de una cadena de la demo
+  Corrección: proteger las cadenas visibles y los comentarios antes de sustituir, y revisar el diff de cada archivo además de los tests
+  Estado: consolidada
+
+- Id: 20261119T162546
+  Tarea: docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md
+  Esperado: que una transformación automática cambiara exactamente lo previsto
+  Obtenido: un perl sin -p no procesó ningún archivo, y una frase con carácter no ASCII no se protegió por falta de use utf8, sin que nada avisara
+  Corrección: tras cada transformación automática, comprobar con diff y grep que cambió exactamente lo previsto
+  Estado: consolidada
+
+- Id: 20261119T162547
+  Tarea: docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md
+  Esperado: que el renombrado de una etiqueta compartida por dos archivos funcionara
+  Obtenido: demo-carrito cambió en el componente pero no en el adaptador; la demo no se montaba y los tests no lo detectaron
+  Corrección: antes y después de renombrar nombres que cruzan archivos (etiquetas, atributos, claves), buscar todas sus ocurrencias en el repositorio
+  Estado: consolidada
+
+- Id: 20261119T162548
+  Tarea: docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md
+  Esperado: normalizar nombres de código a inglés sin afectar la sintaxis de la directiva
+  Obtenido: modo="cantidad" pasó a "quantity" y dejó de coincidir con el contenido del post
+  Corrección: los valores de la sintaxis de una directiva son contrato con el contenido; no se renombran sin cambiar también el contenido, y las excepciones se registran
+  Estado: consolidada
+
+- Id: 20261119T162549
+  Tarea: docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md
+  Esperado: que las cifras del texto coincidieran con lo que produce la ejecución
+  Obtenido: el texto decía «después de cuatro repintados» cuando la secuencia tenía cinco
+  Corrección: contar contra la ejecución o el test antes de escribir una cifra
+  Estado: consolidada
+
+- Id: 20261119T162550
+  Tarea: docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md
+  Esperado: aplicar las propuestas de los subagentes de revisión tras comprobarlas
+  Obtenido: un revisor propuso «PatSub» (era PubSub) y otro propuso cambiar una forma correcta, «tómatela con calma»
+  Corrección: comprobar cada propuesta contra la fuente antes de aplicarla
+  Estado: consolidada
+
+- Id: 20261119T162551
+  Tarea: docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md
+  Esperado: términos técnicos instalados en el español de la divulgación
+  Obtenido: se propusieron términos de nicho («banco de pruebas», «reentrada», «observables con canales») que tuvieron que sustituirse
+  Corrección: investigar el término en fuentes en español antes de decidir, y no aceptar la primera formulación
+  Estado: consolidada

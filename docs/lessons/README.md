@@ -112,3 +112,14 @@
 - cobertura-del-alcance.md
   - Disparadores: alcance, sitio, portada, homepage, superficie, benchmark, páginas, diseño, revisión
   - Resumen: cuando el encargo nombra una superficie amplia —«el diseño del sitio»— la entrega cubre todas sus páginas principales o declara qué queda fuera
+- renombrado-de-identificadores.md
+  - Disparadores: renombrar, renombrado, identificador, sustituir, script, perl, sed, traducir, inglés, custom element, directiva, utf8
+  - Resumen: al renombrar, proteger las cadenas visibles, verificar con diff lo que cambió y buscar en el repo los nombres que cruzan archivos; los valores de una directiva son contrato
+
+- cifras-verificables.md
+  - Disparadores: cifra, número, contar, elementos, repintados, texto, salida, ejemplo
+  - Resumen: las cifras del texto se cuentan contra la ejecución o el test antes de escribirlas
+
+- revision-con-subagentes.md
+  - Disparadores: subagente, revisión, revisor, propuesta, aplicar cambios, revisar, crítica
+  - Resumen: cada propuesta de un revisor se comprueba contra la fuente antes de aplicarla

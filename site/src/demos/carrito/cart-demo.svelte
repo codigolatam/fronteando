@@ -1,4 +1,4 @@
-<svelte:options customElement="demo-carrito" />
+<svelte:options customElement="demo-cart" />
 
 <script lang="ts">
   import { onMount } from "svelte";
@@ -24,15 +24,15 @@
 
 <div class="piece" bind:this={root}>
   <div class="grid">
-    <section class="zone" aria-labelledby="catalogo-heading">
-      <h3 class="heading" id="catalogo-heading">Catálogo</h3>
-      <ul id="catalogo" class="list" role="list"></ul>
+    <section class="zone" aria-labelledby="catalog-heading">
+      <h3 class="heading" id="catalog-heading">Catálogo</h3>
+      <ul id="catalog" class="list" role="list"></ul>
     </section>
-    <section class="zone" aria-labelledby="carrito-heading">
-      <h3 class="heading" id="carrito-heading">Tu carrito</h3>
-      <ul id="carrito" class="list" role="list"></ul>
+    <section class="zone" aria-labelledby="cart-heading">
+      <h3 class="heading" id="cart-heading">Tu carrito</h3>
+      <ul id="cart" class="list" role="list"></ul>
       <p class="total" role="status">
-        Productos: <span id="contador">0</span> · Total:
+        Productos: <span id="counter">0</span> · Total:
         <span id="total">$0</span>
       </p>
     </section>
@@ -112,7 +112,7 @@
     border-color: var(--color-accent);
   }
 
-  #carrito :global(button:hover) {
+  #cart :global(button:hover) {
     color: var(--color-danger);
     border-color: var(--color-danger);
   }

@@ -4,14 +4,14 @@ import { lineOf, sourceLines, WRITE_LINE, type SourceLine } from "./source";
 
 const text = (line: SourceLine) => line.map(([part]) => part).join("");
 
-type Estado = ReturnType<typeof createProgram>["estado"];
+type State = ReturnType<typeof createProgram>["state"];
 
-function observe(write?: (estado: Estado) => void) {
+function observe(write?: (state: State) => void) {
   const observations: ProgramObservation[] = [];
   const program = createProgram((observation) =>
     observations.push(observation),
   );
-  write?.(program.estado);
+  write?.(program.state);
   return observations;
 }
 
@@ -26,21 +26,21 @@ describe("sourceLines", () => {
 
   describe("when the reader writes a property", () => {
     it("shows that assignment on the last line", () => {
-      expect(text(sourceLines({ prop: "nivel", value: "2" })[WRITE_LINE])).toBe(
-        "estado.nivel = 2;",
+      expect(text(sourceLines({ prop: "level", value: "2" })[WRITE_LINE])).toBe(
+        "state.level = 2;",
       );
       expect(
-        text(sourceLines({ prop: "nombre", value: '"lu"' })[WRITE_LINE]),
-      ).toBe('estado.nombre = "lu";');
+        text(sourceLines({ prop: "name", value: '"lu"' })[WRITE_LINE]),
+      ).toBe('state.name = "lu";');
       expect(
         text(
           sourceLines({
-            prop: "nivel",
+            prop: "level",
             value: "2",
-            statement: "estado.nivel += 1",
+            statement: "state.level += 1",
           })[WRITE_LINE],
         ),
-      ).toBe("estado.nivel += 1");
+      ).toBe("state.level += 1");
     });
   });
 });
@@ -49,9 +49,9 @@ describe("lineOf", () => {
   it("points every event the program emits at a line of the source", () => {
     const lines = sourceLines(null);
 
-    for (const { event } of observe((estado) => {
-      estado.nivel = 2;
-      estado.nombre = "lu";
+    for (const { event } of observe((state) => {
+      state.level = 2;
+      state.name = "lu";
     })) {
       expect(lineOf(event)).toBeGreaterThanOrEqual(0);
       expect(lineOf(event)).toBeLessThan(lines.length);
@@ -59,8 +59,8 @@ describe("lineOf", () => {
   });
 
   it("marks the reader's assignment line for a write", () => {
-    const notify = observe((estado) => {
-      estado.nivel = 2;
+    const notify = observe((state) => {
+      state.level = 2;
     }).find(({ event }) => event.kind === "notify");
 
     expect(notify && lineOf(notify.event)).toBe(WRITE_LINE);
@@ -83,7 +83,7 @@ describe("lineOf", () => {
     expect(performed.size).toBe(2);
     for (const { props, line } of performed.values()) {
       const shown = new Set(
-        [...text(lines[line]).matchAll(/estado\.(\w+)/g)].map(
+        [...text(lines[line]).matchAll(/state\.(\w+)/g)].map(
           (match) => match[1],
         ),
       );

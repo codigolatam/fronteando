@@ -8,7 +8,7 @@ import { mountView } from "./view";
 function scaffold(modo = "") {
   const root = document.createElement("div");
   root.innerHTML = `
-    <div id="carrito-app"></div>
+    <div id="cart-app"></div>
     <ol id="log"></ol>
   `;
   mountView(
@@ -21,21 +21,21 @@ function scaffold(modo = "") {
   return root;
 }
 
-function addButton(root: HTMLElement, nombre: string) {
-  const li = [...root.querySelectorAll("#catalogo li")].find((el) =>
-    el.textContent?.includes(nombre),
+function addButton(root: HTMLElement, name: string) {
+  const li = [...root.querySelectorAll("#catalog li")].find((el) =>
+    el.textContent?.includes(name),
   );
-  return li?.querySelector<HTMLButtonElement>("[data-agregar]") ?? null;
+  return li?.querySelector<HTMLButtonElement>("[data-add]") ?? null;
 }
 
 describe("mountView", () => {
   describe("when it mounts", () => {
     it("paints the whole view from the empty model", () => {
       const root = scaffold();
-      expect(root.querySelectorAll("#catalogo li")).toHaveLength(3);
-      expect(root.querySelector("#contador")?.textContent).toBe("0");
+      expect(root.querySelectorAll("#catalog li")).toHaveLength(3);
+      expect(root.querySelector("#counter")?.textContent).toBe("0");
       expect(root.querySelector("#total")?.textContent).toBe("$0");
-      expect(root.querySelectorAll("#carrito li")).toHaveLength(0);
+      expect(root.querySelectorAll("#cart li")).toHaveLength(0);
     });
 
     it("leaves the register empty until the first notification", () => {
@@ -50,8 +50,8 @@ describe("mountView", () => {
       addButton(root, "Teclado")!.click();
       addButton(root, "Ratón")!.click();
       addButton(root, "Monitor")!.click();
-      expect(root.querySelectorAll("#carrito li")).toHaveLength(3);
-      expect(root.querySelector("#contador")?.textContent).toBe("3");
+      expect(root.querySelectorAll("#cart li")).toHaveLength(3);
+      expect(root.querySelector("#counter")?.textContent).toBe("3");
       expect(root.querySelector("#total")?.textContent).toBe("$250");
     });
 
@@ -74,8 +74,8 @@ describe("mountView", () => {
       const root = scaffold();
       addButton(root, "Teclado")!.click();
       addButton(root, "Teclado")!.click();
-      expect(root.querySelector("#contador")?.textContent).toBe("2");
-      expect(root.querySelectorAll("#carrito li")).toHaveLength(2);
+      expect(root.querySelector("#counter")?.textContent).toBe("2");
+      expect(root.querySelectorAll("#cart li")).toHaveLength(2);
     });
   });
 
@@ -85,8 +85,8 @@ describe("mountView", () => {
       addButton(root, "Teclado")!.click();
       addButton(root, "Ratón")!.click();
       addButton(root, "Monitor")!.click();
-      root.querySelector<HTMLElement>("[data-quitar]")!.click();
-      expect(root.querySelectorAll("#carrito li")).toHaveLength(2);
+      root.querySelector<HTMLElement>("[data-remove]")!.click();
+      expect(root.querySelectorAll("#cart li")).toHaveLength(2);
       expect(root.querySelector("#total")?.textContent).toBe("$205");
       expect(root.querySelector("#log li")?.textContent).toBe(
         "notificación 4 → repintado: 2 u / $205",
@@ -119,13 +119,11 @@ describe("mountView", () => {
 });
 
 describe('mountView with modo "controlador"', () => {
-  function addButton(root: HTMLElement, nombre: string) {
-    const li = [...root.querySelectorAll("#catalogo li")].find((el) =>
-      el.textContent?.includes(nombre),
+  function addButton(root: HTMLElement, name: string) {
+    const li = [...root.querySelectorAll("#catalog li")].find((el) =>
+      el.textContent?.includes(name),
     );
-    return (
-      li?.querySelector<HTMLButtonElement>('[data-accion="agregar"]') ?? null
-    );
+    return li?.querySelector<HTMLButtonElement>('[data-action="add"]') ?? null;
   }
 
   describe("when products are added and removed", () => {
@@ -134,17 +132,17 @@ describe('mountView with modo "controlador"', () => {
       addButton(root, "Teclado")!.click();
       addButton(root, "Ratón")!.click();
       addButton(root, "Monitor")!.click();
-      root.querySelector<HTMLElement>('[data-accion="quitar"]')!.click();
+      root.querySelector<HTMLElement>('[data-action="remove"]')!.click();
       const entries = [...root.querySelectorAll("#log li")].map(
         (li) => li.textContent,
       );
       expect(entries[0]).toBe(
-        "clic → acción quitar → notificación 4 → repintado: 2 u / $205",
+        "clic → acción remove → notificación 4 → repintado: 2 u / $205",
       );
       expect(entries[3]).toBe(
-        "clic → acción agregar → notificación 1 → repintado: 1 u / $45",
+        "clic → acción add → notificación 1 → repintado: 1 u / $45",
       );
-      expect(root.querySelectorAll("#carrito li")).toHaveLength(2);
+      expect(root.querySelectorAll("#cart li")).toHaveLength(2);
     });
   });
 
@@ -160,13 +158,11 @@ describe('mountView with modo "controlador"', () => {
 });
 
 describe('mountView with modo "limites"', () => {
-  function addButton(root: HTMLElement, nombre: string) {
-    const li = [...root.querySelectorAll("#catalogo li")].find((el) =>
-      el.textContent?.includes(nombre),
+  function addButton(root: HTMLElement, name: string) {
+    const li = [...root.querySelectorAll("#catalog li")].find((el) =>
+      el.textContent?.includes(name),
     );
-    return (
-      li?.querySelector<HTMLButtonElement>('[data-accion="agregar"]') ?? null
-    );
+    return li?.querySelector<HTMLButtonElement>('[data-action="add"]') ?? null;
   }
 
   describe("when the gift rule fires inside a notification", () => {
@@ -178,12 +174,12 @@ describe('mountView with modo "limites"', () => {
         (li) => li.textContent,
       );
       expect(entries[0]).toBe(
-        "regla → acción regalo → notificación 3 (anidada) → repintado: 3 u / $225",
+        "regla → acción gift → notificación 3 (anidada) → repintado: 3 u / $225",
       );
       expect(entries[1]).toBe(
-        "clic → acción agregar → notificación 2 → repintado: 2 u / $225",
+        "clic → acción add → notificación 2 → repintado: 2 u / $225",
       );
-      const lines = [...root.querySelectorAll("#carrito li")].map(
+      const lines = [...root.querySelectorAll("#cart li")].map(
         (li) => li.textContent,
       );
       expect(lines.some((t) => t?.includes("Regalo"))).toBe(true);
@@ -194,7 +190,7 @@ describe('mountView with modo "limites"', () => {
       addButton(root, "Monitor")!.click();
       addButton(root, "Teclado")!.click();
       addButton(root, "Ratón")!.click();
-      const lines = [...root.querySelectorAll("#carrito li")].filter((li) =>
+      const lines = [...root.querySelectorAll("#cart li")].filter((li) =>
         li.textContent?.includes("Regalo"),
       );
       expect(lines).toHaveLength(1);

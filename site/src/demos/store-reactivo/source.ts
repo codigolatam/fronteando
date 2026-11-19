@@ -23,31 +23,31 @@ const EFFECT_LINES: Record<
 const SOURCE_LINES: readonly SourceLine[] = [
   [
     ["const", "keyword"],
-    [" estado = "],
+    [" state = "],
     ["store", "function"],
-    ["({ nombre: "],
+    ["({ name: "],
     ['"ana"', "string"],
-    [", nivel: "],
+    [", level: "],
     ["1", "constant"],
     [" });"],
   ],
   [],
-  [["effect", "function"], ["(() => { "], ["// título", "comment"]],
+  [["effect", "function"], ["(() => { "], ["// title", "comment"]],
   [
     ["  document.title = "],
     ["`", "string"],
-    ["${estado.nombre}"],
+    ["${state.name}"],
     [" · nivel ", "string"],
-    ["${estado.nivel}"],
+    ["${state.level}"],
     ["`", "string"],
     [";"],
   ],
   [["});"]],
-  [["effect", "function"], ["(() => { "], ["// saludo", "comment"]],
+  [["effect", "function"], ["(() => { "], ["// greeting", "comment"]],
   [
-    ["  saludo.textContent = "],
+    ["  greeting.textContent = "],
     ["`Hola, ", "string"],
-    ["${estado.nombre}"],
+    ["${state.name}"],
     ["`", "string"],
     [";"],
   ],
@@ -70,7 +70,7 @@ export function sourceLines(write: Write | null): readonly SourceLine[] {
   const line: SourceLine = write.statement
     ? [[write.statement]]
     : [
-        [`estado.${write.prop} = `],
+        [`state.${write.prop} = `],
         [write.value, write.value.startsWith('"') ? "string" : "constant"],
         [";"],
       ];

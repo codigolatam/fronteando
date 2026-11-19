@@ -13,12 +13,12 @@ const urls = assistantUrlsOf(protocol);
   <summary>lectura acompañada</summary>
   <div class="accompaniment-body">
     <p class="accompaniment-text">
-      Pega este protocolo en tu asistente y avísale al llegar a cada pausa:
+      Pega este prompt en tu asistente y avísale al llegar a cada pausa:
       revisará tu comprensión ahí y al terminar el artículo.
     </p>
     <div class="accompaniment-actions">
       <button class="btn btn-primary accompaniment-copy" type="button">
-        copiar protocolo
+        copiar prompt
       </button>
       {urls.chatgpt && (
         <a
@@ -42,7 +42,7 @@ const urls = assistantUrlsOf(protocol);
       )}
     </div>
     <details class="accompaniment-protocol">
-      <summary>ver el protocolo</summary>
+      <summary>ver el prompt</summary>
       <pre tabindex="0">{protocol}</pre>
     </details>
   </div>
@@ -93,7 +93,7 @@ const urls = assistantUrlsOf(protocol);
       copyWithFeedback(
         event.currentTarget as HTMLButtonElement,
         protocolText,
-        "copiar protocolo",
+        "copiar prompt",
       );
     });
 

@@ -23,7 +23,7 @@ export const RUN_CAPTIONS: Record<RunStatus, string> = {
 
 const OUTPUT_TARGETS: Record<RunnerId, string> = {
   title: "document.title",
-  greeting: "saludo.textContent",
+  greeting: "greeting.textContent",
 };
 
 export interface TraceEntry {
@@ -55,9 +55,9 @@ export function describeEvent(event: DemoEvent): string {
     case "notify":
       return `set ${event.prop} = ${event.value} → ${audience(event.count)}`;
     case "run-start":
-      return `efectoActivo = ${RUNNER_LABELS[event.runner]}`;
+      return `activeEffect = ${RUNNER_LABELS[event.runner]}`;
     case "run-end":
-      return "efectoActivo = null";
+      return "activeEffect = null";
     case "subscribe":
       return `get ${event.prop} → suscribe ${RUNNER_LABELS[event.runner]}`;
     case "write":
@@ -90,7 +90,7 @@ export function initialView(): DemoView {
     outputs: { title: "", greeting: "" },
     runStatus: { title: "boot", greeting: "boot" },
     snapshot: {
-      state: { nombre: "ana", nivel: 1 },
+      state: { name: "ana", level: 1 },
       activeEffect: null,
       subscribers: {},
     },
