@@ -202,7 +202,7 @@ no resuelve.
 - **Un solo `render` lo repinta todo.** Con una vista que cambia poco
   no se nota; con varias suscripciones y vistas parciales, cada
   notificación empieza a costar. Cuánto aguanta este diseño es la
-  pregunta del último capítulo.
+  pregunta del [último capítulo](/articulos/los-limites-del-mvc-a-mano/).
 
 ## El punto
 

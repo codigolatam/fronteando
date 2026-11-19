@@ -243,5 +243,5 @@ estado y los eventos gestionan tanto la lógica como la composición
 visual. Tres preguntas quedan flotando sobre el carrito: quién guarda
 el estado, quién decide lo que pasa y quién pinta los elementos. El
 enredo es lo que ocurre cuando todas se responden con «donde caiga».
-La siguiente parte de la serie responde la primera pregunta: el estado
-se gestiona mediante un Modelo.
+La [siguiente parte de la serie](/articulos/sacar-el-estado-del-dom/)
+responde la primera pregunta: el estado se gestiona mediante un Modelo.

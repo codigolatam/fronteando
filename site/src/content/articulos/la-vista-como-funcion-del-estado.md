@@ -227,4 +227,4 @@ sale de `render(model)`, desde el primer render. Lo que queda suelto
 son los eventos: los clics entran por dentro de la vista y alcanzan el
 modelo sin intermediario. ¿Quién traduce un «Añadir» en una acción, y
 una acción en un cambio del modelo? Ese es el trabajo del controlador,
-y es el siguiente capítulo.
+y es el [siguiente capítulo](/articulos/de-clics-a-acciones/).

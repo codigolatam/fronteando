@@ -284,6 +284,6 @@ La pregunta que los tres límites no saben responder es la misma: «¿quién
 depende de este valor?». Esa es la pregunta que sí sabe responder la
 reactividad.
 
-El arco queda cerrado: del espagueti del primer capítulo al carrito con
+El arco queda cerrado: del espagueti del [primer capítulo](/articulos/carrito-a-lo-bruto/) al carrito con
 modelo, vista y controlador separados, y de ahí al mapa de dónde cede. Qué
 forma toma eso en un framework queda para otra conversación.

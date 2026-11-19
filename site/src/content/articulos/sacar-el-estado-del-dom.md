@@ -273,4 +273,4 @@ Este paso deja cuatro cosas sin resolver, y conviene nombrarlas.
 El DOM ya no es la fuente de verdad: ahora solo refleja lo que el
 modelo notifica. Pero ese reflejo lo escribimos a mano, suscriptor por
 suscriptor, junto al código que cambia los datos. ¿Cómo se organiza la
-parte que pinta? Esa es la pregunta del siguiente capítulo: la vista.
+parte que pinta? Esa es la pregunta del [siguiente capítulo](/articulos/la-vista-como-funcion-del-estado/): la vista.
