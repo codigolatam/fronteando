@@ -46,7 +46,7 @@ que el título se reescriba. Tres piezas lo hacen posible: `signal`,
 `effect` y un truco pequeño que las conecta. Las construiremos una a
 una.
 
-Mientras tanto, puedes ver el mismo mecanismo en una demo. El estado es
+Mientras tanto, la demo muestra la versión completa del mecanismo. El estado es
 ahora un objeto con dos propiedades, `name` y `level`, y hay dos
 efectos que leen de él. Sube `level` y observa qué efectos se ejecutan;
 luego cambia `name` y compara.
@@ -80,8 +80,7 @@ al cambiar `name` se reejecutan los dos.
 ## Estado que notifica
 
 La primera pieza es la más vieja del mundo: una variable que avisa a
-quien se suscriba cuando cambia. Un getter (el código que se ejecuta al leer la propiedad) devuelve el valor
-y un setter (el que se ejecuta al escribirla), además de guardarlo, avisa a
+quien se suscriba cuando cambia. Un getter devuelve el valor y un setter, además de guardarlo, avisa a
 cada suscriptor:
 
 ```js
@@ -104,7 +103,7 @@ function signal(initialValue) {
 }
 ```
 
-Y se usa así:
+Y se usa así: cada escritura en `value` reejecuta a los suscriptores.
 
 ```js
 const count = signal(0);
@@ -113,15 +112,15 @@ count.subscribe(() => {
   document.title = `count: ${count.value}`;
 });
 
-count.value = 1;
-count.value = 2;
+count.value = 1; // el título queda «count: 1»
+count.value = 2; // el título queda «count: 2»
 ```
 
-Funciona, pero el defecto salta a la vista: cada consumidor tiene que
-acordarse de suscribirse y de repetir dentro lo que lee. Con un
-componente real (varias propiedades, varios consumidores) el registro
-manual de suscriptores se convierte en la fuente de los errores: el efecto que nadie
-suscribió, el que quedó suscrito al dato equivocado.
+Funciona, pero el defecto salta a la vista: la dependencia se declara
+dos veces, una al suscribirse a `count` y otra al leer `count.value`
+dentro del manejador. Con un componente real (varias propiedades,
+varios consumidores) esa duplicación es la fuente de los errores: el
+efecto que nadie suscribió, el que quedó suscrito al dato equivocado.
 
 :::pausa
 Explica con tus palabras qué le cuesta al consumidor suscribirse a
@@ -167,8 +166,8 @@ get value() {
 ```
 
 Leer `value` dentro de un `effect` registra la dependencia sin que
-nadie lo pida: si hay un efecto en ejecución, queda suscrito. Con esa
-pieza `subscribe` desaparece y el programa del gancho ya es real:
+nadie lo pida: si hay un efecto en ejecución, queda suscrito. Solo cambia el getter, con una línea más, y con ella `subscribe` deja de
+hacer falta. El programa del gancho ya es real:
 
 ```js
 const count = signal(0);
@@ -181,8 +180,8 @@ count.value = 1; // reejecuta el efecto
 count.value = 2; // y otra vez
 ```
 
-El grafo de dependencias se construye solo: cada efecto queda anotado
-en los signals que lee cada vez que corre. Ese matiz («cada vez que
+Cada efecto queda anotado en los signals que lee, cada vez que corre:
+el mapa de quién depende de qué se dibuja solo. Ese matiz («cada vez que
 corre») importa; volveremos a él en los límites.
 
 :::pausa
@@ -265,9 +264,10 @@ pregunta que los frameworks tuvieron que responder:
   entero; escalar eso al DOM es justamente lo que los frameworks
   resuelven (diffing en los frameworks de virtual DOM, actualización
   quirúrgica compilada en Solid o Svelte).
-- **Un solo efecto a la vez.** `activeEffect` es una variable, así que
-  los efectos no pueden anidarse; la versión de verdad mantiene una
-  pila.
+- **Un solo efecto a la vez.** `activeEffect` es una variable: un
+  `effect` que creara otro dentro de su `fn` la pisaría, y las lecturas
+  del efecto exterior que vinieran después ya no registrarían nada. La
+  versión de verdad mantiene una pila.
 
 Y sin embargo, la sustancia ya está (en unas cincuenta líneas): leer
 registra, escribir notifica y la lista de dependencias la lleva la
@@ -286,5 +286,4 @@ llamar.
 
 Sincronizar el estado con la vista ya no cuesta nada. La pregunta que
 sí queda abierta es cómo estructurar todo lo demás (quién escucha los
-eventos, quién decide, qué se guarda dónde). De esa pregunta va la
-siguiente serie.
+eventos, quién decide, qué se guarda dónde). De esa pregunta va [la serie del carrito](/articulos/carrito-a-lo-bruto/).
