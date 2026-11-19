@@ -33,8 +33,9 @@ Antes de abrir el controlador conviene ver qué queda cuando se quita
 `connect`. Así se pone en marcha el carrito completo sobre el
 [modelo](/articulos/sacar-el-estado-del-dom/) y la
 [vista](/articulos/la-vista-como-funcion-del-estado/) de los capítulos
-anteriores, con una sola diferencia: `render` pinta los botones con
-`data-action`, un cambio que se explica más abajo:
+anteriores, con dos diferencias: `render` pinta los botones con
+`data-action` (más abajo) y la pareja `update`/`connect` desapareció:
+`render` ya se suscribe directamente:
 
 ```js
 // extracto: requiere la clase `Cart`, el arreglo `products`, la función
@@ -87,7 +88,8 @@ Eso es lo que la regla de Tania Rascia prohíbe en su
 clic, y lo peor no
 era la regla incumplida sino la acumulación: cada manejador nuevo que
 nazca en `connect` tendrá que aprender a llamar al modelo, y cada
-repintado tendrá que volver a conectarlos.
+repintado ya tenía que volver a conectarlos: los nodos morían con el
+`innerHTML` y nacían sordos.
 
 ## De llamadas a intenciones
 
@@ -110,7 +112,9 @@ cumple: esa correspondencia la decide quien interpreta la intención.
 
 El segundo cambio es quién escucha. En lugar de un manejador por
 botón, uno solo sobre el `host` (el `<div>` que `render` llena pero no
-recrea) traduce cada clic en la acción que declara:
+recrea) traduce cada clic en la acción que declara. El patrón tiene
+nombre: delegación de eventos, un manejador en el contenedor que
+atiende los clics de todos sus descendientes:
 
 ```js
 // extracto: el manejador del resultado primero, de nuevo
@@ -133,7 +137,8 @@ hace falta volver a conectarlo. La segunda: `closest` encuentra el
 botón aunque el clic caiga en cualquier nodo interior, y `dataset` trae
 los argumentos. La tercera: la tabla `actions` es el único sitio del
 programa que llama a los métodos que cambian el modelo; los botones solo
-nombran intenciones.
+nombran intenciones. Es un objeto y no un `switch` porque las acciones
+quedan como datos: añadir una es añadir una entrada, no otro `case`.
 
 Esa tabla es el controlador: la parte que recibe los eventos del
 usuario y los convierte en operaciones del modelo. Dave Stearns
@@ -154,7 +159,7 @@ si los botones sí, y qué habría que cambiar si `render` reemplazara el
 
 ## El ciclo cerrado
 
-Con el controlador en su sitio, el recorrido de un clic queda completo
+Con las tres partes en su sitio, el recorrido de un clic queda completo
 y en una sola dirección: el usuario pulsa «Quitar» (evento), el
 controlador lee `data-action` y llama a `cart.remove` (acción), el
 modelo quita la línea y notifica a sus suscriptores (notificación), y la
