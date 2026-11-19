@@ -1,7 +1,7 @@
 ---
 title: "El componente empaquetado: el MVC en una clase"
 description: "¿Cómo usar el carrito MVC sin cablear tres piezas a mano cada vez? Empaquetándolo en una clase: dos instancias en la misma página lo demuestran."
-date: 2026-11-19T23:30:00Z
+date: 2026-11-19T23:37:30Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
@@ -23,7 +23,7 @@ debería ser un `new`. Hoy pasa a serlo.
 
 Vamos a empaquetar el carrito en una clase: `new CartComponent(host)`
 pone en marcha las tres piezas de una vez y `unmount` las desmonta
-igual de limpio. Al terminar tendrás dos instancias funcionando en la
+revirtiendo cada paso. Al terminar tendrás dos instancias funcionando en la
 misma página (la prueba de que la separación sobrevive dentro de un
 objeto) y el mapa de lo que el empaquetado compra y lo que no.
 
@@ -239,10 +239,12 @@ en los capítulos anteriores.
 
 ## El estado que no sale
 
-¿Por qué dos instancias no comparten nada? Porque los campos `#` son
+¿Por qué dos instancias no comparten estado? Porque los campos `#` son
 por instancia: cada `new CartComponent` crea su propio `#lines`, su
-`#nextId` y su `#subscribers`. No hay un estado «del carrito» en el
-programa; hay un estado por carrito, inalcanzable desde fuera.
+`#nextId` y su `#subscribers`. Lo único que comparten es el catálogo
+`products`, que vive en el módulo y solo se lee. No hay un estado «del
+carrito» en el programa; hay un estado por carrito, inalcanzable desde
+fuera.
 
 El mecanismo no es nuevo: es el mismo que ya protegía `#lines` dentro
 de `Cart` en el capítulo 2. Lo que cambia es el perímetro: ahora
@@ -261,8 +263,7 @@ razones que se encadenan:
 - El manejador de A está registrado sobre `hostA`: solo oye los clics
   que ocurren dentro de ese árbol. El de B, sobre `hostB`, ni se
   entera.
-- Cuando se dispara, `#onClick` llama a `this.add`: el `this` de cada
-  método
+- Cuando se dispara, `#onClick` llama a `this.add`: el `this` de cada método
   es su instancia, así que el clic solo puede tocar su propio modelo.
 - Y si el modelo de A notifica, solo se enteran los suscriptores de su
   `#subscribers`. `#render` de A escribe `hostA.innerHTML`; nada sale
@@ -272,10 +273,10 @@ Queda un detalle visible en el código: el render ya no escribe `id`
 dentro del HTML. Los tenía desde el capítulo 2 (`catalog`,
 `counter`, `cart`, `total`), pero ni la vista ni el controlador los
 consultan desde que la vista entera se regenera en el capítulo 3: eran
-nombres globales de documento sin dueño. Con dos instancias en la página se duplicarían, y un `id`
-duplicado es HTML inválido. Dentro de la clase sobraban, así que
-salieron; si estilas por selector, apunta a `[data-action]`, que es
-justo para lo que quedaron.
+nombres globales de documento sin dueño. Con dos instancias en la
+página se duplicarían, y un `id` duplicado es HTML inválido. Dentro de
+la clase sobraban, así que salieron; si estilas por selector, apunta a
+`[data-action]`, que es justo para lo que quedaron.
 
 :::pausa
 Explica por qué añadir un producto en el carrito A no toca al B:
@@ -358,8 +359,8 @@ Lo que no compra conviene nombrarlo:
 
 Lo que sí queda claro es de dónde sale la forma: un custom element es
 esta misma envoltura con los callbacks de ciclo de vida ya puestos, y
-un componente de framework es la misma envoltura con props y repintado
-granular. `CartComponent` es el molde; la plataforma lo
+un componente de framework es la misma envoltura con props y un repintado
+que el framework calcula. `CartComponent` es el molde; la plataforma lo
 institucionalizó.
 
 ## El punto
