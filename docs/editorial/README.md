@@ -10,14 +10,15 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## lista
 
+- [El componente empaquetado: el MVC en una clase](piezas/mvc-componente.md)
+
 ## en redacción
 
 ## en revisión
 
-- [Los límites del MVC a mano](piezas/mvc-limites.md)
-
 ## publicado
 
+- [Los límites del MVC a mano](../../site/src/content/articulos/los-limites-del-mvc-a-mano.md)
 - [De clics a acciones: el controlador](../../site/src/content/articulos/de-clics-a-acciones.md)
 - [La Vista: el render como función del estado](../../site/src/content/articulos/la-vista-como-funcion-del-estado.md)
 - [El Modelo: sacar el estado del DOM](../../site/src/content/articulos/sacar-el-estado-del-dom.md)

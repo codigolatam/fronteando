@@ -4,7 +4,7 @@
 - **Pregunta del arco:** ¿cómo estructuro un componente sin framework sin que el estado, los manejadores de eventos y el DOM se enreden en espagueti inmantenible?
 - **Ángulo:** MVC construido pieza a pieza a mano en JavaScript vanilla, con la justificación de cada separación hecha visible (el patrón que el lector asocia a backends o a frameworks); la comprensión por contraste explica qué problema resolvieron después la reactividad y los signals.
 - **Soporte:** un componente real que el lector lleva del espagueti al MVC completo (modelo con notificación, vista como función del estado, controlador cerrando el ciclo); el arco deja en cada post una pieza funcional y una pregunta abierta, y cierra enlazando de vuelta al post del store reactivo.
-- **Próximo paso:** escribir el capítulo 5 (los límites del MVC a mano), que cierra el arco — los cuatro anteriores ya están publicados.
+- **Próximo paso:** escribir el capítulo 6 (el componente empaquetado): las piezas ya separadas vuelven juntas como una clase instanciable — coda del arco, que cierra cuando se publique.
 - **Notas sueltas:** hermana del post del mini-store ya publicado (este enseñó cómo se sincroniza el estado con la vista; la serie enseña cómo se estructura todo lo demás); primera serie del blog como formato editorial; migra de `docs/ideas/007`; las referencias del género están en `docs/research/2026-10-referencias-mvc-vanilla-js.md` (Rascia y Stearns como lecturas imprescindibles; el caveat de boilerplate es tropo del género que el capítulo 5 puede usar).
 
 ## Piezas
@@ -16,3 +16,4 @@ Componente conductor: el carrito de la compra, que el lector lleva del espagueti
 3. [La Vista: el render como función del estado](../piezas/mvc-vista.md) — la pantalla se regenera desde el modelo.
 4. [El Controlador: cerrar el ciclo](../piezas/mvc-controlador.md) — los eventos se vuelven acciones y el ciclo se cierra.
 5. [Los límites del MVC a mano](../piezas/mvc-limites.md) — dónde cede el patrón y qué problema resolvió la reactividad.
+6. [El componente empaquetado: el MVC en una clase](../piezas/mvc-componente.md) — las tres piezas dentro de una clase instanciable, con estado privado y ciclo de vida; coda del arco.

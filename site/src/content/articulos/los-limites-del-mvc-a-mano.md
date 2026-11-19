@@ -1,7 +1,7 @@
 ---
 title: "Los límites del MVC a mano"
 description: "El carrito MVC ya funciona, pero ¿cuánto aguanta? Tres pruebas de estrés muestran dónde cede el patrón hecho a mano y qué resolvió la reactividad."
-date: 2026-11-07T00:55:00Z
+date: 2026-11-19T00:53:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom", "reactividad"]
@@ -28,8 +28,8 @@ mano y qué problema resolvió la reactividad después).
 
 ## El resultado primero
 
-Antes de explicar cada prueba, el banco de estrés corriendo. Las tres
-salidas vienen de ejecución real sobre el carrito intacto:
+Antes de explicar cada prueba, ahí va el banco de estrés corriendo. Las
+tres salidas vienen de la ejecución real sobre el carrito intacto:
 
 ```text
 quitar 1 línea → el árbol entero se reescribe: 16 elementos
@@ -43,7 +43,7 @@ Tres síntomas del mismo límite. Vamos uno por uno.
 
 El código de partida es el del capítulo anterior, sin tocar: la clase
 `Carrito` con `suscribir` y `#notificar`, el `render` que reescribe
-`host.innerHTML` entero, el listener delegado que traduce `data-accion`
+`host.innerHTML` entero, el manejador delegado que traduce `data-accion`
 en acciones del modelo. Todo lo que sigue corre sobre esa base (los
 snippets llevan la marca `// extracto:` cuando necesitan ese contexto).
 
@@ -70,10 +70,11 @@ con la vista, no con el cambio.
 ## Prueba dos: la vista parcial a mano diverge
 
 La tentación natural: si solo cambiaron dos números, actualicemos solo
-esos dos nodos. Escribimos el suscriptor parcial:
+esos dos nodos. Sustituimos el `render` completo por un suscriptor
+parcial:
 
 ```js
-// extracto: requiere el `host` ya pintado por el render del capítulo anterior
+// extracto: el `host` ya pintado, y este suscriptor en lugar del render del capítulo anterior
 carrito.suscribir(() => {
   host.querySelector("#contador").textContent = carrito.unidades;
   host.querySelector("#total").textContent = `$${carrito.total}`;
@@ -90,7 +91,7 @@ DOM: 0 líneas
 
 El modelo dice dos líneas y la pantalla muestra cero. Nadie te avisa: no
 hay error, no hay advertencia (la interfaz miente en silencio). La
-vista parcial a mano obliga a mantener dos listas sincronizadas a
+vista parcial a mano obliga a mantener dos listas sincronizadas de
 memoria: la de cosas que pueden cambiar y la de sitios donde se
 pintan. Olvidar un sitio no rompe nada visible en el momento del
 descuido; rompe la verdad de la pantalla.
@@ -127,10 +128,10 @@ repintado por notificación 3 (anidada): 3 u / $225
 
 La regla se dispara dentro de la segunda notificación y su `agregar`
 abre una tercera antes de que la segunda termine. El repintado del
-regalo ocurre anidado dentro de la notificación que lo provocó: cualquier
-suscriptor que asuma «una notificación, un turno completo» cuenta mal:
-cada vista suscrita multiplica el efecto, porque un solo `agregar`
-produce un repintado por vista.
+regalo ocurre anidado dentro de la notificación que lo provocó.
+Cualquier suscriptor que asuma «una notificación, un turno completo»
+cuenta mal. Y la cuenta crece sola: cada vista suscrita repinta
+entera, así que un solo `agregar` produce un repintado por vista.
 
 Y la misma regla sin la guardia `regaloDado` no se detiene nunca:
 
@@ -168,7 +169,7 @@ Las tres pruebas señalan el mismo sitio desde ángulos distintos:
   y abre una notificación anidada).
 - **La sincronización fina entre estado y DOM es trabajo manual.** El
   patrón separa las piezas pero deja en tus manos la pregunta «¿qué
-  cambió y qué nodo le corresponde?».
+  cambió y qué nodo hay que tocar?».
 
 Lo que el MVC a mano aguanta bien: un componente con una vista, pocas
 reglas, notificación burda a todo el mundo. Ahí el patrón ordena de
@@ -177,7 +178,7 @@ la granularidad: saber qué cambió y tocar solo eso. Ese es el problema
 que la reactividad resolvió después, y el [store reactivo del
 blog](/articulos/un-store-reactivo-en-vanilla-js/) es justamente esa
 respuesta a mano: el estado recuerda quién depende de cada valor y
-solo avisa a quien lo usa, en lugar de gritar a todos que algo pasó.
+solo notifica a quien lo usa, en lugar de gritar a todos que algo pasó.
 
 ## Los límites honestos
 
@@ -200,5 +201,6 @@ con modelo, vista y controlador separados, y de ahí al mapa de dónde
 cede. El MVC a mano enseña a ordenar el código; el límite que toca es
 saber qué cambió. Esa pregunta («¿quién depende de este valor?») es la
 que la reactividad convirtió en sistema. De cómo se responde con
-signals y efectos ya habla el post del store reactivo; de qué forma
-toma eso en un framework, la próxima conversación.
+signals y efectos ya habla el [post del store
+reactivo](/articulos/un-store-reactivo-en-vanilla-js/); qué forma toma
+eso en un framework queda para otra conversación.

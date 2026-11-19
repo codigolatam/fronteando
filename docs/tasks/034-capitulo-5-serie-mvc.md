@@ -2,7 +2,7 @@
 
 ## Estado
 
-[r] En revisión
+[x] Completada
 
 ## Tipo
 
@@ -62,5 +62,7 @@ Llevar la pieza «Los límites del MVC a mano» (`docs/editorial/piezas/mvc-limi
 - Subagente: 2026-11-06 — Aprueba
 - Subagente: 2026-11-18 — Solicita cambios
 - Subagente: 2026-11-18 — Aprueba
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-11-19 — Solicita cambios
+- Subagente: 2026-11-19 — Aprueba
+- Usuario (ejecución): 2026-11-19 — Aprueba
+- Usuario (cierre): 2026-11-19 — Aprueba
