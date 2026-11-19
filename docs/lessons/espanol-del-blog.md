@@ -11,5 +11,5 @@
   Origen: 20261023T105839
 
 - **Ante una duda de idiomaticidad en un término técnico, verifica el verbo instalado en fuentes reales en español, no la forma que suena natural en inglés.** «El estado que notifica» y «un modelo que avisa» fueron rechazados como calcos; buscar en tutoriales en español mostró que el patrón se nombra con «notificar» («notifica a los suscriptores», «la notificación») y que «avisar» exige complemento («avisar a alguien de algo»), nunca suelto.
-  Disparadores: español, redacción, calco, idiomatico, notificar, avisar, description, título, posts, description
-  Origen: 20261028T015908
+  Disparadores: español, redacción, calco, idiomatico, notificar, avisar, description, título, posts, description, vocabulario, término técnico, divulgación
+  Origen: 20261028T015908, 20261119T162551
