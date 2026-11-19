@@ -34,6 +34,9 @@ Estos son los términos que vas a encontrar:
 
 - **Repintado:** volver a dibujar elementos de la pantalla a partir del modelo.
   Aquí, `render` repinta toda la vista en cada cambio.
+- **Suscriptor:** una función que se registra en el modelo con `subscribe`
+  y se ejecuta cada vez que el modelo notifica un cambio. En este capítulo
+  hay tres: `render`, el registro de la demo y la regla del regalo.
 - **Vista parcial:** una vista que solo actualiza algunos de sus elementos,
   en lugar de la pantalla entera.
 - **Notificación anidada:** una notificación que dispara otra antes de que
@@ -89,16 +92,15 @@ el árbol entero se reescribe: 16 elementos (antes del cambio: 18)
 
 Esos 16 elementos son todo lo que `render` vuelve a crear:
 
-- El catálogo: 1 lista, 3 elementos de lista y 3 botones «Añadir». Son 7.
-- El título con el contador: 2.
-- La lista del carrito con sus dos líneas: 1 lista, 2 elementos y 2 botones
-  «Quitar». Son 5.
-- El total: 2.
+- El catálogo: 1 lista + 3 elementos de lista + 3 botones «Añadir» = 7.
+- El título con el contador: `<h3>` + `<span>` = 2.
+- La lista del carrito: 1 lista + 2 líneas + 2 botones «Quitar» = 5.
+- El total: `<p>` + `<span>` = 2.
 
-Con tres líneas en el carrito, la lista tenía 7 elementos en lugar de 5, y el
-árbol sumaba 18.
+Suman 16. Con tres líneas en el carrito, el bloque de la lista sumaba 7 en
+lugar de 5 y el árbol completo, 18.
 
-Para cambiar tres valores, `render` reescribió los dieciséis elementos. No es
+Para cambiar tres valores, `render` reescribió los 16 elementos. No es
 un fallo: `render` no sabe qué cambió, así que su única respuesta honesta es
 repintarlo todo. Con un carrito pequeño el coste es invisible. El problema es
 que el coste crece con el tamaño de la vista, no con el tamaño del cambio.
@@ -124,9 +126,10 @@ cart.subscribe(() => {
 });
 ```
 
-Hacemos tres «Añadir» (teclado, ratón y monitor) y un «Quitar» desde código
-(`cart.remove(1)`), porque en pantalla no hay ningún «Quitar» que pulsar: la
-lista nunca se repinta. Compara lo que dice el modelo con lo que se ve:
+Hacemos tres «Añadir»: teclado, ratón y monitor. Después quitamos una línea
+desde código, con `cart.remove(1)`; en pantalla no hay ningún «Quitar» que
+pulsar, porque la lista nunca se repintó. Compara lo que dice el modelo con
+lo que se ve:
 
 |          | Modelo | Pantalla |
 | -------- | ------ | -------- |
@@ -140,8 +143,10 @@ líneas y la pantalla no muestra ninguna. No hay error ni advertencia: la
 interfaz miente en silencio.
 
 La vista parcial a mano obliga a mantener dos listas de memoria: la de lo que
-puede cambiar y la de los sitios donde se pinta. Si olvidas un sitio, no
-aparece ningún error. La pantalla deja de decir la verdad.
+puede cambiar en el modelo y la de los sitios del DOM donde se pinta cada
+cosa. El suscriptor de arriba se olvidó de la `<ul>`: nadie se lo señaló. Si
+olvidas un sitio, no aparece ningún error. La pantalla deja de decir la
+verdad.
 
 :::pausa
 Explica por qué el DOM muestra 0 líneas cuando el modelo tiene 2, sin que
@@ -176,15 +181,20 @@ regla → acción gift → notificación 3 (anidada) → repintado: 3 u / $225
 Sigamos la secuencia paso a paso:
 
 1. Clic en «Añadir» del monitor. `add` notifica (notificación 1). Los
-   suscriptores se ejecutan en el orden en que se suscribieron: primero
-   `render` (1 u / $180) y después la regla, que no hace nada porque el total
-   es menor que $200.
+   suscriptores se ejecutan en el orden en que se suscribieron: `render`
+   (1 u / $180), luego el registro que escribe la línea del log y por último
+   la regla, que no hace nada porque el total es menor que $200.
 2. Clic en «Añadir» del teclado. `add` notifica (notificación 2). `render`
    repinta (2 u / $225) y la regla ve que el total ya supera $200.
 3. La regla llama a `add` para el regalo. Eso notifica otra vez (notificación
    3, anidada dentro de la 2). `render` repinta (3 u / $225) y la regla ya no
    actúa, porque `giftGiven` vale `true`.
 4. Termina la notificación 3 y después la 2, que no tiene más suscriptores.
+
+La notificación 3 aparece antes de que termine la 2 porque `add` llama a
+`#notify` de inmediato, dentro de la regla: la 2 todavía no ha terminado de
+recorrer a sus suscriptores. Es una llamada dentro de otra llamada, como
+cualquier función que invoca a otra.
 
 El problema no es el regalo. Es que la notificación 2 sigue abierta mientras
 ocurre la 3. Cualquier suscriptor que asuma «una notificación, una ejecución
@@ -199,7 +209,8 @@ pila se llena, el navegador corta con un error:
 RangeError: Maximum call stack size exceeded
 ```
 
-Que una notificación dispare otra antes de terminar es legal para el modelo. El modelo no distingue un «cambio del usuario» de un «cambio
+Nada de esto es un error del modelo: notificar dentro de una notificación es
+legal, porque el modelo no distingue un «cambio del usuario» de un «cambio
 que otro suscriptor acaba de causar». Por eso la guardia es necesaria, y por
 eso el patrón deja la responsabilidad en quien escribe el suscriptor.
 
@@ -240,11 +251,6 @@ Eso es lo que resolvió la reactividad. En el
 porque el saludo nunca leyó `level`. Cada valor sabe quién depende de él y
 solo avisa a esos.
 
-:::pausa
-Piensa en un proyecto tuyo: ¿qué vista repinta más de lo que cambió? Nombra
-un suscriptor que decida si le afecta un cambio y explica cómo lo sabe.
-:::
-
 ## Lo que este experimento no mide
 
 Las cifras de este capítulo cuentan nodos repintados, no milisegundos. En un
@@ -264,17 +270,14 @@ nodo hay que tocar.
 
 ## El punto
 
-Lo que te llevas de este capítulo:
+Lo que te llevas de este capítulo, en una frase por límite: repintar todo es
+correcto y barato mientras la vista es pequeña; las vistas parciales a mano
+divergen sin avisar; y una notificación avisa a todos, así que un suscriptor
+puede anidar otra notificación sin que el modelo lo impida.
 
-- Repintar todo es correcto y barato mientras la vista es pequeña. Su coste
-  crece con la vista.
-- Las vistas parciales a mano divergen sin avisar, porque nada comprueba que
-  las dos listas sigan coincidiendo.
-- Una notificación avisa a todos. Si un suscriptor modifica el modelo mientras
-  se notifica, las notificaciones se anidan y la regla puede llamarse a sí
-  misma.
-- La reactividad responde a la pregunta «¿quién depende de este valor?», y
-  así solo avisa a quien lo usa.
+La pregunta que los tres límites no saben responder es la misma: «¿quién
+depende de este valor?». Esa es la pregunta que sí sabe responder la
+reactividad.
 
 El arco queda cerrado: del espagueti del primer capítulo al carrito con
 modelo, vista y controlador separados, y de ahí al mapa de dónde cede. Qué
