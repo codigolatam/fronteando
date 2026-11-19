@@ -29,8 +29,8 @@ sin tocar el DOM.
 
 ## El resultado primero
 
-Antes de abrir la clase conviene ver qué hace. Este es el modelo del
-carrito del capítulo anterior, ejecutado sin ninguna pantalla: añadimos
+Antes de abrir la clase conviene ver qué hace. Este es el recorrido del
+capítulo anterior ejecutado sobre el modelo nuevo, sin ninguna pantalla: añadimos
 los tres productos y quitamos el primero, con un suscriptor que imprime
 el estado cada vez que el modelo notifica.
 
@@ -55,8 +55,8 @@ Cada línea de la salida corresponde a una notificación:
 
 Tres añadidos dejan $250 y quitar el teclado deja $205, las mismas
 cifras del capítulo anterior. La diferencia es dónde viven: ahora el
-estado está en un objeto que no sabe nada de la página. La clase que
-hace posible este código es la que abrimos a continuación.
+estado está en un objeto que no sabe nada de la página. Antes de abrir la clase
+que lo hace posible conviene nombrar qué sale del DOM y qué se queda.
 
 ## Qué sale del DOM
 
@@ -115,6 +115,11 @@ class Cart {
 }
 ```
 
+Un detalle antes de mirar las decisiones: cada producto trae su `id`,
+pero la línea lleva el suyo propio (`line`, que sale de `#nextId`),
+porque el mismo producto puede entrar dos veces y hay que poder quitar
+una línea sin llevarse la otra.
+
 En esa clase tomamos tres decisiones que conviene mirar de cerca.
 
 **Los datos son privados.** `#lines` solo se modifica desde dentro de
@@ -140,9 +145,10 @@ líneas, y qué tendrías que cambiar para que sí pudieran.
 ## Un patrón con nombre
 
 El modelo no sabe quién escucha ni para qué. Solo guarda una lista de
-suscriptores y los notifica cuando sus datos cambian. Es el patrón de
-observador, y conviene conocerlo con su nombre porque aparece en
-muchas herramientas de estado. A mano, cada manejador repintaba el total
+suscriptores y los notifica cuando sus datos cambian. Ese diseño tiene nombre,
+patrón de observador, y conviene conocerlo porque aparece en muchas
+herramientas de estado, empezando por los stores de los frameworks
+front-end. A mano, cada manejador repintaba el total
 y el contador por su cuenta; con el patrón, el modelo notifica una sola
 vez y cada suscriptor decide qué hace con la notificación.
 
@@ -150,7 +156,8 @@ Dave Stearns describe este mismo diseño en su [tutorial sobre MVC](https://drst
 un modelo que mantiene una lista de suscriptores y los notifica cuando sus
 datos cambian, y una vista que se vuelve a pintar sola al recibir la
 notificación. Nuestro modelo pasa el propio carrito al suscriptor, para
-que pueda leer el estado sin tener una referencia aparte.
+que pueda leer el estado sin tener una referencia aparte. Y un modelo
+que no conoce la página se puede ejecutar, y probar, fuera de ella.
 
 ## Probarlo sin DOM
 
@@ -177,8 +184,8 @@ No hay ni un nodo del DOM. Si el total estuviera mal, la prueba lo
 diría en la terminal, sin abrir una página ni buscar un `<span>`.
 
 :::pausa
-Predice qué total dará el carrito si, tras quitar el teclado, añades
-otro teclado, y comprueba la predicción con `node`.
+Predice qué total y cuántas líneas tendrá el carrito si, tras quitar
+el teclado, añades otro teclado; comprueba la predicción con `node`.
 :::
 
 ## Conectar el modelo con la pantalla
@@ -198,7 +205,7 @@ El catálogo ya no guarda nada: cada «Añadir» le pide al modelo que
 añada el producto.
 
 ```js
-// extracto: sigue a `const cart = new Cart();` del bloque anterior
+// extracto: va tras la clase `Cart` y `const cart = new Cart();`
 const products = [
   { id: 1, name: "Teclado", price: 45 },
   { id: 2, name: "Ratón", price: 25 },
@@ -263,6 +270,7 @@ Este paso deja cuatro cosas sin resolver, y conviene nombrarlas.
 
 ## El punto
 
-El DOM ya no es la fuente de verdad, pero sigue sin actualizarse solo. ¿Quién
-lo mantiene al día sin que tengamos que escribir cada suscriptor a
-mano? Esa es la pregunta del siguiente capítulo: la vista.
+El DOM ya no es la fuente de verdad: ahora solo refleja lo que el
+modelo notifica. Pero ese reflejo lo escribimos a mano, suscriptor por
+suscriptor, junto al código que cambia los datos. ¿Cómo se organiza la
+parte que pinta? Esa es la pregunta del siguiente capítulo: la vista.
