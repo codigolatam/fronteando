@@ -12,8 +12,8 @@ agente:
 ---
 
 Añadir productos, quitar productos y calcular el total: el carrito de
-compras de este artículo funciona sin necesidad de ningún framework, y
-sin embargo es código que nadie quiere mantener porque el estado, los
+compras de este artículo funciona sin necesidad de ningún framework. Y
+sin embargo es código que nadie quiere mantener: el estado, los
 eventos y el DOM están tan enredados que cualquier cambio conlleva más
 riesgo de lo que debería.
 
@@ -98,8 +98,7 @@ El estado está repartido. `cart` guarda los productos, `total` y
 `units` guardan los datos numéricos, y el DOM guarda otra parte
 de la verdad: cada `<li>` lleva el nombre, la cantidad y el subtotal
 dentro de su texto. ¿Cuántos teclados hay en el carrito? Depende de
-a quién le preguntes: el arreglo sabe una cosa, el `<li>` otra y el
-contador otra. Mientras coincidan, nadie lo nota. Y de las tres
+a quién le preguntes. Y de las tres
 copias, las que viven en el DOM son las traicioneras: no salen en un
 `console.log` como el arreglo, pero son las que el usuario tiene
 delante.
@@ -158,9 +157,9 @@ subtotal ahora viven en tres sitios a la vez (el arreglo, el `value`
 del input y el texto del `<li>`), y todas hay que mantenerlas a mano.
 
 Lo peor no es el trabajo extra: es que funciona y aun así rompe
-cosas. Pruébalo en la pieza de abajo: cambia la cantidad del teclado
-a 3 y todo se actualiza correctamente (total $135, contador 3,
-subtotal $135) y en ese mismo instante el botón «Quitar» de esa
+cosas. Pruébalo en la pieza de abajo: añade el teclado y cambia su
+cantidad a 3. Todo se recalcula bien (subtotal $135, total $135,
+contador 3). Y en ese mismo instante el botón «Quitar» de esa
 línea deja de funcionar: el `innerHTML` eliminó el botón viejo del
 DOM y el nuevo nació sin manejadores. El input corrió la misma
 suerte: con un nodo nuevo el foco se perdió justo al confirmar la edición.
@@ -225,8 +224,8 @@ Habrá quien ya esté pensando en las soluciones de manual: delegar los
 eventos en el `<ul>` padre (que nunca se regenera y por tanto nunca
 pierde sus manejadores) o tocar solo el trozo que cambia (un
 `textContent` en el `.subtotal` en lugar de rehacer el `<li>`
-entero). Los dos funcionan pero ninguno mejora nada: son dos líneas
-más que hay que acordarse de mantener. El carrito con esos parches
+entero). Los dos arreglan el síntoma que acabamos de ver sin tocar el
+enredo: son dos líneas más que hay que acordarse de mantener. El carrito con esos parches
 sigue sin una fuente de verdad única y con las decisiones sin sitio común.
 
 Aunque el patrón que falta aquí tiene nombre y décadas de historia
