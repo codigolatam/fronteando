@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | [r] En revisión | **[x] Completada** | [!] Bloqueada
 
 ## Tipo
 
@@ -99,4 +99,4 @@ Siete commits, uno por artículo (`30e4e6a`…`dd34a18`), más tres correcciones
 - `los-limites-del-mvc-a-mano`: glosario con «suscriptor»; desglose de 16 elementos; explicación de la notificación anidada; prueba dos con el olvido concreto; resumen por límite; pausa de proyecto propio restaurada (cuatro pausas).
 - `hola-fronteando`: negrita del previo retirada; repetición de front-end repartida; cierre con puerta al primer capítulo.
 - Usuario (ejecución): 2026-11-19 — Aprueba (PR #37 aprobado en sesión)
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (cierre): 2026-11-19 — Aprueba
