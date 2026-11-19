@@ -1,6 +1,6 @@
 // The reactive program from the article, instrumented —not
 // reimplemented—. The same mechanics the text builds (an effect
-// runner, efectoActivo, a Proxy with per-property subscriber sets)
+// runner, activeEffect, a Proxy with per-property subscriber sets)
 // emits a typed event and a real snapshot at each observable step so
 // the piece can show the mechanism without diverging from it.
 
@@ -19,7 +19,7 @@ export type DemoEvent =
   | { kind: "write"; runner: RunnerId; value: string };
 
 export interface ProgramSnapshot {
-  state: { nombre: string; nivel: number };
+  state: { name: string; level: number };
   activeEffect: RunnerId | null;
   subscribers: Record<string, RunnerId[]>;
 }
@@ -32,7 +32,7 @@ export interface ProgramObservation {
 export function createProgram(
   observe: (observation: ProgramObservation) => void,
 ) {
-  const target = { nombre: "ana", nivel: 1 };
+  const target = { name: "ana", level: 1 };
   const subscribersPerProp = new Map<string, Set<() => void>>();
   const runnerIds = new Map<() => void, RunnerId>();
   let activeEffect: (() => void) | null = null;
@@ -63,23 +63,23 @@ export function createProgram(
     return subscribers;
   };
 
-  // The article's `effect`: correr declares itself the active effect,
+  // The article's `effect`: run declares itself the active effect,
   // runs fn and cleans up —each run re-registers what it reads.
   function effect(fn: () => void, id: RunnerId) {
-    const correr = () => {
-      activeEffect = correr;
+    const run = () => {
+      activeEffect = run;
       emit({ kind: "run-start", runner: id });
       fn();
       activeEffect = null;
       emit({ kind: "run-end", runner: id });
     };
-    runnerIds.set(correr, id);
-    correr();
+    runnerIds.set(run, id);
+    run();
   }
 
   // The article's `store`: read registers the active effect on the
   // property, write notifies that property's subscribers.
-  const estado = new Proxy(target, {
+  const state = new Proxy(target, {
     get(obj, prop) {
       if (typeof prop !== "string") return Reflect.get(obj, prop);
       const value = obj[prop as keyof typeof obj];
@@ -113,12 +113,12 @@ export function createProgram(
   });
 
   // Two effects with a job each, so the fine graph is provable: the
-  // greeting reads only `nombre`, so writes to `nivel` never re-run it.
+  // greeting reads only `name`, so writes to `level` never re-run it.
   effect(() => {
     emit({
       kind: "write",
       runner: "title",
-      value: `${estado.nombre} · nivel ${estado.nivel}`,
+      value: `${state.name} · nivel ${state.level}`,
     });
   }, "title");
 
@@ -126,9 +126,9 @@ export function createProgram(
     emit({
       kind: "write",
       runner: "greeting",
-      value: `Hola, ${estado.nombre}`,
+      value: `Hola, ${state.name}`,
     });
   }, "greeting");
 
-  return { estado, getSnapshot: snapshot };
+  return { state, getSnapshot: snapshot };
 }

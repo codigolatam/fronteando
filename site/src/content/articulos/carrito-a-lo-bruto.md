@@ -6,7 +6,7 @@ categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom"]
 agente:
-  tema: "un carrito de compras en vanilla JS construido sin patrón, a lo bruto: el diagnóstico de por qué cada cambio nuevo sale más caro (estado repartido, manejadores que deciden de todo y un render que destruye el cableado)"
+  tema: "un carrito de compras en vanilla JS construido sin patrón, a lo bruto: el diagnóstico de por qué cada cambio nuevo sale más caro (estado repartido, manejadores que deciden de todo y un render que destruye los manejadores)"
   prerequisitos:
     ["JavaScript y DOM básicos (createElement, addEventListener, innerHTML)"]
 ---
@@ -35,44 +35,44 @@ el carrito completo, tal como lo escribe cualquiera cuando el
 componente es pequeño y se está trabajando sin un framework:
 
 ```html
-<ul id="catalogo"></ul>
-<h3>Tu carrito (<span id="contador">0</span>)</h3>
-<ul id="carrito"></ul>
+<ul id="catalog"></ul>
+<h3>Tu carrito (<span id="counter">0</span>)</h3>
+<ul id="cart"></ul>
 <p>Total: <span id="total">$0</span></p>
 ```
 
 ```js
-const productos = [
-  { id: 1, nombre: "Teclado", precio: 45 },
-  { id: 2, nombre: "Ratón", precio: 25 },
-  { id: 3, nombre: "Monitor", precio: 180 },
+const products = [
+  { id: 1, name: "Teclado", price: 45 },
+  { id: 2, name: "Ratón", price: 25 },
+  { id: 3, name: "Monitor", price: 180 },
 ];
-const carrito = [];
+const cart = [];
 let total = 0;
-let unidades = 0;
+let units = 0;
 
-productos.forEach((p) => {
+products.forEach((p) => {
   const li = document.createElement("li");
-  li.innerHTML = `${p.nombre} — $${p.precio} <button>Añadir</button>`;
+  li.innerHTML = `${p.name} — $${p.price} <button>Añadir</button>`;
   li.querySelector("button").addEventListener("click", () => {
-    carrito.push({ ...p, cantidad: 1 });
+    cart.push({ ...p, quantity: 1 });
     const item = document.createElement("li");
-    item.innerHTML = `${p.nombre} x1 — $${p.precio} <button>Quitar</button>`;
+    item.innerHTML = `${p.name} x1 — $${p.price} <button>Quitar</button>`;
     item.querySelector("button").addEventListener("click", () => {
       item.remove();
-      total -= p.precio;
-      unidades -= 1;
+      total -= p.price;
+      units -= 1;
       document.querySelector("#total").textContent = `$${total}`;
-      document.querySelector("#contador").textContent = unidades;
-      carrito.splice(carrito.indexOf(carrito.find((c) => c.id === p.id)), 1);
+      document.querySelector("#counter").textContent = units;
+      cart.splice(cart.indexOf(cart.find((c) => c.id === p.id)), 1);
     });
-    document.querySelector("#carrito").appendChild(item);
-    total += p.precio;
-    unidades += 1;
+    document.querySelector("#cart").appendChild(item);
+    total += p.price;
+    units += 1;
     document.querySelector("#total").textContent = `$${total}`;
-    document.querySelector("#contador").textContent = unidades;
+    document.querySelector("#counter").textContent = units;
   });
-  document.querySelector("#catalogo").appendChild(li);
+  document.querySelector("#catalog").appendChild(li);
 });
 ```
 
@@ -94,24 +94,24 @@ contador 3 y total $250; quitar el teclado deja dos líneas y $205.
 Nadie escribe este código con mala intención. Es el resultado natural
 de ir resolviendo lo que la pantalla pide, una línea cada vez.
 
-El estado está repartido. `carrito` guarda los productos, `total` y
-`unidades` guardan los datos numéricos, y el DOM guarda otra parte
+El estado está repartido. `cart` guarda los productos, `total` y
+`units` guardan los datos numéricos, y el DOM guarda otra parte
 de la verdad: cada `<li>` lleva el nombre, la cantidad y el subtotal
 dentro de su texto. ¿Cuántos teclados hay en el carrito? Depende de
-a quién le preguntes: el array sabe una cosa, el `<li>` otra y el
+a quién le preguntes: el arreglo sabe una cosa, el `<li>` otra y el
 contador otra. Mientras coincidan, nadie lo nota. Y de las tres
 copias, las que viven en el DOM son las traicioneras: no salen en un
-`console.log` como el array, pero son las que el usuario tiene
+`console.log` como el arreglo, pero son las que el usuario tiene
 delante.
 
 Los manejadores de eventos tocan de todo. El de «Añadir» agrega datos
-al array, crea un nodo, le cablea otro manejador y actualiza dos
+al arreglo, crea un nodo, le registra otro manejador y actualiza dos
 `<span>`; el de «Quitar» borra el nodo, toca dos variables, dos
-`<span>` y el array. Ninguno tiene una responsabilidad que quepa
+`<span>` y el arreglo. Ninguno tiene una responsabilidad que quepa
 en una frase.
 
-Además el cableado es manual y disperso: cada `<li>` nuevo nace con
-sus manejadores conectados a mano desde dentro de otro manejador.
+Además, registrar los manejadores es manual y disperso: cada `<li>` nuevo
+nace con sus manejadores registrados a mano desde dentro de otro manejador.
 Nada conecta las piezas salvo nuestra costumbre de hacerlo siempre
 igual.
 
@@ -129,32 +129,32 @@ y su nuevo manejador quedan así:
 
 ```js
 // extracto: dentro del manejador de «Añadir», el <li> cambia
-item.innerHTML = `${p.nombre}
+item.innerHTML = `${p.name}
   x<input type="number" value="1" min="1">
-  — <span class="subtotal">$${p.precio}</span>
+  — <span class="subtotal">$${p.price}</span>
   <button>Quitar</button>`;
 item.querySelector("input").addEventListener("change", (e) => {
-  const cantidad = Number(e.target.value);
-  // tocar el array
-  carrito.find((c) => c.id === p.id).cantidad = cantidad;
+  const quantity = Number(e.target.value);
+  // tocar el arreglo
+  cart.find((c) => c.id === p.id).quantity = quantity;
   // recalcular las dos variables
-  total = carrito.reduce((s, c) => s + c.precio * c.cantidad, 0);
-  unidades = carrito.reduce((s, c) => s + c.cantidad, 0);
+  total = cart.reduce((s, c) => s + c.price * c.quantity, 0);
+  units = cart.reduce((s, c) => s + c.quantity, 0);
   // pintar los dos <span>
   document.querySelector("#total").textContent = `$${total}`;
-  document.querySelector("#contador").textContent = unidades;
+  document.querySelector("#counter").textContent = units;
   // reescribir el <li> entero para que enseñe el subtotal nuevo
-  item.innerHTML = `${p.nombre}
-    x<input type="number" value="${cantidad}" min="1">
-    — <span class="subtotal">$${p.precio * cantidad}</span>
+  item.innerHTML = `${p.name}
+    x<input type="number" value="${quantity}" min="1">
+    — <span class="subtotal">$${p.price * quantity}</span>
     <button>Quitar</button>`;
 });
 ```
 
 Fíjate en lo que ese `change` tuvo que hacer para una sola edición:
-tocar el array, recalcular dos variables, pintar dos `<span>` y
+tocar el arreglo, recalcular dos variables, pintar dos `<span>` y
 reescribir el `<li>` entero. Los datos de cantidad, unidades y
-subtotal ahora viven en tres sitios a la vez (el array, el `value`
+subtotal ahora viven en tres sitios a la vez (el arreglo, el `value`
 del input y el texto del `<li>`), y todas hay que mantenerlas a mano.
 
 Lo peor no es el trabajo extra: es que funciona y aun así rompe
@@ -163,7 +163,7 @@ a 3 y todo se actualiza correctamente (total $135, contador 3,
 subtotal $135) y en ese mismo instante el botón «Quitar» de esa
 línea deja de funcionar: el `innerHTML` eliminó el botón viejo del
 DOM y el nuevo nació sin manejadores. El input corrió la misma
-suerte: con un nodo nuevo el foco se perdió a mitad de la edición.
+suerte: con un nodo nuevo el foco se perdió justo al confirmar la edición.
 
 :::demo{nombre="carrito" modo="cantidad" altura="272px" altura-estrecha="372px"}
 El mismo carrito con el campo de cantidad por línea. Resultado
@@ -185,19 +185,19 @@ el foco al cambiar la cantidad.
 El carrito no está mal programado, está enredado, y el enredo tiene
 tres caras reconocibles:
 
-**El estado no tiene dueño.** La verdad vive repartida entre un array,
+**El estado no tiene una fuente de verdad única.** La verdad vive repartida entre un arreglo,
 unas variables sueltas y el propio DOM, y ninguna es la referencia de
 las demás. Cada actualización debe aplicarse en todas las copias. Que
-una se olvide es un bug el día de mañana.
+una se olvide es un fallo el día de mañana.
 
 **Los manejadores deciden de todo.** Cada evento ejecuta directamente
-las acciones (mutar estado, repintar, cablear) sin pasar por ningún
+las acciones (modificar el estado, repintar, registrar manejadores) sin pasar por ningún
 sitio común. Añadir una vía nueva (un input, un cupón, un contador
 más) significa repetir la cascada en un sitio más.
 
-**El render destruye y re-cablea.** Actualizar la maqueta con
+**El render destruye los manejadores.** Actualizar el HTML con
 `innerHTML` crea nodos nuevos que nacen sin manejadores ni estado:
-cada cambio pequeño obliga a gestionar el cableado a mano, y si se te
+cada cambio pequeño obliga a registrar los manejadores a mano, y si se te
 olvida un botón la interfaz se ve igual pero ya no responde.
 
 Cada síntoma encarece el siguiente cambio. Por eso el código espagueti
@@ -218,8 +218,8 @@ exactamente el trabajo de los capítulos siguientes.
 
 El ejemplo tampoco está fabricado para fallar: es el código que
 escribe una persona razonable con prisa y tiene la forma de un
-componente real pequeño. En uno más grande no se introducen problemas
-nuevos sino que hace que estos cuesten más.
+componente real pequeño. En uno más grande no introduce problemas
+nuevos: hace que estos cuesten más.
 
 Habrá quien ya esté pensando en las soluciones de manual: delegar los
 eventos en el `<ul>` padre (que nunca se regenera y por tanto nunca
@@ -227,7 +227,7 @@ pierde sus manejadores) o tocar solo el trozo que cambia (un
 `textContent` en el `.subtotal` en lugar de rehacer el `<li>`
 entero). Los dos funcionan pero ninguno mejora nada: son dos líneas
 más que hay que acordarse de mantener. El carrito con esos parches
-sigue con el estado sin dueño y las decisiones sin sitio común.
+sigue sin una fuente de verdad única y con las decisiones sin sitio común.
 
 Aunque el patrón que falta aquí tiene nombre y décadas de historia
 (Modelo, Vista y Controlador, que [Trygve Reenskaug concibió en Xerox

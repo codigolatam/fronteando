@@ -14,7 +14,7 @@
   const NAMES = ["ana", "lu", "mara"];
   const OUTPUTS = [
     { runner: "title", label: "document.title (simulado)" },
-    { runner: "greeting", label: "saludo.textContent (simulado)" },
+    { runner: "greeting", label: "greeting.textContent (simulado)" },
   ] as const;
 
   let captured: ProgramObservation[] = [];
@@ -35,7 +35,7 @@
   // reader is stepping through an operation.
   const activeLine = $derived(stepMode && total > 0 ? view.line : null);
   const nextName = $derived(
-    NAMES[(NAMES.indexOf(view.snapshot.state.nombre) + 1) % NAMES.length],
+    NAMES[(NAMES.indexOf(view.snapshot.state.name) + 1) % NAMES.length],
   );
   const status = $derived(stepMode ? view.lastStep : view.operation);
   const stepLabel = $derived(
@@ -117,19 +117,19 @@
           class:primary={pending.length === 0}
           bind:this={levelButton}
           onclick={() =>
-            perform(() => (program.estado.nivel += 1), "estado.nivel += 1")}
+            perform(() => (program.state.level += 1), "state.level += 1")}
         >
-          estado.nivel += 1
+          state.level += 1
         </button>
         <button
           type="button"
           onclick={() =>
             perform(
-              () => (program.estado.nombre = nextName),
-              `estado.nombre = "${nextName}"`,
+              () => (program.state.name = nextName),
+              `state.name = "${nextName}"`,
             )}
         >
-          estado.nombre = "{nextName}"
+          state.name = "{nextName}"
         </button>
         <label class="toggle">
           <input type="checkbox" checked={stepMode} onchange={toggleSteps} />
@@ -199,7 +199,7 @@
       <p class="label" id="inside-label">&gt; por dentro</p>
       <div class="field">
         <p class="field-line">
-          <code>efectoActivo</code> =
+          <code>activeEffect</code> =
           <code class:idle={view.snapshot.activeEffect === null}>
             {view.snapshot.activeEffect
               ? RUNNER_LABELS[view.snapshot.activeEffect]
@@ -211,7 +211,7 @@
         </p>
       </div>
       <div class="field">
-        <p class="field-line"><code>suscriptoresPorProp</code></p>
+        <p class="field-line"><code>subscribersPerProp</code></p>
         <p class="gloss">quién escucha a cada propiedad</p>
         <ul class="subscribers" role="list">
           {#each Object.entries(view.snapshot.subscribers) as [prop, runners] (prop)}

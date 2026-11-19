@@ -2,7 +2,7 @@
 
 ## Estado
 
-**[ ] Pendiente** | [~] En progreso | [r] En revisión | [x] Completada | [!] Bloqueada
+[ ] Pendiente | [~] En progreso | **[r] En revisión** | [x] Completada | [!] Bloqueada
 
 ## Tipo
 
@@ -27,8 +27,8 @@ La prosa sigue en español.
 
 - `EDITORIAL.md`: la regla de identificadores en inglés (sección «Forma del post largo») y la tabla «Palabras problemáticas» («marcado» → «HTML»).
 - `docs/lessons/idioma-del-codigo.md`.
-- Posts publicados con código de ejemplo en `site/src/content/articulos/`: `carrito-a-lo-bruto.md`, `sacar-el-estado-del-dom.md`, `un-store-reactivo-en-vanilla-js.md` y `hola-fronteando.md` si tiene bloques con identificadores en español.
-- Demos asociadas a esos posts en `site/src/demos/` (por ejemplo `carrito`, `store-reactivo`, `contador`), y sus tests.
+- Posts publicados con código de ejemplo en `site/src/content/articulos/`: `carrito-a-lo-bruto.md`, `sacar-el-estado-del-dom.md`, `un-store-reactivo-en-vanilla-js.md`, `la-vista-como-funcion-del-estado.md`, `de-clics-a-acciones.md` y `los-limites-del-mvc-a-mano.md`. `hola-fronteando.md` entra solo para la revisión de términos.
+- Demos asociadas a esos posts en `site/src/demos/` (`carrito`, `vista-instrumentada`, `store-reactivo`), y sus tests. `contador` no tiene identificadores en español y no se toca.
 - Tabla de equivalencias en inglés, aprobada por el usuario antes de renombrar.
 
 ## Resultado esperado
@@ -45,8 +45,9 @@ La prosa sigue en español.
 - La revisión editorial de cada post publicado está anotada en este archivo: desajustes encontrados y qué se hizo con cada uno (corregido aquí o diferido con tarea propia).
 - Cada bloque de código modificado corre con los nombres nuevos y produce la misma salida que antes, verificado ejecutándolo.
 - `npm test`, `npm run lint`, `npm run check`, `npm run format:check` y `npm run build` en verde.
-- Ninguna mención en prosa de un identificador que ya no existe en el código.
-- `la-vista-como-funcion-del-estado.md` y la demo `vista-instrumentada` no se modifican: pertenecen a la tarea 032.
+- Ninguna mención en prosa de un identificador que ya no existe en el código del capítulo que lo menciona. Las APIs de otros frameworks citadas como comparación (`ref()`, `createSignal()`, `signal()`, `onCleanup`, `dispose`) no cuentan como identificadores del proyecto.
+- `la-vista-como-funcion-del-estado.md` y la demo `vista-instrumentada` entran en el alcance de esta tarea (decisión del usuario, 2026-11-19): sus identificadores se renombran igual que en el resto de la serie.
+- La etiqueta `modo` de la directiva y de la demo se mantiene en español como excepción, junto con sus valores `cantidad`, `controlador` y `limites` (decisión del usuario, 2026-11-19): es sintaxis de la directiva de `EDITORIAL.md` y valores de configuración. Por la misma razón se mantienen los atributos de directiva `nombre`, `altura` y `altura-estrecha`, que son contrato de `:::demo{…}` y de `fronteando-demo.ts`. Se registra aquí como excepción; la tabla de equivalencias no la incluye.
 - Las cifras de las salidas y los resultados esperados de las demos no cambian.
 
 ## Procedimiento sugerido
@@ -63,9 +64,25 @@ La prosa sigue en español.
 
 - Origen: decisión del usuario, 2026-11-18, al cerrar la revisión de la guía editorial en la tarea 032. Se separa de esa tarea para no ampliar su alcance. El alcance se amplió el mismo día a petición del usuario para incluir la sustitución de «marcado» en los publicados.
 - Mientras esta tarea no esté completada, la guía y el capítulo 3 no coinciden en este punto: el capítulo sigue con nombres en español. La alineación del capítulo 3 se decide dentro de la tarea 032.
+- Ejecución sin plan registrado: la tarea se ejecutó sin secciones de contexto, conectividad, plan técnico ni suite aprobadas. Esto se reconoce como hallazgo de proceso de la revisión técnica; el plan retroactivo queda pendiente de aprobación del usuario.
+- La tabla de equivalencias se acordó en la conversación (identificadores en inglés según la lista de `Carrito`, `add`, `remove`, `subscribe`, `subscribers`, `products`, `name`, `price`, `quantity`, `units`, `lines`, `line`, `counter`, `catalog`, `state`, `level`, `greeting`, `activeEffect`, `subscribersPerProp`, `subsOf`, `run`, `connect`, `update`, `actions`, `action`, `button`, `gift`, `giftGiven`, `inRule`, `model`, `nextId`, `sum`, `current`, `initialValue`, `target`, `next`) y sus valores por defecto para ids del DOM y `data-*` se aplicaron. No hay tabla escrita en el repositorio.
+- Equivalencias de vocabulario en prosa: «línea» para cada entrada del carrito; «unidades» para la suma de cantidades; «arreglo» en lugar de «array»; «fuente de verdad»; «registrar manejadores» en lugar de «cablear»; «HTML» en lugar de «marcado»; «front-end».
 
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente (revisión editorial de los 7 posts, 2026-11-19): Aprueba con cambios menores. Cambios aplicados: frontmatter de `la-vista` (prerrequisito con `Cart`), prueba dos de `los-limites` (el «Quitar» se hace desde código), concordancia en `carrito-a-lo-bruto` y «coste» en lugar de «costo».
+- Subagente (revisión de términos de la serie, 2026-11-19): sin hallazgos de severidad alta. Aplicados: «de grano fino», «emisores con eventos nombrados», «fuera de esta serie», «envuelta en una API», «una ejecución completa» y «el controlador» en lugar de «manejador delegado». `tómatela con calma` se mantiene.
+- Subagente (revisión técnica del diff, 2026-11-19): Solicita cambios. Corregido: etiqueta de la demo `demo-carrito` → `demo-cart` (la demo no se montaba), «simplemente» eliminado, comentario `// título` → `// title` en la demo del store, alias `Estado` → `State` en `source.test.ts`, texto de salida de `los-limites` alineado con el registro de la demo y orden cronológico indicado. El alcance, la prosa revisada y la excepción de `modo` están decididos por el usuario (2026-11-19).
+- Subagente (segunda revisión técnica, 2026-11-19): tests 86/86, eslint, prettier, astro check y build en verde. Los cambios de `description` de `hola-fronteando.md` («front-end») forman parte de la prosa revisada que el usuario mantuvo.
+
+### Revisión editorial por post
+
+- `carrito-a-lo-bruto.md`: aprueba con cambios menores. Concordancia en la frase de los incisos corregida; «cableado» → «registrar manejadores»; «dueño» → «fuente de verdad»; «bug» → «fallo»; «maqueta» → «HTML».
+- `sacar-el-estado-del-dom.md`: aprueba. «marcado» → «HTML» (dos veces); «ítems» → «líneas»; «sin dueño» → «sin una fuente de verdad única»; «oyentes» → «suscriptores».
+- `un-store-reactivo-en-vanilla-js.md`: aprueba. Identificadores en backticks de la prosa renombrados; «cableado» → «registro manual de suscriptores»; «cleanup» → «limpieza»; «grano fino»; «envuelta en una API».
+- `la-vista-como-funcion-del-estado.md`: aprueba con cambios menores. Frontmatter con `Cart`; «ítems» → «unidades» en la salida; «fuera de esta serie»; «con nombre» en lugar de «con nombre propio».
+- `de-clics-a-acciones.md`: aprueba. «ítems» → «unidades»; «En este capítulo `connect` ya no existe» aclara el alcance.
+- `los-limites-del-mvc-a-mano.md`: aprueba con cambios menores tras reescritura de claridad aprobada por el usuario: secciones «Antes de empezar», tabla modelo/pantalla, secuencia de la prueba tres, sección «Lo que este experimento no mide», cierre con puntos de revisión. Correcciones: «Tras tres «Añadir» y un «Quitar»» explicita que el «Quitar» es desde código; «costo» → «coste»; «simplemente» eliminado; «reentrada» sustituida; «manejador delegado» → «el controlador»; «emisores con eventos nombrados»; salida alineada con el registro de la demo.
+- `hola-fronteando.md`: aprueba. «frontend» → «front-end» en prosa y description; «hola mundo» entre comillas latinas.
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]

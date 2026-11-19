@@ -30,31 +30,31 @@ separadas.
 ## El resultado primero
 
 Antes de abrir el controlador conviene ver qué queda cuando se quita
-`conectar`. Así se pone en marcha el carrito completo sobre el
+`connect`. Así se pone en marcha el carrito completo sobre el
 [modelo](/articulos/sacar-el-estado-del-dom/) y la
 [vista](/articulos/la-vista-como-funcion-del-estado/) de los capítulos
 anteriores, con una sola diferencia: `render` pinta los botones con
-`data-accion`, un cambio que se explica más abajo:
+`data-action`, un cambio que se explica más abajo:
 
 ```js
-// extracto: requiere la clase `Carrito`, el array `productos`, la función
-// `render` del capítulo anterior (con `data-accion`, más abajo), un
-// `<div id="carrito-app">` vacío y `host` apuntando a ese `<div>`
-const carrito = new Carrito();
-carrito.suscribir(() => render(carrito));
+// extracto: requiere la clase `Cart`, el arreglo `products`, la función
+// `render` del capítulo anterior (con `data-action`, más abajo), un
+// `<div id="cart-app">` vacío y `host` apuntando a ese `<div>`
+const cart = new Cart();
+cart.subscribe(() => render(cart));
 
 host.addEventListener("click", (e) => {
-  const boton = e.target.closest("[data-accion]");
-  if (!boton) return;
-  const acciones = {
-    agregar: () =>
-      carrito.agregar(productos.find((p) => p.id === Number(boton.dataset.id))),
-    quitar: () => carrito.quitar(Number(boton.dataset.linea)),
+  const button = e.target.closest("[data-action]");
+  if (!button) return;
+  const actions = {
+    add: () =>
+      cart.add(products.find((p) => p.id === Number(button.dataset.id))),
+    remove: () => cart.remove(Number(button.dataset.line)),
   };
-  acciones[boton.dataset.accion]?.();
+  actions[button.dataset.action]?.();
 });
 
-render(carrito);
+render(cart);
 ```
 
 Con eso montado, pulsamos «Añadir» en los tres productos, «Quitar» en
@@ -62,23 +62,23 @@ la primera línea y «Añadir» en «Teclado» otra vez.
 Esto es lo que muestra la pantalla en cada momento:
 
 ```text
-al montar:               0 ítems / $0
-tras 3 «Añadir»:         3 ítems / $250
-tras quitar el primero:  2 ítems / $205
-tras otro «Añadir»:      3 ítems / $250
+al montar:               0 unidades / $0
+tras 3 «Añadir»:         3 unidades / $250
+tras quitar el primero:  2 unidades / $205
+tras otro «Añadir»:      3 unidades / $250
 ```
 
 La última línea es la que importa: después de cuatro repintados, los
 botones siguen respondiendo sin que nadie los haya vuelto a conectar.
-`conectar` ya no existe.
+En este capítulo `connect` ya no existe.
 
 ## Quién decide hoy
 
 En el [capítulo anterior](/articulos/la-vista-como-funcion-del-estado/)
 la vista tenía dos trabajos. `render` generaba
-el HTML, y `conectar` recorría los botones recién nacidos para darles
-su manejador: cada «Añadir» llamaba a `carrito.agregar` y cada
-«Quitar» a `carrito.quitar`. Funcionaba, pero la decisión de qué pasa
+el HTML, y `connect` recorría los botones recién nacidos para darles
+su manejador: cada «Añadir» llamaba a `cart.add` y cada
+«Quitar» a `cart.remove`. Funcionaba, pero la decisión de qué pasa
 al pulsar vivía dentro de la vista.
 
 Eso es lo que la regla de Tania Rascia prohíbe en su
@@ -86,23 +86,23 @@ Eso es lo que la regla de Tania Rascia prohíbe en su
 «the view never touches the model». Nuestra vista lo tocaba en cada
 clic, y lo peor no
 era la regla incumplida sino la acumulación: cada manejador nuevo que
-nazca en `conectar` tendrá que aprender a llamar al modelo, y cada
+nazca en `connect` tendrá que aprender a llamar al modelo, y cada
 repintado tendrá que volver a conectarlos.
 
 ## De llamadas a intenciones
 
 El primer cambio es en los botones. Dejan de llevar el nombre del
-método que llaman (`data-agregar`, `data-quitar`) y pasan a declarar
+método que llaman (`data-add`, `data-remove`) y pasan a declarar
 qué quiere el usuario. En `render`, los dos botones de la plantilla
 quedan así:
 
 ```js
-// extracto: dentro de `render`, en lugar de `data-agregar` y `data-quitar`
-const botonAgregar = `<button data-accion="agregar" data-id="${p.id}">Añadir</button>`;
-const botonQuitar = `<button data-accion="quitar" data-linea="${l.linea}">Quitar</button>`;
+// extracto: dentro de `render`, en lugar de `data-add` y `data-remove`
+const addButton = `<button data-action="add" data-id="${p.id}">Añadir</button>`;
+const removeButton = `<button data-action="remove" data-line="${l.line}">Quitar</button>`;
 ```
 
-`data-accion` dice «qué» y `data-id`/`data-linea` dicen «sobre qué».
+`data-action` dice «qué» y `data-id`/`data-line` dicen «sobre qué».
 El botón sigue nombrando una acción, pero ya no sabe qué método la
 cumple: esa correspondencia la decide quien interpreta la intención.
 
@@ -115,14 +115,14 @@ recrea) traduce cada clic en la acción que declara:
 ```js
 // extracto: el manejador del resultado primero, de nuevo
 host.addEventListener("click", (e) => {
-  const boton = e.target.closest("[data-accion]");
-  if (!boton) return;
-  const acciones = {
-    agregar: () =>
-      carrito.agregar(productos.find((p) => p.id === Number(boton.dataset.id))),
-    quitar: () => carrito.quitar(Number(boton.dataset.linea)),
+  const button = e.target.closest("[data-action]");
+  if (!button) return;
+  const actions = {
+    add: () =>
+      cart.add(products.find((p) => p.id === Number(button.dataset.id))),
+    remove: () => cart.remove(Number(button.dataset.line)),
   };
-  acciones[boton.dataset.accion]?.();
+  actions[button.dataset.action]?.();
 });
 ```
 
@@ -131,7 +131,7 @@ elemento que sobrevive a los repintados (`render` reescribe su
 `innerHTML` pero no lo reemplaza), así que se conecta una sola vez y no
 hace falta volver a conectarlo. La segunda: `closest` encuentra el
 botón aunque el clic caiga en cualquier nodo interior, y `dataset` trae
-los argumentos. La tercera: la tabla `acciones` es el único sitio del
+los argumentos. La tercera: la tabla `actions` es el único sitio del
 programa que llama a los métodos que cambian el modelo; los botones solo
 nombran intenciones.
 
@@ -156,7 +156,7 @@ si los botones sí, y qué habría que cambiar si `render` reemplazara el
 
 Con el controlador en su sitio, el recorrido de un clic queda completo
 y en una sola dirección: el usuario pulsa «Quitar» (evento), el
-controlador lee `data-accion` y llama a `carrito.quitar` (acción), el
+controlador lee `data-action` y llama a `cart.remove` (acción), el
 modelo quita la línea y notifica a sus suscriptores (notificación), y la
 suscripción vuelve a llamar a `render` (vista). Nadie se salta el
 orden: la vista no toca el modelo, el modelo no toca la vista, y los
@@ -186,11 +186,11 @@ hasta el `<li>` nuevo en pantalla, nombrando cada parte que toca.
 Las tres partes están separadas, pero hay cosas que esta separación
 no resuelve.
 
-- **El controlador conoce la forma del DOM.** Lee `data-accion` y los
+- **El controlador conoce la forma del DOM.** Lee `data-action` y los
   atributos que `render` escribe: si la vista cambia los nombres, el
   controlador hay que tocarlo también. La frontera entre ambos es una
   convención, no un contrato.
-- **El modelo acepta cualquier llamada externa.** `agregar` y `quitar`
+- **El modelo acepta cualquier llamada externa.** `add` y `remove`
   son públicos: nada impide que otro código (o la consola) los llame
   sin pasar por el controlador. La disciplina la ponemos nosotros, no
   el programa.

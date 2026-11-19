@@ -9,7 +9,7 @@ agente:
   tema: "explica cómo convertir el código que pinta un componente en una función render que regenera toda la vista desde el modelo, con el primer render incluido"
   prerequisitos:
     [
-      "el modelo del capítulo anterior (la clase Carrito con suscribir y notificar); DOM básico (innerHTML, querySelector, addEventListener)",
+      "el modelo del capítulo anterior (la clase `Cart` con `subscribe` y `#notify`); DOM básico (innerHTML, querySelector, addEventListener)",
     ]
 ---
 
@@ -34,24 +34,24 @@ el carrito sobre el modelo del
 vacío en la página, una suscripción y una llamada inicial.
 
 ```js
-// extracto: requiere la clase `Carrito` del capítulo anterior, el array `productos`,
-// las funciones `render` y `conectar` de más abajo y un `<div id="carrito-app">` vacío
-const carrito = new Carrito();
-const actualizar = () => {
-  render(carrito);
-  conectar(carrito);
+// extracto: requiere la clase `Cart` del capítulo anterior, el arreglo `products`,
+// las funciones `render` y `connect` de más abajo y un `<div id="cart-app">` vacío
+const cart = new Cart();
+const update = () => {
+  render(cart);
+  connect(cart);
 };
-carrito.suscribir(actualizar);
-actualizar();
+cart.subscribe(update);
+update();
 ```
 
 Con eso montado, pulsamos «Añadir» en los tres productos y después
 «Quitar» en la primera línea. Esto es lo que muestra la pantalla en cada momento:
 
 ```text
-al montar:               0 ítems / $0
-tras 3 «Añadir»:         3 ítems / $250
-tras quitar el primero:  2 ítems / $205
+al montar:               0 unidades / $0
+tras 3 «Añadir»:         3 unidades / $250
+tras quitar el primero:  2 unidades / $205
 ```
 
 Las mismas cifras de siempre, con una diferencia: el primer `0 / $0`
@@ -67,8 +67,8 @@ los tres por separado. Poco código, sí, pero repartido elemento a
 elemento, y con una trampa escondida en el propio HTML:
 
 ```html
-<h3>Tu carrito (<span id="contador">0</span>)</h3>
-<ul id="carrito"></ul>
+<h3>Tu carrito (<span id="counter">0</span>)</h3>
+<ul id="cart"></ul>
 <p>Total: <span id="total">$0</span></p>
 ```
 
@@ -85,35 +85,35 @@ función del modelo. El HTML de la página queda reducido a un
 contenedor vacío:
 
 ```html
-<div id="carrito-app"></div>
+<div id="cart-app"></div>
 ```
 
 Y `render` genera todo el HTML, catálogo incluido:
 
 ```js
-// extracto: `productos` es el array del catálogo, ya visto
-const host = document.querySelector("#carrito-app");
+// extracto: `products` es el arreglo del catálogo, ya visto
+const host = document.querySelector("#cart-app");
 
-function render(modelo) {
+function render(model) {
   host.innerHTML = `
-    <ul id="catalogo">
-      ${productos.map((p) => `<li>${p.nombre} — $${p.precio} <button data-agregar="${p.id}">Añadir</button></li>`).join("")}
+    <ul id="catalog">
+      ${products.map((p) => `<li>${p.name} — $${p.price} <button data-add="${p.id}">Añadir</button></li>`).join("")}
     </ul>
-    <h3>Tu carrito (<span id="contador">${modelo.unidades}</span>)</h3>
-    <ul id="carrito">
-      ${modelo.lineas.map((l) => `<li>${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad} <button data-quitar="${l.linea}">Quitar</button></li>`).join("")}
+    <h3>Tu carrito (<span id="counter">${model.units}</span>)</h3>
+    <ul id="cart">
+      ${model.lines.map((l) => `<li>${l.name} x${l.quantity} — $${l.price * l.quantity} <button data-remove="${l.line}">Quitar</button></li>`).join("")}
     </ul>
-    <p>Total: <span id="total">$${modelo.total}</span></p>`;
+    <p>Total: <span id="total">$${model.total}</span></p>`;
 }
 ```
 
 Tres cosas que cambian aquí. La primera: el HTML ya no guarda datos
 escritos a mano que puedan mentir. El `0` y el `$0` que antes vivían en
-el HTML ahora salen de `modelo.unidades` y `modelo.total`. La segunda:
+el HTML ahora salen de `model.units` y `model.total`. La segunda:
 la vista entera está en un solo lugar. Si lo que se ve tiene una forma
 rara, el sitio donde mirar es `render`; si algo raro pasa al pulsar, es
-`conectar`. La tercera es sutil: los botones llevan atributos
-`data-agregar` y `data-quitar` en lugar de nacer con su manejador
+`connect`. La tercera es sutil: los botones llevan atributos
+`data-add` y `data-remove` en lugar de nacer con su manejador
 puesto, porque el HTML se compone como texto y los nodos todavía no
 existen cuando lo escribimos.
 
@@ -124,12 +124,12 @@ trabajo:
 
 ```js
 // extracto: el mismo programa del resultado primero
-carrito.suscribir(actualizar);
-actualizar();
+cart.subscribe(update);
+update();
 ```
 
 La primera es la de siempre: cada notificación del modelo llama a
-`actualizar`, que repinta la vista y vuelve a conectar los botones.
+`update`, que repinta la vista y vuelve a conectar los botones.
 La segunda es la que faltaba: una llamada inicial, para que la primera
 pantalla también la produzca `render`. Antes, el estado inicial lo
 escribía el HTML a mano y la página solo se ponía al día cuando
@@ -146,25 +146,25 @@ explica por qué ya no puede quedarse enseñando datos de mentira.
 
 Cada repintado destruye los nodos y crea otros nuevos, así que hay
 que volver a conectar los manejadores después de pintar. Para eso
-sirven los `data-*` y la función `conectar`, la otra mitad de
-`actualizar`:
+sirven los `data-*` y la función `connect`, la otra mitad de
+`update`:
 
 ```js
-// extracto: sigue a `render`; `host` es el mismo `<div id="carrito-app">`
-function conectar(modelo) {
-  for (const b of host.querySelectorAll("[data-agregar]"))
+// extracto: sigue a `render`; `host` es el mismo `<div id="cart-app">`
+function connect(model) {
+  for (const b of host.querySelectorAll("[data-add]"))
     b.addEventListener("click", () =>
-      modelo.agregar(productos.find((p) => p.id === Number(b.dataset.agregar))),
+      model.add(products.find((p) => p.id === Number(b.dataset.add))),
     );
-  for (const b of host.querySelectorAll("[data-quitar]"))
-    b.addEventListener("click", () => modelo.quitar(Number(b.dataset.quitar)));
+  for (const b of host.querySelectorAll("[data-remove]"))
+    b.addEventListener("click", () => model.remove(Number(b.dataset.remove)));
 }
 ```
 
 Es el mismo patrón que el suscriptor del capítulo anterior ya usaba
-para sus «Quitar», ahora con nombre propio y aplicado a todos los
+para sus «Quitar», ahora con nombre y aplicado a todos los
 botones. Y funciona, pero mira quién decide qué pasa al pulsar: la
-propia vista. Cada botón recién nacido llama a `agregar` o a `quitar`
+propia vista. Cada botón recién nacido llama a `add` o a `remove`
 del modelo directamente.
 
 El patrón tiene una regla explícita sobre eso. Tania Rascia, en su
@@ -204,7 +204,7 @@ precio que conviene nombrar.
   catálogo entero, que nunca cambia, y recrea todos los nodos. Con
   tres productos no se nota; con una lista larga, sí.
 - **Los nodos se destruyen y recrean.** Si una línea tuviera un campo
-  de texto (el campo de cantidad que sigue fuera del arco), cada
+  de texto (el campo de cantidad que sigue fuera de esta serie), cada
   repintado borraría su contenido y le quitaría el foco mientras
   escribes.
 - **Los manejadores viven dentro de la vista y tocan el modelo a
@@ -212,12 +212,12 @@ precio que conviene nombrar.
   decide qué pasa al pulsar no debería ser quien pinta.
 - **`innerHTML` interpola datos sin escapar.** Aquí los nombres son
   literales del catálogo y no pasa nada; con datos que vinieran del
-  usuario, esta plantilla sería una puerta abierta.
+  usuario, esta plantilla abriría la puerta a la inyección de HTML (XSS).
 
 ## El punto
 
 El DOM ya no es fuente de verdad ni de HTML: todo lo que se ve
-sale de `render(modelo)`, desde el primer render. Lo que queda suelto
+sale de `render(model)`, desde el primer render. Lo que queda suelto
 son los eventos: los clics entran por dentro de la vista y alcanzan el
 modelo sin intermediario. ¿Quién traduce un «Añadir» en una acción, y
 una acción en un cambio del modelo? Ese es el trabajo del controlador,

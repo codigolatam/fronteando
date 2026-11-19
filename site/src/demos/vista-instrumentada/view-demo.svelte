@@ -21,7 +21,7 @@
 
 <div class="piece" bind:this={root}>
   <div class="grid">
-    <div class="zone" id="carrito-app"></div>
+    <div class="zone" id="cart-app"></div>
     <section class="zone" aria-labelledby="log-heading">
       <h3 class="heading" id="log-heading">Registro del modelo</h3>
       <p class="initial">render inicial: 0 u / $0 (sin notificación)</p>
@@ -75,7 +75,7 @@
      register entries arrive as bare <li> nodes —neither carries the
      svelte scope attribute, so their styles go through :global under
      the piece (still inside this shadow). */
-  .piece :global(#carrito-app ul) {
+  .piece :global(#cart-app ul) {
     display: grid;
     gap: var(--space-1);
     margin: 0;
@@ -83,13 +83,13 @@
     list-style: none;
   }
 
-  .piece :global(#carrito-app h3) {
+  .piece :global(#cart-app h3) {
     margin: var(--space-2) 0 var(--space-1);
     font-size: inherit;
     font-weight: 500;
   }
 
-  .piece :global(#carrito-app li),
+  .piece :global(#cart-app li),
   .piece :global(#log li) {
     display: flex;
     align-items: center;
@@ -102,12 +102,12 @@
     color: var(--color-text-muted);
   }
 
-  .piece :global(#carrito-app li:last-child),
+  .piece :global(#cart-app li:last-child),
   .piece :global(#log li:last-child) {
     border-bottom: 0;
   }
 
-  .piece :global(#carrito-app p) {
+  .piece :global(#cart-app p) {
     margin: var(--space-2) 0 0;
     font-weight: 500;
   }
@@ -131,7 +131,7 @@
     border-color: var(--color-accent);
   }
 
-  .piece :global(#carrito button:hover) {
+  .piece :global(#cart button:hover) {
     color: var(--color-danger);
     border-color: var(--color-danger);
   }

@@ -1,5 +1,5 @@
 // The cart view programs from the MVC series, verbatim: the chapter-3
-// listing (render + conectar, run with no modo) and the chapter-4 one
+// listing (render + connect, run with no modo) and the chapter-4 one
 // (delegated controller, run with modo="controlador") —each against a
 // document scoped to the piece instead of the global one. The only
 // addition is the live register: subscribers that log the cycle they
@@ -12,51 +12,51 @@ export interface ScopedDocument {
   createElement(tag: string): HTMLElement;
 }
 
-type CartProduct = { id: number; nombre: string; precio: number };
-type CartLine = CartProduct & { linea: number; cantidad: number };
+type CartProduct = { id: number; name: string; price: number };
+type CartLine = CartProduct & { line: number; quantity: number };
 
 const MAX_ENTRIES = 5;
 
-class Carrito {
-  #lineas: CartLine[] = [];
-  #siguienteId = 1;
-  #suscriptores: ((c: Carrito) => void)[] = [];
+class Cart {
+  #lines: CartLine[] = [];
+  #nextId = 1;
+  #subscribers: ((c: Cart) => void)[] = [];
 
-  suscribir(fn: (c: Carrito) => void) {
-    this.#suscriptores.push(fn);
+  subscribe(fn: (c: Cart) => void) {
+    this.#subscribers.push(fn);
   }
 
-  #notificar() {
-    for (const fn of this.#suscriptores) fn(this);
+  #notify() {
+    for (const fn of this.#subscribers) fn(this);
   }
 
-  get lineas() {
-    return this.#lineas.map((l) => ({ ...l }));
+  get lines() {
+    return this.#lines.map((l) => ({ ...l }));
   }
 
-  get unidades() {
-    return this.#lineas.reduce((suma, l) => suma + l.cantidad, 0);
+  get units() {
+    return this.#lines.reduce((sum, l) => sum + l.quantity, 0);
   }
 
   get total() {
-    return this.#lineas.reduce((suma, l) => suma + l.precio * l.cantidad, 0);
+    return this.#lines.reduce((sum, l) => sum + l.price * l.quantity, 0);
   }
 
-  agregar(producto: CartProduct) {
-    this.#lineas.push({ linea: this.#siguienteId++, ...producto, cantidad: 1 });
-    this.#notificar();
+  add(product: CartProduct) {
+    this.#lines.push({ line: this.#nextId++, ...product, quantity: 1 });
+    this.#notify();
   }
 
-  quitar(linea: number) {
-    this.#lineas = this.#lineas.filter((l) => l.linea !== linea);
-    this.#notificar();
+  remove(line: number) {
+    this.#lines = this.#lines.filter((l) => l.line !== line);
+    this.#notify();
   }
 }
 
-const productos: CartProduct[] = [
-  { id: 1, nombre: "Teclado", precio: 45 },
-  { id: 2, nombre: "Ratón", precio: 25 },
-  { id: 3, nombre: "Monitor", precio: 180 },
+const products: CartProduct[] = [
+  { id: 1, name: "Teclado", price: 45 },
+  { id: 2, name: "Ratón", price: 25 },
+  { id: 3, name: "Monitor", price: 180 },
 ];
 
 function cap(log: Element) {
@@ -66,188 +66,184 @@ function cap(log: Element) {
 // Chapter 3: render + per-button re-wiring after each repaint, logging
 // every notification → repaint pair.
 function mountChapter3(document: ScopedDocument): void {
-  const host = document.querySelector("#carrito-app") as HTMLElement;
+  const host = document.querySelector("#cart-app") as HTMLElement;
   const log = document.querySelector("#log")!;
 
-  function render(modelo: Carrito) {
+  function render(model: Cart) {
     host.innerHTML = `
-      <ul id="catalogo">
-        ${productos
+      <ul id="catalog">
+        ${products
           .map(
             (p) =>
-              `<li>${p.nombre} — $${p.precio} <button data-agregar="${p.id}">Añadir</button></li>`,
+              `<li>${p.name} — $${p.price} <button data-add="${p.id}">Añadir</button></li>`,
           )
           .join("")}
       </ul>
-      <h3>Tu carrito (<span id="contador">${modelo.unidades}</span>)</h3>
-      <ul id="carrito">
-        ${modelo.lineas
+      <h3>Tu carrito (<span id="counter">${model.units}</span>)</h3>
+      <ul id="cart">
+        ${model.lines
           .map(
             (l) =>
-              `<li>${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad} <button data-quitar="${l.linea}">Quitar</button></li>`,
+              `<li>${l.name} x${l.quantity} — $${l.price * l.quantity} <button data-remove="${l.line}">Quitar</button></li>`,
           )
           .join("")}
       </ul>
-      <p>Total: <span id="total">$${modelo.total}</span></p>`;
+      <p>Total: <span id="total">$${model.total}</span></p>`;
   }
 
-  function conectar(modelo: Carrito) {
-    for (const b of host.querySelectorAll<HTMLElement>("[data-agregar]"))
+  function connect(model: Cart) {
+    for (const b of host.querySelectorAll<HTMLElement>("[data-add]"))
       b.addEventListener("click", () =>
-        modelo.agregar(
-          productos.find((p) => p.id === Number(b.dataset.agregar))!,
-        ),
+        model.add(products.find((p) => p.id === Number(b.dataset.add))!),
       );
-    for (const b of host.querySelectorAll<HTMLElement>("[data-quitar]"))
-      b.addEventListener("click", () =>
-        modelo.quitar(Number(b.dataset.quitar)),
-      );
+    for (const b of host.querySelectorAll<HTMLElement>("[data-remove]"))
+      b.addEventListener("click", () => model.remove(Number(b.dataset.remove)));
   }
 
-  const carrito = new Carrito();
-  const actualizar = () => {
-    render(carrito);
-    conectar(carrito);
+  const cart = new Cart();
+  const update = () => {
+    render(cart);
+    connect(cart);
   };
-  carrito.suscribir(actualizar);
+  cart.subscribe(update);
 
   let notifications = 0;
-  carrito.suscribir((c) => {
+  cart.subscribe((c) => {
     notifications += 1;
     const li = document.createElement("li");
-    li.textContent = `notificación ${notifications} → repintado: ${c.unidades} u / $${c.total}`;
+    li.textContent = `notificación ${notifications} → repintado: ${c.units} u / $${c.total}`;
     log.prepend(li);
     cap(log);
   });
 
-  actualizar();
+  update();
 }
 
 // Chapter 4: buttons declare intent, a delegated listener on the host
 // translates clicks to actions —and the register logs the whole cycle.
 function mountChapter4(document: ScopedDocument): void {
-  const host = document.querySelector("#carrito-app") as HTMLElement;
+  const host = document.querySelector("#cart-app") as HTMLElement;
   const log = document.querySelector("#log")!;
 
-  function render(modelo: Carrito) {
+  function render(model: Cart) {
     host.innerHTML = `
-      <ul id="catalogo">
-        ${productos
+      <ul id="catalog">
+        ${products
           .map(
             (p) =>
-              `<li>${p.nombre} — $${p.precio} <button data-accion="agregar" data-id="${p.id}">Añadir</button></li>`,
+              `<li>${p.name} — $${p.price} <button data-action="add" data-id="${p.id}">Añadir</button></li>`,
           )
           .join("")}
       </ul>
-      <h3>Tu carrito (<span id="contador">${modelo.unidades}</span>)</h3>
-      <ul id="carrito">
-        ${modelo.lineas
+      <h3>Tu carrito (<span id="counter">${model.units}</span>)</h3>
+      <ul id="cart">
+        ${model.lines
           .map(
             (l) =>
-              `<li>${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad} <button data-accion="quitar" data-linea="${l.linea}">Quitar</button></li>`,
+              `<li>${l.name} x${l.quantity} — $${l.price * l.quantity} <button data-action="remove" data-line="${l.line}">Quitar</button></li>`,
           )
           .join("")}
       </ul>
-      <p>Total: <span id="total">$${modelo.total}</span></p>`;
+      <p>Total: <span id="total">$${model.total}</span></p>`;
   }
 
-  const carrito = new Carrito();
-  carrito.suscribir(() => render(carrito));
+  const cart = new Cart();
+  cart.subscribe(() => render(cart));
 
   // Instrumentation listener, registered first: it only remembers which
   // action the click meant so the register can name it.
   let pendingAction: string | null = null;
   host.addEventListener("click", (e) => {
-    const b = (e.target as Element).closest("[data-accion]");
-    if (b) pendingAction = (b as HTMLElement).dataset.accion ?? null;
+    const b = (e.target as Element).closest("[data-action]");
+    if (b) pendingAction = (b as HTMLElement).dataset.action ?? null;
   });
 
   host.addEventListener("click", (e) => {
-    const boton = (e.target as Element).closest("[data-accion]") as HTMLElement;
-    if (!boton) return;
-    const acciones: Record<string, () => void> = {
-      agregar: () =>
-        carrito.agregar(
-          productos.find((p) => p.id === Number(boton.dataset.id))!,
-        ),
-      quitar: () => carrito.quitar(Number(boton.dataset.linea)),
+    const button = (e.target as Element).closest(
+      "[data-action]",
+    ) as HTMLElement;
+    if (!button) return;
+    const actions: Record<string, () => void> = {
+      add: () =>
+        cart.add(products.find((p) => p.id === Number(button.dataset.id))!),
+      remove: () => cart.remove(Number(button.dataset.line)),
     };
-    acciones[boton.dataset.accion!]?.();
+    actions[button.dataset.action!]?.();
   });
 
   let notifications = 0;
-  carrito.suscribir((c) => {
+  cart.subscribe((c) => {
     notifications += 1;
     const li = document.createElement("li");
-    li.textContent = `clic → acción ${pendingAction} → notificación ${notifications} → repintado: ${c.unidades} u / $${c.total}`;
+    li.textContent = `clic → acción ${pendingAction} → notificación ${notifications} → repintado: ${c.units} u / $${c.total}`;
     pendingAction = null;
     log.prepend(li);
     cap(log);
   });
 
-  render(carrito);
+  render(cart);
 }
 
 // Chapter 5: the same delegated program with a business rule as one
 // more subscriber —when the total reaches $200 it mutates the model
 // inside the notification, and the register marks the nested repaint.
 function mountChapter5(document: ScopedDocument): void {
-  const host = document.querySelector("#carrito-app") as HTMLElement;
+  const host = document.querySelector("#cart-app") as HTMLElement;
   const log = document.querySelector("#log")!;
 
-  function render(modelo: Carrito) {
+  function render(model: Cart) {
     host.innerHTML = `
-      <ul id="catalogo">
-        ${productos
+      <ul id="catalog">
+        ${products
           .map(
             (p) =>
-              `<li>${p.nombre} — $${p.precio} <button data-accion="agregar" data-id="${p.id}">Añadir</button></li>`,
+              `<li>${p.name} — $${p.price} <button data-action="add" data-id="${p.id}">Añadir</button></li>`,
           )
           .join("")}
       </ul>
-      <h3>Tu carrito (<span id="contador">${modelo.unidades}</span>)</h3>
-      <ul id="carrito">
-        ${modelo.lineas
+      <h3>Tu carrito (<span id="counter">${model.units}</span>)</h3>
+      <ul id="cart">
+        ${model.lines
           .map(
             (l) =>
-              `<li>${l.nombre} x${l.cantidad} — $${l.precio * l.cantidad} <button data-accion="quitar" data-linea="${l.linea}">Quitar</button></li>`,
+              `<li>${l.name} x${l.quantity} — $${l.price * l.quantity} <button data-action="remove" data-line="${l.line}">Quitar</button></li>`,
           )
           .join("")}
       </ul>
-      <p>Total: <span id="total">$${modelo.total}</span></p>`;
+      <p>Total: <span id="total">$${model.total}</span></p>`;
   }
 
-  const carrito = new Carrito();
-  carrito.suscribir(() => render(carrito));
+  const cart = new Cart();
+  cart.subscribe(() => render(cart));
 
   let pendingAction: string | null = null;
   host.addEventListener("click", (e) => {
-    const b = (e.target as Element).closest("[data-accion]");
-    if (b) pendingAction = (b as HTMLElement).dataset.accion ?? null;
+    const b = (e.target as Element).closest("[data-action]");
+    if (b) pendingAction = (b as HTMLElement).dataset.action ?? null;
   });
 
   host.addEventListener("click", (e) => {
-    const boton = (e.target as Element).closest("[data-accion]") as HTMLElement;
-    if (!boton) return;
-    const acciones: Record<string, () => void> = {
-      agregar: () =>
-        carrito.agregar(
-          productos.find((p) => p.id === Number(boton.dataset.id))!,
-        ),
-      quitar: () => carrito.quitar(Number(boton.dataset.linea)),
+    const button = (e.target as Element).closest(
+      "[data-action]",
+    ) as HTMLElement;
+    if (!button) return;
+    const actions: Record<string, () => void> = {
+      add: () =>
+        cart.add(products.find((p) => p.id === Number(button.dataset.id))!),
+      remove: () => cart.remove(Number(button.dataset.line)),
     };
-    acciones[boton.dataset.accion!]?.();
+    actions[button.dataset.action!]?.();
   });
 
   // The register subscribes before the rule, so the outer notification
   // is logged first and the nested repaint arrives marked as nested.
   let notifications = 0;
-  carrito.suscribir((c) => {
+  cart.subscribe((c) => {
     notifications += 1;
     const li = document.createElement("li");
-    li.textContent = enRegla
-      ? `regla → acción regalo → notificación ${notifications} (anidada) → repintado: ${c.unidades} u / $${c.total}`
-      : `clic → acción ${pendingAction} → notificación ${notifications} → repintado: ${c.unidades} u / $${c.total}`;
+    li.textContent = inRule
+      ? `regla → acción gift → notificación ${notifications} (anidada) → repintado: ${c.units} u / $${c.total}`
+      : `clic → acción ${pendingAction} → notificación ${notifications} → repintado: ${c.units} u / $${c.total}`;
     pendingAction = null;
     log.prepend(li);
     cap(log);
@@ -255,18 +251,18 @@ function mountChapter5(document: ScopedDocument): void {
 
   // The stress rule: gift when the total reaches $200 —a subscriber
   // that mutates the model inside the notification it is handling.
-  let regaloDado = false;
-  let enRegla = false;
-  carrito.suscribir((c) => {
-    if (!regaloDado && c.total >= 200) {
-      regaloDado = true;
-      enRegla = true;
-      c.agregar({ id: 99, nombre: "Regalo", precio: 0 });
-      enRegla = false;
+  let giftGiven = false;
+  let inRule = false;
+  cart.subscribe((c) => {
+    if (!giftGiven && c.total >= 200) {
+      giftGiven = true;
+      inRule = true;
+      c.add({ id: 99, name: "Regalo", price: 0 });
+      inRule = false;
     }
   });
 
-  render(carrito);
+  render(cart);
 }
 
 export function mountView(document: ScopedDocument, modo = ""): void {

@@ -49,7 +49,7 @@ describe("applyObservation", () => {
       const { program, write } = setup();
 
       const { view } = write(() => {
-        program.estado.nivel = 2;
+        program.state.level = 2;
       });
 
       expect(view.outputs).toEqual({
@@ -57,12 +57,12 @@ describe("applyObservation", () => {
         greeting: "Hola, ana",
       });
       expect(view.runStatus).toEqual({ title: "ran", greeting: "skipped" });
-      expect(view.write).toEqual({ prop: "nivel", value: "2" });
+      expect(view.write).toEqual({ prop: "level", value: "2" });
       expect(view.trace[0]).toMatchObject({ kind: "notify", depth: 0 });
       expect(view.trace.at(-1)).toMatchObject({
         kind: "skip",
         depth: 1,
-        text: "saludo no leyó nivel → no se ejecuta",
+        text: "saludo no leyó level → no se ejecuta",
       });
     });
   });
@@ -72,7 +72,7 @@ describe("applyObservation", () => {
       const { program, write } = setup();
 
       const { view } = write(() => {
-        program.estado.nombre = "lu";
+        program.state.name = "lu";
       });
 
       expect(view.outputs).toEqual({
@@ -89,7 +89,7 @@ describe("applyObservation", () => {
     it("shows the write pending and keeps the previous outputs", () => {
       const { booted, program, write } = setup();
       const { batch, view: whole } = write(() => {
-        program.estado.nivel = 2;
+        program.state.level = 2;
       });
 
       const first = applyObservation(booted, batch[0]);
@@ -100,7 +100,7 @@ describe("applyObservation", () => {
       });
       expect(first.outputs).toEqual(booted.outputs);
       expect(first.trace).toHaveLength(1);
-      expect(first.snapshot.state.nivel).toBe(2);
+      expect(first.snapshot.state.level).toBe(2);
       expect(whole.trace.length).toBeGreaterThan(first.trace.length);
     });
   });
@@ -109,7 +109,7 @@ describe("applyObservation", () => {
     it("marks it as running while the other stays pending", () => {
       const { booted, program, write } = setup();
       const { batch } = write(() => {
-        program.estado.nivel = 2;
+        program.state.level = 2;
       });
 
       const view = batch.slice(0, 2).reduce(applyObservation, booted);
@@ -123,7 +123,7 @@ describe("applyObservation", () => {
     const { program, write } = setup();
 
     const { view } = write(() => {
-      program.estado.nombre = "lu";
+      program.state.name = "lu";
     });
 
     const ids = view.trace.map((entry) => entry.id);
@@ -134,28 +134,28 @@ describe("applyObservation", () => {
 describe("describeEvent", () => {
   it("writes each step the way the program reads", () => {
     expect(
-      describeEvent({ kind: "notify", prop: "nivel", value: "2", count: 1 }),
-    ).toBe("set nivel = 2 → avisa a 1 efecto");
+      describeEvent({ kind: "notify", prop: "level", value: "2", count: 1 }),
+    ).toBe("set level = 2 → avisa a 1 efecto");
     expect(
       describeEvent({
         kind: "notify",
-        prop: "nombre",
+        prop: "name",
         value: '"lu"',
         count: 2,
       }),
-    ).toBe('set nombre = "lu" → avisa a 2 efectos');
+    ).toBe('set name = "lu" → avisa a 2 efectos');
     expect(describeEvent({ kind: "run-start", runner: "title" })).toBe(
-      "efectoActivo = título",
+      "activeEffect = título",
     );
     expect(describeEvent({ kind: "run-end", runner: "title" })).toBe(
-      "efectoActivo = null",
+      "activeEffect = null",
     );
     expect(
-      describeEvent({ kind: "subscribe", prop: "nombre", runner: "greeting" }),
-    ).toBe("get nombre → suscribe saludo");
+      describeEvent({ kind: "subscribe", prop: "name", runner: "greeting" }),
+    ).toBe("get name → suscribe saludo");
     expect(
       describeEvent({ kind: "write", runner: "greeting", value: "Hola, ana" }),
-    ).toBe('saludo.textContent ← "Hola, ana"');
+    ).toBe('greeting.textContent ← "Hola, ana"');
   });
 });
 
@@ -164,7 +164,7 @@ describe("depthOf", () => {
     const start = { kind: "run-start", runner: "title" } as const;
     const read = {
       kind: "subscribe",
-      prop: "nombre",
+      prop: "name",
       runner: "title",
     } as const;
 

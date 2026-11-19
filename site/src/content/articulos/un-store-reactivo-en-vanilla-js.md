@@ -47,57 +47,58 @@ que el título se reescriba. Tres piezas lo hacen posible: `signal`,
 una.
 
 Mientras tanto, puedes ver el mismo mecanismo en una demo. El estado es
-ahora un objeto con dos propiedades, `nombre` y `nivel`, y hay dos
-efectos que leen de él. Sube `nivel` y observa qué efectos se ejecutan;
-luego cambia `nombre` y compara.
+ahora un objeto con dos propiedades, `name` y `level`, y hay dos
+efectos que leen de él. Sube `level` y observa qué efectos se ejecutan;
+luego cambia `name` y compara.
 
 :::demo{nombre="store-reactivo" altura="760px" altura-estrecha="1220px"}
 Demo interactiva del mismo mecanismo con un estado de dos propiedades
-(`nombre` y `nivel`) y dos efectos: uno escribe el título del documento
+(`name` y `level`) y dos efectos: uno escribe el título del documento
 y otro un saludo. Este es el programa que ejecuta:
 
 ```js
-const estado = store({ nombre: "ana", nivel: 1 });
+const state = store({ name: "ana", level: 1 });
 
 effect(() => {
-  document.title = `${estado.nombre} · nivel ${estado.nivel}`;
+  document.title = `${state.name} · nivel ${state.level}`;
 });
 
 effect(() => {
-  saludo.textContent = `Hola, ${estado.nombre}`;
+  greeting.textContent = `Hola, ${state.name}`;
 });
 ```
 
 Con JavaScript, la demo permite escribir en el estado
-(`estado.nivel += 1`, `estado.nombre = "lu"`), marca en el programa la
-línea que se ejecuta, muestra el valor de `efectoActivo` y el mapa
-`suscriptoresPorProp`, y registra una traza de cada lectura, escritura y
-reejecución (también paso a paso). Resultado esperado: al subir `nivel`
-solo se reejecuta el efecto del título, porque el saludo no lee `nivel`;
-al cambiar `nombre` se reejecutan los dos.
+(`state.level += 1`, `state.name = "lu"`), marca en el programa la
+línea que se ejecuta, muestra el valor de `activeEffect` y el mapa
+`subscribersPerProp`, y registra una traza de cada lectura, escritura y
+reejecución (también paso a paso). Resultado esperado: al subir `level`
+solo se reejecuta el efecto del título, porque el saludo no lee `level`;
+al cambiar `name` se reejecutan los dos.
 :::
 
 ## Estado que notifica
 
 La primera pieza es la más vieja del mundo: una variable que avisa a
-quien se suscriba cuando cambia. Un getter devuelve el valor y un
-setter, además de guardarlo, avisa a cada suscriptor:
+quien se suscriba cuando cambia. Un getter (el código que se ejecuta al leer la propiedad) devuelve el valor
+y un setter (el que se ejecuta al escribirla), además de guardarlo, avisa a
+cada suscriptor:
 
 ```js
-function signal(valorInicial) {
-  let valor = valorInicial;
-  const suscriptores = new Set();
+function signal(initialValue) {
+  let current = initialValue;
+  const subscribers = new Set();
 
   return {
-    suscribir(fn) {
-      suscriptores.add(fn);
+    subscribe(fn) {
+      subscribers.add(fn);
     },
     get value() {
-      return valor;
+      return current;
     },
-    set value(nuevo) {
-      valor = nuevo;
-      suscriptores.forEach((fn) => fn());
+    set value(next) {
+      current = next;
+      subscribers.forEach((fn) => fn());
     },
   };
 }
@@ -108,7 +109,7 @@ Y se usa así:
 ```js
 const count = signal(0);
 
-count.suscribir(() => {
+count.subscribe(() => {
   document.title = `count: ${count.value}`;
 });
 
@@ -118,13 +119,13 @@ count.value = 2;
 
 Funciona, pero el defecto salta a la vista: cada consumidor tiene que
 acordarse de suscribirse y de repetir dentro lo que lee. Con un
-componente real (varias propiedades, varios consumidores) el cableado
-manual se convierte en la fuente de los errores: el efecto que nadie
+componente real (varias propiedades, varios consumidores) el registro
+manual de suscriptores se convierte en la fuente de los errores: el efecto que nadie
 suscribió, el que quedó suscrito al dato equivocado.
 
 :::pausa
 Explica con tus palabras qué le cuesta al consumidor suscribirse a
-mano y qué errores trae ese cableado.
+mano y qué errores trae ese registro manual.
 :::
 
 ## El efecto que se registra solo
@@ -136,38 +137,38 @@ quién lo está leyendo.
 La pieza es una variable global que apunta al efecto en ejecución:
 
 ```js
-let efectoActivo = null;
+let activeEffect = null;
 
 function effect(fn) {
-  function correr() {
-    efectoActivo = correr;
+  function run() {
+    activeEffect = run;
     fn();
-    efectoActivo = null;
+    activeEffect = null;
   }
-  correr();
+  run();
 }
 ```
 
-`effect` envuelve `fn` en `correr`: al ejecutarse, `correr` se declara
-efecto activo, ejecuta `fn` y limpia. El suscriptor real es `correr`, no
+`effect` envuelve `fn` en `run`: al ejecutarse, `run` se declara
+efecto activo, ejecuta `fn` y limpia. El suscriptor real es `run`, no
 `fn`: así cada reejecución vuelve a declararse efecto activo y a
 registrar lo que lea. Como JavaScript corre en un solo hilo, mientras
-`correr` se ejecuta ningún otro efecto puede estar en marcha:
-`efectoActivo` es, sin ambigüedad, «el efecto que está corriendo
+`run` se ejecuta ningún otro efecto puede estar en marcha:
+`activeEffect` es, sin ambigüedad, «el efecto que está corriendo
 ahora».
 
 Ahora el getter del signal aprovecha ese dato:
 
 ```js
 get value() {
-  if (efectoActivo) suscriptores.add(efectoActivo);
-  return valor;
+  if (activeEffect) subscribers.add(activeEffect);
+  return current;
 }
 ```
 
 Leer `value` dentro de un `effect` registra la dependencia sin que
 nadie lo pida: si hay un efecto en ejecución, queda suscrito. Con esa
-pieza `suscribir` desaparece y el programa del gancho ya es real:
+pieza `subscribe` desaparece y el programa del gancho ya es real:
 
 ```js
 const count = signal(0);
@@ -185,7 +186,7 @@ en los signals que lee cada vez que corre. Ese matiz («cada vez que
 corre») importa; volveremos a él en los límites.
 
 :::pausa
-Explica quién toma nota de quién: por qué el suscriptor es `correr`
+Explica quién toma nota de quién: por qué el suscriptor es `run`
 y no `fn`.
 :::
 
@@ -197,23 +198,23 @@ notifica. Para interceptar lecturas y escrituras de propiedades
 arbitrarias existe `Proxy`:
 
 ```js
-function store(objeto) {
-  const suscriptoresPorProp = new Map();
-  const subsDe = (prop) => {
-    if (!suscriptoresPorProp.has(prop)) {
-      suscriptoresPorProp.set(prop, new Set());
+function store(target) {
+  const subscribersPerProp = new Map();
+  const subsOf = (prop) => {
+    if (!subscribersPerProp.has(prop)) {
+      subscribersPerProp.set(prop, new Set());
     }
-    return suscriptoresPorProp.get(prop);
+    return subscribersPerProp.get(prop);
   };
 
-  return new Proxy(objeto, {
+  return new Proxy(target, {
     get(obj, prop) {
-      if (efectoActivo) subsDe(prop).add(efectoActivo);
+      if (activeEffect) subsOf(prop).add(activeEffect);
       return obj[prop];
     },
-    set(obj, prop, nuevo) {
-      obj[prop] = nuevo;
-      subsDe(prop).forEach((fn) => fn());
+    set(obj, prop, next) {
+      obj[prop] = next;
+      subsOf(prop).forEach((fn) => fn());
       return true;
     },
   });
@@ -225,23 +226,23 @@ La mejora sobre `signal` es que la suscripción es por propiedad: cada
 reejecuta cuando cambia algo que de verdad leyó:
 
 ```js
-const estado = store({ nombre: "ana", nivel: 1 });
+const state = store({ name: "ana", level: 1 });
 
 effect(() => {
-  document.title = `${estado.nombre} · nivel ${estado.nivel}`;
+  document.title = `${state.name} · nivel ${state.level}`;
 });
 
-estado.nivel = 2; // reejecuta el efecto
-estado.nombre = "lu"; // y otra vez
+state.level = 2; // reejecuta el efecto
+state.name = "lu"; // y otra vez
 ```
 
-Y la prueba de que el grafo es fino: un efecto que solo lee
-`estado.nombre` no corre cuando cambia `estado.nivel`. La reactividad
+Y la prueba de que el grafo es de grano fino: un efecto que solo lee
+`state.name` no corre cuando cambia `state.level`. La reactividad
 ya no es por variable, es por propiedad.
 
 :::pausa
-Explica por qué un efecto que solo lee `estado.nombre` no se
-reejecuta cuando cambia `estado.nivel`.
+Explica por qué un efecto que solo lee `state.name` no se
+reejecuta cuando cambia `state.level`.
 :::
 
 ## Lo que falta para ser un framework
@@ -264,7 +265,7 @@ pregunta que los frameworks tuvieron que responder:
   entero; escalar eso al DOM es justamente lo que los frameworks
   resuelven (diffing en los frameworks de virtual DOM, actualización
   quirúrgica compilada en Solid o Svelte).
-- **Un solo efecto a la vez.** `efectoActivo` es una variable, así que
+- **Un solo efecto a la vez.** `activeEffect` es una variable, así que
   los efectos no pueden anidarse; la versión de verdad mantiene una
   pila.
 
@@ -276,8 +277,8 @@ propia pieza de estado.
 
 `ref()` en Vue, `createSignal()` en Solid, `signal()` en Preact: detrás
 de cada una está esta misma idea (un contenedor que toma nota de quién
-lee y avisa cuando cambia) vestida de API y rodeada de lo que sí cuesta
-trabajo: render eficiente, batching, cleanup.
+lee y avisa cuando cambia) envuelta en una API y rodeada de lo que sí cuesta
+trabajo: render eficiente, batching, limpieza.
 
 La próxima vez que `count.value++` mueva tu pantalla, ya sabes qué
 acaba de ocurrir: un getter anotó a tu efecto y un setter lo volvió a
