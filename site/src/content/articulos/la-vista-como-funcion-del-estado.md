@@ -13,8 +13,9 @@ agente:
     ]
 ---
 
-El carrito se actualiza solo: su estado vive en un modelo aparte del
-DOM y cada cambio llega a la pantalla. Pero el código que aplica esos
+El [carrito del capítulo anterior](/articulos/sacar-el-estado-del-dom/) se
+actualiza solo: su estado vive en un modelo aparte del DOM y cada cambio
+llega a la pantalla. Pero el código que aplica esos
 cambios toca tres elementos a mano, y el HTML inicial muestra un
 estado que puede mentir. Hoy convertimos todo lo que se ve en una
 función del estado.
@@ -29,7 +30,7 @@ componente en una función de su estado, y verás qué queda por separar.
 ## El resultado primero
 
 Antes de abrir la función conviene ver qué hace. Así se inicializa
-el carrito sobre el modelo del
+el carrito con el modelo del
 [capítulo anterior](/articulos/sacar-el-estado-del-dom/): un `<div>`
 vacío en la página, una suscripción y una llamada inicial.
 
@@ -50,6 +51,7 @@ Con eso montado, pulsamos «Añadir» en los tres productos y después
 
 ```text
 al montar:               0 unidades / $0
+tras el primer «Añadir»: 1 unidad / $45
 tras 3 «Añadir»:         3 unidades / $250
 tras quitar el primero:  2 unidades / $205
 ```
@@ -107,12 +109,15 @@ function render(model) {
 }
 ```
 
-Tres cosas que cambian aquí. La primera: el HTML ya no guarda datos
-escritos a mano que puedan mentir. El `0` y el `$0` que antes vivían en
-el HTML ahora salen de `model.units` y `model.total`. La segunda:
-la vista entera está en un solo lugar. Si lo que se ve tiene una forma
-rara, el sitio donde mirar es `render`; si algo raro pasa al pulsar, es
-`connect`. La tercera es sutil: los botones llevan atributos
+Tres cosas cambian aquí. La primera: el HTML ya no guarda datos
+escritos a mano. El `0` y el `$0` que antes vivían en
+el HTML ahora salen de `model.units` y `model.total`.
+
+La segunda: la vista entera está en un solo lugar. Si lo que se ve
+tiene una forma rara, el sitio donde mirar es `render`; si algo falla
+al pulsar, es `connect`.
+
+La tercera es sutil: los botones llevan atributos
 `data-add` y `data-remove` en lugar de nacer con su manejador
 puesto, porque el HTML se compone como texto y los nodos todavía no
 existen cuando lo escribimos.
@@ -129,7 +134,8 @@ update();
 ```
 
 La primera es la de siempre: cada notificación del modelo llama a
-`update`, que repinta la vista y vuelve a conectar los botones.
+`update`, que repinta la vista y vuelve a conectar los botones, que
+cada repintado deja nuevos.
 La segunda es la que faltaba: una llamada inicial, para que la primera
 pantalla también la produzca `render`. Antes, el estado inicial lo
 escribía el HTML a mano y la página solo se ponía al día cuando
@@ -167,7 +173,7 @@ botones. Y funciona, pero mira quién decide qué pasa al pulsar: la
 propia vista. Cada botón recién nacido llama a `add` o a `remove`
 del modelo directamente.
 
-El patrón tiene una regla explícita sobre eso. Tania Rascia, en su
+MVC tiene una regla explícita sobre eso. Tania Rascia, en su
 [tutorial de MVC](https://www.taniarascia.com/javascript-mvc-todo-app/),
 la deja en una sola línea: «the view never touches the model». La
 vista nunca toca el modelo; la nuestra lo toca en cada clic. Dave
