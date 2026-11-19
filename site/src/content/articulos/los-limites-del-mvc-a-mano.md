@@ -251,6 +251,11 @@ Eso es lo que resolvió la reactividad. En el
 porque el saludo nunca leyó `level`. Cada valor sabe quién depende de él y
 solo avisa a esos.
 
+:::pausa
+Piensa en un proyecto tuyo: ¿qué vista repinta más de lo que cambió? Nombra
+un suscriptor que decida si le afecta un cambio y explica cómo lo sabe.
+:::
+
 ## Lo que este experimento no mide
 
 Las cifras de este capítulo cuentan nodos repintados, no milisegundos. En un
