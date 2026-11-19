@@ -98,5 +98,5 @@ Siete commits, uno por artículo (`30e4e6a`…`dd34a18`), más tres correcciones
 - `de-clics-a-acciones`: delegación de eventos nombrada antes de usarla; `actions` justificada frente a `switch`; resultado primero con dos diferencias; «cinco repintados» tras la corrección.
 - `los-limites-del-mvc-a-mano`: glosario con «suscriptor»; desglose de 16 elementos; explicación de la notificación anidada; prueba dos con el olvido concreto; resumen por límite; pausa de proyecto propio restaurada (cuatro pausas).
 - `hola-fronteando`: negrita del previo retirada; repetición de front-end repartida; cierre con puerta al primer capítulo.
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-11-19 — Aprueba (PR #37 aprobado en sesión)
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
