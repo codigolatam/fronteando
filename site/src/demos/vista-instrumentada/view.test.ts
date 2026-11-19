@@ -158,3 +158,46 @@ describe('mountView with modo "controlador"', () => {
     });
   });
 });
+
+describe('mountView with modo "limites"', () => {
+  function addButton(root: HTMLElement, nombre: string) {
+    const li = [...root.querySelectorAll("#catalogo li")].find((el) =>
+      el.textContent?.includes(nombre),
+    );
+    return (
+      li?.querySelector<HTMLButtonElement>('[data-accion="agregar"]') ?? null
+    );
+  }
+
+  describe("when the gift rule fires inside a notification", () => {
+    it("logs the nested repaint the rule causes", () => {
+      const root = scaffold("limites");
+      addButton(root, "Monitor")!.click();
+      addButton(root, "Teclado")!.click();
+      const entries = [...root.querySelectorAll("#log li")].map(
+        (li) => li.textContent,
+      );
+      expect(entries[0]).toBe(
+        "regla → acción regalo → notificación 3 (anidada) → repintado: 3 u / $225",
+      );
+      expect(entries[1]).toBe(
+        "clic → acción agregar → notificación 2 → repintado: 2 u / $225",
+      );
+      const lines = [...root.querySelectorAll("#carrito li")].map(
+        (li) => li.textContent,
+      );
+      expect(lines.some((t) => t?.includes("Regalo"))).toBe(true);
+    });
+
+    it("fires the rule only once", () => {
+      const root = scaffold("limites");
+      addButton(root, "Monitor")!.click();
+      addButton(root, "Teclado")!.click();
+      addButton(root, "Ratón")!.click();
+      const lines = [...root.querySelectorAll("#carrito li")].filter((li) =>
+        li.textContent?.includes("Regalo"),
+      );
+      expect(lines).toHaveLength(1);
+    });
+  });
+});
