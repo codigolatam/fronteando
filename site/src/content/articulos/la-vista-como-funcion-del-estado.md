@@ -210,7 +210,7 @@ precio que conviene nombrar.
   catálogo entero, que nunca cambia, y recrea todos los nodos. Con
   tres productos no se nota; con una lista larga, sí.
 - **Los nodos se destruyen y recrean.** Si una línea tuviera un campo
-  de texto (el campo de cantidad que sigue fuera de esta serie), cada
+  de texto (el campo de cantidad que el modelo de esta serie todavía no soporta), cada
   repintado borraría su contenido y le quitaría el foco mientras
   escribes.
 - **Los manejadores viven dentro de la vista y tocan el modelo a
@@ -222,7 +222,7 @@ precio que conviene nombrar.
 
 ## El punto
 
-El DOM ya no es fuente de verdad ni de HTML: todo lo que se ve
+El DOM ya no es fuente de verdad: todo lo que se ve
 sale de `render(model)`, desde el primer render. Lo que queda suelto
 son los eventos: los clics entran por dentro de la vista y alcanzan el
 modelo sin intermediario. ¿Quién traduce un «Añadir» en una acción, y
