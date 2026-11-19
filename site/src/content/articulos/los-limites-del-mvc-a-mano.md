@@ -1,12 +1,12 @@
 ---
 title: "Los límites del MVC a mano"
-description: "El carrito MVC ya funciona. ¿Cuánto aguanta? Tres pruebas de estrés muestran dónde cede el patrón hecho a mano y qué resolvió la reactividad."
+description: "El carrito MVC ya funciona, pero ¿cuánto aguanta? Tres pruebas de estrés muestran dónde cede el patrón hecho a mano y qué resolvió la reactividad."
 date: 2026-11-07T00:55:00Z
 categoria: arquitectura
 nivel: intermedio
 tags: ["javascript", "mvc", "dom", "reactividad"]
 agente:
-  tema: "evalúa dónde cede el patrón MVC hecho a mano —repintados totales, vistas parciales que divergen, suscriptores que se pisan— y qué problema resolvió la reactividad"
+  tema: "evalúa dónde cede el patrón MVC hecho a mano (repintados totales, vistas parciales que divergen, suscriptores que se pisan) y qué problema resolvió la reactividad"
   prerequisitos:
     [
       "el carrito MVC de la serie (modelo que notifica, vista como función del estado, controlador delegado)",
@@ -73,7 +73,7 @@ La tentación natural: si solo cambiaron dos números, actualicemos solo
 esos dos nodos. Escribimos el suscriptor parcial:
 
 ```js
-// extracto: requiere el `host` con el marcado del capítulo anterior
+// extracto: requiere el `host` ya pintado por el render del capítulo anterior
 carrito.suscribir(() => {
   host.querySelector("#contador").textContent = carrito.unidades;
   host.querySelector("#total").textContent = `$${carrito.total}`;
@@ -128,8 +128,8 @@ repintado por notificación 3 (anidada): 3 u / $225
 La regla se dispara dentro de la segunda notificación y su `agregar`
 abre una tercera antes de que la segunda termine. El repintado del
 regalo ocurre anidado dentro de la notificación que lo provocó: cualquier
-suscriptor que asuma «una notificación, un turno completo» cuenta mal
-—y cada vista suscrita multiplica el efecto, porque un solo `agregar`
+suscriptor que asuma «una notificación, un turno completo» cuenta mal:
+cada vista suscrita multiplica el efecto, porque un solo `agregar`
 produce un repintado por vista.
 
 Y la misma regla sin la guardia `regaloDado` no se detiene nunca:
@@ -186,7 +186,8 @@ mediciones de tiempo: en componentes de este tamaño el repintado total
 sigue siendo instantáneo, y el límite real se nota antes en la
 complejidad del código (dos listas a sincronizar, guardias contra la
 reentrada) que en el rendimiento bruto. El boilerplate tampoco es
-denuncia nuestra: es el caveat clásico del género (Rascia y Stearns lo
+denuncia nuestra: es la salvedad clásica del género ([Rascia](https://www.taniarascia.com/javascript-mvc-todo-app/)
+y [Stearns](https://drstearns.github.io/tutorials/mvc/) lo
 advierten en los mismos tutoriales que citamos en la serie) y aquí lo
 convertimos en banco de pruebas. Quedaron fuera las respuestas
 históricas intermedias: eventos nombrados, PubSub, observables con
@@ -197,7 +198,7 @@ canales; todas responden al mismo límite sin llegar a la granularidad.
 El arco queda cerrado: del espagueti del primer capítulo al carrito
 con modelo, vista y controlador separados, y de ahí al mapa de dónde
 cede. El MVC a mano enseña a ordenar el código; el límite que toca es
-saber qué cambió. Esa pregunta —«¿quién depende de este valor?»— es la
+saber qué cambió. Esa pregunta («¿quién depende de este valor?») es la
 que la reactividad convirtió en sistema. De cómo se responde con
 signals y efectos ya habla el post del store reactivo; de qué forma
 toma eso en un framework, la próxima conversación.
