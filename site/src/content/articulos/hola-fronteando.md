@@ -66,6 +66,4 @@ const blog = "fronteando";
 console.log(`hola, ${blog}`);
 ```
 
-Bienvenido. La serie ya empezó: el primer capítulo construye
-[un carrito de compras a lo bruto](/articulos/carrito-a-lo-bruto/) y
-explica por qué cada cambio sale más caro que el anterior.
+Bienvenido.
