@@ -74,6 +74,8 @@ La prosa sigue en español.
 - Subagente (revisión de términos de la serie, 2026-11-19): sin hallazgos de severidad alta. Aplicados: «de grano fino», «emisores con eventos nombrados», «fuera de esta serie», «envuelta en una API», «una ejecución completa» y «el controlador» en lugar de «manejador delegado». `tómatela con calma` se mantiene.
 - Subagente (revisión técnica del diff, 2026-11-19): Solicita cambios. Corregido: etiqueta de la demo `demo-carrito` → `demo-cart` (la demo no se montaba), «simplemente» eliminado, comentario `// título` → `// title` en la demo del store, alias `Estado` → `State` en `source.test.ts`, texto de salida de `los-limites` alineado con el registro de la demo y orden cronológico indicado. El alcance, la prosa revisada y la excepción de `modo` están decididos por el usuario (2026-11-19).
 - Subagente (segunda revisión técnica, 2026-11-19): tests 86/86, eslint, prettier, astro check y build en verde. Los cambios de `description` de `hola-fronteando.md` («front-end») forman parte de la prosa revisada que el usuario mantuvo.
+- Subagente (revisión de redacción por artículo, 2026-11-19): siete revisiones de narrativa, progresión, explicación y ejemplos, con cambios aplicados uno por artículo (commits `30e4e6a`…`dd34a18`). Las cifras y las afirmaciones se comprobaron contra las demos antes de aplicarlas.
+- Subagente (revisión final previa al cierre, 2026-11-19): primera pasada solicitó cambios (un número de repintados, dos frases de `la-vista` y una pausa retirada sin registrar), corregidos en `ad9dd6c`, `1c030b1` y `d07828a`. Segunda pasada: aprueba, sin bloqueantes. Queda como observación menor, que no bloquea: el bloque de `un-store-reactivo` muestra `store({ name, level })`, pero en `runtime.ts` el Proxy se crea en línea dentro de `createProgram`; el comportamiento es equivalente y lo cubren los tests.
 
 ### Revisión editorial por post
 
@@ -84,5 +86,17 @@ La prosa sigue en español.
 - `de-clics-a-acciones.md`: aprueba. «ítems» → «unidades»; «En este capítulo `connect` ya no existe» aclara el alcance.
 - `los-limites-del-mvc-a-mano.md`: aprueba con cambios menores tras reescritura de claridad aprobada por el usuario: secciones «Antes de empezar», tabla modelo/pantalla, secuencia de la prueba tres, sección «Lo que este experimento no mide», cierre con puntos de revisión. Correcciones: «Tras tres «Añadir» y un «Quitar»» explicita que el «Quitar» es desde código; «costo» → «coste»; «simplemente» eliminado; «reentrada» sustituida; «manejador delegado» → «el controlador»; «emisores con eventos nombrados»; salida alineada con el registro de la demo.
 - `hola-fronteando.md`: aprueba. «frontend» → «front-end» en prosa y description; «hola mundo» entre comillas latinas.
+
+### Ronda de redacción posterior a la revisión técnica (2026-11-19)
+
+Siete commits, uno por artículo (`30e4e6a`…`dd34a18`), más tres correcciones tras la revisión final (`ad9dd6c`, `1c030b1`, `d07828a`). Sin cambios de código de demo ni de cifras de salida.
+
+- `carrito-a-lo-bruto`: gancho en dos frases; diagnóstico acortado sin perder causas; la prueba del teclado usa el escenario del test (teclado como única línea, $135).
+- `sacar-el-estado-del-dom`: explica `line` frente al `id` del producto; el cierre deja de decir que el DOM no se actualiza solo.
+- `un-store-reactivo-en-vanilla-js`: se nombra la dependencia duplicada; caso concreto para «un solo efecto a la vez»; la salida se comenta en el bloque de uso; puerta final a la serie.
+- `la-vista-como-funcion-del-estado`: previo enlaza el capítulo anterior; salida intermedia «1 unidad / $45»; «tres cosas» en tres párrafos; regla de Rascia atribuida a MVC.
+- `de-clics-a-acciones`: delegación de eventos nombrada antes de usarla; `actions` justificada frente a `switch`; resultado primero con dos diferencias; «cinco repintados» tras la corrección.
+- `los-limites-del-mvc-a-mano`: glosario con «suscriptor»; desglose de 16 elementos; explicación de la notificación anidada; prueba dos con el olvido concreto; resumen por límite; pausa de proyecto propio restaurada (cuatro pausas).
+- `hola-fronteando`: negrita del previo retirada; repetición de front-end repartida; cierre con puerta al primer capítulo.
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
