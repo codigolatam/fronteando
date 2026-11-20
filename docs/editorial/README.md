@@ -10,11 +10,11 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## lista
 
-- [El componente empaquetado: el MVC en una clase](piezas/mvc-componente.md)
-
 ## en redacción
 
 ## en revisión
+
+- [El componente empaquetado: el MVC en una clase](piezas/mvc-componente.md)
 
 ## publicado
 

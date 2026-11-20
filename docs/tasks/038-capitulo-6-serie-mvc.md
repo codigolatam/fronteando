@@ -2,7 +2,7 @@
 
 ## Estado
 
-[ ] Pendiente
+[r] En revisión
 
 ## Tipo
 
@@ -52,8 +52,22 @@ Llevar la pieza «El componente empaquetado: el MVC en una clase» (`docs/editor
 - Interacción con la tarea 037 (identificadores en inglés en posts publicados): si esta tarea corre antes que la 037, el capítulo heredaría los identificadores en español de la demo y la 037 tendría que retocarlo después; si corre después, nace ya con la convención alineada. Decidir el orden antes de arrancar.
 - Es la última pieza de la serie: al publicarse, la serie pasa a `cerrada` y su línea se retira del planeador.
 
+## Encuadre
+
+- **Brief:** `docs/editorial/briefs/el-componente-empaquetado.md` — aprobado 2026-11-19
+- **Promesa:** «después de leer esto, el lector podrá empaquetar un componente de tres piezas sueltas en una clase instanciable (`new CartComponent(host)`) donde cada método conserva su rol, con estado privado y ciclo de vida»
+
+## Desviaciones del plan
+
+- La demo usa `cart-component.ts`, `cart-component-demo.svelte` y `cart-component.test.ts` (alineados con el nombre definitivo de la clase); el Material del brief mencionaba `cart-app.ts`, remanente del nombre descartado.
+- El bloque `:::demo` va en «El resultado primero» (como manda el arco del brief) en lugar de junto a «La prueba de fuego», donde el borrador del outline lo situaba.
+- El `return` nuevo de `subscribe`, que el arco situaba en «El estado que no sale», se cubre íntegramente en «El ciclo de vida»: es donde la baja se usa y donde editorialmente funciona. Hallazgo menor de la revisión editorial, registrado aquí.
+
 ## Revisión
 
-- Subagente: [fecha] — [Aprueba | Solicita cambios]
+- Subagente: 2026-11-19 — Solicita cambios
+- Subagente: 2026-11-19 — Solicita cambios
+- Subagente: 2026-11-19 — Solicita cambios
+- Subagente: 2026-11-19 — Aprueba
 - Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
 - Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
