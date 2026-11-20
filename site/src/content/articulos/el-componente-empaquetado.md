@@ -330,7 +330,7 @@ en su API imperativa; React lo llama
 [`root.unmount()`](https://react.dev/reference/react-dom/client/createRoot#root-unmount).
 El ciclo de vida
 que acabamos de inventar no es una idea nuestra: es el que los
-componentes de verdad ya institucionalizaron.
+componentes de verdad ya resolvieron.
 
 ## Lo que la clase no compra
 
@@ -361,7 +361,7 @@ Lo que sí queda claro es de dónde sale la forma: un custom element es
 esta misma envoltura con los callbacks de ciclo de vida ya puestos, y
 un componente de framework es la misma envoltura con props y un repintado
 que el framework calcula. `CartComponent` es el molde; la plataforma lo
-institucionalizó.
+incorporó.
 
 ## El punto
 
