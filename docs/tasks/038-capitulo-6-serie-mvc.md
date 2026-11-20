@@ -2,7 +2,7 @@
 
 ## Estado
 
-[r] En revisión
+[x] Completada
 
 ## Tipo
 
@@ -69,5 +69,5 @@ Llevar la pieza «El componente empaquetado: el MVC en una clase» (`docs/editor
 - Subagente: 2026-11-19 — Solicita cambios
 - Subagente: 2026-11-19 — Solicita cambios
 - Subagente: 2026-11-19 — Aprueba
-- Usuario (ejecución): [fecha] — [Aprueba | Solicita cambios]
-- Usuario (cierre): [fecha] — [Aprueba | Solicita cambios]
+- Usuario (ejecución): 2026-11-19 — Aprueba (PR #38 aprobado en sesión)
+- Usuario (cierre): 2026-11-20 — Aprueba

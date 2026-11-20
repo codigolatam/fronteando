@@ -1,6 +1,6 @@
 # El componente empaquetado: el MVC en una clase
 
-- estado: en revisión
+- estado: publicado
 - serie: mvc-en-vanilla-js
 - **Pregunta del lector:** tengo el MVC funcionando en tres piezas sueltas — ¿cómo lo convierto en un componente que instancio como una sola cosa?
 - **Ángulo:** la serie separó las piezas para enseñarlas; ahora las juntamos para usar el componente. La frontera que importa es de responsabilidades, no de objetos: cada método conserva su rol y la clase es solo la envoltura — instanciable, con estado privado y ciclo de vida (montar y desmontar).

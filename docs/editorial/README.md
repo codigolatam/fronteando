@@ -14,9 +14,9 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 
 ## en revisión
 
-- [El componente empaquetado: el MVC en una clase](piezas/mvc-componente.md)
-
 ## publicado
+
+- [El componente empaquetado: el MVC en una clase](piezas/mvc-componente.md)
 
 - [Los límites del MVC a mano](../../site/src/content/articulos/los-limites-del-mvc-a-mano.md)
 - [De clics a acciones: el controlador](../../site/src/content/articulos/de-clics-a-acciones.md)
@@ -26,5 +26,3 @@ Las ideas de contenido viven aquí; las de producto y siguientes líneas del pro
 - [El carrito a lo bruto: construyendo un componente web sin seguir un patrón](../../site/src/content/articulos/carrito-a-lo-bruto.md)
 
 ## series
-
-- [Serie MVC en vanilla JS](series/mvc-en-vanilla-js.md) — en curso

@@ -16,6 +16,6 @@
 ## General
 
 - [x] docs/tasks/037-alinear-posts-publicados-con-las-reglas-nuevas.md — Alinear los posts publicados con las reglas nuevas de la guía
-- [r] docs/tasks/038-capitulo-6-serie-mvc.md — Escribir el capítulo 6 de la serie MVC
+- [x] docs/tasks/038-capitulo-6-serie-mvc.md — Escribir el capítulo 6 de la serie MVC
 
 ## Propuestas en revisión
